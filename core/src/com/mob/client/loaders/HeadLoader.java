@@ -22,10 +22,9 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.HeadData;
-import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class HeadLoader extends Loader implements Loadable<HeadData> {
+public class HeadLoader extends Loader<HeadData> {
 
 	// ===========================================================
 	// Constants

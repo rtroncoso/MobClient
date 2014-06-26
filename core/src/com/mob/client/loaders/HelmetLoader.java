@@ -22,10 +22,9 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.HelmetData;
-import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class HelmetLoader extends Loader implements Loadable<HelmetData> {
+public class HelmetLoader extends Loader<HelmetData> {
 
 	// ===========================================================
 	// Constants

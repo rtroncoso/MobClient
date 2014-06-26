@@ -14,12 +14,6 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Loads Argentum Online bodys
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-06-26
- */
 package com.mob.client.loaders;
 
 import java.io.DataInputStream;
@@ -28,10 +22,9 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.BodyData;
-import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class BodyLoader extends Loader implements Loadable<BodyData> {
+public class BodyLoader extends Loader<BodyData> {
 
 
 	// ===========================================================

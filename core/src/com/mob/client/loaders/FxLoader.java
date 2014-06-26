@@ -22,10 +22,9 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.FxData;
-import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader implements Loadable<FxData> {
+public class FxLoader extends Loader<FxData> {
 
 
 	// ===========================================================

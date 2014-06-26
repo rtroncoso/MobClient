@@ -102,6 +102,20 @@ public class Tile extends TileSprite {
 		
 	}
 
+	@Override
+	public void update(float dt, int pLayer) {
+		
+		// Update animation timer of this tile
+		BundledTexture layer = this.getGraphic(pLayer);
+		layer.setAnimationTime(layer.getAnimationTime() + dt);
+		
+		// Draw tile into spritebatch
+		if(this.getGrhIndex(pLayer) != 0) {
+			this.mGame.getSpriteBatch().draw(this.getGraphic(pLayer).getGraphic(true), this.getGraphic(pLayer).getX(), this.getGraphic(pLayer).getY());
+		}
+		
+	}
+
 	// ===========================================================
 	// Methods
 	// ===========================================================

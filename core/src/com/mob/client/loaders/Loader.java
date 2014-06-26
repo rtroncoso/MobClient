@@ -14,20 +14,14 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Binary INIT files parsing
- * TODO :
- * 	- Fix reading of VB6 binarys, not being able to read VB6 longs and turn them into Java integers
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
 package com.mob.client.loaders;
+
+import java.util.Vector;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.mob.client.interfaces.Constants;
 
-public abstract class Loader implements Constants {
+public abstract class Loader<T> implements Constants {
 	
 	// ===========================================================
 	// Constants
@@ -47,7 +41,8 @@ public abstract class Loader implements Constants {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-
+	public abstract Vector<T> load(String initFileName);
+	
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================

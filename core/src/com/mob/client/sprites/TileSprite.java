@@ -60,7 +60,7 @@ public abstract class TileSprite extends GameSprite implements Constants {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-
+	public abstract void update(float dt, int pLayer);
 
 	// ===========================================================
 	// Getter & Setter
