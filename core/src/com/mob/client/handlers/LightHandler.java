@@ -74,6 +74,12 @@ public class LightHandler implements Constants {
 		return index;
 	}
 
+	public int createLight(Light pLight) {
+		int index = this.mLights.size() + 1;
+		this.mLights.put(index, pLight);
+		return index;
+	}
+
 	public void moveLight(int pIndex, int pX, int pY) {
 		this.moveLight(pIndex, (pX * TILE_PIXEL_WIDTH), (pY * TILE_PIXEL_HEIGHT));
 	}

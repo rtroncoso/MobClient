@@ -80,7 +80,7 @@ public class PhysicsEngine extends Engine implements Constants {
 		this.mRayHandler.setBlurNum(5);
 		
 		// LightHandler setup
-		this.setLightHandler(new LightHandler(this.mGame));
+		this.mLightHandler = new LightHandler(this.mGame);
 	}
 
 	// ===========================================================

@@ -18,9 +18,9 @@ package com.mob.client.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -179,18 +179,22 @@ public class TestScreen extends Screen implements Constants {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+
+		// Update camera projection
+		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
+		this.mGame.getCamera().update();
 		
         // Start our spritebatch
 		this.mGame.getSpriteBatch().begin();
 
-			// Set up camera
-			this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
-			this.mGame.getCamera().update();
-			
 			// Render our engine
         	this.mGame.getEngine().update(dt);
         	
 		this.mGame.getSpriteBatch().end();
+		
+		// Update camera projection
+		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
+		this.mGame.getCamera().update();
 		
 		// Render Box2D Engine
 		this.mGame.getEngine().updatePhysics(dt);

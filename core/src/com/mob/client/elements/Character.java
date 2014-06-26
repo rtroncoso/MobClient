@@ -88,7 +88,7 @@ public class Character extends CharacterSprite implements Constants {
 		
 		// Render sprite
 		this.charRender(dt);
-
+		
 		// If moving and focused we set camera position to ourselves
 		if(this.mFocused) this.focusCamera();
 	}
@@ -295,51 +295,43 @@ public class Character extends CharacterSprite implements Constants {
 		// Vars
 		float offsetCounterX = 0.0f, offsetCounterY = 0.0f;
 		
-		// Calculate next user position and finish momvement if we reached destination
-		if(this.mNextX != 0) {
+		// Calculate moving offset
+		offsetCounterX = this.mNextX * this.mSpeed * this.mDeltaTime; 
+		this.mX += offsetCounterX;
 
-			// Calculate moving offset
-			offsetCounterX = this.mNextX * this.mSpeed * this.mDeltaTime; 
-			this.mX += offsetCounterX;
+		// Calculate moving offset
+		offsetCounterY = this.mNextY * this.mSpeed * this.mDeltaTime; 
+		this.mY += offsetCounterY;
 
-			// Check if we reached destination
-			if(this.mNextX == 1) {
-				if(this.mX >= (this.mUserPosX) * TILE_PIXEL_WIDTH) {
-					this.updateUserPos();
-					this.mMoving = false;
-					this.mNextX = 0;
-				}
-			} else if(this.mNextX == -1) {
-				if(this.mX <= (this.mUserPosX) * TILE_PIXEL_WIDTH) {
-					this.updateUserPos();
-					this.mMoving = false;
-					this.mNextX = 0;
-				}
+		// Check if we reached destination
+		if(this.mNextX == 1) {
+			if(this.mX >= (this.mUserPosX) * TILE_PIXEL_WIDTH) {
+				this.updateUserPos();
+				this.mMoving = false;
+				this.mNextX = 0;
+			}
+		} else if(this.mNextX == -1) {
+			if(this.mX <= (this.mUserPosX) * TILE_PIXEL_WIDTH) {
+				this.updateUserPos();
+				this.mMoving = false;
+				this.mNextX = 0;
 			}
 		}
-		
-		if(this.mNextY != 0) {
-			
-			// Calculate moving offset
-			offsetCounterY = this.mNextY * this.mSpeed * this.mDeltaTime; 
-			this.mY += offsetCounterY;
-			
-			// Check if we reached destination
-			if(this.mNextY == 1) {
-				if(this.mY >= (this.mUserPosY) * TILE_PIXEL_HEIGHT) {
-					this.updateUserPos();
-					this.mMoving = false;
-					this.mNextY = 0;
-				}
-			} else if(this.mNextY == -1) {
-				if(this.mY <= (this.mUserPosY) * TILE_PIXEL_HEIGHT) {
-					this.updateUserPos();
-					this.mMoving = false;
-					this.mNextY = 0;
-				}
+	
+		if(this.mNextY == 1) {
+			if(this.mY >= (this.mUserPosY) * TILE_PIXEL_HEIGHT) {
+				this.updateUserPos();
+				this.mMoving = false;
+				this.mNextY = 0;
+			}
+		} else if(this.mNextY == -1) {
+			if(this.mY <= (this.mUserPosY) * TILE_PIXEL_HEIGHT) {
+				this.updateUserPos();
+				this.mMoving = false;
+				this.mNextY = 0;
 			}
 		}
-		
+			
 		// Update light position
 		this.updateLight(this.mX, this.mY);
 	}
@@ -392,12 +384,12 @@ public class Character extends CharacterSprite implements Constants {
 		if(this.mX - halfWindowWidth < TILE_PIXEL_WIDTH || this.mX + halfWindowWidth > MAX_MAP_SIZE_WIDTH * TILE_PIXEL_WIDTH)
 			newPosX = this.mGame.getCamera().position.x;
 		else
-			newPosX = this.mX;
+			newPosX = this.mX;//(this.mX - this.mGame.getCamera().position.x) * 0.1f;
 		
 		if(this.mY - halfWindowHeight < TILE_PIXEL_HEIGHT || this.mY + halfWindowHeight > MAX_MAP_SIZE_HEIGHT * TILE_PIXEL_HEIGHT)
 			newPosY = this.mGame.getCamera().position.y;
 		else
-			newPosY = this.mY;
+			newPosY = this.mY;//(this.mY - this.mGame.getCamera().position.y) * 0.1f;
 		
 		//Update camera
 		this.mGame.getCamera().position.set(newPosX, newPosY, 0);
