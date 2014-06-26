@@ -242,6 +242,8 @@ public class PhysicsEngine extends Engine implements Constants {
 	
 	@Override
 	public void reset() {
+		
+		// Delete all box2d bodies
 		Array<Body> tmpBodies = new Array<Body>();
 		this.mWorld.getBodies(tmpBodies);
 		for(int i = 0; i < tmpBodies.size; i++) {
@@ -280,6 +282,15 @@ public class PhysicsEngine extends Engine implements Constants {
 	
 	@Override
 	public void dispose() {
+		
+		// Dispose all map tiles
+		for(int y = MIN_MAP_SIZE_HEIGHT; y <= MAX_MAP_SIZE_HEIGHT; y++) {
+			for(int x = MIN_MAP_SIZE_WIDTH; x <= MAX_MAP_SIZE_WIDTH; x++) {
+				if(this.mTiles[x][y] != null) this.mTiles[x][y].dispose();
+			}
+		}
+		
+		// Dispose LightHandler
 		this.mRayHandler.dispose();
 	}
 

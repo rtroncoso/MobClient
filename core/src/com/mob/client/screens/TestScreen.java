@@ -86,7 +86,6 @@ public class TestScreen extends Screen implements Constants {
 					break;
 				case(Keys.NUM_1):
 					mGame.getEngine().setTint(COLOR_NIGHT);
-					mGame.getCharacterHandler().getPlayer().unsetFocus();
 					break;
 				case(Keys.NUM_2):
 					mGame.getEngine().setTint(COLOR_DAWN);
@@ -204,7 +203,10 @@ public class TestScreen extends Screen implements Constants {
 	
 	@Override
 	public void dispose() {
+		// Dispose engine
 		this.mGame.getEngine().dispose();
+		
+		// Dispose all characters
 		this.mGame.getCharacterHandler().disposeAll();
 	}
 
