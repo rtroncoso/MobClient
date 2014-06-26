@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\src\debug\assets" />
+    </dataSet>
+
+</merger>

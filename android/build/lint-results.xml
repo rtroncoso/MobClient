@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 22.6.2">
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.applet. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglApplet."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.awt. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.awt.datatransfer. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglClipboard."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.awt.event. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.awt.image. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.sound.sampled. Referenced from com.badlogic.gdx.backends.lwjgl.audio.JavaSoundAudioRecorder."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTFrame."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing.border. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.4."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing.text. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.4."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: java.awt.geom. Referenced from com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.imageio. Referenced from com.badlogic.gdx.tiledmappacker.TileSetLayout."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.imageio.stream. Referenced from com.badlogic.gdx.tools.texturepacker.TexturePacker."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing.event. Referenced from com.badlogic.gdx.tools.hiero.Hiero.2."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing.plaf.basic. Referenced from com.badlogic.gdx.tools.particleeditor.ParticleEditor.3."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+    <issue
+        id="InvalidPackage"
+        severity="Error"
+        message="Invalid package reference in library; not included in Android: javax.swing.table. Referenced from com.badlogic.gdx.tools.particleeditor.EffectPanel."
+        category="Correctness"
+        priority="6"
+        summary="Finds API accesses to APIs that are not supported in Android"
+        explanation="This check scans through libraries looking for calls to APIs that are not included in Android.
+
+When you create Android projects, the classpath is set up such that you can only access classes in the API packages that are included in Android. However, if you add other projects to your libs/ folder, there is no guarantee that those .jar files were built with an Android specific classpath, and in particular, they could be accessing unsupported APIs such as java.applet.
+
+This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
+        <location
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+    </issue>
+
+</issues>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res" >
+            <file
+                name="ic_launcher"
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-xxhdpi\ic_launcher.png"
+                qualifiers="xxhdpi"
+                type="drawable" />
+            <file
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >GameClient
+                </string>
+            </file>
+            <file
+                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\values\styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme" >
+
+                    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                    <item name="android:windowIsTranslucent">
+true
+                    </item>
+                    <item name="android:windowBackground">
+@android:color/transparent
+                    </item>
+                    <item name="android:windowContentOverlay">
+@null
+                    </item>
+                    <item name="android:windowNoTitle">
+true
+                    </item>
+                    <item name="android:windowIsFloating">
+false
+                    </item>
+                    <item name="android:backgroundDimEnabled">
+false
+                    </item>
+                </style>
+            </file>
+        </source>
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\build\res\rs\debug" />
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\src\debug\res" />
+    </dataSet>
+
+</merger>
