@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import box2dLight.Light;
-import box2dLight.PointLight;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.mob.client.Game;
 import com.mob.client.interfaces.ConstantsInterface;
 
@@ -60,17 +60,17 @@ public class LightHandler implements ConstantsInterface {
 		
 		// Allocate our light on the last index
 		int index = this.mLights.size() + 1;
-		this.mLights.put(index, new PointLight(this.mGame.getEngine().getRayHandler(), DEFAULT_NUM_RAYS, 
-				new Color(pColor.r, pColor.g, pColor.b, ALPHA_LIGHTS), pSize, 
-				(pX * TILE_PIXEL_WIDTH) - (TILE_PIXEL_WIDTH / 2f), 
-				(pY * TILE_PIXEL_HEIGHT) - (TILE_PIXEL_HEIGHT / 2f)));
+//		this.mLights.put(index, new Light(this.mGame.getEngine().getRayHandler(), DEFAULT_NUM_RAYS, 
+//				new Color(pColor.r, pColor.g, pColor.b, ALPHA_LIGHTS), pSize, 
+//				(pX * TILE_PIXEL_WIDTH) - (TILE_PIXEL_WIDTH / 2f), 
+//				(pY * TILE_PIXEL_HEIGHT) - (TILE_PIXEL_HEIGHT / 2f)));
 		return index;
 	}
 
 	public int createLight(float x, float y, Color pColor, float pSize) {
 		int index = this.mLights.size() + 1;
-		this.mLights.put(index, new PointLight(this.mGame.getEngine().getRayHandler(), DEFAULT_NUM_RAYS, pColor, pSize, 
-				x - (TILE_PIXEL_WIDTH / 2f), y - (TILE_PIXEL_HEIGHT / 2f)));
+//		this.mLights.put(index, new Light(this.mGame.getEngine().getRayHandler(), DEFAULT_NUM_RAYS, pColor, pSize, 
+//				x - (TILE_PIXEL_WIDTH / 2f), y - (TILE_PIXEL_HEIGHT / 2f)));
 		return index;
 	}
 

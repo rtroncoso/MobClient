@@ -17,8 +17,8 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = 'GameClient'
-        gdxVersion = '1.0-SNAPSHOT'
+        appName = 'MobClient'
+        gdxVersion = '1.5.2'
         roboVMVersion = '0.0.11'
     }
 
@@ -26,6 +26,7 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
 }
 
@@ -41,6 +42,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.ashley:ashley:1.3.2"
+        compile "com.badlogicgames.box2dlights:box2dlights:1.3"
     }
 }
 
@@ -109,6 +111,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:1.1:sources"
         compile "com.badlogicgames.ashley:ashley:1.3.2"
+        compile "com.badlogicgames.box2dlights:box2dlights:1.3"
     }
 }
 
