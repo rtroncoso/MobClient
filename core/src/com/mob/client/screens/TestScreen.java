@@ -25,10 +25,10 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.mob.client.Game;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
 
-public class TestScreen extends Screen implements Constants {
+public class TestScreen extends Screen implements ConstantsInterface {
 	
 	// Constants
 	// ===========================================================

@@ -36,10 +36,10 @@ import com.mob.client.data.MapBlockData;
 import com.mob.client.data.MapData;
 import com.mob.client.elements.Tile;
 import com.mob.client.handlers.LightHandler;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.textures.BundledTexture;
 
-public class PhysicsEngine extends Engine implements Constants {
+public class PhysicsEngine extends Engine implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -32,10 +32,10 @@ import com.mob.client.Game;
 import com.mob.client.data.MapBlockData;
 import com.mob.client.data.MapData;
 import com.mob.client.data.WorldPositionData;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.util.Util;
 
-public class MapHandler implements Constants {
+public class MapHandler implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants

@@ -30,9 +30,9 @@ import box2dLight.PointLight;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mob.client.Game;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public class LightHandler implements Constants {
+public class LightHandler implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================

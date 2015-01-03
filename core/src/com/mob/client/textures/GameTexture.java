@@ -25,9 +25,9 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
 import com.mob.client.data.GrhData;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public class GameTexture implements Constants {
+public class GameTexture implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================

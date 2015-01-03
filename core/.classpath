@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
-	<classpathentry exported="true" kind="lib" path="libs/box2dlights-1.2-SNAPSHOT.jar" sourcepath="libs/box2dlights-1.2-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rodrigo/workspace/workspace-mob/MobClient/libs/box2dlights-1.2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

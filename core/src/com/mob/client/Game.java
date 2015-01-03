@@ -42,10 +42,10 @@ import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.handlers.DataHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.screens.Screen;
   
-public abstract class Game implements ApplicationListener, Constants {  
+public abstract class Game implements ApplicationListener, ConstantsInterface {  
 
 	// ===========================================================
 	// Constants

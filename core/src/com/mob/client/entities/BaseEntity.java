@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.sprites;
+package com.mob.client.entities;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -25,7 +25,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mob.client.Game;
 import com.mob.client.interfaces.ConstantsInterface;
 
-public abstract class GameSprite implements ConstantsInterface {
+public abstract class BaseEntity implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -50,11 +50,8 @@ public abstract class GameSprite implements ConstantsInterface {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GameSprite(Game _game, float x, float y) {
+	public BaseEntity(Game _game) {
 		this.mGame = _game;
-		
-		this.mX = x;
-		this.mY = y;
 		
 		this.mActive = true;
 		this.mVisible = true;

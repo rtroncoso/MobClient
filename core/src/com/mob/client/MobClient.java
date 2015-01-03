@@ -31,11 +31,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch; 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.handlers.DataHandler;
   
   
-public class MobClient extends Game implements Constants {  
+public class MobClient extends Game implements ConstantsInterface {  
 
 	// ===========================================================
 	// Constants

@@ -22,9 +22,9 @@
  */
 package com.mob.client.data;
 
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public class MapData implements Constants {
+public class MapData implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants

@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 import com.mob.client.Game;
 import com.mob.client.elements.Character;
-import com.mob.client.interfaces.Constants.Heading;
+import com.mob.client.interfaces.ConstantsInterface.Heading;
 
 public class CharacterHandler {
 

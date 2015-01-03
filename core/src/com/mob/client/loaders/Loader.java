@@ -19,9 +19,9 @@ package com.mob.client.loaders;
 import java.util.Vector;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public abstract class Loader<T> implements Constants {
+public abstract class Loader<T> implements ConstantsInterface {
 	
 	// ===========================================================
 	// Constants

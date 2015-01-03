@@ -24,7 +24,7 @@ package com.mob.client.interfaces;
 
 import com.badlogic.gdx.graphics.Color;
 
-public interface Constants {
+public interface ConstantsInterface {
 
 	public static final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
     public static final int GAME_SCREEN_WIDTH = 1366;
