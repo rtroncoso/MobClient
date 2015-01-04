@@ -39,7 +39,7 @@ import com.mob.client.data.ShieldData;
 import com.mob.client.data.WeaponData;
 import com.mob.client.engine.PhysicsEngine;
 import com.mob.client.handlers.CharacterHandler;
-import com.mob.client.handlers.DataHandler;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
@@ -62,7 +62,7 @@ public abstract class Game implements ApplicationListener, ConstantsInterface {
 	protected MapHandler mMapHandler;
     protected SurfaceHandler mSurfaceHandler;
     protected CharacterHandler mCharacterHandler;
-    protected DataHandler mDataHandler;
+    protected AssetsHandler mDataHandler;
 
 	protected PhysicsEngine mEngine;
 

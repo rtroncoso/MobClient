@@ -39,7 +39,7 @@ import com.mob.client.loaders.HelmetLoader;
 import com.mob.client.loaders.ShieldLoader;
 import com.mob.client.loaders.WeaponLoader;
 
-public class DataHandler {
+public class AssetsHandler {
 
 	// ===========================================================
 	// Constants
@@ -49,46 +49,43 @@ public class DataHandler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private Vector<GrhData> mGrhData;
-	private Vector<BodyData> mBodyData;
-	private Vector<HeadData> mHeadData;
-	private Vector<HelmetData> mHelmetData;
-	private Vector<WeaponData> mWeaponData;
-    private Vector<ShieldData> mShieldData;
-    private Vector<FxData> mFxData;
+	private static Vector<GrhData> mGrhData;
+	private static Vector<BodyData> mBodyData;
+	private static Vector<HeadData> mHeadData;
+	private static Vector<HelmetData> mHelmetData;
+	private static Vector<WeaponData> mWeaponData;
+    private static Vector<ShieldData> mShieldData;
+    private static Vector<FxData> mFxData;
 
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-	/**
-	 * Constructor
-	 */
-	public DataHandler() {
-
-    	// Init our vectors
-        this.mGrhData = new Vector<GrhData>();
-        this.mBodyData = new Vector<BodyData>();
-        this.mHeadData = new Vector<HeadData>();
-        this.mHelmetData = new Vector<HelmetData>();
-        this.mWeaponData = new Vector<WeaponData>();
-        this.mShieldData = new Vector<ShieldData>();
-        this.mFxData = new Vector<FxData>();
-        
-        // Load all INITs
-        this.mGrhData = new GrhLoader().load("Graficos.ind");
-        this.mBodyData = new BodyLoader().load("Personajes.ind");
-        this.mWeaponData = new WeaponLoader().load("Armas.dat");
-        this.mShieldData = new ShieldLoader().load("Escudos.dat");
-        this.mHeadData = new HeadLoader().load("Cabezas.ind");
-        this.mHelmetData = new HelmetLoader().load("Cascos.ind");
-        this.mFxData = new FxLoader().load("Fxs.ind");
-	}
-
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	public static void load() {
+
+    	// Init our vectors
+        mGrhData = new Vector<GrhData>();
+        mBodyData = new Vector<BodyData>();
+        mHeadData = new Vector<HeadData>();
+        mHelmetData = new Vector<HelmetData>();
+        mWeaponData = new Vector<WeaponData>();
+        mShieldData = new Vector<ShieldData>();
+        mFxData = new Vector<FxData>();
+        
+        // Load all INITs
+        mGrhData = new GrhLoader().load("Graficos.ind");
+        mBodyData = new BodyLoader().load("Personajes.ind");
+        mWeaponData = new WeaponLoader().load("Armas.dat");
+        mShieldData = new ShieldLoader().load("Escudos.dat");
+        mHeadData = new HeadLoader().load("Cabezas.ind");
+        mHelmetData = new HelmetLoader().load("Cascos.ind");
+        mFxData = new FxLoader().load("Fxs.ind");
+		
+	}
 	
 	
 	// ===========================================================
@@ -102,99 +99,99 @@ public class DataHandler {
 	/**
 	 * @return the mGrhData
 	 */
-	public Vector<GrhData> getGrhData() {
+	public static Vector<GrhData> getGrhData() {
 		return mGrhData;
 	}
 
 	/**
 	 * @param mGrhData the mGrhData to set
 	 */
-	public void setGrhData(Vector<GrhData> mGrhData) {
-		this.mGrhData = mGrhData;
+	public static void setGrhData(Vector<GrhData> mGrhData) {
+		mGrhData = mGrhData;
 	}
 
 	/**
 	 * @return the mBodyData
 	 */
-	public Vector<BodyData> getBodyData() {
+	public static Vector<BodyData> getBodyData() {
 		return mBodyData;
 	}
 
 	/**
 	 * @param mBodyData the mBodyData to set
 	 */
-	public void setBodyData(Vector<BodyData> mBodyData) {
-		this.mBodyData = mBodyData;
+	public static void setBodyData(Vector<BodyData> mBodyData) {
+		mBodyData = mBodyData;
 	}
 
 	/**
 	 * @return the mHeadData
 	 */
-	public Vector<HeadData> getHeadData() {
+	public static Vector<HeadData> getHeadData() {
 		return mHeadData;
 	}
 
 	/**
 	 * @param mHeadData the mHeadData to set
 	 */
-	public void setHeadData(Vector<HeadData> mHeadData) {
-		this.mHeadData = mHeadData;
+	public static void setHeadData(Vector<HeadData> mHeadData) {
+		mHeadData = mHeadData;
 	}
 
 	/**
 	 * @return the mHelmetData
 	 */
-	public Vector<HelmetData> getHelmetData() {
+	public static Vector<HelmetData> getHelmetData() {
 		return mHelmetData;
 	}
 
 	/**
 	 * @param mHelmetData the mHelmetData to set
 	 */
-	public void setHelmetData(Vector<HelmetData> mHelmetData) {
-		this.mHelmetData = mHelmetData;
+	public static void setHelmetData(Vector<HelmetData> mHelmetData) {
+		mHelmetData = mHelmetData;
 	}
 
 	/**
 	 * @return the mWeaponData
 	 */
-	public Vector<WeaponData> getWeaponData() {
+	public static Vector<WeaponData> getWeaponData() {
 		return mWeaponData;
 	}
 
 	/**
 	 * @param mWeaponData the mWeaponData to set
 	 */
-	public void setWeaponData(Vector<WeaponData> mWeaponData) {
-		this.mWeaponData = mWeaponData;
+	public static void setWeaponData(Vector<WeaponData> mWeaponData) {
+		mWeaponData = mWeaponData;
 	}
 
 	/**
 	 * @return the mShieldData
 	 */
-	public Vector<ShieldData> getShieldData() {
+	public static Vector<ShieldData> getShieldData() {
 		return mShieldData;
 	}
 
 	/**
 	 * @param mShieldData the mShieldData to set
 	 */
-	public void setShieldData(Vector<ShieldData> mShieldData) {
-		this.mShieldData = mShieldData;
+	public static void setShieldData(Vector<ShieldData> mShieldData) {
+		mShieldData = mShieldData;
 	}
 
 	/**
 	 * @return the mFxData
 	 */
-	public Vector<FxData> getFxData() {
+	public static Vector<FxData> getFxData() {
 		return mFxData;
 	}
 
 	/**
 	 * @param mFxData the mFxData to set
 	 */
-	public void setFxData(Vector<FxData> mFxData) {
-		this.mFxData = mFxData;
+	public static void setFxData(Vector<FxData> mFxData) {
+		mFxData = mFxData;
 	}
 
 

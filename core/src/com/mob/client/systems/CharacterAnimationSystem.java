@@ -44,10 +44,12 @@ public class CharacterAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+	@SuppressWarnings("unchecked")
 	public CharacterAnimationSystem() {
-		super(Family.getFor(BodyComponent.class,
-							AnimationComponent.class,
-							StateComponent.class));
+		super(Family.all(BodyComponent.class,
+						AnimationComponent.class,
+						StateComponent.class)
+					.get());
 		
 		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
 		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
@@ -66,7 +68,6 @@ public class CharacterAnimationSystem extends IteratingSystem {
 		// Obtenemos los components necesarios
 		BodyComponent body = this.mBodyMapper.get(entity);
 		StateComponent state = this.mStateMapper.get(entity);
-		
 		Animation animation = body.animations.get(state.get());
 		
 		// Si tiene una animación cambiamos la region

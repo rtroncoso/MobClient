@@ -32,7 +32,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
-import com.mob.client.handlers.DataHandler;
+import com.mob.client.handlers.AssetsHandler;
   
   
 public class MobClient extends Game implements ConstantsInterface {  
@@ -69,7 +69,7 @@ public class MobClient extends Game implements ConstantsInterface {
         this.setScreen("LoadingScreen");  
 
         // Load INITs
-        this.mDataHandler = new DataHandler();
+        this.mDataHandler = new AssetsHandler();
         
         // Init texture engine
         this.setSurfaceHandler(new SurfaceHandler(this));

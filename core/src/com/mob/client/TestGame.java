@@ -14,21 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems;
+package com.mob.client;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.Vector2;
-import com.mob.client.components.MovementComponent;
-import com.mob.client.components.TransformComponent;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mob.client.screens.GameScreen;
+import com.mob.client.screens.Screen;
 
 /**
  * @author Rodrigo
  *
  */
-public class MovementSystem extends IteratingSystem {
+public class TestGame extends Game {
 
 	// ===========================================================
 	// Constants
@@ -37,22 +36,12 @@ public class MovementSystem extends IteratingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private Vector2 tmp = new Vector2();
-
-	private ComponentMapper<TransformComponent> mTransformMapper;
-	private ComponentMapper<MovementComponent> mMovementMapper;
+	private SpriteBatch mSpriteBatch;
+	private Screen mCurrentScreen;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	@SuppressWarnings("unchecked")
-	public MovementSystem() {
-		super(Family.all(MovementComponent.class, TransformComponent.class)
-					.get());
-		
-		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
-		this.mMovementMapper = ComponentMapper.getFor(MovementComponent.class);
-	}
 
 	// ===========================================================
 	// Methods
@@ -62,21 +51,43 @@ public class MovementSystem extends IteratingSystem {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	protected void processEntity(Entity entity, float deltaTime) {
-		TransformComponent pos = this.mTransformMapper.get(entity);
-		MovementComponent mov = this.mMovementMapper.get(entity);;
+	public void create() {
+		// Inicializamos el batch
+		this.mSpriteBatch = new SpriteBatch();
 		
-		tmp.set(mov.accel).scl(deltaTime);
-		mov.velocity.add(tmp);
+		// Cargamos resources
+//		Settings.load();
+//		Assets.load();
 		
-		tmp.set(mov.velocity).scl(deltaTime);
-		pos.pos.add(tmp.x, tmp.y, 0.0f);
-
+		// Setteamos la screen a usar inicialmente
+		this.setScreen(new GameScreen(this));
+	}
+	
+	@Override
+	public void render() {
+		GL20 gl = Gdx.gl;
+		gl.glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		super.render();
 	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+	/**
+	 * @return the mSpriteBatch
+	 */
+	public SpriteBatch getSpriteBatch() {
+		return mSpriteBatch;
+	}
+
+	/**
+	 * @param mSpriteBatch the mSpriteBatch to set
+	 */
+	public void setSpriteBatch(SpriteBatch mSpriteBatch) {
+		this.mSpriteBatch = mSpriteBatch;
+	}
 
 	// ===========================================================
 	// Inner and Anonymous Classes
