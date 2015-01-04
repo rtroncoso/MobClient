@@ -103,97 +103,97 @@ public abstract class Game implements ApplicationListener, ConstantsInterface {
 	 * @return the mShieldData
 	 */
 	public Vector<ShieldData> getShieldData() {
-		return this.mDataHandler.getShieldData();
+		return AssetsHandler.getShieldData();
 	}
 
 	/**
 	 * @param mShieldData the mShieldData to set
 	 */
 	public void setShieldData(Vector<ShieldData> mShieldData) {
-		this.mDataHandler.setShieldData(mShieldData);
+		AssetsHandler.setShieldData(mShieldData);
 	}
     /**
 	 * @return the mWeaponData
 	 */
 	public Vector<WeaponData> getWeaponData() {
-		return this.mDataHandler.getWeaponData();
+		return AssetsHandler.getWeaponData();
 	}
 
 	/**
 	 * @param mWeaponData the mWeaponData to set
 	 */
 	public void setWeaponData(Vector<WeaponData> mWeaponData) {
-		this.mDataHandler.setWeaponData(mWeaponData);
+		AssetsHandler.setWeaponData(mWeaponData);
 	}
 	
 	/**
 	* @return the _grhData
 	*/
 	public Vector<GrhData> getGrhData() {
-		return this.mDataHandler.getGrhData();
+		return AssetsHandler.getGrhData();
 	}
 	
 	/**
 	* @param _grhData the _grhData to set
 	*/
 	public void setGrhData(Vector<GrhData> _grhData) {
-		this.mDataHandler.setGrhData(_grhData);
+		AssetsHandler.setGrhData(_grhData);
 	}
 	
 	/**
 	* @return the _bodyData
 	*/
 	public Vector<BodyData> getBodyData() {
-		return this.mDataHandler.getBodyData();
+		return AssetsHandler.getBodyData();
 	}
 	
 	/**
 	* @param _bodyData the _bodyData to set
 	*/
 	public void setBodyData(Vector<BodyData> _bodyData) {
-		this.mDataHandler.setBodyData(_bodyData);
+		AssetsHandler.setBodyData(_bodyData);
 	}
 
 	/**
 	 * @return the _headData
 	 */
 	public Vector<HeadData> getHeadData() {
-		return this.mDataHandler.getHeadData();
+		return AssetsHandler.getHeadData();
 	}
 
 	/**
 	 * @param _headData the _headData to set
 	 */
 	public void setHeadData(Vector<HeadData> _headData) {
-		this.mDataHandler.setHeadData(_headData);
+		AssetsHandler.setHeadData(_headData);
 	}
 
 	/**
 	 * @return the _helmetData
 	 */
 	public Vector<HelmetData> getHelmetData() {
-		return this.mDataHandler.getHelmetData();
+		return AssetsHandler.getHelmetData();
 	}
 
 	/**
 	 * @param _helmetData the _helmetData to set
 	 */
 	public void setHelmetData(Vector<HelmetData> _helmetData) {
-		this.mDataHandler.setHelmetData(_helmetData);
+		AssetsHandler.setHelmetData(_helmetData);
 	}
 	
 	/**
 	 * @return the mFxData
 	 */
 	public Vector<FxData> getFxData() {
-		return this.mDataHandler.getFxData();
+		return AssetsHandler.getFxData();
 	}
 
 	/**
 	 * @param mFxData the mFxData to set
 	 */
 	public void setFxData(Vector<FxData> mFxData) {
-		this.mDataHandler.setFxData(mFxData);
+		AssetsHandler.setFxData(mFxData);
 	}
 
 	/**

@@ -73,7 +73,7 @@ public class SurfaceHandler implements ConstantsInterface {
 	 * @param mGraphicsPath the mGraphicsPath to set
 	 */
 	public static void setGraphicsPath(String mGraphicsPath) {
-		mGraphicsPath = mGraphicsPath;
+		SurfaceHandler.mGraphicsPath = mGraphicsPath;
 	}
 
 	// ===========================================================

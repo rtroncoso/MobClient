@@ -20,10 +20,10 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.mob.client.components.AnimationComponent;
 import com.mob.client.components.BodyComponent;
+import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.StateComponent;
+import com.mob.client.textures.BundledAnimation;
 
 /**
  * @author Rodrigo
@@ -40,6 +40,7 @@ public class CharacterAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	private ComponentMapper<BodyComponent> mBodyMapper;
 	private ComponentMapper<StateComponent> mStateMapper;
+	private ComponentMapper<HeadingComponent> mHeadingMapper;
 
 	// ===========================================================
 	// Constructors
@@ -47,12 +48,14 @@ public class CharacterAnimationSystem extends IteratingSystem {
 	@SuppressWarnings("unchecked")
 	public CharacterAnimationSystem() {
 		super(Family.all(BodyComponent.class,
-						AnimationComponent.class,
-						StateComponent.class)
+						StateComponent.class,
+						HeadingComponent.class)
 					.get());
 		
+		// Obtenemos nuestros Mappers
 		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
 		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
+		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
 	}
 
 	// ===========================================================
@@ -68,11 +71,12 @@ public class CharacterAnimationSystem extends IteratingSystem {
 		// Obtenemos los components necesarios
 		BodyComponent body = this.mBodyMapper.get(entity);
 		StateComponent state = this.mStateMapper.get(entity);
-		Animation animation = body.animations.get(state.get());
+		HeadingComponent heading = this.mHeadingMapper.get(entity);
+		BundledAnimation animation = body.animations.get(heading.current);
 		
 		// Si tiene una animación cambiamos la region
 		if (animation != null) {
-			body.region = animation.getKeyFrame(state.time); 
+			animation.setAnimationTime(state.time);
 		}
 		
 		// Actualizamos nuestro DeltaTime interno de la Entity

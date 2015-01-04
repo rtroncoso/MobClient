@@ -17,13 +17,18 @@
 package com.mob.client.factories;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Color;
 import com.mob.client.components.BodyComponent;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
+import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.MovementComponent;
 import com.mob.client.components.StateComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
+import com.mob.client.data.GrhData;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.textures.BundledAnimation;
 
 /**
  * @author Rodrigo
@@ -46,7 +51,25 @@ public class CharacterFactory extends Factory<Entity> {
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public Factory<Entity> withBody(BodyData body) {
+	public CharacterFactory withBody(BodyData body) {
+		
+		// Creamos un nuevo BodyComponent
+		BodyComponent bodyComponent = new BodyComponent();
+		
+		// Iteramos nuestros headings
+		int index = 0;
+		for(int grhIndex : body.getBodyArray()) {
+			
+			// Obtenemos GrhData necesario
+			GrhData grh = AssetsHandler.getGrh(grhIndex);
+			
+			// Agregamos las animations
+			bodyComponent.animations.put(index, new BundledAnimation(grh));
+			index++;
+		}
+		
+		// Agregamos el component a nuestra entity
+		this.mScope.add(bodyComponent);
 		
 		return this;
 	}
@@ -55,37 +78,42 @@ public class CharacterFactory extends Factory<Entity> {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Factory<Entity> create() {
+	public CharacterFactory create() {
 		
 		// Creamos la entity a guardar
 		Entity entity = new Entity();
 		
 		// Declaramos los components a usar
-		BodyComponent body = new BodyComponent();
 		CharacterComponent character = new CharacterComponent();
 		ColorComponent color = new ColorComponent();
 		MovementComponent movement = new MovementComponent();
 		StateComponent state = new StateComponent();
 		TransformComponent transform = new TransformComponent();
+		HeadingComponent heading = new HeadingComponent();
+		
+		// Initial states de un character
+		transform.pos.set(5.0f, 5.0f, 0.0f);
+		color.tint = Color.WHITE;
+		heading.current = HeadingComponent.HEADING_SOUTH;
 		
 		// Agregamos los components necesarios a la entity
-		entity.add(body);
 		entity.add(character);
+		entity.add(heading);
 		entity.add(color);
 		entity.add(movement);
 		entity.add(state);
 		entity.add(transform);
 		
 		// Apuntamos nuestro scope a la entity creada
-		this.mScopedEntity = entity;
+		this.mScope = entity;
 		
-		// Devolvemos la entity
+		// Devolvemos nuestra instancia para chainear
 		return this;
 	}
 
 	@Override
 	public Entity get() {
-		return this.mScopedEntity;
+		return this.mScope;
 	}
 
 	// ===========================================================

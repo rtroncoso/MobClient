@@ -25,5 +25,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/5446be5d62e4c6b347c8e6cd28dc00a936417ba2/jorbis-0.0.17-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/dfef8e7b1118cc6ea70393e4f4f7ede95de8f4bd/gdx-box2d-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/9bad798bf0d49ed7ade9772762d32ed2c87d46e3/gdx-box2d-1.5.2-sources.jar"/>
 	<classpathentry kind="src" path="assets"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/MobClient"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

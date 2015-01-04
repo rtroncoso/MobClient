@@ -32,16 +32,16 @@ public class GrhData {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int x;
-	private int y;
-	private int fileNum;
-	private int grhIndex;
-	private int pixelWidth;
-	private int pixelHeight;
-	private float tileWidth;
-	private float tileHeight;
-	private int[] frames;
-	private float speed;
+	private int mX;
+	private int mY;
+	private int mFileNum;
+	private int mGrhIndex;
+	private int mPixelWidth;
+	private int mPixelHeight;
+	private float mTileWidth;
+	private float mTileHeight;
+	private int[] mFrames;
+	private float mSpeed;
 
 	// ===========================================================
 	// Constructors
@@ -49,15 +49,15 @@ public class GrhData {
 	public GrhData(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
 			float tileWidth, float tileHeight, int[] frames, float speed) {
 		super();
-		this.x = x;
-		this.y = y;
-		this.fileNum = fileNum;
-		this.pixelWidth = pixelWidth;
-		this.pixelHeight = pixelHeight;
-		this.tileWidth = tileWidth;
-		this.tileHeight = tileHeight;
-		this.frames = frames;
-		this.speed = speed;
+		this.mX = x;
+		this.mY = y;
+		this.mFileNum = fileNum;
+		this.mPixelWidth = pixelWidth;
+		this.mPixelHeight = pixelHeight;
+		this.mTileWidth = tileWidth;
+		this.mTileHeight = tileHeight;
+		this.mFrames = frames;
+		this.mSpeed = speed;
 	}
 
 	// ===========================================================
@@ -72,144 +72,144 @@ public class GrhData {
 	 * @return the x
 	 */
 	public int getX() {
-		return x;
+		return mX;
 	}
 
 	/**
 	 * @param x the x to set
 	 */
 	public void setX(int x) {
-		this.x = x;
+		this.mX = x;
 	}
 
 	/**
 	 * @return the y
 	 */
 	public int getY() {
-		return y;
+		return mY;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
 	public void setY(int y) {
-		this.y = y;
+		this.mY = y;
 	}
 
 	/**
 	 * @return the fileNum
 	 */
 	public int getFileNum() {
-		return fileNum;
+		return mFileNum;
 	}
 
 	/**
 	 * @param fileNum the fileNum to set
 	 */
 	public void setFileNum(int fileNum) {
-		this.fileNum = fileNum;
+		this.mFileNum = fileNum;
 	}
 
 	/**
 	 * @return the pixelWidth
 	 */
 	public int getPixelWidth() {
-		return pixelWidth;
+		return mPixelWidth;
 	}
 
 	/**
 	 * @param pixelWidth the pixelWidth to set
 	 */
 	public void setPixelWidth(int pixelWidth) {
-		this.pixelWidth = pixelWidth;
+		this.mPixelWidth = pixelWidth;
 	}
 
 	/**
 	 * @return the pixelHeight
 	 */
 	public int getPixelHeight() {
-		return pixelHeight;
+		return mPixelHeight;
 	}
 
 	/**
 	 * @param pixelHeight the pixelHeight to set
 	 */
 	public void setPixelHeight(int pixelHeight) {
-		this.pixelHeight = pixelHeight;
+		this.mPixelHeight = pixelHeight;
 	}
 
 	/**
 	 * @return the tileWidth
 	 */
 	public float getTileWidth() {
-		return tileWidth;
+		return mTileWidth;
 	}
 
 	/**
 	 * @param tileWidth the tileWidth to set
 	 */
 	public void setTileWidth(float tileWidth) {
-		this.tileWidth = tileWidth;
+		this.mTileWidth = tileWidth;
 	}
 
 	/**
 	 * @return the tileHeight
 	 */
 	public float getTileHeight() {
-		return tileHeight;
+		return mTileHeight;
 	}
 
 	/**
 	 * @param tileHeight the tileHeight to set
 	 */
 	public void setTileHeight(float tileHeight) {
-		this.tileHeight = tileHeight;
+		this.mTileHeight = tileHeight;
 	}
 
 	/**
 	 * @return the frames
 	 */
 	public int[] getFrames() {
-		return frames;
+		return mFrames;
 	}
 	
 	public int getFrame(int pIndex) {
-		return frames[pIndex];
+		return mFrames[pIndex];
 	}
 
 	/**
 	 * @param frames the frames to set
 	 */
 	public void setFrames(int[] frames) {
-		this.frames = frames;
+		this.mFrames = frames;
 	}
 
 	/**
 	 * @return the speed
 	 */
 	public float getSpeed() {
-		return speed;
+		return mSpeed;
 	}
 
 	/**
 	 * @param speed the speed to set
 	 */
 	public void setSpeed(float speed) {
-		this.speed = speed;
+		this.mSpeed = speed;
 	}
 
 	/**
 	 * @return the grhIndex
 	 */
 	public int getGrhIndex() {
-		return grhIndex;
+		return mGrhIndex;
 	}
 
 	/**
 	 * @param grhIndex the grhIndex to set
 	 */
 	public void setGrhIndex(int grhIndex) {
-		this.grhIndex = grhIndex;
+		this.mGrhIndex = grhIndex;
 	}
 
 	// ===========================================================

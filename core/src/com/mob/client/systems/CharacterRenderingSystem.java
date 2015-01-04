@@ -26,23 +26,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.mob.client.components.BodyComponent;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
+import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.TransformComponent;
+import com.mob.client.interfaces.ConstantsInterface;
 
 /**
  * @author Rodrigo
  *
  */
-public class CharacterRenderingSystem extends IteratingSystem {
+public class CharacterRenderingSystem extends IteratingSystem implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final float PIXELS_TO_METERS = 1.0f / 32.0f;
+	public static final float PIXELS_TO_METERS = 1.0f / TILE_PIXEL_WIDTH;
 
 	// ===========================================================
 	// Fields
@@ -50,6 +53,7 @@ public class CharacterRenderingSystem extends IteratingSystem {
 	private ComponentMapper<BodyComponent> mBodyMapper;
 	private ComponentMapper<TransformComponent> mTransformMapper;
 	private ComponentMapper<CharacterComponent> mCharacterMapper;
+	private ComponentMapper<HeadingComponent> mHeadingMapper;
 	private ComponentMapper<ColorComponent> mColorMapper;
 	
 	private SpriteBatch mBatch;
@@ -65,16 +69,21 @@ public class CharacterRenderingSystem extends IteratingSystem {
 		super(Family.all(BodyComponent.class, 
 					TransformComponent.class, 
 					CharacterComponent.class,
+					HeadingComponent.class,
 					ColorComponent.class)
 				.get());
-		
+
+		// Obtenemos nuestros Mappers
 		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
 		this.mCharacterMapper = ComponentMapper.getFor(CharacterComponent.class);
+		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
 		this.mColorMapper = ComponentMapper.getFor(ColorComponent.class);
 		
+		// Creamos la render queue
 		this.mRenderQueue = new Array<Entity>();
 		
+		// Creamos el comparator para decidir cual entidad tiene más prioridad
 		this.mComparator = new Comparator<Entity>() {
 			@Override
 			public int compare(Entity entityA, Entity entityB) {
@@ -83,8 +92,8 @@ public class CharacterRenderingSystem extends IteratingSystem {
 			}
 		};
 		
+		// Asignamos cosas necesarias para el engine
 		this.mBatch = pBatch;
-		
 		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 		
@@ -105,6 +114,15 @@ public class CharacterRenderingSystem extends IteratingSystem {
 
 	}
 	
+	/**
+	 * Este metodo se encarga de renderizar los characters con todos 
+	 * sus components. Se ejecuta una vez por cada ciclo del engine
+	 * y va iterando una render queue interna hasta que se dibujen
+	 * todas las entities.
+	 * 
+	 * @author rt
+	 * @param deltaTime
+	 */
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
@@ -121,9 +139,11 @@ public class CharacterRenderingSystem extends IteratingSystem {
 			// Obtenemos los components del character
 			BodyComponent body = this.mBodyMapper.get(entity);
 			ColorComponent color = this.mColorMapper.get(entity);
+			HeadingComponent heading = this.mHeadingMapper.get(entity);
+			TextureRegion bodyRegion = body.animations.get(heading.current).getGraphic();
 			
 			// Si no tiene TextureRegion
-			if (body.region == null) {
+			if (bodyRegion == null) {
 				continue;
 			}
 			
@@ -131,20 +151,15 @@ public class CharacterRenderingSystem extends IteratingSystem {
 			TransformComponent t = this.mTransformMapper.get(entity);
 		
 			// Preparamos variables para el render
-			float width = body.region.getRegionWidth();
-			float height = body.region.getRegionHeight();
+			float width = bodyRegion.getRegionWidth();
+			float height = bodyRegion.getRegionHeight();
 			float originX = width * 0.5f;
 			float originY = height * 0.5f;
 			
-			// Dibujamos nuestros components
+			// Renderizamos el character
 			Color previousColor = this.mBatch.getColor();
-			this.mBatch.setColor(color.mColor);
-			this.mBatch.draw(body.region,
-					   t.pos.x - originX, t.pos.y - originY,
-					   originX, originY,
-					   width, height,
-					   t.scale.x * PIXELS_TO_METERS, t.scale.y * PIXELS_TO_METERS,
-					   MathUtils.radiansToDegrees * t.rotation);
+			this.mBatch.setColor(color.tint);
+			this.mBatch.draw(bodyRegion, t.pos.x - originX, t.pos.y - originY);
 			this.mBatch.setColor(previousColor);
 		}
 		

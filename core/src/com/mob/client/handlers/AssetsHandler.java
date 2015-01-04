@@ -97,6 +97,21 @@ public class AssetsHandler {
 	// Getter & Setter
 	// ===========================================================
 	/**
+	 * @param pIndex
+	 * @return body data of a specified index
+	 */
+	public static BodyData getBody(int pIndex) {
+		return AssetsHandler.getBodyData().get(pIndex);
+	}
+	/**
+	 * @param pIndex
+	 * @return grh data of a specified index
+	 */
+	public static GrhData getGrh(int pIndex) {
+		return AssetsHandler.getGrhData().get(pIndex);
+	}
+	
+	/**
 	 * @return the mGrhData
 	 */
 	public static Vector<GrhData> getGrhData() {
@@ -107,7 +122,7 @@ public class AssetsHandler {
 	 * @param mGrhData the mGrhData to set
 	 */
 	public static void setGrhData(Vector<GrhData> mGrhData) {
-		mGrhData = mGrhData;
+		AssetsHandler.mGrhData = mGrhData;
 	}
 
 	/**
@@ -121,7 +136,7 @@ public class AssetsHandler {
 	 * @param mBodyData the mBodyData to set
 	 */
 	public static void setBodyData(Vector<BodyData> mBodyData) {
-		mBodyData = mBodyData;
+		AssetsHandler.mBodyData = mBodyData;
 	}
 
 	/**
@@ -135,7 +150,7 @@ public class AssetsHandler {
 	 * @param mHeadData the mHeadData to set
 	 */
 	public static void setHeadData(Vector<HeadData> mHeadData) {
-		mHeadData = mHeadData;
+		AssetsHandler.mHeadData = mHeadData;
 	}
 
 	/**
@@ -149,7 +164,7 @@ public class AssetsHandler {
 	 * @param mHelmetData the mHelmetData to set
 	 */
 	public static void setHelmetData(Vector<HelmetData> mHelmetData) {
-		mHelmetData = mHelmetData;
+		AssetsHandler.mHelmetData = mHelmetData;
 	}
 
 	/**
@@ -163,7 +178,7 @@ public class AssetsHandler {
 	 * @param mWeaponData the mWeaponData to set
 	 */
 	public static void setWeaponData(Vector<WeaponData> mWeaponData) {
-		mWeaponData = mWeaponData;
+		AssetsHandler.mWeaponData = mWeaponData;
 	}
 
 	/**
@@ -177,7 +192,7 @@ public class AssetsHandler {
 	 * @param mShieldData the mShieldData to set
 	 */
 	public static void setShieldData(Vector<ShieldData> mShieldData) {
-		mShieldData = mShieldData;
+		AssetsHandler.mShieldData = mShieldData;
 	}
 
 	/**
@@ -191,7 +206,7 @@ public class AssetsHandler {
 	 * @param mFxData the mFxData to set
 	 */
 	public static void setFxData(Vector<FxData> mFxData) {
-		mFxData = mFxData;
+		AssetsHandler.mFxData = mFxData;
 	}
 
 

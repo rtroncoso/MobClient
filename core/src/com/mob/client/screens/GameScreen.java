@@ -21,9 +21,9 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 import com.mob.client.TestGame;
+import com.mob.client.factories.CharacterFactory;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.systems.CharacterAnimationSystem;
 import com.mob.client.systems.CharacterRenderingSystem;
 import com.mob.client.systems.MovementSystem;
@@ -47,25 +47,32 @@ public class GameScreen extends ScreenAdapter {
 	private Engine mEngine;
 	private int mState;
 	private OrthographicCamera mCamera;
+	private CharacterFactory mCharacterFactory;
 	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 	public GameScreen(TestGame game) {
 		
-		// Inicializamos la escena
-		this.mGame = game;
-		this.mState = GAME_RUNNING;
+		// Inicializamos todo lo necesario
 		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-		
-		// Inicializamos el engine
+		this.mCharacterFactory = new CharacterFactory();
+		this.mGame = game;
+		this.mState = GAME_RUNNING;
 		this.mEngine = new Engine();
 		
 		// Agregamos los sistemas al engine
 		this.mEngine.addSystem(new MovementSystem());
 		this.mEngine.addSystem(new CharacterAnimationSystem());
 		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
+		
+		// Creamos un dummy character y lo agregamos al engine
+		this.mEngine.addEntity(
+			this.mCharacterFactory.create()
+				.withBody(AssetsHandler.getBodyData().get(1))
+				.get()
+		);
 		
 		
 	}

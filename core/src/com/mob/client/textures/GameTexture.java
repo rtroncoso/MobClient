@@ -28,6 +28,14 @@ import com.mob.client.data.GrhData;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 
+/**
+ * Este objeto permite una simple implementación e instanciación de 
+ * cualquier {@link GrhData} encapsulando y cargando su respectiva
+ * {@link TextureRegion}
+ * 
+ * @author Rodrigo
+ *
+ */
 public class GameTexture implements ConstantsInterface {
 	// ===========================================================
 	// Constants
@@ -45,7 +53,7 @@ public class GameTexture implements ConstantsInterface {
 	public GameTexture(Game _game, int grhIndex) {
 		GrhData grh = _game.getGrhData().get(grhIndex);
 		
-		this.mTextureRegion = new TextureRegion(_game.getSurfaceHandler().get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 	

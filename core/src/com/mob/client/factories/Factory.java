@@ -30,7 +30,7 @@ public abstract class Factory<T> {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	protected T mScopedEntity;
+	protected T mScope;
 
 	// ===========================================================
 	// Constructors
@@ -39,6 +39,12 @@ public abstract class Factory<T> {
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	/**
+	 * Provee una interfaz a nuestra propia instancia
+	 */
+	public Factory<T> getThis() {
+		return this;
+	}
 	
 
 	// ===========================================================
@@ -60,6 +66,7 @@ public abstract class Factory<T> {
 	 * @return
 	 */
 	public abstract T get();
+	
 
 	// ===========================================================
 	// Getter & Setter

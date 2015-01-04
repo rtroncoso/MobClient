@@ -27,6 +27,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
 import com.mob.client.data.GrhData;
+import com.mob.client.handlers.AssetsHandler;
 
 public class BundledTexture {
 	
@@ -67,6 +68,27 @@ public class BundledTexture {
 			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
 			for(int i = 0; i < numFrames; i++) {
 				this.mFrames[i] = new GameTexture(_game, grh.getFrame(i));
+				tmpFrames[i] = this.mFrames[i].getGraphic();
+			}
+			this.mAnimation = new Animation(grh.getSpeed() / 1000, tmpFrames);
+			this.mAnimated = true;
+		}
+	}
+	
+	public BundledTexture (GrhData grh, boolean pAnimated) {
+		this.mAnimationTime = 0.0f;
+		
+		if(!pAnimated) {
+			this.mFrames = new GameTexture[1];
+			this.mFrames[0] = new GameTexture(grh);
+			this.mAnimated = false;
+		} else {
+			int numFrames = grh.getFrames().length;
+			
+			this.mFrames = new GameTexture[numFrames];
+			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
+			for(int i = 0; i < numFrames; i++) {
+				this.mFrames[i] = new GameTexture(AssetsHandler.getGrhData().get(grh.getFrame(i)));
 				tmpFrames[i] = this.mFrames[i].getGraphic();
 			}
 			this.mAnimation = new Animation(grh.getSpeed() / 1000, tmpFrames);

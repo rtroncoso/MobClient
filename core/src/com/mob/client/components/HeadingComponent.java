@@ -17,23 +17,25 @@
 package com.mob.client.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.utils.IntMap;
-import com.mob.client.textures.BundledAnimation;
 
 /**
  * @author Rodrigo
  *
  */
-public class BodyComponent extends Component {
+public class HeadingComponent extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	public static final int HEADING_NORTH = 0;
+	public static final int HEADING_EAST = 1;
+	public static final int HEADING_SOUTH = 2;
+	public static final int HEADING_WEST = 3;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+	public int current;
 
 	// ===========================================================
 	// Constructors
@@ -54,4 +56,5 @@ public class BodyComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }
