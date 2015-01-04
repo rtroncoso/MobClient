@@ -23,6 +23,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -119,6 +120,7 @@ public class CharacterRenderingSystem extends IteratingSystem {
 			
 			// Obtenemos los components del character
 			BodyComponent body = this.mBodyMapper.get(entity);
+			ColorComponent color = this.mColorMapper.get(entity);
 			
 			// Si no tiene TextureRegion
 			if (body.region == null) {
@@ -135,12 +137,15 @@ public class CharacterRenderingSystem extends IteratingSystem {
 			float originY = height * 0.5f;
 			
 			// Dibujamos nuestros components
+			Color previousColor = this.mBatch.getColor();
+			this.mBatch.setColor(color.mColor);
 			this.mBatch.draw(body.region,
 					   t.pos.x - originX, t.pos.y - originY,
 					   originX, originY,
 					   width, height,
 					   t.scale.x * PIXELS_TO_METERS, t.scale.y * PIXELS_TO_METERS,
 					   MathUtils.radiansToDegrees * t.rotation);
+			this.mBatch.setColor(previousColor);
 		}
 		
 		// Finalizamos el batch

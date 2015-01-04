@@ -30,6 +30,7 @@ public abstract class Factory<T> {
 	// ===========================================================
 	// Fields
 	// ===========================================================
+	protected T mScopedEntity;
 
 	// ===========================================================
 	// Constructors
@@ -43,7 +44,22 @@ public abstract class Factory<T> {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	public abstract T create();
+	/**
+	 * Crea un scope en el cual trabajar con la entity mScopedEntity
+	 * 
+	 * Al finalizar de trabajar con esta entity, se obtiene y se 
+	 * inicializa con el método get()
+	 * 
+	 * @return Factory chaining Factory builder
+	 */
+	public abstract Factory<T> create();
+	
+	/**
+	 * Obtiene el scope finalizado de nuestra Factory
+	 * 
+	 * @return
+	 */
+	public abstract T get();
 
 	// ===========================================================
 	// Getter & Setter

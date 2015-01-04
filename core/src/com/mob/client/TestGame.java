@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.MapHandler;
+import com.mob.client.handlers.SurfaceHandler;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.screens.GameScreen;
 import com.mob.client.screens.Screen;
 
@@ -29,7 +31,7 @@ import com.mob.client.screens.Screen;
  * @author Rodrigo
  *
  */
-public class TestGame extends Game {
+public class TestGame extends Game implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants
@@ -54,12 +56,14 @@ public class TestGame extends Game {
 	// ===========================================================
 	@Override
 	public void create() {
-		// Inicializamos el batch
-		this.mSpriteBatch = new SpriteBatch();
 		
 		// Cargamos resources
+		SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
 		AssetsHandler.load();
 		MapHandler.loadMap(1);
+		
+		// Inicializamos SpriteBatch
+		this.mSpriteBatch = new SpriteBatch();
 		
 		// Setteamos la screen a usar inicialmente
 		this.setScreen(new GameScreen(this));

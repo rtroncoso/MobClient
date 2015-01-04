@@ -25,6 +25,7 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
 import com.mob.client.data.GrhData;
+import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 
 public class GameTexture implements ConstantsInterface {
@@ -45,6 +46,11 @@ public class GameTexture implements ConstantsInterface {
 		GrhData grh = _game.getGrhData().get(grhIndex);
 		
 		this.mTextureRegion = new TextureRegion(_game.getSurfaceHandler().get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+		this.mTextureRegion.flip(false, true);
+	}
+	
+	public GameTexture(GrhData grh) {
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 

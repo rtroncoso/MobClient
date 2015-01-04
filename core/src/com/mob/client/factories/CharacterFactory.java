@@ -17,6 +17,13 @@
 package com.mob.client.factories;
 
 import com.badlogic.ashley.core.Entity;
+import com.mob.client.components.BodyComponent;
+import com.mob.client.components.CharacterComponent;
+import com.mob.client.components.ColorComponent;
+import com.mob.client.components.MovementComponent;
+import com.mob.client.components.StateComponent;
+import com.mob.client.components.TransformComponent;
+import com.mob.client.data.BodyData;
 
 /**
  * @author Rodrigo
@@ -39,13 +46,46 @@ public class CharacterFactory extends Factory<Entity> {
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	public Factory<Entity> withBody(BodyData body) {
+		
+		return this;
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Entity create() {
-		return null;
+	public Factory<Entity> create() {
+		
+		// Creamos la entity a guardar
+		Entity entity = new Entity();
+		
+		// Declaramos los components a usar
+		BodyComponent body = new BodyComponent();
+		CharacterComponent character = new CharacterComponent();
+		ColorComponent color = new ColorComponent();
+		MovementComponent movement = new MovementComponent();
+		StateComponent state = new StateComponent();
+		TransformComponent transform = new TransformComponent();
+		
+		// Agregamos los components necesarios a la entity
+		entity.add(body);
+		entity.add(character);
+		entity.add(color);
+		entity.add(movement);
+		entity.add(state);
+		entity.add(transform);
+		
+		// Apuntamos nuestro scope a la entity creada
+		this.mScopedEntity = entity;
+		
+		// Devolvemos la entity
+		return this;
+	}
+
+	@Override
+	public Entity get() {
+		return this.mScopedEntity;
 	}
 
 	// ===========================================================

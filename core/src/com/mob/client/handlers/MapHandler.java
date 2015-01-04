@@ -55,7 +55,12 @@ public class MapHandler implements ConstantsInterface {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-
+	/**
+	 * @param game
+	 */
+	public MapHandler(Game game) {
+		// TODO Auto-generated constructor stub
+	}
 
 	// ===========================================================
 	// Getter & Setter
