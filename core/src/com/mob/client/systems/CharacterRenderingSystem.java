@@ -22,6 +22,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -83,8 +84,8 @@ public class CharacterRenderingSystem extends IteratingSystem {
 		
 		this.mBatch = pBatch;
 		
-		this.mCamera = new OrthographicCamera(800, 600);
-		this.mCamera.position.set(800 / 2, 600 / 2, 0);
+		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 		
 	}
 
