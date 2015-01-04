@@ -21,7 +21,7 @@ import java.util.Vector;
 import com.badlogic.gdx.files.FileHandle;
 import com.mob.client.interfaces.ConstantsInterface;
 
-public abstract class Loader<T> implements ConstantsInterface {
+public abstract class Loader implements ConstantsInterface {
 	
 	// ===========================================================
 	// Constants
@@ -41,7 +41,6 @@ public abstract class Loader<T> implements ConstantsInterface {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	public abstract Vector<T> load(String initFileName);
 	
 	// ===========================================================
 	// Getter & Setter

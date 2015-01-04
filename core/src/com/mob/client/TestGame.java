@@ -20,6 +20,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.MapHandler;
 import com.mob.client.screens.GameScreen;
 import com.mob.client.screens.Screen;
 
@@ -56,8 +58,8 @@ public class TestGame extends Game {
 		this.mSpriteBatch = new SpriteBatch();
 		
 		// Cargamos resources
-//		Settings.load();
-//		Assets.load();
+		AssetsHandler.load();
+		MapHandler.loadMap(1);
 		
 		// Setteamos la screen a usar inicialmente
 		this.setScreen(new GameScreen(this));

@@ -45,17 +45,12 @@ public class MapHandler implements ConstantsInterface {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private FileHandle mFileHandle;
-	private Game mGame;
-	private HashMap<Integer, MapData> mMapData;
+	private static FileHandle mFileHandle;
+	private static HashMap<Integer, MapData> mMapData = new HashMap<Integer, MapData>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public MapHandler(Game pGame) {
-		this.setGame(pGame);
-		this.mMapData = new HashMap<Integer, MapData>();
-	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
@@ -65,38 +60,24 @@ public class MapHandler implements ConstantsInterface {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	/**
-	 * @return the mGame
-	 */
-	public Game getGame() {
-		return mGame;
-	}
-
-	/**
-	 * @param mGame the mGame to set
-	 */
-	public void setGame(Game mGame) {
-		this.mGame = mGame;
-	}
-
-	public void set(MapData pMapData, int pMapNumber) {
-		if(this.mMapData.containsKey(pMapNumber)) return;
-		this.mMapData.put(pMapNumber, pMapData);
+	public static void set(MapData pMapData, int pMapNumber) {
+		if(MapHandler.mMapData.containsKey(pMapNumber)) return;
+		MapHandler.mMapData.put(pMapNumber, pMapData);
 	}
 	
-	public MapData get(int pMapNumber) {
-		if(!this.mMapData.containsKey(pMapNumber)) loadMap(pMapNumber);
-		return this.mMapData.get(pMapNumber);
+	public static MapData get(int pMapNumber) {
+		if(!MapHandler.mMapData.containsKey(pMapNumber)) loadMap(pMapNumber);
+		return MapHandler.mMapData.get(pMapNumber);
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public boolean loadMap(int pMapNumber) {
+	public static boolean loadMap(int pMapNumber) {
 		
-		this.mFileHandle = new FileHandle(GAME_MAPS_PATH + "Mapa" + String.valueOf(pMapNumber) + ".map");
+		MapHandler.mFileHandle = new FileHandle(GAME_MAPS_PATH + "Mapa" + String.valueOf(pMapNumber) + ".map");
 		
-		DataInputStream file = new DataInputStream(this.mFileHandle.read());
+		DataInputStream file = new DataInputStream(MapHandler.mFileHandle.read());
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE + (2 * 5)); // Skip complete map header
 			MapData mapData = new MapData();
@@ -140,11 +121,11 @@ public class MapHandler implements ConstantsInterface {
 				}
 			}
 			
-			this.set(mapData, pMapNumber);
-			Gdx.app.log(this.getClass().getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");
+			MapHandler.set(mapData, pMapNumber);
+			Gdx.app.log(MapHandler.class.getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");
 			return true;
 		} catch(IOException e) {
-			Gdx.app.log(this.getClass().getSimpleName(), e.getMessage());
+			Gdx.app.log(MapHandler.class.getSimpleName(), e.getMessage());
 			e.printStackTrace();
 			return false;
 		}

@@ -23,9 +23,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.GrhData;
+import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class GrhLoader extends Loader<GrhData> {
+public class GrhLoader extends Loader implements LoadableInterface<GrhData> {
 
 	// ===========================================================
 	// Constants

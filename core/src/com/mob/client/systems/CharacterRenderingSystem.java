@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.mob.client.components.BodyComponent;
 import com.mob.client.components.CharacterComponent;
+import com.mob.client.components.ColorComponent;
 import com.mob.client.components.TransformComponent;
 
 /**
@@ -47,6 +48,7 @@ public class CharacterRenderingSystem extends IteratingSystem {
 	private ComponentMapper<BodyComponent> mBodyMapper;
 	private ComponentMapper<TransformComponent> mTransformMapper;
 	private ComponentMapper<CharacterComponent> mCharacterMapper;
+	private ComponentMapper<ColorComponent> mColorMapper;
 	
 	private SpriteBatch mBatch;
 	private Array<Entity> mRenderQueue;
@@ -58,12 +60,16 @@ public class CharacterRenderingSystem extends IteratingSystem {
 	// ===========================================================
 	@SuppressWarnings("unchecked")
 	public CharacterRenderingSystem(SpriteBatch pBatch) {
-		super(Family.all(BodyComponent.class, TransformComponent.class, CharacterComponent.class)
+		super(Family.all(BodyComponent.class, 
+					TransformComponent.class, 
+					CharacterComponent.class,
+					ColorComponent.class)
 				.get());
 		
 		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
 		this.mCharacterMapper = ComponentMapper.getFor(CharacterComponent.class);
+		this.mColorMapper = ComponentMapper.getFor(ColorComponent.class);
 		
 		this.mRenderQueue = new Array<Entity>();
 		

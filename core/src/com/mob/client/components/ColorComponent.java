@@ -14,85 +14,43 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.loaders;
+package com.mob.client.components;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.util.Vector;
+import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.graphics.Color;
 
-import com.badlogic.gdx.Gdx;
-import com.mob.client.data.BodyData;
-import com.mob.client.interfaces.LoadableInterface;
-import com.mob.client.util.Util;
-
-public class BodyLoader extends Loader implements LoadableInterface<BodyData> {
-
+/**
+ * @author Rodrigo
+ *
+ */
+public class ColorComponent extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-
+	public Color mColor;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
-
 	// ===========================================================
 	// Methods
 	// ===========================================================
 
-
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	@Override
-	public Vector<BodyData> load(String initFileName) {
-		Vector<BodyData> cuerpos = new Vector<BodyData>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
-		int numCuerpos = 0;
-		
-		DataInputStream file = new DataInputStream(mFileHandle.read());
-		
-		try {
-			file.skipBytes(GAME_FILE_HEADER_SIZE);
-			numCuerpos = Util.leShort(file.readShort());
-			cuerpos.setSize(numCuerpos + 1);
-			
-			for(int i = 1; i <= numCuerpos; i++) {
-				int grhArray[] = new int[4], headOffSetX = 0, headOffSetY = 0;;
-				
-				grhArray[Heading.NORTH.toInt()] = Util.leShort(file.readShort());
-				grhArray[Heading.EAST.toInt()] = Util.leShort(file.readShort());
-				grhArray[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
-				grhArray[Heading.WEST.toInt()] = Util.leShort(file.readShort());
-				
-				headOffSetX = Util.leShort(file.readShort());
-				headOffSetY = Util.leShort(file.readShort());
-				
-				cuerpos.setElementAt(new BodyData(grhArray, headOffSetX, headOffSetY), i);
-			}
-			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
-			return cuerpos;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
 
-
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }
