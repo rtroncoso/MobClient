@@ -14,74 +14,51 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
+package com.mob.client.components;
+
+import com.badlogic.ashley.core.Component;
+
 /**
- * Packages and loads a Texture into a TextureRegion by a given GrhIndex
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
+ * @author Rodrigo
+ *
  */
-package com.mob.client.textures;
+public class StateComponent extends Component {
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.Game;
-import com.mob.client.data.GrhData;
-import com.mob.client.interfaces.ConstantsInterface;
-
-public class GameTexture implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private TextureRegion mTextureRegion;
+	private int state = 0;
+	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GameTexture(Game _game, int grhIndex) {
-		GrhData grh = _game.getGrhData().get(grhIndex);
-		
-		this.mTextureRegion = new TextureRegion(_game.getSurfaceHandler().get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
-		this.mTextureRegion.flip(false, true);
+
+	// ===========================================================
+	// Methods
+	// ===========================================================
+	public int get() {
+		return state;
+	}
+	
+	public void set(int newState) {
+		state = newState;
+		time = 0.0f;
 	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	public void dispose() {
-		this.mTextureRegion.getTexture().dispose();
-	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	/**
-	 * @return the mTextureRegion
-	 */
-	public TextureRegion getGraphic() {
-		return mTextureRegion;
-	}
-
-	/**
-	 * @param mTextureRegion the mTextureRegion to set
-	 */
-	public void setGraphic(TextureRegion mTextureRegion) {
-		this.mTextureRegion = mTextureRegion;
-	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
 
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
-
-	  
-
 }

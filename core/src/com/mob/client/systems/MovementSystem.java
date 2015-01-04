@@ -39,17 +39,17 @@ public class MovementSystem extends IteratingSystem {
 	// ===========================================================
 	private Vector2 tmp = new Vector2();
 
-	private ComponentMapper<TransformComponent> tm;
-	private ComponentMapper<MovementComponent> mm;
+	private ComponentMapper<TransformComponent> mTransformMapper;
+	private ComponentMapper<MovementComponent> mMovementMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	/**
-	 * @param family
-	 */
 	public MovementSystem() {
 		super(Family.getFor(MovementComponent.class, TransformComponent.class));
+		
+		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
+		this.mMovementMapper = ComponentMapper.getFor(MovementComponent.class);
 	}
 
 	// ===========================================================
@@ -59,12 +59,16 @@ public class MovementSystem extends IteratingSystem {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	/* (non-Javadoc)
-	 * @see com.badlogic.ashley.systems.IteratingSystem#processEntity(com.badlogic.ashley.core.Entity, float)
-	 */
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
-		// TODO Auto-generated method stub
+		TransformComponent pos = this.mTransformMapper.get(entity);
+		MovementComponent mov = this.mMovementMapper.get(entity);;
+		
+		tmp.set(mov.accel).scl(deltaTime);
+		mov.velocity.add(tmp);
+		
+		tmp.set(mov.velocity).scl(deltaTime);
+		pos.pos.add(tmp.x, tmp.y, 0.0f);
 
 	}
 

@@ -14,74 +14,75 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
+package com.mob.client.systems;
+
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.mob.client.components.AnimationComponent;
+import com.mob.client.components.BodyComponent;
+import com.mob.client.components.StateComponent;
+
 /**
- * Packages and loads a Texture into a TextureRegion by a given GrhIndex
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
+ * @author Rodrigo
+ *
  */
-package com.mob.client.textures;
+public class CharacterAnimationSystem extends IteratingSystem {
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.Game;
-import com.mob.client.data.GrhData;
-import com.mob.client.interfaces.ConstantsInterface;
-
-public class GameTexture implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private TextureRegion mTextureRegion;
+	private ComponentMapper<BodyComponent> mBodyMapper;
+	private ComponentMapper<StateComponent> mStateMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GameTexture(Game _game, int grhIndex) {
-		GrhData grh = _game.getGrhData().get(grhIndex);
+	public CharacterAnimationSystem() {
+		super(Family.getFor(BodyComponent.class,
+							AnimationComponent.class,
+							StateComponent.class));
 		
-		this.mTextureRegion = new TextureRegion(_game.getSurfaceHandler().get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
-		this.mTextureRegion.flip(false, true);
-	}
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-	public void dispose() {
-		this.mTextureRegion.getTexture().dispose();
-	}
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	/**
-	 * @return the mTextureRegion
-	 */
-	public TextureRegion getGraphic() {
-		return mTextureRegion;
-	}
-
-	/**
-	 * @param mTextureRegion the mTextureRegion to set
-	 */
-	public void setGraphic(TextureRegion mTextureRegion) {
-		this.mTextureRegion = mTextureRegion;
+		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
+		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
 
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+	@Override
+	public void processEntity(Entity entity, float deltaTime) {
+		
+		// Obtenemos los components necesarios
+		BodyComponent body = this.mBodyMapper.get(entity);
+		StateComponent state = this.mStateMapper.get(entity);
+		
+		Animation animation = body.animations.get(state.get());
+		
+		// Si tiene una animación cambiamos la region
+		if (animation != null) {
+			body.region = animation.getKeyFrame(state.time); 
+		}
+		
+		// Actualizamos nuestro DeltaTime interno de la Entity
+		state.time += deltaTime;
+	}
+
+	// ===========================================================
+	// Getter & Setter
+	// ===========================================================
 
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
-
-	  
-
 }
