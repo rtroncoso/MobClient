@@ -96,6 +96,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 		this.mBatch = pBatch;
 		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        this.mCamera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
 		
 	}
 
@@ -140,7 +141,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			BodyComponent body = this.mBodyMapper.get(entity);
 			ColorComponent color = this.mColorMapper.get(entity);
 			HeadingComponent heading = this.mHeadingMapper.get(entity);
-			TextureRegion bodyRegion = body.animations.get(heading.current).getGraphic();
+			TextureRegion bodyRegion = body.animations.get(heading.current).getAnimatedGraphic(true);
 			
 			// Si no tiene TextureRegion
 			if (bodyRegion == null) {

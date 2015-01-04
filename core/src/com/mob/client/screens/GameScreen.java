@@ -149,7 +149,7 @@ public class GameScreen extends ScreenAdapter {
 	public void pause () {
 		if (this.mState == GAME_RUNNING) {
 			this.mState = GAME_PAUSED;
-			this.pauseSystems();
+//			this.pauseSystems();
 		}
 	}
 
