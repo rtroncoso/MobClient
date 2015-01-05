@@ -126,14 +126,12 @@ public class GameScreen extends ScreenAdapter {
 	}
 	
 	private void pauseSystems() {
-		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(false);
 	}
 	
 	private void resumeSystems() {
-		this.mEngine.getSystem(MovementSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(true);

@@ -76,7 +76,6 @@ public abstract class Game implements ApplicationListener, ConstantsInterface {
     public Game() {
 
         this.mMapHandler = new MapHandler(this);
-        this.mCharacterHandler = new CharacterHandler(this);
 
     	this.mScreens = new HashMap<String, Screen>();  
         this.mEngine = new PhysicsEngine(this);

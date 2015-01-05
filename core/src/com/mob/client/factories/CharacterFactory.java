@@ -53,7 +53,7 @@ public class CharacterFactory extends Factory<Character> {
 	 * Chaining method que nos permite agregar un body a nuestro scope
 	 * 
 	 * @param body
-	 * @return
+	 * @return CharacterFactory
 	 */
 	public CharacterFactory withBody(BodyData body) {
 		
@@ -67,8 +67,8 @@ public class CharacterFactory extends Factory<Character> {
 	/**
 	 * Chaining method que nos permite agregar una head a nuestro scope
 	 * 
-	 * @param body
-	 * @return
+	 * @param head
+	 * @return CharacterFactory
 	 */
 	public CharacterFactory withHead(HeadData head) {
 		
@@ -82,13 +82,28 @@ public class CharacterFactory extends Factory<Character> {
 	/**
 	 * Chaining method que nos permite agregar un movement component a nuestro scope
 	 * 
-	 * @param body
-	 * @return
+	 * @param movement
+	 * @return CharacterFactory
 	 */
 	public CharacterFactory withMovement(MovementComponent movement) {
 		
 		// Setteamos el movement component en la entity
 		this.mScope.setMovementComponent(movement);
+		
+		// Devolvemos nuestra instancia para chaining
+		return this;
+	}
+	
+	/**
+	 * Chaining method que nos permite agregar un color component a nuestro scope
+	 * 
+	 * @param color
+	 * @return CharacterFactory
+	 */
+	public CharacterFactory withColor(ColorComponent color) {
+		
+		// Setteamos el color component en la entity
+		this.mScope.setColorComponent(color);
 		
 		// Devolvemos nuestra instancia para chaining
 		return this;
@@ -117,9 +132,10 @@ public class CharacterFactory extends Factory<Character> {
 		heading.current = HeadingComponent.HEADING_EAST;
 		
 		// Default components
-		this.withBody(AssetsHandler.getBody(1));
-		this.withHead(AssetsHandler.getHead(2));
-		this.withMovement(movement);
+		this.withBody(AssetsHandler.getBody(1))
+			.withHead(AssetsHandler.getHead(2))
+			.withMovement(movement)
+			.withColor(color);
 		
 		// Agregamos los components necesarios a la entity
 		this.mScope.add(character);
@@ -133,6 +149,11 @@ public class CharacterFactory extends Factory<Character> {
 		return this;
 	}
 
+	/**
+	 * Devuelve nuestro character scope listo para enviar a un engine
+	 * 
+	 * @return Character
+	 */
 	@Override
 	public Character get() {
 		return this.mScope;

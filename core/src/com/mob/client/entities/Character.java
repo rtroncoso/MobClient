@@ -17,8 +17,10 @@
 package com.mob.client.entities;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.BodyComponent;
+import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadComponent;
 import com.mob.client.components.MovementComponent;
 import com.mob.client.data.BodyData;
@@ -44,6 +46,7 @@ public class Character extends Entity implements DisposableInterface {
 	// Fields
 	// ===========================================================
 	private MovementComponent mMovementComponent = new MovementComponent();
+	private ColorComponent mColorComponent = new ColorComponent();
 	private BodyComponent mBodyComponent = new BodyComponent();
 	private HeadComponent mHeadComponent = new HeadComponent();
 
@@ -136,6 +139,22 @@ public class Character extends Entity implements DisposableInterface {
 	}
 	
 	/**
+	 * @return el color del character
+	 */
+	public Color getColor() {
+		return this.getColorComponent().tint;
+	}
+	
+	/**
+	 * Settea el color de nuestro character
+	 * 
+	 * @param tint
+	 */
+	public void setColor(Color tint) {
+		this.getColorComponent().tint = tint;
+	}
+	
+	/**
 	 * @return the mBodyComponent
 	 */
 	public BodyComponent getBodyComponent() {
@@ -175,6 +194,20 @@ public class Character extends Entity implements DisposableInterface {
 	 */
 	public void setMovementComponent(MovementComponent mMovementComponent) {
 		this.mMovementComponent = mMovementComponent;
+	}
+
+	/**
+	 * @return the mColorComponent
+	 */
+	public ColorComponent getColorComponent() {
+		return mColorComponent;
+	}
+
+	/**
+	 * @param mColorComponent the mColorComponent to set
+	 */
+	public void setColorComponent(ColorComponent mColorComponent) {
+		this.mColorComponent = mColorComponent;
 	}
 
 	// ===========================================================

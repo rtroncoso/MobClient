@@ -140,27 +140,38 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			HeadComponent head = this.mHeadMapper.get(entity);
 			ColorComponent color = this.mColorMapper.get(entity);
 			HeadingComponent heading = this.mHeadingMapper.get(entity);
-			TextureRegion bodyRegion = body.animations.get(heading.current).getAnimatedGraphic(true);
 			
-			// Si no tiene TextureRegion
-			if (bodyRegion == null) {
-				continue;
-			}
+			// Separamos las TextureRegion's en uso
+			TextureRegion bodyRegion = body.animations.get(heading.current).getAnimatedGraphic(true);
+			TextureRegion headRegion = head.animations.get(heading.current).getGraphic();
 			
 			// Obtenemos las coordenadas del character
 			TransformComponent t = this.mTransformMapper.get(entity);
-		
-			// Preparamos variables para el render
-			float bodyPixelOffsetX, bodyPixelOffsetY, headPixelOffsetX, headPixelOffsetY;
-			float width = bodyRegion.getRegionWidth();
-			float height = bodyRegion.getRegionHeight();
-			float originX = width * 0.5f;
-			float originY = height * 0.5f;
 			
 			// Renderizamos el character
 			Color previousColor = this.mBatch.getColor();
 			this.mBatch.setColor(color.tint);
-			this.mBatch.draw(bodyRegion, t.pos.x - originX, t.pos.y - originY);
+		
+			// Preparamos variables para el render
+			float bodyPixelOffsetX = 0.0f, bodyPixelOffsetY = 0.0f, headPixelOffsetX = 0.0f, headPixelOffsetY = 0.0f;
+			
+			// Si tiene un body
+			if(bodyRegion != null) {
+				bodyPixelOffsetX = t.pos.x - bodyRegion.getRegionWidth() * 0.5f;
+				bodyPixelOffsetY = t.pos.y - bodyRegion.getRegionHeight() * 0.5f;
+				
+				this.mBatch.draw(bodyRegion, bodyPixelOffsetX, bodyPixelOffsetY);
+			}
+			
+			// Si tiene head
+			if(headRegion != null) {
+				headPixelOffsetX = bodyPixelOffsetX + 5.0f;
+				headPixelOffsetY = bodyPixelOffsetY - 9.0f;
+				
+				this.mBatch.draw(headRegion, headPixelOffsetX, headPixelOffsetY);
+			}
+			
+			// Devolvemos el color original de la escena
 			this.mBatch.setColor(previousColor);
 		}
 		
