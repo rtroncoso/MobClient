@@ -23,6 +23,7 @@ import com.mob.client.components.BodyComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadComponent;
 import com.mob.client.components.MovementComponent;
+import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.GrhData;
 import com.mob.client.data.HeadData;
@@ -46,6 +47,7 @@ public class Character extends Entity implements DisposableInterface {
 	// Fields
 	// ===========================================================
 	private MovementComponent mMovementComponent = new MovementComponent();
+	private TransformComponent mTransformComponent = new TransformComponent();
 	private ColorComponent mColorComponent = new ColorComponent();
 	private BodyComponent mBodyComponent = new BodyComponent();
 	private HeadComponent mHeadComponent = new HeadComponent();
@@ -208,6 +210,20 @@ public class Character extends Entity implements DisposableInterface {
 	 */
 	public void setColorComponent(ColorComponent mColorComponent) {
 		this.mColorComponent = mColorComponent;
+	}
+
+	/**
+	 * @return the mTransformComponent
+	 */
+	public TransformComponent getTransformComponent() {
+		return mTransformComponent;
+	}
+
+	/**
+	 * @param mTransformComponent the mTransformComponent to set
+	 */
+	public void setTransformComponent(TransformComponent mTransformComponent) {
+		this.mTransformComponent = mTransformComponent;
 	}
 
 	// ===========================================================

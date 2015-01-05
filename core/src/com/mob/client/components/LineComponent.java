@@ -17,23 +17,23 @@
 package com.mob.client.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Rodrigo
  *
  */
-public class StateComponent extends Component {
+public class LineComponent extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int state = 0;
-	public float time = 0.0f;
+	public Vector2 start = new Vector2();
+	public Vector2 end = new Vector2();
 
 	// ===========================================================
 	// Constructors
@@ -42,13 +42,6 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public int get() {
-		return state;
-	}
-	
-	public void set(int newState) {
-		state = newState;
-	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
@@ -61,4 +54,5 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

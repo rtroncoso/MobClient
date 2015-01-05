@@ -14,26 +14,27 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
+package com.mob.client.factories;
 
-import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.utils.Array;
+import com.mob.client.components.LineComponent;
 
 /**
+ * Se encarga de crear un grid system específico para
+ * Argentum Online (tiles de 32px * 32px)
+ * 
  * @author Rodrigo
- *
  */
-public class StateComponent extends Component {
+public class GridFactory {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int state = 0;
-	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
@@ -42,17 +43,51 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public int get() {
-		return state;
-	}
-	
-	public void set(int newState) {
-		state = newState;
-	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
+	public static Array<Entity> create() {
+		
+		// Declaramos cosas necesarias
+		int horizontalLines = 100, verticalLines = 100;
+		float horizontalStep = 32.0f, verticalStep = 32.0f;
+		Array<Entity> lines = new Array<Entity>();
+		
+		// Iteramos sobre las lineas horizontales
+		for(int i = 0; i < horizontalLines; i++) {
+			
+			// Creamos la entidad
+			Entity line = new Entity();
+			
+			// Creamos su line component
+			LineComponent linePosition = new LineComponent();
+			linePosition.start.set(0.0f, i * horizontalStep);
+			linePosition.end.set(100.0f * horizontalStep, i * horizontalStep);
+			line.add(linePosition);
+			
+			// Agregamos la line al array
+			lines.add(line);
+		}
+		
+		// Iteramos sobre las lineas verticales
+		for(int i = 0; i < verticalLines; i++) {
+			
+			// Creamos la entidad
+			Entity line = new Entity();
+			
+			// Creamos su line component
+			LineComponent linePosition = new LineComponent();
+			linePosition.start.set((float) i * verticalStep, 0.0f);
+			linePosition.end.set(i * verticalStep, 100.0f * verticalStep);
+			line.add(linePosition);
+			
+			// Agregamos la line al array
+			lines.add(line);
+		}
+		
+		return lines;
+	}
 
 	// ===========================================================
 	// Getter & Setter
@@ -61,4 +96,5 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

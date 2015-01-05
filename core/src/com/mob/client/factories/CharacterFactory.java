@@ -127,7 +127,7 @@ public class CharacterFactory extends Factory<Character> {
 		HeadingComponent heading = new HeadingComponent();
 		
 		// Initial states de un character
-		transform.pos.set(500.0f, 300.0f, 0.0f);
+		transform.pos.set(500.0f, 300.0f, 3.0f);
 		color.tint = Color.WHITE;
 		heading.current = HeadingComponent.HEADING_EAST;
 		
