@@ -68,6 +68,8 @@ public class GameScreen extends ScreenAdapter {
 		this.mEngine.addSystem(new CharacterSystem());
 		this.mEngine.addSystem(new CharacterAnimationSystem());
 		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
+		
+//		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
 	
 		// Creamos un dummy character y lo agregamos a nuestro engine y handler
 		this.mDummyCharacter = this.mCharacterFactory.create().get();
@@ -85,6 +87,11 @@ public class GameScreen extends ScreenAdapter {
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	/**
+	 * Game Main Loop
+	 * 
+	 * @param deltaTime
+	 */
 	public void update (float deltaTime) {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
 		
@@ -104,42 +111,33 @@ public class GameScreen extends ScreenAdapter {
 		}
 	}
 
+	/**
+	 * Loop llamado sólo cuando el juego está corriendo
+	 * 
+	 * @param deltaTime
+	 */
 	private void updateRunning (float deltaTime) {
-		
-//		ApplicationType appType = Gdx.app.getType();
-		
-//		this.mEngine.getSystem(BobSystem.class).setAccelX(accelX);
-		
-//		if (world.score != lastScore) {
-//			lastScore = world.score;
-//			scoreString = "SCORE: " + lastScore;
-//		}
-//		if (world.state == World.WORLD_STATE_NEXT_LEVEL) {
-//			game.setScreen(new WinScreen(game));
-//		}
-//		if (world.state == World.WORLD_STATE_GAME_OVER) {
-//			state = GAME_OVER;
-//			if (lastScore >= Settings.highscores[4])
-//				scoreString = "NEW HIGHSCORE: " + lastScore;
-//			else
-//				scoreString = "SCORE: " + lastScore;
-//			pauseSystems();
-//			Settings.addScore(lastScore);
-//			Settings.save();
-//		}
+
 	}
 
+	/**
+	 * Loop llamado solo cuando el juego está en pausa
+	 */
 	private void updatePaused () {
-		// TODO : Implementar esto
+
 	}
 	
 	private void pauseSystems() {
+		
+		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(false);
 	}
 	
 	private void resumeSystems() {
+		
+		this.mEngine.getSystem(MovementSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(true);
@@ -159,6 +157,13 @@ public class GameScreen extends ScreenAdapter {
 		if (this.mState == GAME_RUNNING) {
 			this.mState = GAME_PAUSED;
 			this.pauseSystems();
+		}
+	}
+	@Override
+	public void resume() {
+		if(this.mState == GAME_PAUSED) {
+			this.mState = GAME_RUNNING;
+			this.resumeSystems();
 		}
 	}
 

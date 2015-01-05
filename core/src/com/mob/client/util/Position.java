@@ -14,116 +14,52 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
+package com.mob.client.util;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.mob.client.handlers.CameraHandler;
+
 /**
- * Stores position information
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
+ * @author Rodrigo
+ *
  */
-package com.mob.client.data;
+public class Position {
 
-import com.mob.client.interfaces.ConstantsInterface;
-
-public class PositionData implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private float mX;
-	private float mY;
-
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public PositionData() {
-		this(0, 0);
-	}
-	
-	public PositionData(float mX, float mY) {
-		this.setX(mX);
-		this.setY(mY);
-	}
 
+	// ===========================================================
+	// Methods
+	// ===========================================================
+	/**
+	 * Dado un Vector3 position calculamos el tile en el que está
+	 * las coordenadas dadas
+	 * 
+	 * @param position
+	 * @return Vector3
+	 */
+	public static Vector3 toWorld(Vector3 position) {
+		
+		return new Vector3((int) (position.x / 32.0f), (int) (position.y) / 32.0f, 0.0f);
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	/**
-	 * @return the mX
-	 */
-	public float getX() {
-		return mX;
-	}
-
-
-	/**
-	 * @param mX the mX to set
-	 */
-	public void setX(float mX) {
-		this.mX = mX;
-	}
-	
-	/**
-	 * @return the mY
-	 */
-	public float getY() {
-		return mY;
-	}
-
-
-	/**
-	 * @param mY the mY to set
-	 */
-	public void setY(float mY) {
-		this.mY = mY;
-	}
-
-
-	/**
-	 * @return the mX
-	 */
-	public float getTileX() {
-		return mX * TILE_PIXEL_WIDTH;
-	}
-
-
-	/**
-	 * @param mX the mX to set
-	 */
-	public void setTileX(int mX) {
-		this.mX = mX * TILE_PIXEL_WIDTH;
-	
-	}
-	
-	/**
-	 * @return the mY
-	 */
-	public float getTileY() {
-		return mY * TILE_PIXEL_HEIGHT;
-	}
-
-
-	/**
-	 * @param mY the mY to set
-	 */
-	public void setTileY(int mY) {
-		this.mY = mY * TILE_PIXEL_HEIGHT;
-	}
-	
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
 
 	// ===========================================================
 	// Inner and Anonymous Classes

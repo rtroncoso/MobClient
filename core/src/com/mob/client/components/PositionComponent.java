@@ -14,116 +14,52 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
+package com.mob.client.components;
+
+import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector3;
+
 /**
- * Stores position information
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
+ * @author Rodrigo
+ *
  */
-package com.mob.client.data;
+public class PositionComponent extends Component {
 
-import com.mob.client.interfaces.ConstantsInterface;
-
-public class PositionData implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private float mX;
-	private float mY;
-
+	public Vector3 position = new Vector3();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public PositionData() {
-		this(0, 0);
-	}
-	
-	public PositionData(float mX, float mY) {
-		this.setX(mX);
-		this.setY(mY);
-	}
 
+	// ===========================================================
+	// Methods
+	// ===========================================================
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	/**
-	 * @return the mX
-	 */
-	public float getX() {
-		return mX;
-	}
-
-
-	/**
-	 * @param mX the mX to set
-	 */
-	public void setX(float mX) {
-		this.mX = mX;
+	public Vector3 get() {
+		return position;
 	}
 	
-	/**
-	 * @return the mY
-	 */
-	public float getY() {
-		return mY;
-	}
-
-
-	/**
-	 * @param mY the mY to set
-	 */
-	public void setY(float mY) {
-		this.mY = mY;
-	}
-
-
-	/**
-	 * @return the mX
-	 */
-	public float getTileX() {
-		return mX * TILE_PIXEL_WIDTH;
-	}
-
-
-	/**
-	 * @param mX the mX to set
-	 */
-	public void setTileX(int mX) {
-		this.mX = mX * TILE_PIXEL_WIDTH;
-	
+	public void set(Vector3 position) {
+		this.position = position;
 	}
 	
-	/**
-	 * @return the mY
-	 */
-	public float getTileY() {
-		return mY * TILE_PIXEL_HEIGHT;
+	public void set(int x, int y) {
+		this.set(new Vector3(x, y, 0));
 	}
-
-
-	/**
-	 * @param mY the mY to set
-	 */
-	public void setTileY(int mY) {
-		this.mY = mY * TILE_PIXEL_HEIGHT;
-	}
-	
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
 
 	// ===========================================================
 	// Inner and Anonymous Classes

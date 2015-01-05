@@ -19,10 +19,12 @@ package com.mob.client.entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.mob.client.components.BodyComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadComponent;
 import com.mob.client.components.MovementComponent;
+import com.mob.client.components.PositionComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.GrhData;
@@ -48,6 +50,7 @@ public class Character extends Entity implements DisposableInterface {
 	// ===========================================================
 	private MovementComponent mMovementComponent = new MovementComponent();
 	private TransformComponent mTransformComponent = new TransformComponent();
+	private PositionComponent mPositionComponent = new PositionComponent();
 	private ColorComponent mColorComponent = new ColorComponent();
 	private BodyComponent mBodyComponent = new BodyComponent();
 	private HeadComponent mHeadComponent = new HeadComponent();
@@ -141,6 +144,24 @@ public class Character extends Entity implements DisposableInterface {
 	}
 	
 	/**
+	 * Obtiene Vector2 de un character
+	 * 
+	 * @return la velocidad del character
+	 */
+	public Vector3 getPosition() {
+		return this.mPositionComponent.get();
+	}
+	
+	/**
+	 * Settea la velocidad vertical y horizontal de un character
+	 * 
+	 * @param position
+	 */
+	public void setPosition(Vector3 position) {
+		this.getPositionComponent().set(position);
+	}
+	
+	/**
 	 * @return el color del character
 	 */
 	public Color getColor() {
@@ -224,6 +245,20 @@ public class Character extends Entity implements DisposableInterface {
 	 */
 	public void setTransformComponent(TransformComponent mTransformComponent) {
 		this.mTransformComponent = mTransformComponent;
+	}
+
+	/**
+	 * @return the mPositionComponent
+	 */
+	public PositionComponent getPositionComponent() {
+		return mPositionComponent;
+	}
+
+	/**
+	 * @param mPositionComponent the mPositionComponent to set
+	 */
+	public void setPositionComponent(PositionComponent mPositionComponent) {
+		this.mPositionComponent = mPositionComponent;
 	}
 
 	// ===========================================================

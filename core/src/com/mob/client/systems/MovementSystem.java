@@ -22,7 +22,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.MovementComponent;
+import com.mob.client.components.PositionComponent;
 import com.mob.client.components.TransformComponent;
+import com.mob.client.data.PositionData;
+import com.mob.client.util.Position;
 
 /**
  * @author Rodrigo
@@ -41,6 +44,7 @@ public class MovementSystem extends IteratingSystem {
 
 	private ComponentMapper<TransformComponent> mTransformMapper;
 	private ComponentMapper<MovementComponent> mMovementMapper;
+	private ComponentMapper<PositionComponent> mPositionMapper;
 
 	// ===========================================================
 	// Constructors
@@ -48,11 +52,14 @@ public class MovementSystem extends IteratingSystem {
 	@SuppressWarnings("unchecked")
 	public MovementSystem() {
 		super(Family.all(MovementComponent.class, 
-						TransformComponent.class)
+						TransformComponent.class,
+						PositionComponent.class)
 					.get());
 		
+		// Obtenemos nuestros mappers
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
 		this.mMovementMapper = ComponentMapper.getFor(MovementComponent.class);
+		this.mPositionMapper = ComponentMapper.getFor(PositionComponent.class);
 	}
 
 	// ===========================================================
@@ -64,14 +71,20 @@ public class MovementSystem extends IteratingSystem {
 	// ===========================================================
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
-		TransformComponent pos = this.mTransformMapper.get(entity);
-		MovementComponent mov = this.mMovementMapper.get(entity);;
+		TransformComponent transform = this.mTransformMapper.get(entity);
+		MovementComponent movement = this.mMovementMapper.get(entity);
+		PositionComponent position = this.mPositionMapper.get(entity);
 		
-		tmp.set(mov.accel).scl(deltaTime);
-		mov.velocity.add(tmp);
+		// Setteamos la aceleración de nuestro cuerpo
+		tmp.set(movement.accel).scl(deltaTime);
+		movement.velocity.add(tmp);
 		
-		tmp.set(mov.velocity).scl(deltaTime);
-		pos.pos.add(tmp.x, tmp.y, 0.0f);
+		// Seteamos la velocidad de nuestro cuerpo
+		tmp.set(movement.velocity).scl(deltaTime);
+		transform.pos.add(tmp.x, tmp.y, 0.0f);
+		
+		// Guardamos nuestra posición
+		position.set(Position.toWorld(transform.pos));
 
 	}
 
