@@ -58,10 +58,6 @@ public class MobClient extends Game implements ConstantsInterface {
     @Override  
     public void create() {  
         
-        // We render using YDown instead of YUp
-        this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
-        this.mCamera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
-        
         // Calculate camera zoom according to aspect ratio
 		this.mCamera.zoom = (Gdx.graphics.getWidth() / Gdx.graphics.getHeight()) * (GAME_SCREEN_ZOOM / ((Gdx.graphics.getWidth() / Gdx.graphics.getHeight()))); 
         

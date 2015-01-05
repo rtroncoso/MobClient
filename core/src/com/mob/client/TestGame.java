@@ -19,8 +19,10 @@ package com.mob.client;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.CameraHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
@@ -62,6 +64,12 @@ public class TestGame extends Game implements ConstantsInterface {
 		AssetsHandler.load();
 		MapHandler.loadMap(1);
 		
+		// Inicializamos la cámara
+		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        CameraHandler.setCamera(camera);
+		
 		// Inicializamos SpriteBatch
 		this.mSpriteBatch = new SpriteBatch();
 		
@@ -72,7 +80,7 @@ public class TestGame extends Game implements ConstantsInterface {
 	@Override
 	public void render() {
 		GL20 gl = Gdx.gl;
-		gl.glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		super.render();

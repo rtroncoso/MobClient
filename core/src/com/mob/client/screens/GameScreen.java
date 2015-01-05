@@ -17,16 +17,17 @@
 package com.mob.client.screens;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mob.client.TestGame;
 import com.mob.client.factories.CharacterFactory;
 import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.systems.CharacterAnimationSystem;
 import com.mob.client.systems.CharacterRenderingSystem;
+import com.mob.client.systems.CharacterSystem;
 import com.mob.client.systems.MovementSystem;
+import com.mob.client.util.Util;
+import com.mob.client.entities.Character;
 
 /**
  * @author Rodrigo
@@ -46,8 +47,9 @@ public class GameScreen extends ScreenAdapter {
 	private TestGame mGame;
 	private Engine mEngine;
 	private int mState;
-	private OrthographicCamera mCamera;
-	private CharacterFactory mCharacterFactory;
+	
+	private CharacterFactory mCharacterFactory = new CharacterFactory();
+	private Character mDummyCharacter;
 	
 	// ===========================================================
 	// Constructors
@@ -55,24 +57,19 @@ public class GameScreen extends ScreenAdapter {
 	public GameScreen(TestGame game) {
 		
 		// Inicializamos todo lo necesario
-		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-		this.mCharacterFactory = new CharacterFactory();
 		this.mGame = game;
 		this.mState = GAME_RUNNING;
 		this.mEngine = new Engine();
 		
 		// Agregamos los sistemas al engine
 		this.mEngine.addSystem(new MovementSystem());
+		this.mEngine.addSystem(new CharacterSystem());
 		this.mEngine.addSystem(new CharacterAnimationSystem());
 		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
 		
-		// Creamos un dummy character y lo agregamos al engine
-		this.mEngine.addEntity(
-			this.mCharacterFactory.create()
-				.withBody(AssetsHandler.getBodyData().get(1))
-				.get()
-		);
+		this.mDummyCharacter = this.mCharacterFactory.create().get();
+		this.mEngine.addEntity(this.mDummyCharacter);
+		CharacterHandler.add(this.mDummyCharacter);
 		
 		
 	}
@@ -82,22 +79,26 @@ public class GameScreen extends ScreenAdapter {
 	// ===========================================================
 	public void update (float deltaTime) {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
+		
+		this.mDummyCharacter.setVelocity(10.0f, 0.0f);
 
 		this.mEngine.update(deltaTime);
 		
 		switch (this.mState) {
-		case GAME_RUNNING:
-			updateRunning(deltaTime);
-			break;
-		case GAME_PAUSED:
-			updatePaused();
-			break;
+			case GAME_RUNNING: {
+				updateRunning(deltaTime);
+				break;
+			}
+			case GAME_PAUSED: {
+				updatePaused();
+				break;
+			}
 		}
 	}
 
 	private void updateRunning (float deltaTime) {
 		
-		ApplicationType appType = Gdx.app.getType();
+//		ApplicationType appType = Gdx.app.getType();
 		
 //		this.mEngine.getSystem(BobSystem.class).setAccelX(accelX);
 		
@@ -126,12 +127,14 @@ public class GameScreen extends ScreenAdapter {
 	
 	private void pauseSystems() {
 		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
+		this.mEngine.getSystem(CharacterSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(false);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(false);
 	}
 	
 	private void resumeSystems() {
 		this.mEngine.getSystem(MovementSystem.class).setProcessing(true);
+		this.mEngine.getSystem(CharacterSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(true);
 		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(true);
 	}
@@ -149,7 +152,7 @@ public class GameScreen extends ScreenAdapter {
 	public void pause () {
 		if (this.mState == GAME_RUNNING) {
 			this.mState = GAME_PAUSED;
-//			this.pauseSystems();
+			this.pauseSystems();
 		}
 	}
 

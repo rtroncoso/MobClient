@@ -22,11 +22,9 @@
  */
 package com.mob.client.handlers;
 
-import java.util.HashMap;
-
-import com.mob.client.Game;
-import com.mob.client.elements.Character;
-import com.mob.client.interfaces.ConstantsInterface.Heading;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.utils.LongMap;
+import com.mob.client.entities.Character;
 
 public class CharacterHandler {
 
@@ -38,18 +36,13 @@ public class CharacterHandler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private HashMap<Integer, Character> mCharacterMap; 
-	private Game mGame;
+	private static LongMap<Character> mCharacterMap = new LongMap<Character>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public CharacterHandler(Game pGame) {
-		
-		this.mCharacterMap = new HashMap<Integer, Character>();
-		this.mGame = pGame;
-	}
-
+	
+	
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
@@ -61,95 +54,93 @@ public class CharacterHandler {
 	/**
 	 * @return the mCharacterMap
 	 */
-	public HashMap<Integer, Character> getCharacterMap() {
-		return mCharacterMap;
+	public static LongMap<Character> getCharacterMap() {
+		return CharacterHandler.mCharacterMap;
 	}
 	/**
 	 * @param mCharacterMap the mCharacterMap to set
 	 */
-	public void setCharacterMap(HashMap<Integer, Character> mCharacterMap) {
-		this.mCharacterMap = mCharacterMap;
+	public static void setCharacterMap(LongMap<Character> mCharacterMap) {
+		CharacterHandler.mCharacterMap = mCharacterMap;
 	}
 	
-	/**
-	 * @return the mGame
-	 */
-	public Game getGame() {
-		return mGame;
-	}
-	/**
-	 * @param mGame the mGame to set
-	 */
-	public void setGame(Game mGame) {
-		this.mGame = mGame;
-	}
-
 	/**
 	 * @param key Index in map
 	 * @param pCharacter character to add
 	 */
-	 public void add(final int key, final Character pCharacter) {
-		 if (this.mCharacterMap.containsKey(key)) {
+	 public static void add(Character pCharacter) {
+		 if (CharacterHandler.mCharacterMap.containsKey(pCharacter.getId())) {
 			 return;
 		 }
 	   
-	 	this.mCharacterMap.put(key, pCharacter);
+	 	CharacterHandler.mCharacterMap.put(pCharacter.getId(), pCharacter);
 	 }
 
 	/**
 	 * Gets a Character from the map
+	 * 
 	 * @param key Index in map
 	 * @return Character inside the map
 	 */
-	 public Character get(final int key) {
-		 //if(!this.mCharacterMap.containsKey(key)) this.loadTexture(key);
-		 return this.mCharacterMap.get(key);
+	 public static Character get(long key) {
+		 return CharacterHandler.mCharacterMap.get(key);
+	 }
+
+	/**
+	 * Gets a Character from the map
+	 * 
+	 * @param key Index in map
+	 * @return Character inside the map
+	 */
+	 public static Character get(Entity entity) {
+		 return CharacterHandler.get(entity.getId());
 	 }
 
 	/**
 	 * Gets the application player (always index 1)
 	 * @return the player
 	 */
-	 public Character getPlayer() {
+	 public static Character getPlayer() {
 		 return get(1);
 	 }
 	  
 	 /**
 	  * Unloads a Character from the map and memory
+	  * @param Character Character in map
+	  */
+	public static void dispose(Character character) {
+		CharacterHandler.dispose(character.getId());
+	}
+	  
+	 /**
+	  * Unloads a Character from the map and memory
 	  * @param key Index in map
 	  */
-	public void dispose(final int key) {
-		if (!this.mCharacterMap.containsKey(key)) {
+	public static void dispose(long key) {
+		if (!CharacterHandler.mCharacterMap.containsKey(key)) {
 			return;
 		}
 	   
-		final Character t = this.mCharacterMap.get(key);
+		final Character t = CharacterHandler.mCharacterMap.get(key);
 		t.dispose();
-		this.mCharacterMap.remove(key);
+		CharacterHandler.mCharacterMap.remove(key);
 	}
 	  
-	public void disposeAll() {
-		for (final Character t : this.mCharacterMap.values()) {
+	/**
+	 * Disposes all objects from this handler
+	 * 
+	 */
+	public static void disposeAll() {
+		for (Character t : CharacterHandler.mCharacterMap.values()) {
 			t.dispose();
 		}
    
-		this.mCharacterMap.clear();
+		CharacterHandler.mCharacterMap.clear();
 	 }
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public void makeChar(int charIndex, int x, int y, Heading heading, int bodyIndex, int weaponIndex, int headIndex, int helmetIndex, int shieldIndex) {
-		
-		// Make character
-		Character character = new Character(this.mGame, charIndex, x, y, heading, bodyIndex, weaponIndex, headIndex, helmetIndex, shieldIndex);
-		
-		// Add to hashmap
-		this.add(charIndex, character);
-		
-		// Plot on map
-		this.mGame.getEngine().setCharacter(x, y, character);
-	}
 
 	// ===========================================================
 	// Inner and Anonymous Classes

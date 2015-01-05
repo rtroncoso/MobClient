@@ -16,9 +16,7 @@
  *******************************************************************************/
 package com.mob.client.factories;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
-import com.mob.client.components.BodyComponent;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadingComponent;
@@ -26,15 +24,15 @@ import com.mob.client.components.MovementComponent;
 import com.mob.client.components.StateComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
-import com.mob.client.data.GrhData;
+import com.mob.client.data.HeadData;
+import com.mob.client.entities.Character;
 import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.textures.BundledAnimation;
 
 /**
  * @author Rodrigo
  *
  */
-public class CharacterFactory extends Factory<Entity> {
+public class CharacterFactory extends Factory<Character> {
 
 	// ===========================================================
 	// Constants
@@ -51,26 +49,48 @@ public class CharacterFactory extends Factory<Entity> {
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	/**
+	 * Chaining method que nos permite agregar un body a nuestro scope
+	 * 
+	 * @param body
+	 * @return
+	 */
 	public CharacterFactory withBody(BodyData body) {
 		
-		// Creamos un nuevo BodyComponent
-		BodyComponent bodyComponent = new BodyComponent();
+		// Setteamos el body en la entity
+		this.mScope.setBody(body);
 		
-		// Iteramos nuestros headings
-		int index = 0;
-		for(int grhIndex : body.getBodyArray()) {
-			
-			// Obtenemos GrhData necesario
-			GrhData grh = AssetsHandler.getGrh(grhIndex);
-			
-			// Agregamos las animations
-			bodyComponent.animations.put(index, new BundledAnimation(grh));
-			index++;
-		}
+		// Devolvemos nuestra instancia para chaining
+		return this;
+	}
+	
+	/**
+	 * Chaining method que nos permite agregar una head a nuestro scope
+	 * 
+	 * @param body
+	 * @return
+	 */
+	public CharacterFactory withHead(HeadData head) {
 		
-		// Agregamos el component a nuestra entity
-		this.mScope.add(bodyComponent);
+		// Setteamos la head en la entity
+		this.mScope.setHead(head);
 		
+		// Devolvemos nuestra instancia para chaining
+		return this;
+	}
+	
+	/**
+	 * Chaining method que nos permite agregar un movement component a nuestro scope
+	 * 
+	 * @param body
+	 * @return
+	 */
+	public CharacterFactory withMovement(MovementComponent movement) {
+		
+		// Setteamos el movement component en la entity
+		this.mScope.setMovementComponent(movement);
+		
+		// Devolvemos nuestra instancia para chaining
 		return this;
 	}
 
@@ -81,7 +101,7 @@ public class CharacterFactory extends Factory<Entity> {
 	public CharacterFactory create() {
 		
 		// Creamos la entity a guardar
-		Entity entity = new Entity();
+		this.mScope = new Character();
 		
 		// Declaramos los components a usar
 		CharacterComponent character = new CharacterComponent();
@@ -92,27 +112,29 @@ public class CharacterFactory extends Factory<Entity> {
 		HeadingComponent heading = new HeadingComponent();
 		
 		// Initial states de un character
-		transform.pos.set(50.0f, 50.0f, 0.0f);
+		transform.pos.set(500.0f, 300.0f, 0.0f);
 		color.tint = Color.WHITE;
-		heading.current = HeadingComponent.HEADING_SOUTH;
+		heading.current = HeadingComponent.HEADING_EAST;
+		
+		// Default components
+		this.withBody(AssetsHandler.getBody(1));
+		this.withHead(AssetsHandler.getHead(2));
+		this.withMovement(movement);
 		
 		// Agregamos los components necesarios a la entity
-		entity.add(character);
-		entity.add(heading);
-		entity.add(color);
-		entity.add(movement);
-		entity.add(state);
-		entity.add(transform);
-		
-		// Apuntamos nuestro scope a la entity creada
-		this.mScope = entity;
+		this.mScope.add(character);
+		this.mScope.add(heading);
+		this.mScope.add(color);
+		this.mScope.add(movement);
+		this.mScope.add(state);
+		this.mScope.add(transform);
 		
 		// Devolvemos nuestra instancia para chainear
 		return this;
 	}
 
 	@Override
-	public Entity get() {
+	public Character get() {
 		return this.mScope;
 	}
 

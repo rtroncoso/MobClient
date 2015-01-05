@@ -105,6 +105,14 @@ public class AssetsHandler {
 	}
 	/**
 	 * @param pIndex
+	 * @return head data of a specified index
+	 */
+	public static HeadData getHead(int pIndex) {
+		return AssetsHandler.getHeadData().get(pIndex);
+	}
+	
+	/**
+	 * @param pIndex
 	 * @return grh data of a specified index
 	 */
 	public static GrhData getGrh(int pIndex) {

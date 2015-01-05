@@ -67,13 +67,13 @@ public class TestScreen extends Screen implements ConstantsInterface {
 		this.mGame.getEngine().setTint(COLOR_NIGHT);
 		
 		// Plot a character
-		this.mGame.getCharacterHandler().makeChar(1, 51, 50, Heading.SOUTH, 1, 13, 6, 4, 6);
-		this.mGame.getCharacterHandler().getPlayer().setName("BetaTester");
-		this.mGame.getCharacterHandler().getPlayer().createLight(Color.WHITE, 300.0f);
-		this.mGame.getCharacterHandler().getPlayer().setFocus();
+//		this.mGame.getCharacterHandler().makeChar(1, 51, 50, Heading.SOUTH, 1, 13, 6, 4, 6);
+//		this.mGame.getCharacterHandler().getPlayer().setName("BetaTester");
+//		this.mGame.getCharacterHandler().getPlayer().createLight(Color.WHITE, 300.0f);
+//		this.mGame.getCharacterHandler().getPlayer().setFocus();
 		
 		// Plot a npc
-		this.mGame.getCharacterHandler().makeChar(2, 50, 50, Heading.SOUTH, 17, 0, 0, 0, 0);
+//		this.mGame.getCharacterHandler().makeChar(2, 50, 50, Heading.SOUTH, 17, 0, 0, 0, 0);
 		
 		this.mInputMultiplexer = new InputMultiplexer();
 		this.mInputMultiplexer.addProcessor(new InputProcessor() {
@@ -82,7 +82,7 @@ public class TestScreen extends Screen implements ConstantsInterface {
 			public boolean keyDown(int keycode) {
 				switch(keycode) {
 				case(Keys.SPACE):
-					mGame.getCharacterHandler().getPlayer().setFx(13);
+//					mGame.getCharacterHandler().getPlayer().setFx(13);
 					break;
 				case(Keys.NUM_1):
 					mGame.getEngine().setTint(COLOR_NIGHT);
@@ -96,12 +96,12 @@ public class TestScreen extends Screen implements ConstantsInterface {
 				case(Keys.PLUS):
 					map += 1;
 					mGame.getEngine().setMap(map);
-					mGame.getCharacterHandler().getPlayer().updateUserPos();
+//					mGame.getCharacterHandler().getPlayer().updateUserPos();
 					break;
 				case(Keys.MINUS):
 					map -= 1;
 					mGame.getEngine().setMap(map);
-					mGame.getCharacterHandler().getPlayer().updateUserPos();
+//					mGame.getCharacterHandler().getPlayer().updateUserPos();
 					break;
 				}
 				return true;
@@ -157,21 +157,22 @@ public class TestScreen extends Screen implements ConstantsInterface {
 		
 		Gdx.graphics.setTitle("FPS: " + String.valueOf(Gdx.graphics.getFramesPerSecond()
 				+ " Map: " + map
-				+ " X: " + this.mGame.getCharacterHandler().getPlayer().getUserPosX()
-				+ " Y: " + this.mGame.getCharacterHandler().getPlayer().getUserPosY()));
+//				+ " X: " + this.mGame.getCharacterHandler().getPlayer().getUserPosX()
+//				+ " Y: " + this.mGame.getCharacterHandler().getPlayer().getUserPosY()));
+				));
 		
 		// Input detection
 		if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			this.mGame.getCharacterHandler().getPlayer().moveUp();
+//			this.mGame.getCharacterHandler().getPlayer().moveUp();
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			this.mGame.getCharacterHandler().getPlayer().moveLeft();
+//			this.mGame.getCharacterHandler().getPlayer().moveLeft();
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			this.mGame.getCharacterHandler().getPlayer().moveDown();
+//			this.mGame.getCharacterHandler().getPlayer().moveDown();
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			this.mGame.getCharacterHandler().getPlayer().moveRight();
+//			this.mGame.getCharacterHandler().getPlayer().moveRight();
 		}
 		
 		// Clean up Scene

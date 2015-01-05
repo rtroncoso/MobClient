@@ -22,18 +22,17 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.mob.client.components.BodyComponent;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
+import com.mob.client.components.HeadComponent;
 import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.TransformComponent;
+import com.mob.client.handlers.CameraHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 
 /**
@@ -51,6 +50,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	// Fields
 	// ===========================================================
 	private ComponentMapper<BodyComponent> mBodyMapper;
+	private ComponentMapper<HeadComponent> mHeadMapper;
 	private ComponentMapper<TransformComponent> mTransformMapper;
 	private ComponentMapper<CharacterComponent> mCharacterMapper;
 	private ComponentMapper<HeadingComponent> mHeadingMapper;
@@ -59,7 +59,6 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	private SpriteBatch mBatch;
 	private Array<Entity> mRenderQueue;
 	private Comparator<Entity> mComparator;
-	private OrthographicCamera mCamera;
 
 	// ===========================================================
 	// Constructors
@@ -67,14 +66,16 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	@SuppressWarnings("unchecked")
 	public CharacterRenderingSystem(SpriteBatch pBatch) {
 		super(Family.all(BodyComponent.class, 
-					TransformComponent.class, 
-					CharacterComponent.class,
-					HeadingComponent.class,
-					ColorComponent.class)
+						HeadComponent.class,
+						TransformComponent.class, 
+						CharacterComponent.class,
+						HeadingComponent.class,
+						ColorComponent.class)
 				.get());
 
 		// Obtenemos nuestros Mappers
 		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
+		this.mHeadMapper = ComponentMapper.getFor(HeadComponent.class);
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
 		this.mCharacterMapper = ComponentMapper.getFor(CharacterComponent.class);
 		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
@@ -92,11 +93,8 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			}
 		};
 		
-		// Asignamos cosas necesarias para el engine
+		// Asignamos nuestro puntero al spritebatch
 		this.mBatch = pBatch;
-		this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.mCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        this.mCamera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
 		
 	}
 
@@ -130,8 +128,8 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 		
 		// Obtenemos una entity de la queue y inicializamos el batch
 		this.mRenderQueue.sort(this.mComparator);
-		this.mCamera.update();
-		this.mBatch.setProjectionMatrix(this.mCamera.combined);
+		CameraHandler.getCamera().update();
+		this.mBatch.setProjectionMatrix(CameraHandler.getCamera().combined);
 		this.mBatch.begin();
 		
 		// Iteramos todos los characters
@@ -139,6 +137,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			
 			// Obtenemos los components del character
 			BodyComponent body = this.mBodyMapper.get(entity);
+			HeadComponent head = this.mHeadMapper.get(entity);
 			ColorComponent color = this.mColorMapper.get(entity);
 			HeadingComponent heading = this.mHeadingMapper.get(entity);
 			TextureRegion bodyRegion = body.animations.get(heading.current).getAnimatedGraphic(true);
@@ -152,6 +151,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			TransformComponent t = this.mTransformMapper.get(entity);
 		
 			// Preparamos variables para el render
+			float bodyPixelOffsetX, bodyPixelOffsetY, headPixelOffsetX, headPixelOffsetY;
 			float width = bodyRegion.getRegionWidth();
 			float height = bodyRegion.getRegionHeight();
 			float originX = width * 0.5f;
