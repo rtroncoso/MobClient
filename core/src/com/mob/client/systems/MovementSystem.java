@@ -24,7 +24,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.MovementComponent;
 import com.mob.client.components.PositionComponent;
 import com.mob.client.components.TransformComponent;
-import com.mob.client.data.PositionData;
 import com.mob.client.util.Position;
 
 /**

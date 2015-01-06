@@ -16,6 +16,8 @@
  *******************************************************************************/
 package com.mob.client.factories;
 
+import com.badlogic.ashley.core.PooledEngine;
+
 
 /**
  * @author Rodrigo

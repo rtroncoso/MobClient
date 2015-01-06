@@ -16,6 +16,7 @@
  *******************************************************************************/
 package com.mob.client.factories;
 
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Color;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;

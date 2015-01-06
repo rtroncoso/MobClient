@@ -16,8 +16,8 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.ScreenAdapter;
 import com.mob.client.TestGame;
 import com.mob.client.entities.Character;
@@ -46,7 +46,7 @@ public class GameScreen extends ScreenAdapter {
 	// Fields
 	// ===========================================================
 	private TestGame mGame;
-	private Engine mEngine;
+	private PooledEngine mEngine;
 	private int mState;
 	
 	private CharacterFactory mCharacterFactory = new CharacterFactory();
@@ -60,7 +60,7 @@ public class GameScreen extends ScreenAdapter {
 		// Inicializamos todo lo necesario
 		this.mGame = game;
 		this.mState = GAME_RUNNING;
-		this.mEngine = new Engine();
+		this.mEngine = new PooledEngine();
 		
 		// Agregamos los sistemas al engine
 		this.mEngine.addSystem(new MovementSystem());

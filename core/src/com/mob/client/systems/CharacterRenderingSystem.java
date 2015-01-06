@@ -84,7 +84,7 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 		// Creamos la render queue
 		this.mRenderQueue = new Array<Entity>();
 		
-		// Creamos el comparator para decidir cual entidad tiene más prioridad
+		// Creamos el comparator para decidir cual entidad tiene mï¿½s prioridad
 		this.mComparator = new Comparator<Entity>() {
 			@Override
 			public int compare(Entity entityA, Entity entityB) {
