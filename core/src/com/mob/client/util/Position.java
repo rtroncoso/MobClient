@@ -40,7 +40,7 @@ public class Position {
 	// Methods
 	// ===========================================================
 	/**
-	 * Dado un Vector3 position calculamos el tile en el que está
+	 * Dado un Vector3 position calculamos el tile en el que estï¿½
 	 * las coordenadas dadas
 	 * 
 	 * @param position
@@ -48,7 +48,7 @@ public class Position {
 	 */
 	public static Vector3 toWorld(Vector3 position) {
 		
-		return new Vector3((int) (position.x / 32.0f), (int) (position.y) / 32.0f, 0.0f);
+		return new Vector3((int) (position.x / 32.0f) + 1, (int) (position.y / 32.0f) + 1, 0.0f);
 	}
 
 	// ===========================================================

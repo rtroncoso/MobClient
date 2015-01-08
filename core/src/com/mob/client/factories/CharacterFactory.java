@@ -16,15 +16,13 @@
  *******************************************************************************/
 package com.mob.client.factories;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.MovementComponent;
-import com.mob.client.components.PositionComponent;
 import com.mob.client.components.StateComponent;
-import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.HeadData;
 import com.mob.client.entities.Character;
@@ -117,13 +115,25 @@ public class CharacterFactory extends Factory<Character> {
 	 * @param position
 	 * @return CharacterFactory
 	 */
-	public CharacterFactory withPosition(PositionComponent position) {
+	public CharacterFactory withPosition(Vector2 position) {
 		
 		// Setteamos el color component en la entity
-		this.mScope.setPositionComponent(position);
+		this.mScope.setPosition(position);
 		
 		// Devolvemos nuestra instancia para chaining
 		return this;
+	}
+
+	/**
+	 * Chaining method que nos permite agregar un position component a nuestro scope
+	 *
+	 * @param position
+	 * @return CharacterFactory
+	 */
+	public CharacterFactory withPosition(float x, float y) {
+
+		// Setteamos la position de la entity
+		return this.withPosition(new Vector2(x, y));
 	}
 
 	// ===========================================================
@@ -140,12 +150,9 @@ public class CharacterFactory extends Factory<Character> {
 		ColorComponent color = new ColorComponent();
 		MovementComponent movement = new MovementComponent();
 		StateComponent state = new StateComponent();
-		TransformComponent transform = new TransformComponent();
 		HeadingComponent heading = new HeadingComponent();
-		PositionComponent position = new PositionComponent();
 		
 		// Initial states de un character
-		transform.pos.set(32.0f, 32.0f, 3.0f);
 		color.tint = Color.WHITE;
 		heading.current = HeadingComponent.HEADING_EAST;
 		
@@ -154,16 +161,16 @@ public class CharacterFactory extends Factory<Character> {
 			.withHead(AssetsHandler.getHead(2))
 			.withMovement(movement)
 			.withColor(color)
-			.withPosition(position);
-		
+			.withPosition(1, 0);
+
 		// Agregamos los components necesarios a la entity
+		this.mScope.add(this.mScope.getTransformComponent());
+		this.mScope.add(this.mScope.getPositionComponent());
 		this.mScope.add(character);
 		this.mScope.add(heading);
 		this.mScope.add(color);
 		this.mScope.add(movement);
 		this.mScope.add(state);
-		this.mScope.add(transform);
-		this.mScope.add(position);
 		
 		// Devolvemos nuestra instancia para chainear
 		return this;

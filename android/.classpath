@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK" exported="true"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES" exported="true"/>
-	<classpathentry kind="src" path="/MobClient-core" exported="true"/>
-	<classpathentry sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.2/6e7cf51f1d14c9fab4fe800cb10663104b57ebce/gdx-backend-android-1.5.2-sources.jar" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.2/51f73ee35e73a6d76fd245f83ec3f6a3316744d5/gdx-backend-android-1.5.2.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.5.2/fe2b9fdfda6a1cfb1a7a5857dbbd7380b0cb1ab8/gdx-freetype-1.5.2-sources.jar" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.5.2/de5a9ab0cb0993bf43b81dbbb66ad6dee09e4613/gdx-freetype-1.5.2.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/9bad798bf0d49ed7ade9772762d32ed2c87d46e3/gdx-box2d-1.5.2-sources.jar" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/dfef8e7b1118cc6ea70393e4f4f7ede95de8f4bd/gdx-box2d-1.5.2.jar" exported="true"/>
-	<classpathentry sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.2/26a156f1bebc8d08a2f6101a039390cbba85f07c/gdx-1.5.2-sources.jar" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.2/4e8961d210e6451fda0f3c4f5b6a0685d61533b9/gdx-1.5.2.jar" exported="true"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/MobClient-core"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.2/51f73ee35e73a6d76fd245f83ec3f6a3316744d5/gdx-backend-android-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.2/6e7cf51f1d14c9fab4fe800cb10663104b57ebce/gdx-backend-android-1.5.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.5.2/de5a9ab0cb0993bf43b81dbbb66ad6dee09e4613/gdx-freetype-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.5.2/fe2b9fdfda6a1cfb1a7a5857dbbd7380b0cb1ab8/gdx-freetype-1.5.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/dfef8e7b1118cc6ea70393e4f4f7ede95de8f4bd/gdx-box2d-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.2/9bad798bf0d49ed7ade9772762d32ed2c87d46e3/gdx-box2d-1.5.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.2/4e8961d210e6451fda0f3c4f5b6a0685d61533b9/gdx-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.2/26a156f1bebc8d08a2f6101a039390cbba85f07c/gdx-1.5.2-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -20,10 +20,12 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.MovementComponent;
-import com.mob.client.components.PositionComponent;
 import com.mob.client.components.TransformComponent;
+import com.mob.client.components.WorldPositionComponent;
 import com.mob.client.util.Position;
 
 /**
@@ -43,7 +45,7 @@ public class MovementSystem extends IteratingSystem {
 
 	private ComponentMapper<TransformComponent> mTransformMapper;
 	private ComponentMapper<MovementComponent> mMovementMapper;
-	private ComponentMapper<PositionComponent> mPositionMapper;
+	private ComponentMapper<WorldPositionComponent> mPositionMapper;
 
 	// ===========================================================
 	// Constructors
@@ -52,13 +54,13 @@ public class MovementSystem extends IteratingSystem {
 	public MovementSystem() {
 		super(Family.all(MovementComponent.class, 
 						TransformComponent.class,
-						PositionComponent.class)
+						WorldPositionComponent.class)
 					.get());
 		
 		// Obtenemos nuestros mappers
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
 		this.mMovementMapper = ComponentMapper.getFor(MovementComponent.class);
-		this.mPositionMapper = ComponentMapper.getFor(PositionComponent.class);
+		this.mPositionMapper = ComponentMapper.getFor(WorldPositionComponent.class);
 	}
 
 	// ===========================================================
@@ -72,18 +74,21 @@ public class MovementSystem extends IteratingSystem {
 	protected void processEntity(Entity entity, float deltaTime) {
 		TransformComponent transform = this.mTransformMapper.get(entity);
 		MovementComponent movement = this.mMovementMapper.get(entity);
-		PositionComponent position = this.mPositionMapper.get(entity);
+		WorldPositionComponent position = this.mPositionMapper.get(entity);
 		
-		// Setteamos la aceleración de nuestro cuerpo
+		// Setteamos la aceleraciï¿½n de nuestro cuerpo
 		tmp.set(movement.accel).scl(deltaTime);
 		movement.velocity.add(tmp);
 		
 		// Seteamos la velocidad de nuestro cuerpo
 		tmp.set(movement.velocity).scl(deltaTime);
 		transform.pos.add(tmp.x, tmp.y, 0.0f);
-		
-		// Guardamos nuestra posición
+
+		// Setteamos la world position de nuestro componente
 		position.set(Position.toWorld(transform.pos));
+
+		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		Gdx.app.log(MovementSystem.class.toString(), position.get().toString());
 
 	}
 

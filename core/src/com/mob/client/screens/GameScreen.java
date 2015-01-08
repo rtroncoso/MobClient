@@ -95,7 +95,7 @@ public class GameScreen extends ScreenAdapter {
 	public void update (float deltaTime) {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
 		
-		this.mDummyCharacter.setVelocity(10.0f, 0.0f);
+		this.mDummyCharacter.setVelocity(50.0f, 0.0f);
 
 		this.mEngine.update(deltaTime);
 		
@@ -112,7 +112,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	/**
-	 * Loop llamado sólo cuando el juego está corriendo
+	 * Loop llamado sï¿½lo cuando el juego estï¿½ corriendo
 	 * 
 	 * @param deltaTime
 	 */
@@ -121,7 +121,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	/**
-	 * Loop llamado solo cuando el juego está en pausa
+	 * Loop llamado solo cuando el juego estï¿½ en pausa
 	 */
 	private void updatePaused () {
 

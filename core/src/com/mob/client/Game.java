@@ -21,29 +21,23 @@
  */
 package com.mob.client;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Vector;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.data.BodyData;
-import com.mob.client.data.FxData;
-import com.mob.client.data.GrhData;
-import com.mob.client.data.HeadData;
-import com.mob.client.data.HelmetData;
-import com.mob.client.data.ShieldData;
-import com.mob.client.data.WeaponData;
+import com.mob.client.data.*;
 import com.mob.client.engine.PhysicsEngine;
-import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.screens.Screen;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Vector;
   
 public abstract class Game implements ApplicationListener, ConstantsInterface {  
 

@@ -101,7 +101,7 @@ public class GridSystem extends IteratingSystem {
 			// Obtenemos los components del character
 			LineComponent line = this.mLineMapper.get(entity);
 			
-			// Dibujamos la línea actual
+			// Dibujamos la linea actual
 			this.mShapeRenderer.setColor(Color.WHITE);
 			this.mShapeRenderer.line(line.start.x, line.start.y, line.end.x, line.end.y);
 		}

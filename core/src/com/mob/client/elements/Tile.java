@@ -132,14 +132,6 @@ public class Tile extends TileSprite {
 	public boolean isRoof() {
 		return (this.mTrigger == 1 || this.mTrigger == 2 || this.mTrigger == 4 || this.mTrigger == 21);
 	}
-	
-	/**
-	 * Creates a new light in this tile
-	 * @return the new light index
-	 */
-	public int createLight(Color pColor, float pSize, float pSpeed) {
-		return this.mGame.getEngine().getLightHandler().createLight(this.getX(), this.getY(), pColor, pSize);
-	}
 
 	// ===========================================================
 	// Getter & Setter

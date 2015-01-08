@@ -331,9 +331,6 @@ public class Character extends CharacterSprite implements ConstantsInterface {
 				this.mNextY = 0;
 			}
 		}
-			
-		// Update light position
-		this.updateLight(this.mX, this.mY);
 	}
 
 	// ===========================================================
@@ -411,14 +408,6 @@ public class Character extends CharacterSprite implements ConstantsInterface {
 	
 	public void moveRight() {
 		this.move(Heading.EAST);
-	}
-	
-	public void createLight(Color pColor, float pSize) {
-		this.mLightIndex = this.mGame.getEngine().getLightHandler().createLight(this.mUserPosY, this.mUserPosX, pColor, pSize);
-	}
-	
-	public void updateLight(float pX, float pY) {
-		if(this.mLightIndex != 0) this.mGame.getEngine().getLightHandler().moveLight(this.mLightIndex, pX, pY);
 	}
 	
 	// ===========================================================

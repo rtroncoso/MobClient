@@ -22,10 +22,6 @@
  */
 package com.mob.client.engine;
 
-
-
-import box2dLight.RayHandler;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -36,7 +32,6 @@ import com.mob.client.Game;
 import com.mob.client.data.MapBlockData;
 import com.mob.client.data.MapData;
 import com.mob.client.elements.Tile;
-import com.mob.client.handlers.LightHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.textures.BundledTexture;
@@ -53,8 +48,6 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 	private Game mGame;
 	private World mWorld;
 	private Box2DDebugRenderer mDebugRenderer;
-	private RayHandler mRayHandler;
-	private LightHandler mLightHandler;
 
 	// ===========================================================
 	// Constructors
@@ -73,16 +66,6 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 		this.mWorld = new World(new Vector2(), true);
 		this.mDebugRenderer = new Box2DDebugRenderer();
 		this.mDebugRenderer.setDrawBodies(false);
-		
-		// RayHandler setup
-		RayHandler.setGammaCorrection(true);
-		RayHandler.useDiffuseLight(true);
-		this.mRayHandler = new RayHandler(this.mWorld);
-		this.mRayHandler.setCulling(true);
-		this.mRayHandler.setBlurNum(5);
-		
-		// LightHandler setup
-		this.mLightHandler = new LightHandler(this.mGame);
 	}
 
 	// ===========================================================
@@ -232,14 +215,6 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 		// Render box2d world
 		this.mWorld.step(1/45f, 6, 2);
 		this.mDebugRenderer.render(this.mWorld, this.mGame.getCamera().combined);
-
-		// Render lights
-		this.mRayHandler.setAmbientLight(this.mGame.getEngine().getTint().r, this.mGame.getEngine().getTint().g, 
-				this.mGame.getEngine().getTint().b, this.mGame.getEngine().getTint().a);
-		this.mRayHandler.setCombinedMatrix(this.mGame.getCamera().combined, this.mGame.getCamera().position.x, 
-				this.mGame.getCamera().position.y, this.mGame.getCamera().viewportWidth,
-				this.mGame.getCamera().viewportHeight);
-		this.mRayHandler.updateAndRender();
 	}
 	
 	@Override
@@ -291,9 +266,6 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 				if(this.mTiles[x][y] != null) this.mTiles[x][y].dispose();
 			}
 		}
-		
-		// Dispose LightHandler
-		this.mRayHandler.dispose();
 	}
 
 	// ===========================================================
@@ -311,34 +283,6 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 	 */
 	public void setWorld(World mWorld) {
 		this.mWorld = mWorld;
-	}
-
-	/**
-	 * @return the mLightHandler
-	 */
-	public LightHandler getLightHandler() {
-		return mLightHandler;
-	}
-
-	/**
-	 * @param mLightHandler the mLightHandler to set
-	 */
-	public void setLightHandler(LightHandler mLightHandler) {
-		this.mLightHandler = mLightHandler;
-	}
-
-	/**
-	 * @return the mRayHandler
-	 */
-	public RayHandler getRayHandler() {
-		return mRayHandler;
-	}
-
-	/**
-	 * @param mRayHandler the mRayHandler to set
-	 */
-	public void setRayHandler(RayHandler mRayHandler) {
-		this.mRayHandler = mRayHandler;
 	}
 
 	// ===========================================================

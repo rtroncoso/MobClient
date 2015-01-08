@@ -24,7 +24,7 @@ import com.mob.client.components.BodyComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadComponent;
 import com.mob.client.components.MovementComponent;
-import com.mob.client.components.PositionComponent;
+import com.mob.client.components.WorldPositionComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.GrhData;
@@ -32,6 +32,7 @@ import com.mob.client.data.HeadData;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.interfaces.DisposableInterface;
 import com.mob.client.textures.BundledAnimation;
+import com.mob.client.util.Position;
 
 /**
  * Instancia de la entity en la que se guardan 
@@ -50,7 +51,7 @@ public class Character extends Entity implements DisposableInterface {
 	// ===========================================================
 	private MovementComponent mMovementComponent = new MovementComponent();
 	private TransformComponent mTransformComponent = new TransformComponent();
-	private PositionComponent mPositionComponent = new PositionComponent();
+	private WorldPositionComponent mWorldPositionComponent = new WorldPositionComponent();
 	private ColorComponent mColorComponent = new ColorComponent();
 	private BodyComponent mBodyComponent = new BodyComponent();
 	private HeadComponent mHeadComponent = new HeadComponent();
@@ -144,21 +145,35 @@ public class Character extends Entity implements DisposableInterface {
 	}
 	
 	/**
-	 * Obtiene Vector2 de un character
+	 * Obtiene la posicion en el mundo de un character
 	 * 
-	 * @return la velocidad del character
+	 * @return la posicion del character
 	 */
 	public Vector3 getPosition() {
-		return this.mPositionComponent.get();
+		return Position.toWorld(this.mTransformComponent.pos);
 	}
 	
 	/**
-	 * Settea la velocidad vertical y horizontal de un character
+	 * Settea la posiciion vertical y horizontal de un character
 	 * 
 	 * @param position
 	 */
-	public void setPosition(Vector3 position) {
-		this.getPositionComponent().set(position);
+	public void setPosition(Vector2 position) {
+
+		float positionX = (position.x * 32.0f);
+		float positionY = (position.y * 32.0f);
+
+		this.mWorldPositionComponent.set(position.x + 1.0f, position.y + 1.0f);
+		this.mTransformComponent.pos.set(positionX, positionY, 3.0f);
+	}
+
+	/**
+	 * Settea la posiciion vertical y horizontal de un character
+	 *
+	 * @param position
+	 */
+	public void setPosition(float x, float y) {
+		this.setPosition(new Vector2(x, y));
 	}
 	
 	/**
@@ -250,15 +265,15 @@ public class Character extends Entity implements DisposableInterface {
 	/**
 	 * @return the mPositionComponent
 	 */
-	public PositionComponent getPositionComponent() {
-		return mPositionComponent;
+	public WorldPositionComponent getPositionComponent() {
+		return mWorldPositionComponent;
 	}
 
 	/**
-	 * @param mPositionComponent the mPositionComponent to set
+	 * @param mWorldPositionComponent the mPositionComponent to set
 	 */
-	public void setPositionComponent(PositionComponent mPositionComponent) {
-		this.mPositionComponent = mPositionComponent;
+	public void setPositionComponent(WorldPositionComponent mWorldPositionComponent) {
+		this.mWorldPositionComponent = mWorldPositionComponent;
 	}
 
 	// ===========================================================

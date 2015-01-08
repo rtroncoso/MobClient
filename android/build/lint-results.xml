@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="4" by="lint 22.6.2">
+<issues format="4" by="lint 24.0.2">
 
     <issue
         id="InvalidPackage"
@@ -14,7 +14,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -30,7 +30,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -46,7 +46,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -62,7 +62,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -78,7 +78,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -94,7 +94,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -110,13 +110,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: javax.swing.border. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.4."
+        message="Invalid package reference in library; not included in Android: javax.swing.border. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.3."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -126,13 +126,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: javax.swing.text. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.4."
+        message="Invalid package reference in library; not included in Android: javax.swing.text. Referenced from com.badlogic.gdx.backends.lwjgl.LwjglAWTInput.3."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -142,13 +142,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.0-SNAPSHOT\bd35283151e6a361f3fc765df6d17a3e1093da03\gdx-backend-lwjgl-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-lwjgl\1.5.2\e979b4d3fb8c42c9e0292d0e04bdf229b746ff9\gdx-backend-lwjgl-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: java.awt.geom. Referenced from com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont."
+        message="Invalid package reference in library; not included in Android: java.awt.geom. Referenced from com.badlogic.gdx.tools.flame.TexturePanel."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -158,7 +158,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -174,7 +174,7 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
     </issue>
 
     <issue
@@ -190,13 +190,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: javax.swing.event. Referenced from com.badlogic.gdx.tools.hiero.Hiero.2."
+        message="Invalid package reference in library; not included in Android: javax.swing.event. Referenced from com.badlogic.gdx.tools.flame.DynamicsInfluencerPanel.4."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -206,13 +206,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: javax.swing.plaf.basic. Referenced from com.badlogic.gdx.tools.particleeditor.ParticleEditor.3."
+        message="Invalid package reference in library; not included in Android: javax.swing.plaf.basic. Referenced from com.badlogic.gdx.tools.flame.FlameMain.5."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -222,13 +222,13 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
     </issue>
 
     <issue
         id="InvalidPackage"
         severity="Error"
-        message="Invalid package reference in library; not included in Android: javax.swing.table. Referenced from com.badlogic.gdx.tools.particleeditor.EffectPanel."
+        message="Invalid package reference in library; not included in Android: javax.swing.table. Referenced from com.badlogic.gdx.tools.flame.DynamicsInfluencerPanel."
         category="Correctness"
         priority="6"
         summary="Finds API accesses to APIs that are not supported in Android"
@@ -238,7 +238,27 @@ When you create Android projects, the classpath is set up such that you can only
 
 This check scans through library jars and looks for references to API packages that are not included in Android and flags these. This is only an error if your code calls one of the library classes which wind up referencing the unsupported package.">
         <location
-            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.0-SNAPSHOT\de8598dbf7ac4e709e740970cef4ad0d0a606e\gdx-tools-1.0-SNAPSHOT.jar"/>
+            file="C:\Users\Rodrigo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-tools\1.5.2\e518db2e76e6dbb50729cab65bfda189ca74b70d\gdx-tools-1.5.2.jar"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        severity="Warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        category="Correctness"
+        priority="6"
+        summary="Checks that the manifest specifies a targetSdkVersion that is recent"
+        explanation="When your application runs on a version of Android that is more recent than your `targetSdkVersion` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdkVersion` is less than 14, your app may get an option button in the UI.
+
+To fix this issue, set the `targetSdkVersion` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        url="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        urls="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        errorLine1="    &lt;uses-sdk android:minSdkVersion=&quot;8&quot; android:targetSdkVersion=&quot;19&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\AndroidManifest.xml"
+            line="7"
+            column="5"/>
     </issue>
 
 </issues>
