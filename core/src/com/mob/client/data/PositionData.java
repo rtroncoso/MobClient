@@ -22,9 +22,9 @@
  */
 package com.mob.client.data;
 
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public class PositionData implements Constants {
+public class PositionData implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -40,6 +40,10 @@ public class PositionData implements Constants {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+	public PositionData() {
+		this(0, 0);
+	}
+	
 	public PositionData(float mX, float mY) {
 		this.setX(mX);
 		this.setY(mY);

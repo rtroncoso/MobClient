@@ -22,6 +22,14 @@
  */
 package com.mob.client.data;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.textures.BundledAnimation;
+
+import java.util.ArrayList;
+import java.util.Vector;
+
 public class MapBlockData {
 	// ===========================================================
 	// Constants
@@ -32,6 +40,7 @@ public class MapBlockData {
 	// Fields
 	// ===========================================================
 	private int[] mGraphic;
+	private Vector<BundledAnimation> mTextures = new Vector<BundledAnimation>();
 	
 	private int mCharIndex;
 	private int mObjIndex;
@@ -65,17 +74,33 @@ public class MapBlockData {
 		this.setTileExit(tileExit);
 		this.setBlocked(mBlocked);
 		this.setTrigger(mTrigger);
+		this.loadTextures();
 	}
 
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
+	public void loadTextures() {
+		int layer = 0;
+		this.mTextures.setSize(this.getGraphic().length);
+		for(int grhIndex : this.getGraphic()) {
+			if(grhIndex > 0) this.mTextures.setElementAt(new BundledAnimation(AssetsHandler.getGrh(grhIndex)), layer);
+			layer++;
+		}
+	}
 
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+	public TextureRegion getRegion(int pIndex) {
+		return (this.getGraphic(pIndex) > 0) ? this.mTextures.get(pIndex).getGraphic() : null;
+	}
+	public BundledAnimation getAnimation(int pIndex) {
+		return (this.mTextures.get(pIndex) != null) ? this.mTextures.get(pIndex) : null;
+	}
+
 	public int getGraphic(int pIndex) {
 		return this.mGraphic[pIndex];
 	}

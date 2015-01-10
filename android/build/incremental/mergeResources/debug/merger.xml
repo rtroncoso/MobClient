@@ -2,35 +2,35 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res" >
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res" >
             <file
                 name="ic_launcher"
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-hdpi\ic_launcher.png"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\drawable-hdpi\ic_launcher.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-mdpi\ic_launcher.png"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\drawable-mdpi\ic_launcher.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-xhdpi\ic_launcher.png"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\drawable-xhdpi\ic_launcher.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\drawable-xxhdpi\ic_launcher.png"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\drawable-xxhdpi\ic_launcher.png"
                 qualifiers="xxhdpi"
                 type="drawable" />
             <file
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\values\strings.xml"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >GameClient
                 </string>
             </file>
             <file
-                path="D:\Programacion de cosas locas\Java\AO\MobClient\android\res\values\styles.xml"
+                path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\res\values\styles.xml"
                 qualifiers="" >
 
                 <style
@@ -59,11 +59,11 @@ false
                 </style>
             </file>
         </source>
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\build\res\rs\debug" />
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\build\res\generated\debug" />
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\build\res\rs\debug" />
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\build\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\src\debug\res" />
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\src\debug\res" />
     </dataSet>
 
 </merger>

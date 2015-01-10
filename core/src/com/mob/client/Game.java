@@ -21,31 +21,25 @@
  */
 package com.mob.client;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Vector;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.data.BodyData;
-import com.mob.client.data.FxData;
-import com.mob.client.data.GrhData;
-import com.mob.client.data.HeadData;
-import com.mob.client.data.HelmetData;
-import com.mob.client.data.ShieldData;
-import com.mob.client.data.WeaponData;
+import com.mob.client.data.*;
 import com.mob.client.engine.PhysicsEngine;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.CharacterHandler;
-import com.mob.client.handlers.DataHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.screens.Screen;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Vector;
   
-public abstract class Game implements ApplicationListener, Constants {  
+public abstract class Game implements ApplicationListener, ConstantsInterface {  
 
 	// ===========================================================
 	// Constants
@@ -62,7 +56,7 @@ public abstract class Game implements ApplicationListener, Constants {
 	protected MapHandler mMapHandler;
     protected SurfaceHandler mSurfaceHandler;
     protected CharacterHandler mCharacterHandler;
-    protected DataHandler mDataHandler;
+    protected AssetsHandler mDataHandler;
 
 	protected PhysicsEngine mEngine;
 
@@ -76,7 +70,6 @@ public abstract class Game implements ApplicationListener, Constants {
     public Game() {
 
         this.mMapHandler = new MapHandler(this);
-        this.mCharacterHandler = new CharacterHandler(this);
 
     	this.mScreens = new HashMap<String, Screen>();  
         this.mEngine = new PhysicsEngine(this);
@@ -103,97 +96,97 @@ public abstract class Game implements ApplicationListener, Constants {
 	 * @return the mShieldData
 	 */
 	public Vector<ShieldData> getShieldData() {
-		return this.mDataHandler.getShieldData();
+		return AssetsHandler.getShieldData();
 	}
 
 	/**
 	 * @param mShieldData the mShieldData to set
 	 */
 	public void setShieldData(Vector<ShieldData> mShieldData) {
-		this.mDataHandler.setShieldData(mShieldData);
+		AssetsHandler.setShieldData(mShieldData);
 	}
     /**
 	 * @return the mWeaponData
 	 */
 	public Vector<WeaponData> getWeaponData() {
-		return this.mDataHandler.getWeaponData();
+		return AssetsHandler.getWeaponData();
 	}
 
 	/**
 	 * @param mWeaponData the mWeaponData to set
 	 */
 	public void setWeaponData(Vector<WeaponData> mWeaponData) {
-		this.mDataHandler.setWeaponData(mWeaponData);
+		AssetsHandler.setWeaponData(mWeaponData);
 	}
 	
 	/**
 	* @return the _grhData
 	*/
 	public Vector<GrhData> getGrhData() {
-		return this.mDataHandler.getGrhData();
+		return AssetsHandler.getGrhData();
 	}
 	
 	/**
 	* @param _grhData the _grhData to set
 	*/
 	public void setGrhData(Vector<GrhData> _grhData) {
-		this.mDataHandler.setGrhData(_grhData);
+		AssetsHandler.setGrhData(_grhData);
 	}
 	
 	/**
 	* @return the _bodyData
 	*/
 	public Vector<BodyData> getBodyData() {
-		return this.mDataHandler.getBodyData();
+		return AssetsHandler.getBodyData();
 	}
 	
 	/**
 	* @param _bodyData the _bodyData to set
 	*/
 	public void setBodyData(Vector<BodyData> _bodyData) {
-		this.mDataHandler.setBodyData(_bodyData);
+		AssetsHandler.setBodyData(_bodyData);
 	}
 
 	/**
 	 * @return the _headData
 	 */
 	public Vector<HeadData> getHeadData() {
-		return this.mDataHandler.getHeadData();
+		return AssetsHandler.getHeadData();
 	}
 
 	/**
 	 * @param _headData the _headData to set
 	 */
 	public void setHeadData(Vector<HeadData> _headData) {
-		this.mDataHandler.setHeadData(_headData);
+		AssetsHandler.setHeadData(_headData);
 	}
 
 	/**
 	 * @return the _helmetData
 	 */
 	public Vector<HelmetData> getHelmetData() {
-		return this.mDataHandler.getHelmetData();
+		return AssetsHandler.getHelmetData();
 	}
 
 	/**
 	 * @param _helmetData the _helmetData to set
 	 */
 	public void setHelmetData(Vector<HelmetData> _helmetData) {
-		this.mDataHandler.setHelmetData(_helmetData);
+		AssetsHandler.setHelmetData(_helmetData);
 	}
 	
 	/**
 	 * @return the mFxData
 	 */
 	public Vector<FxData> getFxData() {
-		return this.mDataHandler.getFxData();
+		return AssetsHandler.getFxData();
 	}
 
 	/**
 	 * @param mFxData the mFxData to set
 	 */
 	public void setFxData(Vector<FxData> mFxData) {
-		this.mDataHandler.setFxData(mFxData);
+		AssetsHandler.setFxData(mFxData);
 	}
 
 	/**

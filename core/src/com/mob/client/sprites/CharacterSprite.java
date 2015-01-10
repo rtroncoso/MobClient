@@ -34,10 +34,10 @@ import com.mob.client.data.HeadData;
 import com.mob.client.data.HelmetData;
 import com.mob.client.data.ShieldData;
 import com.mob.client.data.WeaponData;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.textures.BundledTexture;
 
-public abstract class CharacterSprite extends MovingSprite implements Constants {
+public abstract class CharacterSprite extends MovingSprite implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants

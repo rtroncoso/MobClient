@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/D:/Programacion%20de%20cosas%20locas/Java/AO/MobClient/android/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Rodrigo/workspace/workspace-mob/MobClient/android/res/values/strings.xml -->
     <eat-comment />
 
     <string name="app_name">GameClient</string>
-    <!-- From: file:/D:/Programacion%20de%20cosas%20locas/Java/AO/MobClient/android/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Rodrigo/workspace/workspace-mob/MobClient/android/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppTheme" parent="android:Theme">

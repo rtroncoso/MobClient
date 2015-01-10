@@ -20,11 +20,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mob.client.Game;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.sprites.CharacterSprite;
 import com.mob.client.textures.BundledTexture;
 
-public class Character extends CharacterSprite implements Constants {
+public class Character extends CharacterSprite implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants
@@ -331,9 +331,6 @@ public class Character extends CharacterSprite implements Constants {
 				this.mNextY = 0;
 			}
 		}
-			
-		// Update light position
-		this.updateLight(this.mX, this.mY);
 	}
 
 	// ===========================================================
@@ -411,14 +408,6 @@ public class Character extends CharacterSprite implements Constants {
 	
 	public void moveRight() {
 		this.move(Heading.EAST);
-	}
-	
-	public void createLight(Color pColor, float pSize) {
-		this.mLightIndex = this.mGame.getEngine().getLightHandler().createLight(this.mUserPosY, this.mUserPosX, pColor, pSize);
-	}
-	
-	public void updateLight(float pX, float pY) {
-		if(this.mLightIndex != 0) this.mGame.getEngine().getLightHandler().moveLight(this.mLightIndex, pX, pY);
 	}
 	
 	// ===========================================================

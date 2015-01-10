@@ -23,9 +23,9 @@
 package com.mob.client.sprites;
 
 import com.mob.client.Game;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public abstract class MovingSprite extends GameSprite implements Constants {
+public abstract class MovingSprite extends GameSprite implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================

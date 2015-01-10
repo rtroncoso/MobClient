@@ -25,8 +25,9 @@ import org.ini4j.InvalidFileFormatException;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.WeaponData;
+import com.mob.client.interfaces.LoadableInterface;
 
-public class WeaponLoader extends Loader<WeaponData> {
+public class WeaponLoader extends Loader implements LoadableInterface<WeaponData> {
 
 
 	// ===========================================================

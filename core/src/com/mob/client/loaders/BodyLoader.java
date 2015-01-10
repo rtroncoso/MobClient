@@ -22,9 +22,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.BodyData;
+import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class BodyLoader extends Loader<BodyData> {
+public class BodyLoader extends Loader implements LoadableInterface<BodyData> {
 
 
 	// ===========================================================

@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\assets" />
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="D:\Programacion de cosas locas\Java\AO\MobClient\android\src\release\assets" />
+        <source path="C:\Users\Rodrigo\workspace\workspace-mob\MobClient\android\src\release\assets" />
     </dataSet>
 
 </merger>

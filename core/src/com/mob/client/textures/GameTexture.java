@@ -25,9 +25,18 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
 import com.mob.client.data.GrhData;
-import com.mob.client.interfaces.Constants;
+import com.mob.client.handlers.SurfaceHandler;
+import com.mob.client.interfaces.ConstantsInterface;
 
-public class GameTexture implements Constants {
+/**
+ * Este objeto permite una simple implementación e instanciación de 
+ * cualquier {@link GrhData} encapsulando y cargando su respectiva
+ * {@link TextureRegion}
+ * 
+ * @author Rodrigo
+ *
+ */
+public class GameTexture implements ConstantsInterface {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -37,8 +46,6 @@ public class GameTexture implements Constants {
 	// Fields
 	// ===========================================================
 	private TextureRegion mTextureRegion;
-	private float mX;
-	private float mY;
 
 	// ===========================================================
 	// Constructors
@@ -46,7 +53,12 @@ public class GameTexture implements Constants {
 	public GameTexture(Game _game, int grhIndex) {
 		GrhData grh = _game.getGrhData().get(grhIndex);
 		
-		this.mTextureRegion = new TextureRegion(_game.getSurfaceHandler().get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+		this.mTextureRegion.flip(false, true);
+	}
+	
+	public GameTexture(GrhData grh) {
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 
@@ -72,34 +84,6 @@ public class GameTexture implements Constants {
 	 */
 	public void setGraphic(TextureRegion mTextureRegion) {
 		this.mTextureRegion = mTextureRegion;
-	}
-
-	/**
-	 * @return the mX
-	 */
-	public float getX() {
-		return mX;
-	}
-
-	/**
-	 * @param mX the mX to set
-	 */
-	public void setX(float mX) {
-		this.mX = mX;
-	}
-
-	/**
-	 * @return the mY
-	 */
-	public float getY() {
-		return mY;
-	}
-
-	/**
-	 * @param mY the mY to set
-	 */
-	public void setY(float mY) {
-		this.mY = mY;
 	}
 
 	// ===========================================================

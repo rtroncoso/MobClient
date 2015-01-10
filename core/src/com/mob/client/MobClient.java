@@ -31,11 +31,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch; 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.Constants;
-import com.mob.client.handlers.DataHandler;
+import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.handlers.AssetsHandler;
   
   
-public class MobClient extends Game implements Constants {  
+public class MobClient extends Game implements ConstantsInterface {  
 
 	// ===========================================================
 	// Constants
@@ -58,10 +58,6 @@ public class MobClient extends Game implements Constants {
     @Override  
     public void create() {  
         
-        // We render using YDown instead of YUp
-        this.mCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
-        this.mCamera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
-        
         // Calculate camera zoom according to aspect ratio
 		this.mCamera.zoom = (Gdx.graphics.getWidth() / Gdx.graphics.getHeight()) * (GAME_SCREEN_ZOOM / ((Gdx.graphics.getWidth() / Gdx.graphics.getHeight()))); 
         
@@ -69,7 +65,7 @@ public class MobClient extends Game implements Constants {
         this.setScreen("LoadingScreen");  
 
         // Load INITs
-        this.mDataHandler = new DataHandler();
+        this.mDataHandler = new AssetsHandler();
         
         // Init texture engine
         this.setSurfaceHandler(new SurfaceHandler(this));

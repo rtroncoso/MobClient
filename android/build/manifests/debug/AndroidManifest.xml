@@ -1,4 +1,4 @@
-<!-- From: file:/D:/Programacion%20de%20cosas%20locas/Java/AO/MobClient/android/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.mob.client.android">
+<!-- From: file:/C:/Users/Rodrigo/workspace/workspace-mob/MobClient/android/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.mob.client.android">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19"/>
 

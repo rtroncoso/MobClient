@@ -39,13 +39,16 @@ public class WorldPositionData {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+	public WorldPositionData() {
+		this(0, 0, 0);
+	}
+	
 	/**
 	 * @param mMap
 	 * @param mPosX
 	 * @param mPosY
 	 */
 	public WorldPositionData(int mMap, int mPosX, int mPosY) {
-		super();
 		this.mMap = mMap;
 		this.setPosX(mPosX);
 		this.setPosY(mPosY);
