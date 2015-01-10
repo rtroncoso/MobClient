@@ -95,7 +95,11 @@ public class MapBlockData {
 	// Getter & Setter
 	// ===========================================================
 	public TextureRegion getRegion(int pIndex) {
-		return (this.getGraphic(pIndex) > 0) ? this.mTextures.get(pIndex).getGraphic() : null;
+		return (this.getGraphic(pIndex) > 0) ?
+				(this.mTextures.get(pIndex).isAnimated() ?
+						this.mTextures.get(pIndex).getAnimatedGraphic(true) :
+						this.mTextures.get(pIndex).getGraphic()) :
+				null;
 	}
 	public BundledAnimation getAnimation(int pIndex) {
 		return (this.mTextures.get(pIndex) != null) ? this.mTextures.get(pIndex) : null;

@@ -39,6 +39,7 @@ public class BundledAnimation {
 	private Array<GameTexture> mFrames = new Array<GameTexture>();
 	private Animation mAnimation;
 	private float mAnimationTime;
+	private boolean mAnimated = false;
 
 	// ===========================================================
 	// Constructors
@@ -51,7 +52,7 @@ public class BundledAnimation {
 		Array<TextureRegion> tmpRegions = new Array<TextureRegion>();
 		this.setAnimationTime(0.0f);
 		
-		// Si es una animación
+		// Si es una animaciï¿½n
 		if(numFrames > 0) {
 			
 			// Iteramos la lista de frames y los agregamos a nuestro array interno
@@ -72,6 +73,7 @@ public class BundledAnimation {
 			
 			// Setteamos nuestro animation object
 			this.setAnimation(new Animation(grh.getSpeed() / 1000.0f, textures));
+			this.mAnimated = true;
 			
 		} else {
 			
@@ -129,7 +131,7 @@ public class BundledAnimation {
 	}
 
 	/**
-	 * Obtenemos un índice específico de nuestra lista de frames
+	 * Obtenemos un ï¿½ndice especï¿½fico de nuestra lista de frames
 	 * 
 	 * @param pIndex
 	 * @return TextureRegion
@@ -139,7 +141,7 @@ public class BundledAnimation {
 	}
 	
 	/**
-	 * Obtiene un graphic (con o sin animación) de este objeto
+	 * Obtiene un graphic (con o sin animaciï¿½n) de este objeto
 	 * 
 	 * @param loop 
 	 * @return TextureRegion
@@ -149,12 +151,12 @@ public class BundledAnimation {
 	}
 	
 	/**
-	 * Devuelve si está animado o no
+	 * Devuelve si estï¿½ animado o no
 	 * 
 	 * @return boolean
 	 */
 	public boolean isAnimated() {
-		return (this.getAnimationTime() > 0.0f);
+		return this.mAnimated;
 	}
 
 	/**

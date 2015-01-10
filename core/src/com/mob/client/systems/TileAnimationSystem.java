@@ -78,7 +78,7 @@ public class TileAnimationSystem extends IteratingSystem {
 					BundledAnimation animation = chunk.getTile(x, y).getAnimation(layer);
 
 					// Si tiene una animacion cambiamos su timer
-					if (animation != null) {
+					if (animation != null && animation.isAnimated()) {
 						animation.setAnimationTime(state.time);
 					}
 				}

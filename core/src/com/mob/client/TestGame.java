@@ -65,10 +65,9 @@ public class TestGame extends Game implements ConstantsInterface {
 		
 		// Inicializamos la c�mara
 		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
-//		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-		camera.position.set(50 * 32.0f, 50 * 32.0f, 0);
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.zoom = 1.2f;
+		camera.zoom = 1.0f;
         CameraHandler.setCamera(camera);
 		
 		// Inicializamos SpriteBatch

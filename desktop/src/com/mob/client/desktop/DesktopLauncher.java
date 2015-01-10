@@ -28,7 +28,7 @@ public class DesktopLauncher {
         cfg.width = MobClient.GAME_SCREEN_WIDTH;
         cfg.height = MobClient.GAME_SCREEN_HEIGHT;
         cfg.fullscreen = MobClient.GAME_FULL_SCREEN;
-        cfg.vSyncEnabled = false;
+        cfg.vSyncEnabled = true;
         cfg.foregroundFPS = 0;
         cfg.resizable = false;
         
