@@ -21,14 +21,13 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.ScreenAdapter;
 import com.mob.client.TestGame;
 import com.mob.client.entities.Character;
+import com.mob.client.entities.Chunk;
 import com.mob.client.factories.CharacterFactory;
+import com.mob.client.factories.ChunkFactory;
 import com.mob.client.factories.GridFactory;
 import com.mob.client.handlers.CharacterHandler;
-import com.mob.client.systems.CharacterAnimationSystem;
-import com.mob.client.systems.CharacterRenderingSystem;
-import com.mob.client.systems.CharacterSystem;
-import com.mob.client.systems.GridSystem;
-import com.mob.client.systems.MovementSystem;
+import com.mob.client.handlers.MapHandler;
+import com.mob.client.systems.*;
 
 /**
  * @author Rodrigo
@@ -61,32 +60,42 @@ public class GameScreen extends ScreenAdapter {
 		this.mGame = game;
 		this.mState = GAME_RUNNING;
 		this.mEngine = new PooledEngine();
-		
-		// Agregamos los sistemas al engine
-		this.mEngine.addSystem(new MovementSystem());
-		this.mEngine.addSystem(new GridSystem());
-		this.mEngine.addSystem(new CharacterSystem());
-		this.mEngine.addSystem(new CharacterAnimationSystem());
-		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
-		
-//		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
-	
-		// Creamos un dummy character y lo agregamos a nuestro engine y handler
-		this.mDummyCharacter = this.mCharacterFactory.create().get();
-		this.mEngine.addEntity(this.mDummyCharacter);
-		CharacterHandler.add(this.mDummyCharacter);
-		
-		// Creamos lineas para el GridSystem
-		for(Entity line : GridFactory.create()) {
-			this.mEngine.addEntity(line);
-		}
-		
-		
+		this.initSystems();
+		this.initScene();
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
+	private void initSystems() {
+
+		// Agregamos los sistemas al engine
+		this.mEngine.addSystem(new MovementSystem());
+		this.mEngine.addSystem(new CharacterSystem());
+		this.mEngine.addSystem(new CharacterAnimationSystem());
+		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
+		this.mEngine.addSystem(new ChunkRenderingSystem(this.mGame.getSpriteBatch()));
+		this.mEngine.addSystem(new GridSystem());
+	}
+
+	private void initScene() {
+
+		// Creamos un mapa y agregamos los chunks al engine
+		for(Chunk chunk : ChunkFactory.create(MapHandler.get(1))) {
+			this.mEngine.addEntity(chunk);
+		}
+
+		// Creamos un dummy character y lo agregamos a nuestro engine y handler
+		this.mDummyCharacter = this.mCharacterFactory.create().get();
+		this.mEngine.addEntity(this.mDummyCharacter);
+		CharacterHandler.add(this.mDummyCharacter);
+
+		// Creamos lineas para el GridSystem
+		for(Entity line : GridFactory.create()) {
+			this.mEngine.addEntity(line);
+		}
+	}
+
 	/**
 	 * Game Main Loop
 	 * 

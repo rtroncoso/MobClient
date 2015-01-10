@@ -63,6 +63,27 @@ public class Character extends Entity implements DisposableInterface {
 	// Methods
 	// ===========================================================
 
+	/**
+	 * Se encarga de agregar todos los components a la entidad y
+	 * devolver esta misma instancia
+	 *
+	 * @return
+	 */
+	public Character get() {
+
+		// Agregamos los components necesarios a la entity
+		this.add(this.getTransformComponent());
+		this.add(this.getPositionComponent());
+		this.add(this.getCharactercomponent());
+		this.add(this.getHeadingcomponent());
+		this.add(this.getColorComponent());
+		this.add(this.getMovementComponent());
+		this.add(this.getStateComponent());
+
+		// Devolvemos nuestra propia instancia
+		return this;
+	}
+
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================

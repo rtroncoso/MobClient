@@ -56,7 +56,7 @@ public abstract class Factory<T> {
 	 * Crea un scope en el cual trabajar con la entity mScopedEntity
 	 * 
 	 * Al finalizar de trabajar con esta entity, se obtiene y se 
-	 * inicializa con el método get()
+	 * inicializa con el metodo get()
 	 * 
 	 * @return Factory chaining Factory builder
 	 */

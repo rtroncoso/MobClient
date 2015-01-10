@@ -16,8 +16,6 @@
  *******************************************************************************/
 package com.mob.client.systems;
 
-import java.util.Comparator;
-
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -26,20 +24,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.mob.client.components.BodyComponent;
-import com.mob.client.components.CharacterComponent;
-import com.mob.client.components.ColorComponent;
-import com.mob.client.components.HeadComponent;
-import com.mob.client.components.HeadingComponent;
-import com.mob.client.components.TransformComponent;
+import com.mob.client.components.*;
 import com.mob.client.handlers.CameraHandler;
 import com.mob.client.interfaces.ConstantsInterface;
+
+import javax.xml.crypto.dsig.Transform;
+import java.util.Comparator;
 
 /**
  * @author Rodrigo
  *
  */
-public class CharacterRenderingSystem extends IteratingSystem implements ConstantsInterface {
+public class ChunkRenderingSystem extends IteratingSystem implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants
@@ -49,13 +45,9 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<BodyComponent> mBodyMapper;
-	private ComponentMapper<HeadComponent> mHeadMapper;
 	private ComponentMapper<TransformComponent> mTransformMapper;
-	private ComponentMapper<CharacterComponent> mCharacterMapper;
-	private ComponentMapper<HeadingComponent> mHeadingMapper;
-	private ComponentMapper<ColorComponent> mColorMapper;
-	
+	private ComponentMapper<ChunkComponent> mChunkComponent;
+
 	private SpriteBatch mBatch;
 	private Array<Entity> mRenderQueue;
 	private Comparator<Entity> mComparator;
@@ -64,22 +56,14 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	// Constructors
 	// ===========================================================
 	@SuppressWarnings("unchecked")
-	public CharacterRenderingSystem(SpriteBatch pBatch) {
-		super(Family.all(BodyComponent.class, 
-						HeadComponent.class,
-						TransformComponent.class, 
-						CharacterComponent.class,
-						HeadingComponent.class,
-						ColorComponent.class)
+	public ChunkRenderingSystem(SpriteBatch pBatch) {
+		super(Family.all(TransformComponent.class,
+						ChunkComponent.class)
 				.get());
 
 		// Obtenemos nuestros Mappers
-		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
-		this.mHeadMapper = ComponentMapper.getFor(HeadComponent.class);
 		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
-		this.mCharacterMapper = ComponentMapper.getFor(CharacterComponent.class);
-		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
-		this.mColorMapper = ComponentMapper.getFor(ColorComponent.class);
+		this.mChunkComponent = ComponentMapper.getFor(ChunkComponent.class);
 		
 		// Creamos la render queue
 		this.mRenderQueue = new Array<Entity>();
@@ -114,10 +98,9 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 	}
 	
 	/**
-	 * Este metodo se encarga de renderizar los characters con todos 
-	 * sus components. Se ejecuta una vez por cada ciclo del engine
-	 * y va iterando una render queue interna hasta que se dibujen
-	 * todas las entities.
+	 * Este metodo se encarga de renderizar todos los chunks
+	 * del juego. Estos son creados al inicializarse un mapa
+	 * usando ChunkFactory
 	 * 
 	 * @author rt
 	 * @param deltaTime
@@ -132,47 +115,30 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 		this.mBatch.setProjectionMatrix(CameraHandler.getCamera().combined);
 		this.mBatch.begin();
 		
-		// Iteramos todos los characters
+		// Iteramos todos los chunks
 		for (Entity entity : this.mRenderQueue) {
 			
-			// Obtenemos los components del character
-			BodyComponent body = this.mBodyMapper.get(entity);
-			HeadComponent head = this.mHeadMapper.get(entity);
-			ColorComponent color = this.mColorMapper.get(entity);
-			HeadingComponent heading = this.mHeadingMapper.get(entity);
+			// Obtenemos los components del chunk
+			ChunkComponent chunk = this.mChunkComponent.get(entity);
 			TransformComponent t = this.mTransformMapper.get(entity);
-			
-			// Separamos las TextureRegion's en uso
-			TextureRegion bodyRegion = body.animations.get(heading.current).getAnimatedGraphic(true);
-			TextureRegion headRegion = head.animations.get(heading.current).getGraphic();
-			
-			// Renderizamos el character
-			Color previousColor = this.mBatch.getColor();
-			this.mBatch.setColor(color.tint);
-		
-			// Preparamos variables para el render
-			float bodyPixelOffsetX = 0.0f, bodyPixelOffsetY = 0.0f, headPixelOffsetX = 0.0f, headPixelOffsetY = 0.0f;
-			
-			// Si tiene un body
-			if(bodyRegion != null) {
-				bodyPixelOffsetX = t.pos.x;// - bodyRegion.getRegionWidth() * 0.5f;
-				bodyPixelOffsetY = t.pos.y - (bodyRegion.getRegionHeight() - 32.0f);
-				
-				this.mBatch.draw(bodyRegion, bodyPixelOffsetX, bodyPixelOffsetY);
+
+			// Iteramos todas las layers del chunk y las renderizamos
+			for(int layer = 0; layer < ChunkComponent.CHUNK_LAYERS; layer++) {
+				for(int y = 1; y <= ChunkComponent.CHUNK_TILE_SIZE; y++) {
+					for(int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
+
+						// Obtenemos la region para esta layer
+						TextureRegion tileRegion = chunk.tiles[x][y].getRegion(layer);
+
+						// Si tiene region
+						if(tileRegion != null) {
+							this.mBatch.draw(tileRegion, (t.pos.x * 32.0f) + (x * 32.0f), (t.pos.y * 32.0f) + (y * 32.0f));
+						}
+					}
+				}
 			}
-			
-			// Si tiene head
-			if(headRegion != null) {
-				headPixelOffsetX = bodyPixelOffsetX + 5.0f;
-				headPixelOffsetY = bodyPixelOffsetY - 9.0f;
-				
-				this.mBatch.draw(headRegion, headPixelOffsetX, headPixelOffsetY);
-			}
-			
-			// Devolvemos el color original de la escena
-			this.mBatch.setColor(previousColor);
 		}
-		
+
 		// Finalizamos el batch
 		this.mBatch.end();
 		this.mRenderQueue.clear();

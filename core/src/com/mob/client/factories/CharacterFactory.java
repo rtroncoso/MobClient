@@ -160,19 +160,8 @@ public class CharacterFactory extends Factory<Character> {
 		// Default components
 		this.withBody(AssetsHandler.getBody(1))
 			.withHead(AssetsHandler.getHead(2))
-			.withMovement(new MovementComponent())
-			.withColor(new ColorComponent())
 			.withHeading(HeadingComponent.HEADING_EAST)
 			.withPosition(1, 1);
-
-		// Agregamos los components necesarios a la entity
-		this.mScope.add(this.mScope.getTransformComponent());
-		this.mScope.add(this.mScope.getPositionComponent());
-		this.mScope.add(this.mScope.getCharactercomponent());
-		this.mScope.add(this.mScope.getHeadingcomponent());
-		this.mScope.add(this.mScope.getColorComponent());
-		this.mScope.add(this.mScope.getMovementComponent());
-		this.mScope.add(this.mScope.getStateComponent());
 		
 		// Devolvemos nuestra instancia para chainear
 		return this;
@@ -185,7 +174,7 @@ public class CharacterFactory extends Factory<Character> {
 	 */
 	@Override
 	public Character get() {
-		return this.mScope;
+		return this.mScope.get();
 	}
 
 	// ===========================================================

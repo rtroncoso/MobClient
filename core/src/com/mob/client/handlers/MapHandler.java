@@ -78,7 +78,7 @@ public class MapHandler implements ConstantsInterface {
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public static boolean loadMap(int pMapNumber) {
+	private static boolean loadMap(int pMapNumber) {
 		
 		MapHandler.mFileHandle = new FileHandle(GAME_MAPS_PATH + "Mapa" + String.valueOf(pMapNumber) + ".map");
 		

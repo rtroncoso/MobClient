@@ -62,9 +62,8 @@ public class TestGame extends Game implements ConstantsInterface {
 		// Cargamos resources
 		SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
 		AssetsHandler.load();
-		MapHandler.loadMap(1);
 		
-		// Inicializamos la cámara
+		// Inicializamos la cï¿½mara
 		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
