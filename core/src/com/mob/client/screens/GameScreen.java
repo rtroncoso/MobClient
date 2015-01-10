@@ -73,15 +73,15 @@ public class GameScreen extends ScreenAdapter {
 		this.mEngine.addSystem(new MovementSystem());
 		this.mEngine.addSystem(new CharacterSystem());
 		this.mEngine.addSystem(new CharacterAnimationSystem());
-		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
 		this.mEngine.addSystem(new ChunkRenderingSystem(this.mGame.getSpriteBatch()));
+		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
 		this.mEngine.addSystem(new GridSystem());
 	}
 
 	private void initScene() {
 
 		// Creamos un mapa y agregamos los chunks al engine
-		for(Chunk chunk : ChunkFactory.create(MapHandler.get(1))) {
+		for(Chunk chunk : ChunkFactory.create(MapHandler.get(34))) {
 			this.mEngine.addEntity(chunk);
 		}
 

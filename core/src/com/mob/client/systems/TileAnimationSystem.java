@@ -20,48 +20,42 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Array;
-import com.mob.client.components.LineComponent;
-import com.mob.client.handlers.CameraHandler;
+import com.mob.client.components.BodyComponent;
+import com.mob.client.components.ChunkComponent;
+import com.mob.client.components.HeadingComponent;
+import com.mob.client.components.StateComponent;
+import com.mob.client.textures.BundledAnimation;
 
 /**
  * @author Rodrigo
  *
  */
-public class GridSystem extends IteratingSystem {
+public class TileAnimationSystem extends IteratingSystem {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	@SuppressWarnings("unchecked")
-	private static final Family family = Family.one(LineComponent.class).get();
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<LineComponent> mLineMapper;
-	
-	private ShapeRenderer mShapeRenderer = new ShapeRenderer();
-	private Array<Entity> mRenderQueue;
+	private ComponentMapper<BodyComponent> mBodyMapper;
+	private ComponentMapper<StateComponent> mStateMapper;
+	private ComponentMapper<HeadingComponent> mHeadingMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GridSystem() {
-		super(family);
-
+	@SuppressWarnings("unchecked")
+	public TileAnimationSystem() {
+		super(Family.all(ChunkComponent.class,
+						StateComponent.class)
+					.get());
+		
 		// Obtenemos nuestros Mappers
-		this.mLineMapper = ComponentMapper.getFor(LineComponent.class);
-		
-		// Necesario para el ShapeRenderer
-		this.mShapeRenderer.setAutoShapeType(true);
-		
-		// Creamos la render queue
-		this.mRenderQueue = new Array<Entity>();
+		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
+		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
+		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
 	}
 
 	// ===========================================================
@@ -72,46 +66,21 @@ public class GridSystem extends IteratingSystem {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	protected void processEntity(Entity entity, float deltaTime) {
+	public void processEntity(Entity entity, float deltaTime) {
 		
-		// Agregamos la entidad a la queue
-		this.mRenderQueue.add(entity);
-
-	}
-	
-	/**
-	 * Este metodo se encarga de renderizar las lineas de nuestro
-	 * GridSystem
-	 * 
-	 * @author rt
-	 * @param deltaTime
-	 */
-	@Override
-	public void update(float deltaTime) {
-		super.update(deltaTime);
+		// Obtenemos los components necesarios
+		BodyComponent body = this.mBodyMapper.get(entity);
+		StateComponent state = this.mStateMapper.get(entity);
+		HeadingComponent heading = this.mHeadingMapper.get(entity);
+		BundledAnimation animation = body.animations.get(heading.current);
 		
-		// Obtenemos una entity de la queue y inicializamos el batch
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		CameraHandler.getCamera().update();
-		this.mShapeRenderer.setProjectionMatrix(CameraHandler.getCamera().combined);
-		this.mShapeRenderer.begin();
-		
-		// Iteramos todos los characters
-		for (Entity entity : this.mRenderQueue) {
-			
-			// Obtenemos los components del character
-			LineComponent line = this.mLineMapper.get(entity);
-			
-			// Dibujamos la linea actual
-			this.mShapeRenderer.setColor(new Color(0, 255, 0, 0.5f));
-			this.mShapeRenderer.line(line.start.x, line.start.y, line.end.x, line.end.y);
+		// Si tiene una animaci�n cambiamos la region
+		if (animation != null) {
+			animation.setAnimationTime(state.time);
 		}
 		
-		// Finalizamos el ShapeRenderer y limpiamos la queue
-		this.mShapeRenderer.end();
-		Gdx.gl.glDisable(GL20.GL_BLEND);
-		this.mRenderQueue.clear();
+		// Actualizamos nuestro DeltaTime interno de la Entity
+		state.time += deltaTime;
 	}
 
 	// ===========================================================
@@ -121,5 +90,4 @@ public class GridSystem extends IteratingSystem {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }

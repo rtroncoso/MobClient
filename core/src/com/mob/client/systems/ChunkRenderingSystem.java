@@ -72,8 +72,8 @@ public class ChunkRenderingSystem extends IteratingSystem implements ConstantsIn
 		this.mComparator = new Comparator<Entity>() {
 			@Override
 			public int compare(Entity entityA, Entity entityB) {
-				return (int)Math.signum(mTransformMapper.get(entityB).pos.z -
-										mTransformMapper.get(entityA).pos.z);
+				return new Float(mTransformMapper.get(entityA).pos.x)
+						.compareTo(mTransformMapper.get(entityB).pos.x);
 			}
 		};
 		
@@ -114,34 +114,51 @@ public class ChunkRenderingSystem extends IteratingSystem implements ConstantsIn
 		CameraHandler.getCamera().update();
 		this.mBatch.setProjectionMatrix(CameraHandler.getCamera().combined);
 		this.mBatch.begin();
-		
-		// Iteramos todos los chunks
-		for (Entity entity : this.mRenderQueue) {
-			
-			// Obtenemos los components del chunk
-			ChunkComponent chunk = this.mChunkComponent.get(entity);
-			TransformComponent t = this.mTransformMapper.get(entity);
 
-			// Iteramos todas las layers del chunk y las renderizamos
-			for(int layer = 0; layer < ChunkComponent.CHUNK_LAYERS; layer++) {
+		// Todas las calls al renderer irian aca
+		this.renderWorld(deltaTime);
+
+		// Finalizamos el batch
+		this.mBatch.end();
+		this.mRenderQueue.clear();
+	}
+
+	/**
+	 * Renderizamos todos los objetos del mundo (asumiendo que
+	 * ya hay un deltaTime establecido y que se inicializo el
+	 * batch.
+	 *
+	 * @param deltaTime
+	 */
+	public void renderWorld(float deltaTime) {
+
+		// Iteramos todas las layers del chunk y las renderizamos
+		for(int layer = 0; layer < ChunkComponent.CHUNK_LAYERS; layer++) {
+
+			// Iteramos todos los chunks
+			for (Entity entity : this.mRenderQueue) {
+
+				// Obtenemos los components del chunk
+				ChunkComponent chunk = this.mChunkComponent.get(entity);
+				TransformComponent t = this.mTransformMapper.get(entity);
+
 				for(int y = 1; y <= ChunkComponent.CHUNK_TILE_SIZE; y++) {
 					for(int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
 
-						// Obtenemos la region para esta layer
+						// Obtenemos los values para esta layer
 						TextureRegion tileRegion = chunk.tiles[x][y].getRegion(layer);
+						float tileOffsetX = (t.pos.x * TileComponent.TILE_SIZE) + (x * TileComponent.TILE_SIZE) - TileComponent.TILE_SIZE;
+						float tileOffsetY = (t.pos.y * TileComponent.TILE_SIZE) + (y * TileComponent.TILE_SIZE) - TileComponent.TILE_SIZE;
 
 						// Si tiene region
 						if(tileRegion != null) {
-							this.mBatch.draw(tileRegion, (t.pos.x * 32.0f) + (x * 32.0f), (t.pos.y * 32.0f) + (y * 32.0f));
+							this.mBatch.draw(tileRegion, tileOffsetX, tileOffsetY);
 						}
 					}
 				}
 			}
 		}
 
-		// Finalizamos el batch
-		this.mBatch.end();
-		this.mRenderQueue.clear();
 	}
 
 	// ===========================================================

@@ -155,8 +155,8 @@ public class CharacterRenderingSystem extends IteratingSystem implements Constan
 			
 			// Si tiene un body
 			if(bodyRegion != null) {
-				bodyPixelOffsetX = t.pos.x;// - bodyRegion.getRegionWidth() * 0.5f;
-				bodyPixelOffsetY = t.pos.y - (bodyRegion.getRegionHeight() - 32.0f);
+				bodyPixelOffsetX = t.pos.x - 32.0f;// - bodyRegion.getRegionWidth() * 0.5f;
+				bodyPixelOffsetY = t.pos.y - (bodyRegion.getRegionHeight() - 32.0f) - 32.0f;
 				
 				this.mBatch.draw(bodyRegion, bodyPixelOffsetX, bodyPixelOffsetY);
 			}
