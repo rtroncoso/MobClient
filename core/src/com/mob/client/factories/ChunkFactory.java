@@ -67,6 +67,7 @@ public class ChunkFactory {
                         currentChunk.setTile(x, y, map.getTile(tileX, tileY));
                         currentChunk.add(currentChunk.getChunkCompononent());
                         currentChunk.add(currentChunk.getTransformComponent());
+                        currentChunk.add(currentChunk.getStateComponent());
                     }
                 }
 

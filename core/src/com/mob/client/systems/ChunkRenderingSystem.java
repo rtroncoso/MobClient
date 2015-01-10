@@ -146,12 +146,19 @@ public class ChunkRenderingSystem extends IteratingSystem implements ConstantsIn
 					for(int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
 
 						// Obtenemos los values para esta layer
-						TextureRegion tileRegion = chunk.tiles[x][y].getRegion(layer);
-						float tileOffsetX = (t.pos.x * TileComponent.TILE_SIZE) + (x * TileComponent.TILE_SIZE) - TileComponent.TILE_SIZE;
-						float tileOffsetY = (t.pos.y * TileComponent.TILE_SIZE) + (y * TileComponent.TILE_SIZE) - TileComponent.TILE_SIZE;
+						TextureRegion tileRegion = chunk.getTile(x, y).getRegion(layer);
 
 						// Si tiene region
 						if(tileRegion != null) {
+							// Acomodamos el tile
+							final float chunkPosX = (t.pos.x * TileComponent.TILE_SIZE);
+							final float chunkPosY = (t.pos.y * TileComponent.TILE_SIZE);
+							final float tileX = (x * TileComponent.TILE_SIZE);
+							final float tileY = (y * TileComponent.TILE_SIZE);
+							final float tileOffsetX = chunkPosX + tileX - (tileRegion.getRegionWidth() * 0.5f) - (TileComponent.TILE_SIZE * 0.5f);
+							final float tileOffsetY = chunkPosY + tileY - tileRegion.getRegionHeight();
+
+							// Lo dibujamos
 							this.mBatch.draw(tileRegion, tileOffsetX, tileOffsetY);
 						}
 					}

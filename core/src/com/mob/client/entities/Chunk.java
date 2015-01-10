@@ -19,6 +19,7 @@ package com.mob.client.entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector3;
 import com.mob.client.components.ChunkComponent;
+import com.mob.client.components.StateComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.data.MapBlockData;
 
@@ -34,6 +35,7 @@ public class Chunk extends Entity {
     // ===========================================================
     private ChunkComponent mChunkCompononent = new ChunkComponent();
     private TransformComponent mTransformComponent = new TransformComponent();
+    private StateComponent mStateComponent = new StateComponent();
 
 
     // ===========================================================
@@ -109,6 +111,20 @@ public class Chunk extends Entity {
      */
     public void setTransformComponent(TransformComponent mTransformComponent) {
         this.mTransformComponent = mTransformComponent;
+    }
+
+    /**
+     * @return
+     */
+    public StateComponent getStateComponent() {
+        return mStateComponent;
+    }
+
+    /**
+     * @param mStateComponent
+     */
+    public void setStateComponent(StateComponent mStateComponent) {
+        this.mStateComponent = mStateComponent;
     }
 
 

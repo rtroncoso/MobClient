@@ -20,7 +20,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.mob.client.components.BodyComponent;
+import com.mob.client.components.ChunkComponent;
 import com.mob.client.components.ChunkComponent;
 import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.StateComponent;
@@ -39,23 +39,20 @@ public class TileAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<BodyComponent> mBodyMapper;
+	private ComponentMapper<ChunkComponent> mChunkComponent;
 	private ComponentMapper<StateComponent> mStateMapper;
-	private ComponentMapper<HeadingComponent> mHeadingMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	@SuppressWarnings("unchecked")
 	public TileAnimationSystem() {
 		super(Family.all(ChunkComponent.class,
 						StateComponent.class)
 					.get());
 		
 		// Obtenemos nuestros Mappers
-		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
+		this.mChunkComponent = ComponentMapper.getFor(ChunkComponent.class);
 		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
-		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
 	}
 
 	// ===========================================================
@@ -69,14 +66,23 @@ public class TileAnimationSystem extends IteratingSystem {
 	public void processEntity(Entity entity, float deltaTime) {
 		
 		// Obtenemos los components necesarios
-		BodyComponent body = this.mBodyMapper.get(entity);
+		ChunkComponent chunk = this.mChunkComponent.get(entity);
 		StateComponent state = this.mStateMapper.get(entity);
-		HeadingComponent heading = this.mHeadingMapper.get(entity);
-		BundledAnimation animation = body.animations.get(heading.current);
-		
-		// Si tiene una animaci�n cambiamos la region
-		if (animation != null) {
-			animation.setAnimationTime(state.time);
+
+		// Iteramos todos los tiles del chunk
+		for(int y = 1; y <= ChunkComponent.CHUNK_TILE_SIZE; y++) {
+			for (int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
+				for(int layer = 0; layer < ChunkComponent.CHUNK_LAYERS; layer++) {
+
+					// Obtenemos la animacion
+					BundledAnimation animation = chunk.getTile(x, y).getAnimation(layer);
+
+					// Si tiene una animacion cambiamos su timer
+					if (animation != null) {
+						animation.setAnimationTime(state.time);
+					}
+				}
+			}
 		}
 		
 		// Actualizamos nuestro DeltaTime interno de la Entity

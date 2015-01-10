@@ -44,6 +44,16 @@ public class ChunkComponent extends Component {
     // ===========================================================
     // Methods
     // ===========================================================
+    /**
+     * Wrapper para obtener un tile especifico de nuestra lista de tiles
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public MapBlockData getTile(int x, int y) {
+        return this.tiles[x][y];
+    }
 
 
     // ===========================================================
