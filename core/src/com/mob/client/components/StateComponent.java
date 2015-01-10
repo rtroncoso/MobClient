@@ -32,7 +32,7 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int state = 0;
+	private int state = STATE_NORMAL;
 	public float time = 0.0f;
 
 	// ===========================================================

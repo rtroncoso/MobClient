@@ -32,7 +32,7 @@ public class ColorComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Color tint;
+	public Color tint = new Color(Color.WHITE);
 
 	// ===========================================================
 	// Constructors

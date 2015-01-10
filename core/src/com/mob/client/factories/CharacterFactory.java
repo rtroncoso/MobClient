@@ -16,13 +16,10 @@
  *******************************************************************************/
 package com.mob.client.factories;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.mob.client.components.CharacterComponent;
 import com.mob.client.components.ColorComponent;
 import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.MovementComponent;
-import com.mob.client.components.StateComponent;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.HeadData;
 import com.mob.client.entities.Character;
@@ -136,6 +133,21 @@ public class CharacterFactory extends Factory<Character> {
 		return this.withPosition(new Vector2(x, y));
 	}
 
+	/**
+	 * Chaining method que nos permite agregar un heading a nuestro scope
+	 *
+	 * @param position
+	 * @return CharacterFactory
+	 */
+	public CharacterFactory withHeading(int heading) {
+
+		// Setteamos la position de la entity
+		this.mScope.setHeading(heading);
+
+		// Devolvemos nuestra instancia para chaining
+		return this;
+	}
+
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
@@ -145,32 +157,22 @@ public class CharacterFactory extends Factory<Character> {
 		// Creamos la entity a guardar
 		this.mScope = new Character();
 		
-		// Declaramos los components a usar
-		CharacterComponent character = new CharacterComponent();
-		ColorComponent color = new ColorComponent();
-		MovementComponent movement = new MovementComponent();
-		StateComponent state = new StateComponent();
-		HeadingComponent heading = new HeadingComponent();
-		
-		// Initial states de un character
-		color.tint = Color.WHITE;
-		heading.current = HeadingComponent.HEADING_EAST;
-		
 		// Default components
 		this.withBody(AssetsHandler.getBody(1))
 			.withHead(AssetsHandler.getHead(2))
-			.withMovement(movement)
-			.withColor(color)
-			.withPosition(1, 0);
+			.withMovement(new MovementComponent())
+			.withColor(new ColorComponent())
+			.withHeading(HeadingComponent.HEADING_EAST)
+			.withPosition(1, 1);
 
 		// Agregamos los components necesarios a la entity
 		this.mScope.add(this.mScope.getTransformComponent());
 		this.mScope.add(this.mScope.getPositionComponent());
-		this.mScope.add(character);
-		this.mScope.add(heading);
-		this.mScope.add(color);
-		this.mScope.add(movement);
-		this.mScope.add(state);
+		this.mScope.add(this.mScope.getCharactercomponent());
+		this.mScope.add(this.mScope.getHeadingcomponent());
+		this.mScope.add(this.mScope.getColorComponent());
+		this.mScope.add(this.mScope.getMovementComponent());
+		this.mScope.add(this.mScope.getStateComponent());
 		
 		// Devolvemos nuestra instancia para chainear
 		return this;

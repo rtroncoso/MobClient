@@ -16,16 +16,12 @@
  *******************************************************************************/
 package com.mob.client.entities;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.mob.client.components.BodyComponent;
-import com.mob.client.components.ColorComponent;
-import com.mob.client.components.HeadComponent;
-import com.mob.client.components.MovementComponent;
-import com.mob.client.components.WorldPositionComponent;
-import com.mob.client.components.TransformComponent;
+import com.mob.client.components.*;
 import com.mob.client.data.BodyData;
 import com.mob.client.data.GrhData;
 import com.mob.client.data.HeadData;
@@ -55,6 +51,9 @@ public class Character extends Entity implements DisposableInterface {
 	private ColorComponent mColorComponent = new ColorComponent();
 	private BodyComponent mBodyComponent = new BodyComponent();
 	private HeadComponent mHeadComponent = new HeadComponent();
+	private StateComponent mStateComponent = new StateComponent();
+	private HeadingComponent mHeadingComponent = new HeadingComponent();
+	private CharacterComponent mCharacterComponent = new CharacterComponent();
 
 	// ===========================================================
 	// Constructors
@@ -191,6 +190,20 @@ public class Character extends Entity implements DisposableInterface {
 	public void setColor(Color tint) {
 		this.getColorComponent().tint = tint;
 	}
+
+	/**
+	 * @return the mBodyComponent
+	 */
+	public void setHeading(int heading) {
+		this.mHeadingComponent.current = heading;
+	}
+
+	/**
+	 * @return the mBodyComponent
+	 */
+	public int getHeading() {
+		return this.mHeadingComponent.current;
+	}
 	
 	/**
 	 * @return the mBodyComponent
@@ -274,6 +287,47 @@ public class Character extends Entity implements DisposableInterface {
 	 */
 	public void setPositionComponent(WorldPositionComponent mWorldPositionComponent) {
 		this.mWorldPositionComponent = mWorldPositionComponent;
+	}
+
+	/**
+	 * @return StateComponent
+	 */
+	public StateComponent getStateComponent() {
+		return this.mStateComponent;
+	}
+
+	/**
+	 * @param pStateComponent
+	 */
+	public void setStateComponent(StateComponent pStateComponent) {
+		this.mStateComponent = pStateComponent;
+	}
+
+	/**
+	 * @return
+	 */
+	public HeadingComponent getHeadingcomponent() {
+		return this.mHeadingComponent;
+	}
+
+	/**
+	 * @param mHeadingComponent
+	 */
+	public void setHeadingComponent(HeadingComponent mHeadingComponent) {
+		this.mHeadingComponent = mHeadingComponent;
+	}
+	/**
+	 * @return
+	 */
+	public CharacterComponent getCharactercomponent() {
+		return this.mCharacterComponent;
+	}
+
+	/**
+	 * @param mCharacterComponent
+	 */
+	public void setCharacterComponent(CharacterComponent mCharacterComponent) {
+		this.mCharacterComponent = mCharacterComponent;
 	}
 
 	// ===========================================================
