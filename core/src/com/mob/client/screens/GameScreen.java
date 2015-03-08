@@ -87,7 +87,9 @@ public class GameScreen extends ScreenAdapter {
 		}
 
 		// Creamos un dummy character y lo agregamos a nuestro engine y handler
-		this.mDummyCharacter = this.mCharacterFactory.create().get();
+		this.mDummyCharacter = this.mCharacterFactory.create()
+				.withPosition(5, 5)
+				.get();
 		this.mEngine.addEntity(this.mDummyCharacter);
 		CharacterHandler.add(this.mDummyCharacter);
 
@@ -122,7 +124,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	/**
-	 * Loop llamado s�lo cuando el juego est� corriendo
+	 * Loop llamado sólo cuando el juego esté corriendo
 	 * 
 	 * @param deltaTime
 	 */
@@ -131,7 +133,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	/**
-	 * Loop llamado solo cuando el juego est� en pausa
+	 * Loop llamado solo cuando el juego esté en pausa
 	 */
 	private void updatePaused () {
 

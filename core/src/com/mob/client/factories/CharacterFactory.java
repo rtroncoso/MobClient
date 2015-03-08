@@ -124,10 +124,11 @@ public class CharacterFactory extends Factory<Character> {
 	/**
 	 * Chaining method que nos permite agregar un position component a nuestro scope
 	 *
-	 * @param position
+	 * @param x
+	 * @param y
 	 * @return CharacterFactory
 	 */
-	public CharacterFactory withPosition(float x, float y) {
+	public CharacterFactory withPosition(int x, int y) {
 
 		// Setteamos la position de la entity
 		return this.withPosition(new Vector2(x, y));
@@ -136,7 +137,7 @@ public class CharacterFactory extends Factory<Character> {
 	/**
 	 * Chaining method que nos permite agregar un heading a nuestro scope
 	 *
-	 * @param position
+	 * @param heading
 	 * @return CharacterFactory
 	 */
 	public CharacterFactory withHeading(int heading) {
