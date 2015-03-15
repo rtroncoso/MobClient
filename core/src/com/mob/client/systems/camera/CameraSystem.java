@@ -14,19 +14,21 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.basic;
+package com.mob.client.systems.camera;
 
-import com.artemis.Component;
-
-import java.io.Serializable;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.VoidEntitySystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 /**
- * Pos
+ * CameraSystem Class
  *
  * @author rt
- * @package com.mob.client.components.basic
+ * @package com.mob.client.systems.mCamera
  */
-public class PosComponent extends Component implements Serializable {
+@Wire
+public class CameraSystem extends VoidEntitySystem {
 
     // ===========================================================
     // Constants
@@ -36,18 +38,29 @@ public class PosComponent extends Component implements Serializable {
     // ===========================================================
     // Fields
     // ===========================================================
-    public float x;
-    public float y;
+    public final OrthographicCamera camera;
+    public final OrthographicCamera guiCamera;
+
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    public PosComponent(float pX, float pY) {
-        this.x = pX;
-        this.y = pY;
+    /**
+     * @param zoom How much
+     */
+    public CameraSystem( float zoom ) {
+
+        float zoomFactorInverter = 1f/zoom;
+
+        camera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        camera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        camera.update();
+
+        guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        guiCamera.update();
     }
 
-    public PosComponent() {}
 
     // ===========================================================
     // Methods
@@ -57,6 +70,10 @@ public class PosComponent extends Component implements Serializable {
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
+    @Override
+    protected void processSystem() {
+
+    }
 
 
     // ===========================================================

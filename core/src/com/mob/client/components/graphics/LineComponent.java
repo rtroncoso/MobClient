@@ -22,8 +22,9 @@ import com.badlogic.gdx.math.Vector2;
 import java.io.Serializable;
 
 /**
- * @author Rodrigo
- *
+ * LineComponent Class
+ * @author rt
+ * @package com.mob.client.components.graphics
  */
 public class LineComponent extends Component implements Serializable {
 
@@ -40,6 +41,10 @@ public class LineComponent extends Component implements Serializable {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+    public LineComponent(Vector2 start, Vector2 end) {
+        this.start = start;
+        this.end = end;
+    }
 
 	// ===========================================================
 	// Methods

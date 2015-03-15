@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.handlers.CameraHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
 import com.mob.client.screens.GameScreen;
@@ -61,13 +60,6 @@ public class TestGame extends Game implements Constants {
 		// Cargamos resources
 		SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
 		AssetsHandler.load();
-		
-		// Inicializamos la c�mara
-		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());  
-		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        camera.setToOrtho(true);
-		camera.zoom = 1.0f;
-        CameraHandler.setCamera(camera);
 		
 		// Inicializamos SpriteBatch
 		this.mSpriteBatch = new SpriteBatch();

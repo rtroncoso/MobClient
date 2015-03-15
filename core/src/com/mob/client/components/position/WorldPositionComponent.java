@@ -14,23 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems;
+package com.mob.client.components.position;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.Vector2;
-import com.mob.client.components.character.BodyComponent;
-import com.mob.client.components.character.CharacterComponent;
-import com.mob.client.components.character.HeadComponent;
-import com.mob.client.components.MovementComponent;
+import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector3;
+import com.mob.client.data.WorldPosition;
 
 /**
- * @author Rodrigo
+ * WorldPositionComponent Class
  *
+ * @author Rodrigo
+ * @package com.mob.client.components.position
  */
-public class CharacterSystem extends IteratingSystem {
+public class WorldPositionComponent extends Component {
 
 	// ===========================================================
 	// Constants
@@ -39,22 +35,18 @@ public class CharacterSystem extends IteratingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<MovementComponent> mMovementMapper;
-	private Vector2 acceleration = new Vector2();
+    public int map;
+    public int x;
+    public int y;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	@SuppressWarnings("unchecked")
-	public CharacterSystem() {
-		super(Family.all(CharacterComponent.class,
-						BodyComponent.class,
-						HeadComponent.class,
-						MovementComponent.class)
-					.get());
-		
-		this.mMovementMapper = ComponentMapper.getFor(MovementComponent.class);
-	}
+    public WorldPositionComponent(int x, int y, int map) {
+        this.x = x;
+        this.y = y;
+        this.map = map;
+    }
 
 	// ===========================================================
 	// Methods
@@ -63,14 +55,11 @@ public class CharacterSystem extends IteratingSystem {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	@Override
-	protected void processEntity(Entity entity, float deltaTime) {
-
-	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+
 
 	// ===========================================================
 	// Inner and Anonymous Classes

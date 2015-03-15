@@ -40,7 +40,7 @@ public class Position {
 	// Methods
 	// ===========================================================
 	/**
-	 * Dado un Vector3 position calculamos el tile en el que est�
+	 * Dado un Vector3 position calculamos el tile en el que está
 	 * las coordenadas dadas
 	 * 
 	 * @param position

@@ -20,7 +20,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.mob.client.components.ChunkComponent;
+import com.mob.client.components.map.MapComponent;
 import com.mob.client.components.basic.StateComponent;
 import com.mob.client.textures.BundledAnimation;
 
@@ -37,19 +37,19 @@ public class TileAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<ChunkComponent> mChunkComponent;
+	private ComponentMapper<MapComponent> mChunkComponent;
 	private ComponentMapper<StateComponent> mStateMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 	public TileAnimationSystem() {
-		super(Family.all(ChunkComponent.class,
+		super(Family.all(MapComponent.class,
 						StateComponent.class)
 					.get());
 		
 		// Obtenemos nuestros Mappers
-		this.mChunkComponent = ComponentMapper.getFor(ChunkComponent.class);
+		this.mChunkComponent = ComponentMapper.getFor(MapComponent.class);
 		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
 	}
 
@@ -64,13 +64,13 @@ public class TileAnimationSystem extends IteratingSystem {
 	public void processEntity(Entity entity, float deltaTime) {
 		
 		// Obtenemos los components necesarios
-		ChunkComponent chunk = this.mChunkComponent.get(entity);
+		MapComponent chunk = this.mChunkComponent.get(entity);
 		StateComponent state = this.mStateMapper.get(entity);
 
 		// Iteramos todos los tiles del chunk
-		for(int y = 1; y <= ChunkComponent.CHUNK_TILE_SIZE; y++) {
-			for (int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
-				for(int layer = 0; layer < ChunkComponent.CHUNK_LAYERS; layer++) {
+		for(int y = 1; y <= MapComponent.CHUNK_TILE_SIZE; y++) {
+			for (int x = 1; x <= MapComponent.CHUNK_TILE_SIZE; x++) {
+				for(int layer = 0; layer < MapComponent.CHUNK_LAYERS; layer++) {
 
 					// Obtenemos la animacion
 					BundledAnimation animation = chunk.getTile(x, y).getAnimation(layer);

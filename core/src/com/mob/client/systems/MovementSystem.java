@@ -25,7 +25,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mob.client.components.MovementComponent;
 import com.mob.client.components.TransformComponent;
-import com.mob.client.components.WorldPositionComponent;
+import com.mob.client.components.position.WorldPositionComponent;
 import com.mob.client.util.Position;
 
 /**
@@ -76,7 +76,7 @@ public class MovementSystem extends IteratingSystem {
 		MovementComponent movement = this.mMovementMapper.get(entity);
 		WorldPositionComponent position = this.mPositionMapper.get(entity);
 		
-		// Setteamos la aceleraci�n de nuestro cuerpo
+		// Setteamos la aceleración de nuestro cuerpo
 		tmp.set(movement.accel).scl(deltaTime);
 		movement.velocity.add(tmp);
 		

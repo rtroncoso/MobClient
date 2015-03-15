@@ -14,25 +14,40 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
+package com.mob.client.components.position;
 
-public class TileComponent {
+import com.artemis.Component;
+
+import java.io.Serializable;
+
+/**
+ * PositionComponent Class
+ *
+ * @author rt
+ * @package com.mob.client.components.basic
+ */
+public class PositionComponent extends Component implements Serializable {
 
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final float TILE_SIZE = 32.0f;
 
 
     // ===========================================================
     // Fields
     // ===========================================================
-
+    public float x;
+    public float y;
 
     // ===========================================================
     // Constructors
     // ===========================================================
+    public PositionComponent(float pX, float pY) {
+        this.x = pX;
+        this.y = pY;
+    }
 
+    public PositionComponent() {}
 
     // ===========================================================
     // Methods

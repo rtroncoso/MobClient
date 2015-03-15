@@ -14,12 +14,6 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Stores all characters in the game
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
 package com.mob.client.handlers;
 
 import com.badlogic.ashley.core.Entity;

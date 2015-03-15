@@ -16,18 +16,11 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
+import com.artemis.World;
 import com.badlogic.gdx.ScreenAdapter;
 import com.mob.client.TestGame;
-import com.mob.client.entities.Character;
-import com.mob.client.entities.Chunk;
-import com.mob.client.factories.CharacterFactory;
-import com.mob.client.factories.ChunkFactory;
-import com.mob.client.factories.GridFactory;
 import com.mob.client.handlers.CharacterHandler;
-import com.mob.client.handlers.MapHandler;
-import com.mob.client.systems.*;
+import com.mob.client.systems.render.MapRenderingSystem;
 
 /**
  * @author Rodrigo
@@ -45,10 +38,9 @@ public class GameScreen extends ScreenAdapter {
 	// Fields
 	// ===========================================================
 	private TestGame mGame;
-	private PooledEngine mEngine;
+    private World mWorld;
 	private int mState;
 	
-	private CharacterFactory mCharacterFactory = new CharacterFactory();
 	private Character mDummyCharacter;
 	
 	// ===========================================================
@@ -59,7 +51,7 @@ public class GameScreen extends ScreenAdapter {
 		// Inicializamos todo lo necesario
 		this.mGame = game;
 		this.mState = GAME_RUNNING;
-		this.mEngine = new PooledEngine();
+		this.mWorld = new World();
 		this.initSystems();
 		this.initScene();
 	}
@@ -70,33 +62,17 @@ public class GameScreen extends ScreenAdapter {
 	private void initSystems() {
 
 		// Agregamos los sistemas al engine
-		this.mEngine.addSystem(new MovementSystem());
-		this.mEngine.addSystem(new CharacterSystem());
-		this.mEngine.addSystem(new CharacterAnimationSystem());
-		this.mEngine.addSystem(new TileAnimationSystem());
-		this.mEngine.addSystem(new ChunkRenderingSystem(this.mGame.getSpriteBatch()));
-		this.mEngine.addSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
-//		this.mEngine.addSystem(new GridSystem());
+//		this.mWorld.setSystem(new MovementSystem());
+//		this.mWorld.setSystem(new CharacterAnimationSystem());
+//		this.mWorld.setSystem(new TileAnimationSystem());
+		this.mWorld.setSystem(new MapRenderingSystem(this.mGame.getSpriteBatch()));
+//		this.mWorld.setSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
+//		this.mWorld.setSystem(new GridSystem());
 	}
 
 	private void initScene() {
 
-		// Creamos un mapa y agregamos los chunks al engine
-		for(Chunk chunk : ChunkFactory.create(MapHandler.get(34))) {
-			this.mEngine.addEntity(chunk);
-		}
-
-		// Creamos un dummy character y lo agregamos a nuestro engine y handler
-		this.mDummyCharacter = this.mCharacterFactory.create()
-				.withPosition(5, 5)
-				.get();
-		this.mEngine.addEntity(this.mDummyCharacter);
 		CharacterHandler.add(this.mDummyCharacter);
-
-		// Creamos lineas para el GridSystem
-		for(Entity line : GridFactory.create()) {
-			this.mEngine.addEntity(line);
-		}
 	}
 
 	/**
@@ -107,9 +83,8 @@ public class GameScreen extends ScreenAdapter {
 	public void update (float deltaTime) {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
 		
-		this.mDummyCharacter.setVelocity(50.0f, 0.0f);
-
-		this.mEngine.update(deltaTime);
+		this.mWorld.setDelta(deltaTime);
+        this.mWorld.process();
 		
 		switch (this.mState) {
 			case GAME_RUNNING: {
@@ -141,18 +116,18 @@ public class GameScreen extends ScreenAdapter {
 	
 	private void pauseSystems() {
 		
-		this.mEngine.getSystem(MovementSystem.class).setProcessing(false);
-		this.mEngine.getSystem(CharacterSystem.class).setProcessing(false);
-		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(false);
-		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(false);
+//		this.mWorld.getSystem(MovementSystem.class).setProcessing(false);
+//		this.mWorld.getSystem(MapRenderingSystem.class).setProcessing(false);
+//		this.mWorld.getSystem(CharacterAnimationSystem.class).setProcessing(false);
+//		this.mWorld.getSystem(CharacterRenderingSystem.class).setProcessing(false);
 	}
 	
 	private void resumeSystems() {
 		
-		this.mEngine.getSystem(MovementSystem.class).setProcessing(true);
-		this.mEngine.getSystem(CharacterSystem.class).setProcessing(true);
-		this.mEngine.getSystem(CharacterAnimationSystem.class).setProcessing(true);
-		this.mEngine.getSystem(CharacterRenderingSystem.class).setProcessing(true);
+//		this.mWorld.getSystem(MovementSystem.class).setProcessing(true);
+//		this.mWorld.getSystem(MapRenderingSystem.class).setProcessing(true);
+//		this.mWorld.getSystem(CharacterAnimationSystem.class).setProcessing(true);
+//		this.mWorld.getSystem(CharacterRenderingSystem.class).setProcessing(true);
 	}
 
 	// ===========================================================

@@ -74,7 +74,7 @@ public class CharacterAnimationSystem extends IteratingSystem {
 		HeadingComponent heading = this.mHeadingMapper.get(entity);
 		BundledAnimation animation = body.animations.get(heading.current);
 		
-		// Si tiene una animaci�n cambiamos la region
+		// Si tiene una animación cambiamos la region
 		if (animation != null) {
 			animation.setAnimationTime(state.time);
 		}

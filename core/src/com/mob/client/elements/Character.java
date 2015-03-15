@@ -89,7 +89,7 @@ public class Character extends CharacterSprite implements Constants {
 		// Render sprite
 		this.charRender(dt);
 		
-		// If moving and focused we set camera position to ourselves
+		// If moving and focused we set mCamera position to ourselves
 		if(this.mFocused) this.focusCamera();
 	}
 	
@@ -366,7 +366,7 @@ public class Character extends CharacterSprite implements Constants {
 	}
 	
 	/**
-	 * Focuses camera to player position and snaps it to the map borders
+	 * Focuses mCamera to player position and snaps it to the map borders
 	 */
 	public void focusCamera() {
 		
@@ -377,7 +377,7 @@ public class Character extends CharacterSprite implements Constants {
 		halfWindowWidth = this.mGame.getCamera().viewportWidth * 0.5f;
 		halfWindowHeight = this.mGame.getCamera().viewportHeight * 0.5f;
 		
-		// Do not move camera if in map bounds
+		// Do not move mCamera if in map bounds
 		if(this.mX - halfWindowWidth < TILE_PIXEL_WIDTH || this.mX + halfWindowWidth > MAX_MAP_SIZE_WIDTH * TILE_PIXEL_WIDTH)
 			newPosX = this.mGame.getCamera().position.x;
 		else
@@ -388,7 +388,7 @@ public class Character extends CharacterSprite implements Constants {
 		else
 			newPosY = this.mY;//(this.mY - this.mGame.getCamera().position.y) * 0.1f;
 		
-		//Update camera
+		//Update mCamera
 		this.mGame.getCamera().position.set(newPosX, newPosY, 0);
 		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
 		this.mGame.getCamera().update();
@@ -498,7 +498,7 @@ public class Character extends CharacterSprite implements Constants {
 		// Set our focus
 		this.mFocused = mFocused;
 		
-		// Fix for new focused characters not drawing (wasn't in old camera offset)
+		// Fix for new focused characters not drawing (wasn't in old mCamera offset)
 		if(this.mFocused) this.focusCamera();
 	}
 	

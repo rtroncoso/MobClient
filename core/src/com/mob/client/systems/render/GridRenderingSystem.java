@@ -14,54 +14,48 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems;
+package com.mob.client.systems.render;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Array;
 import com.mob.client.components.graphics.LineComponent;
-import com.mob.client.handlers.CameraHandler;
+import com.mob.client.systems.camera.CameraSystem;
 
 /**
- * @author Rodrigo
- *
+ * GridRenderingSystem Class
+ * @author rt
+ * @package com.mob.client.systems.render
  */
-public class GridSystem extends IteratingSystem {
+@Wire
+public class GridRenderingSystem extends EntityProcessingSystem {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	@SuppressWarnings("unchecked")
-	private static final Family family = Family.one(LineComponent.class).get();
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<LineComponent> mLineMapper;
-	
+	private ComponentMapper<LineComponent> lm;
+    private CameraSystem mCameraSystem;
 	private ShapeRenderer mShapeRenderer = new ShapeRenderer();
-	private Array<Entity> mRenderQueue;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GridSystem() {
-		super(family);
+    @SuppressWarnings("unchecked")
+	public GridRenderingSystem() {
+		super(Aspect.getAspectForAll(LineComponent.class));
 
-		// Obtenemos nuestros Mappers
-		this.mLineMapper = ComponentMapper.getFor(LineComponent.class);
-		
 		// Necesario para el ShapeRenderer
 		this.mShapeRenderer.setAutoShapeType(true);
-		
-		// Creamos la render queue
-		this.mRenderQueue = new Array<Entity>();
 	}
 
 	// ===========================================================
@@ -71,50 +65,47 @@ public class GridSystem extends IteratingSystem {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	@Override
-	protected void processEntity(Entity entity, float deltaTime) {
-		
-		// Agregamos la entidad a la queue
-		this.mRenderQueue.add(entity);
 
-	}
-	
-	/**
-	 * Este metodo se encarga de renderizar las lineas de nuestro
-	 * GridSystem
-	 * 
-	 * @author rt
-	 * @param deltaTime
-	 */
-	@Override
-	public void update(float deltaTime) {
-		super.update(deltaTime);
-		
-		// Obtenemos una entity de la queue y inicializamos el batch
-		Gdx.gl.glEnable(GL20.GL_BLEND);
-		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		CameraHandler.getCamera().update();
-		this.mShapeRenderer.setProjectionMatrix(CameraHandler.getCamera().combined);
-		this.mShapeRenderer.begin();
-		
-		// Iteramos todos los characters
-		for (Entity entity : this.mRenderQueue) {
-			
-			// Obtenemos los components del character
-			LineComponent line = this.mLineMapper.get(entity);
-			
-			// Dibujamos la linea actual
-			this.mShapeRenderer.setColor(new Color(0, 255, 0, 0.5f));
-			this.mShapeRenderer.line(line.start.x, line.start.y, line.end.x, line.end.y);
-		}
-		
-		// Finalizamos el ShapeRenderer y limpiamos la queue
-		this.mShapeRenderer.end();
-		Gdx.gl.glDisable(GL20.GL_BLEND);
-		this.mRenderQueue.clear();
-	}
+    @Override
+    protected void begin() {
+        super.begin();
 
-	// ===========================================================
+        // Inicializamos el batch y lo necesario para renderizar
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        this.mCameraSystem.camera.update();
+        this.mShapeRenderer.setProjectionMatrix(this.mCameraSystem.camera.combined);
+        this.mShapeRenderer.begin();
+
+    }
+
+    /**
+     * Este metodo se encarga de renderizar las
+     * líneas de merca de nuestro GridSystem
+     *
+     * @author rt
+     * @param entity
+     */
+    @Override
+    protected void process(Entity entity) {
+        // Obtenemos el component de cada línea
+        LineComponent line = this.lm.get(entity);
+
+        // Dibujamos la linea actual
+        this.mShapeRenderer.setColor(new Color(0, 255, 0, 0.5f));
+        this.mShapeRenderer.line(line.start.x, line.start.y, line.end.x, line.end.y);
+    }
+
+    @Override
+    protected void end() {
+        super.end();
+
+        // Finalizamos el ShapeRenderer y limpiamos
+        this.mShapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+    }
+
+    // ===========================================================
 	// Getter & Setter
 	// ===========================================================
 

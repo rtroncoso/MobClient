@@ -14,51 +14,58 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
+package com.mob.client.systems.map;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Rectangle;
-import com.mob.client.data.MapBlock;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.VoidEntitySystem;
+import com.mob.client.data.Map;
+import com.mob.client.handlers.MapHandler;
 
-public class ChunkComponent extends Component {
+/**
+ * TiledMapSystem Class
+ *
+ * @author rt
+ * @package com.mob.client.systems.map
+ */
+@Wire
+public class TiledMapSystem extends VoidEntitySystem {
 
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final int CHUNK_TILE_SIZE = 20;
-    public static final int CHUNK_LAYERS = 4;
 
 
     // ===========================================================
     // Fields
     // ===========================================================
-    public MapBlock tiles[][] = new MapBlock[CHUNK_TILE_SIZE + 1][CHUNK_TILE_SIZE + 1];
-    public Rectangle bounds = new Rectangle();
+    public Map map;
+    public int mapNumber;
 
 
     // ===========================================================
     // Constructors
     // ===========================================================
-
+    public TiledMapSystem(int pMapNumber) {
+        this.mapNumber = pMapNumber;
+    }
 
     // ===========================================================
     // Methods
     // ===========================================================
-    /**
-     * Wrapper para obtener un tile especifico de nuestra lista de tiles
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public MapBlock getTile(int x, int y) {
-        return this.tiles[x][y];
-    }
 
 
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
+    @Override
+    protected void initialize() {
+        this.map = MapHandler.get(this.mapNumber);
+    }
+
+    @Override
+    protected void processSystem() {
+
+    }
 
 
     // ===========================================================

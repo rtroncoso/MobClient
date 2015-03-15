@@ -180,7 +180,7 @@ public class TestScreen extends Screen implements Constants {
 		Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 
-		// Update camera projection
+		// Update mCamera projection
 		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
 		this.mGame.getCamera().update();
 		
@@ -192,7 +192,7 @@ public class TestScreen extends Screen implements Constants {
         	
 		this.mGame.getSpriteBatch().end();
 		
-		// Update camera projection
+		// Update mCamera projection
 		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
 		this.mGame.getCamera().update();
 		

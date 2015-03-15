@@ -22,7 +22,7 @@ import java.io.Serializable;
  * CameraComponent Class
  *
  * @author rt
- * @package com.mob.client.components.camera
+ * @package com.mob.client.components.mCamera
  */
 public class CameraComponent implements Serializable {
 
