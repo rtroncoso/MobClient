@@ -18,7 +18,6 @@ package com.mob.client.components.character;
 
 
 import com.artemis.Component;
-import com.mob.client.interfaces.ConstantsInterface;
 
 import java.io.Serializable;
 

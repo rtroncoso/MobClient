@@ -25,9 +25,9 @@ import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.interfaces.LoadableInterface;
+import com.mob.client.interfaces.Loadable;
 
-public class ShieldLoader extends Loader implements LoadableInterface<Shield> {
+public class ShieldLoader extends Loader implements Loadable<Shield> {
 
 	// ===========================================================
 	// Constants

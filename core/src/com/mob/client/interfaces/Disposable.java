@@ -14,48 +14,13 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.input;
+package com.mob.client.interfaces;
 
-import com.badlogic.gdx.InputProcessor;
+/**
+ * @author Rodrigo
+ *
+ */
+public interface Disposable {
 
-public class GeneralInputProcessor implements InputProcessor {
-   @Override
-   public boolean keyDown (int keycode) {
-      return false;
-   }
-
-   @Override
-   public boolean keyUp (int keycode) {
-      return false;
-   }
-
-   @Override
-   public boolean keyTyped (char character) {
-      return false;
-   }
-
-   @Override
-   public boolean touchDown (int x, int y, int pointer, int button) {
-      return false;
-   }
-
-   @Override
-   public boolean touchUp (int x, int y, int pointer, int button) {
-      return false;
-   }
-
-   @Override
-   public boolean touchDragged (int x, int y, int pointer) {
-      return false;
-   }
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-   @Override
-   public boolean scrolled (int amount) {
-      return false;
-   }
+	public void dispose();
 }

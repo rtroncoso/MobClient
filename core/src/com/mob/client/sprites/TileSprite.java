@@ -17,10 +17,10 @@
 package com.mob.client.sprites;
 
 import com.mob.client.Game;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 import com.mob.client.textures.BundledTexture;
 
-public abstract class TileSprite extends GameSprite implements ConstantsInterface {
+public abstract class TileSprite extends GameSprite implements Constants {
 
 	// ===========================================================
 	// Constants

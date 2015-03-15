@@ -22,10 +22,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.Body;
-import com.mob.client.interfaces.LoadableInterface;
+import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class BodyLoader extends Loader implements LoadableInterface<Body> {
+public class BodyLoader extends Loader implements Loadable<Body> {
 
 
 	// ===========================================================
@@ -53,19 +53,19 @@ public class BodyLoader extends Loader implements LoadableInterface<Body> {
 	// ===========================================================
 	@Override
 	public Vector<Body> load(String initFileName) {
-		Vector<Body> cuerpos = new Vector<Body>();
+		Vector<Body> bodys = new Vector<Body>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
-		int numCuerpos = 0;
+		int numBodys;
 		
 		DataInputStream file = new DataInputStream(mFileHandle.read());
 		
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE);
-			numCuerpos = Util.leShort(file.readShort());
-			cuerpos.setSize(numCuerpos + 1);
+			numBodys = Util.leShort(file.readShort());
+			bodys.setSize(numBodys + 1);
 			
-			for(int i = 1; i <= numCuerpos; i++) {
-				int grhArray[] = new int[4], headOffSetX = 0, headOffSetY = 0;;
+			for(int i = 1; i <= numBodys; i++) {
+				int grhArray[] = new int[4], headOffSetX, headOffSetY;
 				
 				grhArray[Heading.NORTH.toInt()] = Util.leShort(file.readShort());
 				grhArray[Heading.EAST.toInt()] = Util.leShort(file.readShort());
@@ -75,10 +75,10 @@ public class BodyLoader extends Loader implements LoadableInterface<Body> {
 				headOffSetX = Util.leShort(file.readShort());
 				headOffSetY = Util.leShort(file.readShort());
 				
-				cuerpos.setElementAt(new Body(grhArray, headOffSetX, headOffSetY), i);
+				bodys.setElementAt(new Body(grhArray, headOffSetX, headOffSetY), i);
 			}
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
-			return cuerpos;
+			return bodys;
 			
 		} catch (IOException e) {
 			e.printStackTrace();

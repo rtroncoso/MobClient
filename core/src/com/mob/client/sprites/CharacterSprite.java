@@ -30,10 +30,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mob.client.Game;
 import com.mob.client.data.*;
 import com.mob.client.data.Fx;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 import com.mob.client.textures.BundledTexture;
 
-public abstract class CharacterSprite extends MovingSprite implements ConstantsInterface {
+public abstract class CharacterSprite extends MovingSprite implements Constants {
 
 	// ===========================================================
 	// Constants

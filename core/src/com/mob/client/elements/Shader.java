@@ -26,9 +26,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
-public class Shader implements ConstantsInterface {
+public class Shader implements Constants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

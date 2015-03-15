@@ -22,9 +22,9 @@
  */
 package com.mob.client.data;
 
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
-public class Position implements ConstantsInterface {
+public class Position implements Constants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

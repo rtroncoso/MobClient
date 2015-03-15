@@ -31,7 +31,7 @@ import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 import com.mob.client.screens.Screen;
 
 import java.lang.reflect.Constructor;
@@ -39,7 +39,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Vector;
   
-public abstract class Game implements ApplicationListener, ConstantsInterface {  
+public abstract class Game implements ApplicationListener, Constants {
 
 	// ===========================================================
 	// Constants

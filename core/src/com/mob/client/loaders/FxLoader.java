@@ -22,10 +22,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.Fx;
-import com.mob.client.interfaces.LoadableInterface;
+import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader implements LoadableInterface<Fx> {
+public class FxLoader extends Loader implements Loadable<Fx> {
 
 
 	// ===========================================================
@@ -55,7 +55,7 @@ public class FxLoader extends Loader implements LoadableInterface<Fx> {
 	public Vector<Fx> load(String initFileName) {
 		Vector<Fx> fxs = new Vector<Fx>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
-		int numFxs = 0;
+		int numFxs;
 		
 		DataInputStream file = new DataInputStream(mFileHandle.read());
 		
@@ -65,7 +65,7 @@ public class FxLoader extends Loader implements LoadableInterface<Fx> {
 			fxs.setSize(numFxs + 1);
 			
 			for(int i = 1; i <= numFxs; i++) {
-				int offsetX = 0, offsetY = 0, fxIndex = 0;
+				int offsetX, offsetY, fxIndex;
 				
 				fxIndex = Util.leShort(file.readShort());
 				offsetX = Util.leShort(file.readShort());

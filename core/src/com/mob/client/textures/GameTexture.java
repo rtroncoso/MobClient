@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
 import com.mob.client.data.Grh;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
 /**
  * Este objeto permite una simple implementaci�n e instanciaci�n de 
@@ -36,7 +36,7 @@ import com.mob.client.interfaces.ConstantsInterface;
  * @author Rodrigo
  *
  */
-public class GameTexture implements ConstantsInterface {
+public class GameTexture implements Constants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -26,9 +26,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.mob.client.Game;
 import com.mob.client.elements.Character;
 import com.mob.client.elements.Tile;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
-public abstract class Engine implements ConstantsInterface {
+public abstract class Engine implements Constants {
 
 	// ===========================================================
 	// Constants

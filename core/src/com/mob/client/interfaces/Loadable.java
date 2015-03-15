@@ -16,11 +16,17 @@
  *******************************************************************************/
 package com.mob.client.interfaces;
 
+import java.util.Vector;
+
 /**
+ * Todas las loader clases deben implementar esta interfaz
+ * 
+ * @todo Reemplazar el template <T> por una clase de Data base
  * @author Rodrigo
  *
  */
-public interface DisposableInterface {
+public interface Loadable<T> {
+	
+	public abstract Vector<T> load(String initFileName);
 
-	public void dispose();
 }

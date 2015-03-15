@@ -22,10 +22,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.Head;
-import com.mob.client.interfaces.LoadableInterface;
+import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class HeadLoader extends Loader implements LoadableInterface<Head> {
+public class HeadLoader extends Loader implements Loadable<Head> {
 
 	// ===========================================================
 	// Constants
@@ -54,7 +54,7 @@ public class HeadLoader extends Loader implements LoadableInterface<Head> {
 	public Vector<Head> load(String initFileName) {
 		Vector<Head> heads = new Vector<Head>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
-		int numHeads = 0;
+		int numHeads;
 		
 		DataInputStream file = new DataInputStream(mFileHandle.read());
 		

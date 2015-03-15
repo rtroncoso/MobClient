@@ -23,10 +23,10 @@ import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.Grh;
-import com.mob.client.interfaces.LoadableInterface;
+import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class GrhLoader extends Loader implements LoadableInterface<Grh> {
+public class GrhLoader extends Loader implements Loadable<Grh> {
 
 	// ===========================================================
 	// Constants
@@ -69,8 +69,8 @@ public class GrhLoader extends Loader implements LoadableInterface<Grh> {
 			file.skipBytes(2); // no es negro si nadie lo ve
 			
 			while(grh > 0) {
-				int fileNum = 0, sX = 0, sY = 0, numFrames = 0, pixelWidth = 0, pixelHeight = 0, frames[] = new int[0];
-				float speed = 0.0f, tileWidth = 0.0f, tileHeight = 0.0f;
+				int fileNum = 0, sX = 0, sY = 0, numFrames, pixelWidth, pixelHeight, frames[] = new int[0];
+				float speed = 0.0f, tileWidth, tileHeight;
 				numFrames = Util.leShort(file.readShort());
 				
 				if(numFrames > 1) {

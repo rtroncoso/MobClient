@@ -23,9 +23,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.CameraHandler;
-import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 import com.mob.client.screens.GameScreen;
 import com.mob.client.screens.Screen;
 
@@ -33,7 +32,7 @@ import com.mob.client.screens.Screen;
  * @author Rodrigo
  *
  */
-public class TestGame extends Game implements ConstantsInterface {
+public class TestGame extends Game implements Constants {
 
 	// ===========================================================
 	// Constants

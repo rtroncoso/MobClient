@@ -33,13 +33,13 @@ import com.mob.client.components.character.HeadComponent;
 import com.mob.client.components.character.HeadingComponent;
 import com.mob.client.components.TransformComponent;
 import com.mob.client.handlers.CameraHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
 /**
  * @author Rodrigo
  *
  */
-public class CharacterRenderingSystem extends IteratingSystem implements ConstantsInterface {
+public class CharacterRenderingSystem extends IteratingSystem implements Constants {
 
 	// ===========================================================
 	// Constants

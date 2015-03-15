@@ -20,22 +20,20 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.mob.client.components.*;
 import com.mob.client.handlers.CameraHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
-import javax.xml.crypto.dsig.Transform;
 import java.util.Comparator;
 
 /**
  * @author Rodrigo
  *
  */
-public class ChunkRenderingSystem extends IteratingSystem implements ConstantsInterface {
+public class ChunkRenderingSystem extends IteratingSystem implements Constants {
 
 	// ===========================================================
 	// Constants

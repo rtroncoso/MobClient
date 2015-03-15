@@ -16,12 +16,10 @@
  *******************************************************************************/
 package com.mob.client.loaders;
 
-import java.util.Vector;
-
 import com.badlogic.gdx.files.FileHandle;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
-public abstract class Loader implements ConstantsInterface {
+public abstract class Loader implements Constants {
 	
 	// ===========================================================
 	// Constants

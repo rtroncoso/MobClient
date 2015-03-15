@@ -22,7 +22,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.mob.client.components.character.BodyComponent;
 import com.mob.client.components.character.HeadingComponent;
-import com.mob.client.components.StateComponent;
+import com.mob.client.components.basic.StateComponent;
 import com.mob.client.textures.BundledAnimation;
 
 /**

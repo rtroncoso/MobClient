@@ -22,13 +22,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.mob.client.Game;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 
 
-public class TestScreen extends Screen implements ConstantsInterface {
+public class TestScreen extends Screen implements Constants {
 	
 	// Constants
 	// ===========================================================

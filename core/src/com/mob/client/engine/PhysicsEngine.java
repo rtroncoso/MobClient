@@ -33,10 +33,10 @@ import com.mob.client.data.MapBlock;
 import com.mob.client.data.Map;
 import com.mob.client.elements.Tile;
 import com.mob.client.handlers.MapHandler;
-import com.mob.client.interfaces.ConstantsInterface;
+import com.mob.client.interfaces.Constants;
 import com.mob.client.textures.BundledTexture;
 
-public class PhysicsEngine extends Engine implements ConstantsInterface {
+public class PhysicsEngine extends Engine implements Constants {
 	// ===========================================================
 	// Constants
 	// ===========================================================

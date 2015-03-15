@@ -19,7 +19,7 @@ package com.mob.client.components.camera;
 import java.io.Serializable;
 
 /**
- * Camera
+ * CameraComponent Class
  *
  * @author rt
  * @package com.mob.client.components.camera
