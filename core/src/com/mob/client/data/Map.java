@@ -14,43 +14,85 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
-
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.graphics.Color;
-
 /**
- * @author Rodrigo
- *
+ * Temporal storage for maps info until I make a Map element (to get maps rendered easier)
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-04-10
  */
-public class ColorComponent extends Component {
+package com.mob.client.data;
+
+import com.mob.client.interfaces.ConstantsInterface;
+
+public class Map implements ConstantsInterface {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
+
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Color tint = new Color(Color.WHITE);
+	protected MapBlock mTile[][];
+	protected boolean mLoaded;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
+	/**
+	 * @param mTile
+	 */
+	public Map() {
+		this.mTile = new MapBlock[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
+		this.mLoaded = false;
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
+
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+	/**
+	 * @return the mTile
+	 */
+	public MapBlock[][] getTileArray() {
+		return mTile;
+	}
+
+	/**
+	 * @param mTile the mTile to set
+	 */
+	public void setTileArray(MapBlock mTile[][]) {
+		this.mTile = mTile;
+	}
+	
+	public MapBlock getTile(int pX, int pY) {
+		return this.mTile[pX][pY];
+	}
+	
+	public void setTile(int pX, int pY, MapBlock pMapBlock) {
+		this.mTile[pX][pY] = pMapBlock;
+	}
+
+	public boolean isLoaded() {
+		return mLoaded;
+	}
+
+	public void setLoaded(boolean pLoaded) {
+		this.mLoaded = pLoaded;
+	}
+
+	// ===========================================================
+	// Methods
+	// ===========================================================
+
 
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

@@ -28,12 +28,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mob.client.Game;
-import com.mob.client.data.BodyData;
-import com.mob.client.data.FxData;
-import com.mob.client.data.HeadData;
-import com.mob.client.data.HelmetData;
-import com.mob.client.data.ShieldData;
-import com.mob.client.data.WeaponData;
+import com.mob.client.data.*;
+import com.mob.client.data.Fx;
 import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.textures.BundledTexture;
 
@@ -255,56 +251,56 @@ public abstract class CharacterSprite extends MovingSprite implements ConstantsI
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public void loadBody(BodyData bodyData) {
-		this.mBodyGrhIndex = bodyData.getGraphic(Heading.NORTH.toInt());
+	public void loadBody(Body body) {
+		this.mBodyGrhIndex = body.getGraphic(Heading.NORTH.toInt());
 		this.mBodySkin = new BundledTexture[4];
-		this.mBodySkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, bodyData.getGraphic(Heading.NORTH.toInt()), true);
-		this.mBodySkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, bodyData.getGraphic(Heading.SOUTH.toInt()), true);
-		this.mBodySkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, bodyData.getGraphic(Heading.WEST.toInt()), true);
-		this.mBodySkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, bodyData.getGraphic(Heading.EAST.toInt()), true);
+		this.mBodySkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.NORTH.toInt()), true);
+		this.mBodySkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.SOUTH.toInt()), true);
+		this.mBodySkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.WEST.toInt()), true);
+		this.mBodySkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.EAST.toInt()), true);
 	}
 	
-	public void loadWeapon(WeaponData weaponData) {
-		this.mWeaponGrhIndex = weaponData.getGraphic(Heading.NORTH.toInt());
+	public void loadWeapon(Weapon weapon) {
+		this.mWeaponGrhIndex = weapon.getGraphic(Heading.NORTH.toInt());
 		this.mWeaponSkin = new BundledTexture[4];
-		this.mWeaponSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, weaponData.getGraphic(Heading.NORTH.toInt()), true);
-		this.mWeaponSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, weaponData.getGraphic(Heading.SOUTH.toInt()), true);
-		this.mWeaponSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, weaponData.getGraphic(Heading.WEST.toInt()), true);
-		this.mWeaponSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, weaponData.getGraphic(Heading.EAST.toInt()), true);
+		this.mWeaponSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.NORTH.toInt()), true);
+		this.mWeaponSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.SOUTH.toInt()), true);
+		this.mWeaponSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.WEST.toInt()), true);
+		this.mWeaponSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.EAST.toInt()), true);
 	}
 	
-	public void loadShield(ShieldData shieldData) {
-		this.mShieldGrhIndex = shieldData.getGraphic(Heading.NORTH.toInt());
+	public void loadShield(Shield shield) {
+		this.mShieldGrhIndex = shield.getGraphic(Heading.NORTH.toInt());
 		this.mShieldSkin = new BundledTexture[4];
-		this.mShieldSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, shieldData.getGraphic(Heading.NORTH.toInt()), true);
-		this.mShieldSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, shieldData.getGraphic(Heading.SOUTH.toInt()), true);
-		this.mShieldSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, shieldData.getGraphic(Heading.WEST.toInt()), true);
-		this.mShieldSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, shieldData.getGraphic(Heading.EAST.toInt()), true);
+		this.mShieldSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.NORTH.toInt()), true);
+		this.mShieldSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.SOUTH.toInt()), true);
+		this.mShieldSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.WEST.toInt()), true);
+		this.mShieldSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.EAST.toInt()), true);
 	}
 	
-	public void loadHead(HeadData headData) {
+	public void loadHead(Head head) {
 		this.mHeadSkin = new BundledTexture[4];
-		this.mHeadGrhIndex = headData.getHead(Heading.NORTH.toInt());
-		this.mHeadSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, headData.getHead(Heading.NORTH.toInt()));
-		this.mHeadSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, headData.getHead(Heading.SOUTH.toInt()));
-		this.mHeadSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, headData.getHead(Heading.WEST.toInt()));
-		this.mHeadSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, headData.getHead(Heading.EAST.toInt()));
+		this.mHeadGrhIndex = head.getHead(Heading.NORTH.toInt());
+		this.mHeadSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.NORTH.toInt()));
+		this.mHeadSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.SOUTH.toInt()));
+		this.mHeadSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.WEST.toInt()));
+		this.mHeadSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.EAST.toInt()));
 	}
 	
-	public void loadHelmet(HelmetData helmetData) {
+	public void loadHelmet(Helmet helmet) {
 		this.mHelmetSkin = new BundledTexture[4];
-		this.mHelmetGrhIndex = helmetData.getHelmet(Heading.NORTH.toInt());
-		this.mHelmetSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, helmetData.getHelmet(Heading.NORTH.toInt()));
-		this.mHelmetSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, helmetData.getHelmet(Heading.SOUTH.toInt()));
-		this.mHelmetSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, helmetData.getHelmet(Heading.WEST.toInt()));
-		this.mHelmetSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, helmetData.getHelmet(Heading.EAST.toInt()));
+		this.mHelmetGrhIndex = helmet.getHelmet(Heading.NORTH.toInt());
+		this.mHelmetSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.NORTH.toInt()));
+		this.mHelmetSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.SOUTH.toInt()));
+		this.mHelmetSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.WEST.toInt()));
+		this.mHelmetSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.EAST.toInt()));
 	}
 	
-	public void loadFx(FxData fxData) {
-		this.mFxSkin = new BundledTexture(this.mGame, fxData.getGraphic(), true);
-		this.mFxGrhIndex = fxData.getGraphic();
-		this.mFxOffsetX = fxData.getOffsetX();
-		this.mFxOffsetY = fxData.getOffsetY();
+	public void loadFx(Fx fx) {
+		this.mFxSkin = new BundledTexture(this.mGame, fx.getGraphic(), true);
+		this.mFxGrhIndex = fx.getGraphic();
+		this.mFxOffsetX = fx.getOffsetX();
+		this.mFxOffsetY = fx.getOffsetY();
 	}
 
 	// ===========================================================

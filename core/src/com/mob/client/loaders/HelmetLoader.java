@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.HelmetData;
+import com.mob.client.data.Helmet;
 import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class HelmetLoader extends Loader implements LoadableInterface<HelmetData> {
+public class HelmetLoader extends Loader implements LoadableInterface<Helmet> {
 
 	// ===========================================================
 	// Constants
@@ -51,8 +51,8 @@ public class HelmetLoader extends Loader implements LoadableInterface<HelmetData
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<HelmetData> load(String initFileName) {
-		Vector<HelmetData> helmets = new Vector<HelmetData>();
+	public Vector<Helmet> load(String initFileName) {
+		Vector<Helmet> helmets = new Vector<Helmet>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numHelmets = 0;
 		
@@ -71,7 +71,7 @@ public class HelmetLoader extends Loader implements LoadableInterface<HelmetData
 				helmetIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
 				helmetIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 				
-				helmets.setElementAt(new HelmetData(helmetIndex), i);
+				helmets.setElementAt(new Helmet(helmetIndex), i);
 			}
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
 			return helmets;

@@ -128,7 +128,6 @@ public class CharacterHandler {
 	  
 	/**
 	 * Disposes all objects from this handler
-	 * 
 	 */
 	public static void disposeAll() {
 		for (Character t : CharacterHandler.mCharacterMap.values()) {

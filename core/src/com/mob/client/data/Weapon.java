@@ -14,42 +14,68 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
-
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.utils.IntMap;
-import com.mob.client.textures.BundledAnimation;
-
 /**
- * @author Rodrigo
- *
+ * Stores weapon data
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-04-10
  */
-public class HeadComponent extends Component {
+package com.mob.client.data;
+
+public class Weapon {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
+
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+	private int[] mGraphic;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
+	public Weapon(int[] pGraphic) {
+		this.setGraphicArray(pGraphic);
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
+
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+	public int getGraphic(int pIndex) {
+		return this.mGraphic[pIndex];
+	}
+	
+	public void setGraphic(int pIndex, int pGraphic) {
+		this.mGraphic[pIndex] = pGraphic;
+	}
+	
+	/**
+	 * @return the mGraphic
+	 */
+	public int[] getGraphicArray() {
+		return mGraphic;
+	}
+
+	/**
+	 * @param mGraphic the mGraphic to set
+	 */
+	public void setGraphicArray(int[] mGraphic) {
+		this.mGraphic = mGraphic;
+	}
+
+
+	// ===========================================================
+	// Methods
+	// ===========================================================
+
 
 	// ===========================================================
 	// Inner and Anonymous Classes

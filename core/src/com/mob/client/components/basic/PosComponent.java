@@ -14,14 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.factories;
+package com.mob.client.components.basic;
 
-import com.badlogic.gdx.utils.Array;
-import com.mob.client.components.ChunkComponent;
-import com.mob.client.data.MapData;
-import com.mob.client.entities.Chunk;
+import com.artemis.Component;
 
-public class ChunkFactory {
+import java.io.Serializable;
+
+/**
+ * Pos
+ *
+ * @author rt
+ * @package com.mob.client.components.basic
+ */
+public class PosComponent extends Component implements Serializable {
 
     // ===========================================================
     // Constants
@@ -31,53 +36,23 @@ public class ChunkFactory {
     // ===========================================================
     // Fields
     // ===========================================================
-
+    public float x;
+    public float y;
 
     // ===========================================================
     // Constructors
     // ===========================================================
+    public PosComponent(float pX, float pY) {
+        this.x = pX;
+        this.y = pY;
+    }
 
+    public PosComponent() {}
 
     // ===========================================================
     // Methods
     // ===========================================================
-    public static Array<Chunk> create(MapData map) {
 
-        // Creamos el objeto que va a contener los chunks
-        Array<Chunk> chunkArray = new Array<Chunk>();
-        int chunksAmmount = 100 / ChunkComponent.CHUNK_TILE_SIZE;
-
-        // Creamos todos los chunks posibles acorde al mapa
-        for(int chunkY = 0; chunkY < chunksAmmount; chunkY++) {
-            for(int chunkX = 0; chunkX < chunksAmmount; chunkX++) {
-
-                // Creamos el objeto a agregar al array
-                Chunk currentChunk = new Chunk();
-                float chunkPositionX = (chunkX * ChunkComponent.CHUNK_TILE_SIZE);
-                float chunkPositionY = (chunkY * ChunkComponent.CHUNK_TILE_SIZE);
-
-                // Setteamos la posicion de este chunk
-                currentChunk.setPosition(chunkPositionX, chunkPositionY);
-
-                // Iteramos todos los tiles del mapa hasta llenar todos los chunks
-                for(int y = 1; y <= ChunkComponent.CHUNK_TILE_SIZE; y++) {
-                    for(int x = 1; x <= ChunkComponent.CHUNK_TILE_SIZE; x++) {
-                        int tileX = (int) chunkPositionX + x;
-                        int tileY = (int) chunkPositionY + y;
-                        currentChunk.setTile(x, y, map.getTile(tileX, tileY));
-                        currentChunk.add(currentChunk.getChunkCompononent());
-                        currentChunk.add(currentChunk.getTransformComponent());
-                        currentChunk.add(currentChunk.getStateComponent());
-                    }
-                }
-
-                chunkArray.add(currentChunk);
-            }
-        }
-
-        // Devolvemos la lista de chunks creada
-        return chunkArray;
-    }
 
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
@@ -92,5 +67,6 @@ public class ChunkFactory {
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
+
 
 }

@@ -19,15 +19,15 @@ package com.mob.client.loaders;
 import java.io.IOException;
 import java.util.Vector;
 
+import com.mob.client.data.Weapon;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.WeaponData;
 import com.mob.client.interfaces.LoadableInterface;
 
-public class WeaponLoader extends Loader implements LoadableInterface<WeaponData> {
+public class WeaponLoader extends Loader implements LoadableInterface<Weapon> {
 
 
 	// ===========================================================
@@ -54,8 +54,8 @@ public class WeaponLoader extends Loader implements LoadableInterface<WeaponData
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<WeaponData> load(String initFileName) {
-		Vector<WeaponData> weapons = new Vector<WeaponData>();
+	public Vector<Weapon> load(String initFileName) {
+		Vector<Weapon> weapons = new Vector<Weapon>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -75,7 +75,7 @@ public class WeaponLoader extends Loader implements LoadableInterface<WeaponData
 					weaponIndex[Heading.EAST.toInt()] = 0; 
 					weaponIndex[Heading.SOUTH.toInt()] = 0; 
 					weaponIndex[Heading.WEST.toInt()] = 0; 
-					weapons.setElementAt(new WeaponData(weaponIndex), i);
+					weapons.setElementAt(new Weapon(weaponIndex), i);
 					continue; 
 				}
 				
@@ -84,7 +84,7 @@ public class WeaponLoader extends Loader implements LoadableInterface<WeaponData
 				weaponIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir3"));
 				weaponIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir4"));
 				
-				weapons.setElementAt(new WeaponData(weaponIndex), i);
+				weapons.setElementAt(new Weapon(weaponIndex), i);
 			}
 
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");

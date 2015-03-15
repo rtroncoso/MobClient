@@ -29,8 +29,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mob.client.Game;
-import com.mob.client.data.MapBlockData;
-import com.mob.client.data.MapData;
+import com.mob.client.data.MapBlock;
+import com.mob.client.data.Map;
 import com.mob.client.elements.Tile;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.interfaces.ConstantsInterface;
@@ -76,7 +76,7 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 		
 		// Vars
 		int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
-		MapData mapData = this.mGame.getMapHandler().get(this.getMapNumber());
+		Map map = this.mGame.getMapHandler().get(this.getMapNumber());
 		
 		// Calculate visible part of the map
 		int cameraPosX = (int) (this.mGame.getCamera().position.x / TILE_PIXEL_WIDTH);
@@ -117,7 +117,7 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 
 				layer.setAnimationTime(layer.getAnimationTime() + dt);
 
-				if(mapData.getTile(x, y).getGraphic()[0] != 0) {
+				if(map.getTile(x, y).getGraphic()[0] != 0) {
 					this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 				}
 			}
@@ -132,7 +132,7 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 				Tile tile = this.getTile(x, y);
 				BundledTexture layer = tile.getGraphic(1);
 				
-				if(mapData.getTile(x, y).getGraphic()[1] != 0) {
+				if(map.getTile(x, y).getGraphic()[1] != 0) {
 					layer.setAnimationTime(layer.getAnimationTime() + dt);
 					this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 				}
@@ -149,7 +149,7 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 				BundledTexture layer = tile.getGraphic(2);
 
 				// Layer 3
-				if(mapData.getTile(x, y).getGraphic()[2] != 0) {
+				if(map.getTile(x, y).getGraphic()[2] != 0) {
 					
 					layer.setAnimationTime(layer.getAnimationTime() + dt);
 					
@@ -198,7 +198,7 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 				Tile tile = this.getTile(x, y);
 				BundledTexture layer = tile.getGraphic(3);
 
-				if(mapData.getTile(x, y).getGraphic()[3] != 0) {
+				if(map.getTile(x, y).getGraphic()[3] != 0) {
 					layer.setAnimationTime(layer.getAnimationTime() + dt);
 					
 					// Don't draw the shader above roofs
@@ -238,18 +238,18 @@ public class PhysicsEngine extends Engine implements ConstantsInterface {
 	@Override
 	public void load() {
 		
-		// Get mapData
-		MapData mapData = MapHandler.get(this.mMapNumber);
+		// Get map
+		Map map = MapHandler.get(this.mMapNumber);
 		
 		// Clear box2d world
 		this.reset();
 		
-		// Move MapData tiles into our array
+		// Move Map tiles into our array
 		this.mTiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
 		for(int y = MIN_MAP_SIZE_HEIGHT; y <= MAX_MAP_SIZE_HEIGHT; y++) {
 			for(int x = MIN_MAP_SIZE_WIDTH; x <= MAX_MAP_SIZE_WIDTH; x++) {
 				
-				MapBlockData tile = mapData.getTile(x, y);
+				MapBlock tile = map.getTile(x, y);
 				this.mTiles[x][y] = new Tile(this.mGame, x, y, tile.getGraphic());
 				this.mTiles[x][y].setBlocked(tile.isBlocked());
 				this.mTiles[x][y].setTrigger(tile.getTrigger());

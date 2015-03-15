@@ -15,14 +15,14 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores weapon data
+ * Stores information about a head
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
 package com.mob.client.data;
 
-public class WeaponData {
+public class Head {
 
 	// ===========================================================
 	// Constants
@@ -32,13 +32,16 @@ public class WeaponData {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int[] mGraphic;
+	private int[] mHeadIndex;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public WeaponData(int[] pGraphic) {
-		this.setGraphicArray(pGraphic);
+	/**
+	 * @param headIndex
+	 */
+	public Head(int[] headIndex) {
+		this.mHeadIndex = headIndex;
 	}
 
 	// ===========================================================
@@ -49,28 +52,23 @@ public class WeaponData {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	public int getGraphic(int pIndex) {
-		return this.mGraphic[pIndex];
-	}
-	
-	public void setGraphic(int pIndex, int pGraphic) {
-		this.mGraphic[pIndex] = pGraphic;
-	}
-	
 	/**
-	 * @return the mGraphic
+	 * @return the headIndex
 	 */
-	public int[] getGraphicArray() {
-		return mGraphic;
+	public int[] getHeadIndex() {
+		return mHeadIndex;
 	}
 
 	/**
-	 * @param mGraphic the mGraphic to set
+	 * @param headIndex the headIndex to set
 	 */
-	public void setGraphicArray(int[] mGraphic) {
-		this.mGraphic = mGraphic;
+	public void setHeadIndex(int[] headIndex) {
+		this.mHeadIndex = headIndex;
 	}
-
+	
+	public int getHead(int pIndex) {
+		return this.mHeadIndex[pIndex];
+	}
 
 	// ===========================================================
 	// Methods

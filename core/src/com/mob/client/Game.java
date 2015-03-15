@@ -95,98 +95,98 @@ public abstract class Game implements ApplicationListener, ConstantsInterface {
 	/**
 	 * @return the mShieldData
 	 */
-	public Vector<ShieldData> getShieldData() {
+	public Vector<Shield> getShieldData() {
 		return AssetsHandler.getShieldData();
 	}
 
 	/**
-	 * @param mShieldData the mShieldData to set
+	 * @param mShield the mShield to set
 	 */
-	public void setShieldData(Vector<ShieldData> mShieldData) {
-		AssetsHandler.setShieldData(mShieldData);
+	public void setShieldData(Vector<Shield> mShield) {
+		AssetsHandler.setShieldData(mShield);
 	}
     /**
 	 * @return the mWeaponData
 	 */
-	public Vector<WeaponData> getWeaponData() {
+	public Vector<Weapon> getWeaponData() {
 		return AssetsHandler.getWeaponData();
 	}
 
 	/**
-	 * @param mWeaponData the mWeaponData to set
+	 * @param mWeapon the mWeapon to set
 	 */
-	public void setWeaponData(Vector<WeaponData> mWeaponData) {
-		AssetsHandler.setWeaponData(mWeaponData);
+	public void setWeaponData(Vector<Weapon> mWeapon) {
+		AssetsHandler.setWeaponData(mWeapon);
 	}
 	
 	/**
 	* @return the _grhData
 	*/
-	public Vector<GrhData> getGrhData() {
+	public Vector<Grh> getGrhData() {
 		return AssetsHandler.getGrhData();
 	}
 	
 	/**
-	* @param _grhData the _grhData to set
+	* @param _grh the _grh to set
 	*/
-	public void setGrhData(Vector<GrhData> _grhData) {
-		AssetsHandler.setGrhData(_grhData);
+	public void setGrhData(Vector<Grh> _grh) {
+		AssetsHandler.setGrhData(_grh);
 	}
 	
 	/**
 	* @return the _bodyData
 	*/
-	public Vector<BodyData> getBodyData() {
+	public Vector<Body> getBodyData() {
 		return AssetsHandler.getBodyData();
 	}
 	
 	/**
-	* @param _bodyData the _bodyData to set
+	* @param _body the _body to set
 	*/
-	public void setBodyData(Vector<BodyData> _bodyData) {
-		AssetsHandler.setBodyData(_bodyData);
+	public void setBodyData(Vector<Body> _body) {
+		AssetsHandler.setBodyData(_body);
 	}
 
 	/**
 	 * @return the _headData
 	 */
-	public Vector<HeadData> getHeadData() {
+	public Vector<Head> getHeadData() {
 		return AssetsHandler.getHeadData();
 	}
 
 	/**
-	 * @param _headData the _headData to set
+	 * @param _head the _head to set
 	 */
-	public void setHeadData(Vector<HeadData> _headData) {
-		AssetsHandler.setHeadData(_headData);
+	public void setHeadData(Vector<Head> _head) {
+		AssetsHandler.setHeadData(_head);
 	}
 
 	/**
 	 * @return the _helmetData
 	 */
-	public Vector<HelmetData> getHelmetData() {
+	public Vector<Helmet> getHelmetData() {
 		return AssetsHandler.getHelmetData();
 	}
 
 	/**
-	 * @param _helmetData the _helmetData to set
+	 * @param _helmet the _helmet to set
 	 */
-	public void setHelmetData(Vector<HelmetData> _helmetData) {
-		AssetsHandler.setHelmetData(_helmetData);
+	public void setHelmetData(Vector<Helmet> _helmet) {
+		AssetsHandler.setHelmetData(_helmet);
 	}
 	
 	/**
 	 * @return the mFxData
 	 */
-	public Vector<FxData> getFxData() {
+	public Vector<Fx> getFxData() {
 		return AssetsHandler.getFxData();
 	}
 
 	/**
-	 * @param mFxData the mFxData to set
+	 * @param mFx the mFx to set
 	 */
-	public void setFxData(Vector<FxData> mFxData) {
-		AssetsHandler.setFxData(mFxData);
+	public void setFxData(Vector<Fx> mFx) {
+		AssetsHandler.setFxData(mFx);
 	}
 
 	/**

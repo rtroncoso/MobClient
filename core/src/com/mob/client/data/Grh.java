@@ -22,7 +22,7 @@
  */
 package com.mob.client.data;
 
-public class GrhData {
+public class Grh {
 
 	// ===========================================================
 	// Constants
@@ -46,8 +46,8 @@ public class GrhData {
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public GrhData(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
-			float tileWidth, float tileHeight, int[] frames, float speed) {
+	public Grh(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
+               float tileWidth, float tileHeight, int[] frames, float speed) {
 		super();
 		this.mX = x;
 		this.mY = y;

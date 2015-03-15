@@ -16,11 +16,10 @@
  *******************************************************************************/
 package com.mob.client.textures;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.mob.client.data.GrhData;
+import com.mob.client.data.Grh;
 import com.mob.client.handlers.AssetsHandler;
 
 /**
@@ -45,14 +44,14 @@ public class BundledAnimation {
 	// Constructors
 	// ===========================================================
 	
-	public BundledAnimation(GrhData grh) {
+	public BundledAnimation(Grh grh) {
 		
 		// Declaramos algunos datos a usar e internals
 		int numFrames = grh.getFrames().length;
 		Array<TextureRegion> tmpRegions = new Array<TextureRegion>();
 		this.setAnimationTime(0.0f);
 		
-		// Si es una animaci�n
+		// Si es una animación
 		if(numFrames > 0) {
 			
 			// Iteramos la lista de frames y los agregamos a nuestro array interno
@@ -131,7 +130,7 @@ public class BundledAnimation {
 	}
 
 	/**
-	 * Obtenemos un �ndice espec�fico de nuestra lista de frames
+	 * Obtenemos un índice específico de nuestra lista de frames
 	 * 
 	 * @param pIndex
 	 * @return TextureRegion
@@ -141,7 +140,7 @@ public class BundledAnimation {
 	}
 	
 	/**
-	 * Obtiene un graphic (con o sin animaci�n) de este objeto
+	 * Obtiene un graphic (con o sin animación) de este objeto
 	 * 
 	 * @param loop 
 	 * @return TextureRegion
@@ -151,7 +150,7 @@ public class BundledAnimation {
 	}
 	
 	/**
-	 * Devuelve si est� animado o no
+	 * Devuelve si está animado o no
 	 * 
 	 * @return boolean
 	 */

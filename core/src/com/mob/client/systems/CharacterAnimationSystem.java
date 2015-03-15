@@ -20,8 +20,8 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.mob.client.components.BodyComponent;
-import com.mob.client.components.HeadingComponent;
+import com.mob.client.components.character.BodyComponent;
+import com.mob.client.components.character.HeadingComponent;
 import com.mob.client.components.StateComponent;
 import com.mob.client.textures.BundledAnimation;
 
@@ -74,7 +74,7 @@ public class CharacterAnimationSystem extends IteratingSystem {
 		HeadingComponent heading = this.mHeadingMapper.get(entity);
 		BundledAnimation animation = body.animations.get(heading.current);
 		
-		// Si tiene una animación cambiamos la region
+		// Si tiene una animaciï¿½n cambiamos la region
 		if (animation != null) {
 			animation.setAnimationTime(state.time);
 		}

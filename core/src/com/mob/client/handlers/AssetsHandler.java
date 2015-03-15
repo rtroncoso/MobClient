@@ -24,13 +24,8 @@ package com.mob.client.handlers;
 
 import java.util.Vector;
 
-import com.mob.client.data.BodyData;
-import com.mob.client.data.FxData;
-import com.mob.client.data.GrhData;
-import com.mob.client.data.HeadData;
-import com.mob.client.data.HelmetData;
-import com.mob.client.data.ShieldData;
-import com.mob.client.data.WeaponData;
+import com.mob.client.data.*;
+import com.mob.client.data.Body;
 import com.mob.client.loaders.BodyLoader;
 import com.mob.client.loaders.FxLoader;
 import com.mob.client.loaders.GrhLoader;
@@ -49,13 +44,13 @@ public class AssetsHandler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private static Vector<GrhData> mGrhData;
-	private static Vector<BodyData> mBodyData;
-	private static Vector<HeadData> mHeadData;
-	private static Vector<HelmetData> mHelmetData;
-	private static Vector<WeaponData> mWeaponData;
-    private static Vector<ShieldData> mShieldData;
-    private static Vector<FxData> mFxData;
+	private static Vector<Grh> mGrh;
+	private static Vector<Body> mBody;
+	private static Vector<Head> mHead;
+	private static Vector<Helmet> mHelmet;
+	private static Vector<Weapon> mWeapon;
+    private static Vector<Shield> mShield;
+    private static Vector<Fx> mFx;
 
 
 	// ===========================================================
@@ -68,22 +63,22 @@ public class AssetsHandler {
 	public static void load() {
 
     	// Init our vectors
-        mGrhData = new Vector<GrhData>();
-        mBodyData = new Vector<BodyData>();
-        mHeadData = new Vector<HeadData>();
-        mHelmetData = new Vector<HelmetData>();
-        mWeaponData = new Vector<WeaponData>();
-        mShieldData = new Vector<ShieldData>();
-        mFxData = new Vector<FxData>();
+        mGrh = new Vector<Grh>();
+        mBody = new Vector<Body>();
+        mHead = new Vector<Head>();
+        mHelmet = new Vector<Helmet>();
+        mWeapon = new Vector<Weapon>();
+        mShield = new Vector<Shield>();
+        mFx = new Vector<Fx>();
         
         // Load all INITs
-        mGrhData = new GrhLoader().load("Graficos.ind");
-        mBodyData = new BodyLoader().load("Personajes.ind");
-        mWeaponData = new WeaponLoader().load("Armas.dat");
-        mShieldData = new ShieldLoader().load("Escudos.dat");
-        mHeadData = new HeadLoader().load("Cabezas.ind");
-        mHelmetData = new HelmetLoader().load("Cascos.ind");
-        mFxData = new FxLoader().load("Fxs.ind");
+        mGrh = new GrhLoader().load("Graficos.ind");
+        mBody = new BodyLoader().load("Personajes.ind");
+        mWeapon = new WeaponLoader().load("Armas.dat");
+        mShield = new ShieldLoader().load("Escudos.dat");
+        mHead = new HeadLoader().load("Cabezas.ind");
+        mHelmet = new HelmetLoader().load("Cascos.ind");
+        mFx = new FxLoader().load("Fxs.ind");
 		
 	}
 	
@@ -100,14 +95,14 @@ public class AssetsHandler {
 	 * @param pIndex
 	 * @return body data of a specified index
 	 */
-	public static BodyData getBody(int pIndex) {
+	public static Body getBody(int pIndex) {
 		return AssetsHandler.getBodyData().get(pIndex);
 	}
 	/**
 	 * @param pIndex
 	 * @return head data of a specified index
 	 */
-	public static HeadData getHead(int pIndex) {
+	public static Head getHead(int pIndex) {
 		return AssetsHandler.getHeadData().get(pIndex);
 	}
 	
@@ -115,106 +110,106 @@ public class AssetsHandler {
 	 * @param pIndex
 	 * @return grh data of a specified index
 	 */
-	public static GrhData getGrh(int pIndex) {
+	public static Grh getGrh(int pIndex) {
 		return AssetsHandler.getGrhData().get(pIndex);
 	}
 	
 	/**
-	 * @return the mGrhData
+	 * @return the mGrh
 	 */
-	public static Vector<GrhData> getGrhData() {
-		return mGrhData;
+	public static Vector<Grh> getGrhData() {
+		return mGrh;
 	}
 
 	/**
-	 * @param mGrhData the mGrhData to set
+	 * @param mGrh the mGrh to set
 	 */
-	public static void setGrhData(Vector<GrhData> mGrhData) {
-		AssetsHandler.mGrhData = mGrhData;
+	public static void setGrhData(Vector<Grh> mGrh) {
+		AssetsHandler.mGrh = mGrh;
 	}
 
 	/**
-	 * @return the mBodyData
+	 * @return the mBody
 	 */
-	public static Vector<BodyData> getBodyData() {
-		return mBodyData;
+	public static Vector<Body> getBodyData() {
+		return mBody;
 	}
 
 	/**
-	 * @param mBodyData the mBodyData to set
+	 * @param mBody the mBody to set
 	 */
-	public static void setBodyData(Vector<BodyData> mBodyData) {
-		AssetsHandler.mBodyData = mBodyData;
+	public static void setBodyData(Vector<Body> mBody) {
+		AssetsHandler.mBody = mBody;
 	}
 
 	/**
-	 * @return the mHeadData
+	 * @return the mHead
 	 */
-	public static Vector<HeadData> getHeadData() {
-		return mHeadData;
+	public static Vector<Head> getHeadData() {
+		return mHead;
 	}
 
 	/**
-	 * @param mHeadData the mHeadData to set
+	 * @param mHead the mHead to set
 	 */
-	public static void setHeadData(Vector<HeadData> mHeadData) {
-		AssetsHandler.mHeadData = mHeadData;
+	public static void setHeadData(Vector<Head> mHead) {
+		AssetsHandler.mHead = mHead;
 	}
 
 	/**
-	 * @return the mHelmetData
+	 * @return the mHelmet
 	 */
-	public static Vector<HelmetData> getHelmetData() {
-		return mHelmetData;
+	public static Vector<Helmet> getHelmetData() {
+		return mHelmet;
 	}
 
 	/**
-	 * @param mHelmetData the mHelmetData to set
+	 * @param mHelmet the mHelmet to set
 	 */
-	public static void setHelmetData(Vector<HelmetData> mHelmetData) {
-		AssetsHandler.mHelmetData = mHelmetData;
+	public static void setHelmetData(Vector<Helmet> mHelmet) {
+		AssetsHandler.mHelmet = mHelmet;
 	}
 
 	/**
-	 * @return the mWeaponData
+	 * @return the mWeapon
 	 */
-	public static Vector<WeaponData> getWeaponData() {
-		return mWeaponData;
+	public static Vector<Weapon> getWeaponData() {
+		return mWeapon;
 	}
 
 	/**
-	 * @param mWeaponData the mWeaponData to set
+	 * @param mWeapon the mWeapon to set
 	 */
-	public static void setWeaponData(Vector<WeaponData> mWeaponData) {
-		AssetsHandler.mWeaponData = mWeaponData;
+	public static void setWeaponData(Vector<Weapon> mWeapon) {
+		AssetsHandler.mWeapon = mWeapon;
 	}
 
 	/**
-	 * @return the mShieldData
+	 * @return the mShield
 	 */
-	public static Vector<ShieldData> getShieldData() {
-		return mShieldData;
+	public static Vector<Shield> getShieldData() {
+		return mShield;
 	}
 
 	/**
-	 * @param mShieldData the mShieldData to set
+	 * @param mShield the mShield to set
 	 */
-	public static void setShieldData(Vector<ShieldData> mShieldData) {
-		AssetsHandler.mShieldData = mShieldData;
+	public static void setShieldData(Vector<Shield> mShield) {
+		AssetsHandler.mShield = mShield;
 	}
 
 	/**
-	 * @return the mFxData
+	 * @return the mFx
 	 */
-	public static Vector<FxData> getFxData() {
-		return mFxData;
+	public static Vector<Fx> getFxData() {
+		return mFx;
 	}
 
 	/**
-	 * @param mFxData the mFxData to set
+	 * @param mFx the mFx to set
 	 */
-	public static void setFxData(Vector<FxData> mFxData) {
-		AssetsHandler.mFxData = mFxData;
+	public static void setFxData(Vector<Fx> mFx) {
+		AssetsHandler.mFx = mFx;
 	}
 
 

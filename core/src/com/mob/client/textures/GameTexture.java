@@ -24,13 +24,13 @@ package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
-import com.mob.client.data.GrhData;
+import com.mob.client.data.Grh;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.ConstantsInterface;
 
 /**
- * Este objeto permite una simple implementación e instanciación de 
- * cualquier {@link GrhData} encapsulando y cargando su respectiva
+ * Este objeto permite una simple implementaciï¿½n e instanciaciï¿½n de 
+ * cualquier {@link com.mob.client.data.Grh} encapsulando y cargando su respectiva
  * {@link TextureRegion}
  * 
  * @author Rodrigo
@@ -51,13 +51,13 @@ public class GameTexture implements ConstantsInterface {
 	// Constructors
 	// ===========================================================
 	public GameTexture(Game _game, int grhIndex) {
-		GrhData grh = _game.getGrhData().get(grhIndex);
+		Grh grh = _game.getGrhData().get(grhIndex);
 		
 		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 	
-	public GameTexture(GrhData grh) {
+	public GameTexture(Grh grh) {
 		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}

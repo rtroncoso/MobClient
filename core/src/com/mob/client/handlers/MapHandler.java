@@ -29,9 +29,9 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.mob.client.Game;
-import com.mob.client.data.MapBlockData;
-import com.mob.client.data.MapData;
-import com.mob.client.data.WorldPositionData;
+import com.mob.client.data.Map;
+import com.mob.client.data.MapBlock;
+import com.mob.client.data.WorldPosition;
 import com.mob.client.interfaces.ConstantsInterface;
 import com.mob.client.util.Util;
 
@@ -46,7 +46,7 @@ public class MapHandler implements ConstantsInterface {
 	// Fields
 	// ===========================================================
 	private static FileHandle mFileHandle;
-	private static HashMap<Integer, MapData> mMapData = new HashMap<Integer, MapData>();
+	private static HashMap<Integer, Map> mMapData = new HashMap<Integer, Map>();
 
 	// ===========================================================
 	// Constructors
@@ -65,12 +65,12 @@ public class MapHandler implements ConstantsInterface {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	public static void set(MapData pMapData, int pMapNumber) {
+	public static void set(Map pMap, int pMapNumber) {
 		if(MapHandler.mMapData.containsKey(pMapNumber)) return;
-		MapHandler.mMapData.put(pMapNumber, pMapData);
+		MapHandler.mMapData.put(pMapNumber, pMap);
 	}
 	
-	public static MapData get(int pMapNumber) {
+	public static Map get(int pMapNumber) {
 		if(!MapHandler.mMapData.containsKey(pMapNumber)) loadMap(pMapNumber);
 		return MapHandler.mMapData.get(pMapNumber);
 	}
@@ -85,13 +85,13 @@ public class MapHandler implements ConstantsInterface {
 		DataInputStream file = new DataInputStream(MapHandler.mFileHandle.read());
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE + (2 * 5)); // Skip complete map header
-			MapData mapData = new MapData();
+			Map map = new Map();
 
 			// Read map info (rows first, then columns)
 			for(int y = MIN_MAP_SIZE_WIDTH; y <= MAX_MAP_SIZE_WIDTH; y++) {
 				for(int x = MIN_MAP_SIZE_HEIGHT; x <= MAX_MAP_SIZE_HEIGHT; x++) {
 					int charIndex = 0, objIndex = 0, npcIndex = 0, trigger = 0, graphic[] = new int[4];
-					WorldPositionData tileExit = new WorldPositionData(0, 0, 0);
+					WorldPosition tileExit = new WorldPosition(0, 0, 0);
 					boolean blocked = false;
 					byte byFlags = 0;
 					
@@ -122,11 +122,11 @@ public class MapHandler implements ConstantsInterface {
 						trigger = Util.leShort(file.readShort());
 					}
 					
-					mapData.setTile(x, y, new MapBlockData(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
+					map.setTile(x, y, new MapBlock(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
 				}
 			}
 			
-			MapHandler.set(mapData, pMapNumber);
+			MapHandler.set(map, pMapNumber);
 			Gdx.app.log(MapHandler.class.getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");
 			return true;
 		} catch(IOException e) {

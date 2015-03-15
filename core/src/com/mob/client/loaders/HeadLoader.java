@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.HeadData;
+import com.mob.client.data.Head;
 import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class HeadLoader extends Loader implements LoadableInterface<HeadData> {
+public class HeadLoader extends Loader implements LoadableInterface<Head> {
 
 	// ===========================================================
 	// Constants
@@ -51,8 +51,8 @@ public class HeadLoader extends Loader implements LoadableInterface<HeadData> {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<HeadData> load(String initFileName) {
-		Vector<HeadData> heads = new Vector<HeadData>();
+	public Vector<Head> load(String initFileName) {
+		Vector<Head> heads = new Vector<Head>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numHeads = 0;
 		
@@ -71,7 +71,7 @@ public class HeadLoader extends Loader implements LoadableInterface<HeadData> {
 				headIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
 				headIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 
-				heads.setElementAt(new HeadData(headIndex), i);
+				heads.setElementAt(new Head(headIndex), i);
 			}
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
 			return heads;

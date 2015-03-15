@@ -14,102 +14,44 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Stores data about a position in the world
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
-package com.mob.client.data;
+package com.mob.client.components.graphics;
 
-public class WorldPositionData {
+import com.artemis.Component;
+import com.badlogic.gdx.math.Vector2;
+
+import java.io.Serializable;
+
+/**
+ * @author Rodrigo
+ *
+ */
+public class LineComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int mMap;
-	private int mPosX;
-	private int mPosY;
+	public Vector2 start = new Vector2();
+	public Vector2 end = new Vector2();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public WorldPositionData() {
-		this(0, 0, 0);
-	}
-	
-	/**
-	 * @param mMap
-	 * @param mPosX
-	 * @param mPosY
-	 */
-	public WorldPositionData(int mMap, int mPosX, int mPosY) {
-		this.mMap = mMap;
-		this.setPosX(mPosX);
-		this.setPosY(mPosY);
-	}
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-
-	/**
-	 * @return the mMap
-	 */
-	public int getMap() {
-		return mMap;
-	}
-
-	/**
-	 * @param mMap the mMap to set
-	 */
-	public void setMap(int mMap) {
-		this.mMap = mMap;
-	}
-
-	/**
-	 * @return the mPosX
-	 */
-	public int getPosX() {
-		return mPosX;
-	}
-
-	/**
-	 * @param mPosX the mPosX to set
-	 */
-	public void setPosX(int mPosX) {
-		this.mPosX = mPosX;
-	}
-
-	/**
-	 * @return the mPosY
-	 */
-	public int getPosY() {
-		return mPosY;
-	}
-
-	/**
-	 * @param mPosY the mPosY to set
-	 */
-	public void setPosY(int mPosY) {
-		this.mPosY = mPosY;
-	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
 
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+
+	// ===========================================================
+	// Getter & Setter
+	// ===========================================================
 
 	// ===========================================================
 	// Inner and Anonymous Classes

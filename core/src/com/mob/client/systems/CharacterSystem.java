@@ -21,12 +21,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
-import com.mob.client.components.BodyComponent;
-import com.mob.client.components.CharacterComponent;
-import com.mob.client.components.HeadComponent;
+import com.mob.client.components.character.BodyComponent;
+import com.mob.client.components.character.CharacterComponent;
+import com.mob.client.components.character.HeadComponent;
 import com.mob.client.components.MovementComponent;
-import com.mob.client.entities.Character;
-import com.mob.client.handlers.CharacterHandler;
 
 /**
  * @author Rodrigo

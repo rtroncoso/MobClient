@@ -14,71 +14,50 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Stores shield data
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
-package com.mob.client.data;
+package com.mob.client.components.character;
 
-public class ShieldData {
+import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
+
+import java.io.Serializable;
+
+/**
+ * BodyComponent Class
+ * @author rt
+ * @package com.mob.clients.components.character
+ */
+public class BodyComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
-
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int[] mGraphic;
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public ShieldData(int[] pGraphic) {
-		this.setGraphicArray(pGraphic);
-	}
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	public int getGraphic(int pIndex) {
-		return this.mGraphic[pIndex];
-	}
-	
-	public void setGraphic(int pIndex, int pGraphic) {
-		this.mGraphic[pIndex] = pGraphic;
-	}
-	
-	/**
-	 * @return the mGraphic
-	 */
-	public int[] getGraphicArray() {
-		return mGraphic;
-	}
-
-	/**
-	 * @param mGraphic the mGraphic to set
-	 */
-	public void setGraphicArray(int[] mGraphic) {
-		this.mGraphic = mGraphic;
-	}
-
+    public BodyComponent(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
 
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+
+	// ===========================================================
+	// Getter & Setter
+	// ===========================================================
 
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }

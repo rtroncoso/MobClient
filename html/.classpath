@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/MobClient-core"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.5.2/e1fe18eac511f1b37b5d2967a80766a4b8b6a2e3/gdx-backend-gwt-1.5.2.jar" sourcepath="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.5.2/24cbb2bb9af6ef34248dd95e32a72821320f372a/gdx-backend-gwt-1.5.2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Rodrigo/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.5.2/24cbb2bb9af6ef34248dd95e32a72821320f372a/gdx-backend-gwt-1.5.2-sources.jar"/>

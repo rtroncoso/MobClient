@@ -23,14 +23,12 @@
 package com.mob.client.data;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.textures.BundledAnimation;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
-public class MapBlockData {
+public class MapBlock {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -46,7 +44,7 @@ public class MapBlockData {
 	private int mObjIndex;
 	private int mNpcIndex;
 	
-	private WorldPositionData mTileExit;
+	private WorldPosition mTileExit;
 	private boolean mBlocked;
 	
 	private int mTrigger;
@@ -63,9 +61,9 @@ public class MapBlockData {
 	 * @param mBlocked
 	 * @param mTrigger
 	 */
-	public MapBlockData(int[] mGraphic, int mCharIndex, int mObjIndex,
-			int mNpcIndex, WorldPositionData tileExit, boolean mBlocked,
-			int mTrigger) {
+	public MapBlock(int[] mGraphic, int mCharIndex, int mObjIndex,
+                    int mNpcIndex, WorldPosition tileExit, boolean mBlocked,
+                    int mTrigger) {
 		super();
 		this.setGraphic(mGraphic);
 		this.setCharIndex(mCharIndex);
@@ -174,7 +172,7 @@ public class MapBlockData {
 	/**
 	 * @return the tileExit
 	 */
-	public WorldPositionData getTileExit() {
+	public WorldPosition getTileExit() {
 		return mTileExit;
 	}
 
@@ -182,7 +180,7 @@ public class MapBlockData {
 	/**
 	 * @param tileExit the tileExit to set
 	 */
-	public void setTileExit(WorldPositionData tileExit) {
+	public void setTileExit(WorldPosition tileExit) {
 		this.mTileExit = tileExit;
 	}
 

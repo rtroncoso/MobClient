@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.GrhData;
+import com.mob.client.data.Grh;
 import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class GrhLoader extends Loader implements LoadableInterface<GrhData> {
+public class GrhLoader extends Loader implements LoadableInterface<Grh> {
 
 	// ===========================================================
 	// Constants
@@ -52,8 +52,8 @@ public class GrhLoader extends Loader implements LoadableInterface<GrhData> {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<GrhData> load(String initFileName) {
-		Vector<GrhData> inits = new Vector<GrhData>();
+	public Vector<Grh> load(String initFileName) {
+		Vector<Grh> inits = new Vector<Grh>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		
 		try {
@@ -63,7 +63,7 @@ public class GrhLoader extends Loader implements LoadableInterface<GrhData> {
 			file.skipBytes(2);
 			
 			inits.setSize(numGrhs + 1);
-			inits.setElementAt(new GrhData(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
+			inits.setElementAt(new Grh(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
 			
 			int grh = Util.leShort(file.readShort());
 			file.skipBytes(2); // no es negro si nadie lo ve
@@ -118,7 +118,7 @@ public class GrhLoader extends Loader implements LoadableInterface<GrhData> {
 					tileWidth = (float) pixelWidth / TILE_PIXEL_WIDTH;
 					tileHeight = (float) pixelHeight / TILE_PIXEL_HEIGHT;
 				}
-				inits.setElementAt(new GrhData(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
+				inits.setElementAt(new Grh(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
 				grh = Util.leShort(file.readShort());
 				file.skipBytes(2);
 			}

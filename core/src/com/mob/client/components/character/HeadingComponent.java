@@ -14,43 +14,55 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
+package com.mob.client.components.character;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
-public class TransformComponent extends Component {
+import com.artemis.Component;
+import com.mob.client.interfaces.ConstantsInterface;
+
+import java.io.Serializable;
+
+/**
+ * HeadingComponent Class
+ * @author Rodrigo
+ * @package com.mob.client.components.character
+ */
+public class HeadingComponent extends Component implements Serializable {
+
 	// ===========================================================
 	// Constants
 	// ===========================================================
-
+	public static final int HEADING_NORTH = 0;
+	public static final int HEADING_EAST = 1;
+	public static final int HEADING_SOUTH = 2;
+	public static final int HEADING_WEST = 3;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Vector3 pos = new Vector3();
-	public Vector2 scale = new Vector2(1.0f, 1.0f);
-	public float rotation = 0.0f;
-	
+	public int current = HEADING_SOUTH;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-
-	
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-	
+    // ===========================================================
+    // Constructors
+    // ===========================================================
+    public HeadingComponent(int heading) {
+        this.current = heading;
+    }
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	
-	
+
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+
 	// ===========================================================
 	// Getter & Setter
+	// ===========================================================
+
+	// ===========================================================
+	// Inner and Anonymous Classes
 	// ===========================================================
 
 }

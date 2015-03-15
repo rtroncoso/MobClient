@@ -16,7 +16,7 @@
  *******************************************************************************/
 package com.mob.client.components;
 
-import com.badlogic.ashley.core.Component;
+import com.artemis.Component;
 
 /**
  * @author Rodrigo
@@ -32,23 +32,19 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int state = STATE_NORMAL;
+	public int current = STATE_NORMAL;
 	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+    public StateComponent(int state) {
+        this.current = state;
+    }
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public int get() {
-		return state;
-	}
-	
-	public void set(int newState) {
-		state = newState;
-	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces

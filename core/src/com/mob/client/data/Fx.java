@@ -14,42 +14,92 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
-
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
-
 /**
- * @author Rodrigo
- *
+ * Store information about an FX
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-04-10
  */
-public class LineComponent extends Component {
+package com.mob.client.data;
 
+public class Fx {
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
+
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Vector2 start = new Vector2();
-	public Vector2 end = new Vector2();
+	private int mGrhIndex;
+	private int mOffsetX;
+	private int mOffsetY;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
+	/**
+	 * @param mGrhIndex
+	 * @param mOffsetX
+	 * @param mOffsetY
+	 */
+	public Fx(int mGrhIndex, int mOffsetX, int mOffsetY) {
+		this.mGrhIndex = mGrhIndex;
+		this.mOffsetX = mOffsetX;
+		this.mOffsetY = mOffsetY;
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
+
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+	/**
+	 * @return the mGrhIndex
+	 */
+	public int getGraphic() {
+		return mGrhIndex;
+	}
+	/**
+	 * @param mGrhIndex the mGrhIndex to set
+	 */
+	public void setGraphic(int mGrhIndex) {
+		this.mGrhIndex = mGrhIndex;
+	}
+	
+	/**
+	 * @return the mOffsetX
+	 */
+	public int getOffsetX() {
+		return mOffsetX;
+	}
+	/**
+	 * @param mOffsetX the mOffsetX to set
+	 */
+	public void setOffsetX(int mOffsetX) {
+		this.mOffsetX = mOffsetX;
+	}
+	/**
+	 * @return the mOffsetY
+	 */
+	public int getOffsetY() {
+		return mOffsetY;
+	}
+	/**
+	 * @param mOffsetY the mOffsetY to set
+	 */
+	public void setOffsetY(int mOffsetY) {
+		this.mOffsetY = mOffsetY;
+	}
+
+
+	// ===========================================================
+	// Methods
+	// ===========================================================
+
 
 	// ===========================================================
 	// Inner and Anonymous Classes

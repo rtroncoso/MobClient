@@ -19,15 +19,15 @@ package com.mob.client.loaders;
 import java.io.IOException;
 import java.util.Vector;
 
+import com.mob.client.data.Shield;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.ShieldData;
 import com.mob.client.interfaces.LoadableInterface;
 
-public class ShieldLoader extends Loader implements LoadableInterface<ShieldData> {
+public class ShieldLoader extends Loader implements LoadableInterface<Shield> {
 
 	// ===========================================================
 	// Constants
@@ -53,8 +53,8 @@ public class ShieldLoader extends Loader implements LoadableInterface<ShieldData
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<ShieldData> load(String initFileName) {
-		Vector<ShieldData> shields = new Vector<ShieldData>();
+	public Vector<Shield> load(String initFileName) {
+		Vector<Shield> shields = new Vector<Shield>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -74,7 +74,7 @@ public class ShieldLoader extends Loader implements LoadableInterface<ShieldData
 					shieldIndex[Heading.EAST.toInt()] = 0; 
 					shieldIndex[Heading.SOUTH.toInt()] = 0; 
 					shieldIndex[Heading.WEST.toInt()] = 0; 
-					shields.setElementAt(new ShieldData(shieldIndex), i);
+					shields.setElementAt(new Shield(shieldIndex), i);
 					continue; 
 				}
 				
@@ -83,7 +83,7 @@ public class ShieldLoader extends Loader implements LoadableInterface<ShieldData
 				shieldIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir3"));
 				shieldIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir4"));
 				
-				shields.setElementAt(new ShieldData(shieldIndex), i);
+				shields.setElementAt(new Shield(shieldIndex), i);
 			}
 
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");

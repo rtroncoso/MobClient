@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.BodyData;
+import com.mob.client.data.Body;
 import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class BodyLoader extends Loader implements LoadableInterface<BodyData> {
+public class BodyLoader extends Loader implements LoadableInterface<Body> {
 
 
 	// ===========================================================
@@ -52,8 +52,8 @@ public class BodyLoader extends Loader implements LoadableInterface<BodyData> {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<BodyData> load(String initFileName) {
-		Vector<BodyData> cuerpos = new Vector<BodyData>();
+	public Vector<Body> load(String initFileName) {
+		Vector<Body> cuerpos = new Vector<Body>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numCuerpos = 0;
 		
@@ -75,7 +75,7 @@ public class BodyLoader extends Loader implements LoadableInterface<BodyData> {
 				headOffSetX = Util.leShort(file.readShort());
 				headOffSetY = Util.leShort(file.readShort());
 				
-				cuerpos.setElementAt(new BodyData(grhArray, headOffSetX, headOffSetY), i);
+				cuerpos.setElementAt(new Body(grhArray, headOffSetX, headOffSetY), i);
 			}
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
 			return cuerpos;

@@ -25,7 +25,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
-import com.mob.client.components.LineComponent;
+import com.mob.client.components.graphics.LineComponent;
 import com.mob.client.handlers.CameraHandler;
 
 /**

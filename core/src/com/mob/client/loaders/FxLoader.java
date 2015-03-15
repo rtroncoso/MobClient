@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.FxData;
+import com.mob.client.data.Fx;
 import com.mob.client.interfaces.LoadableInterface;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader implements LoadableInterface<FxData> {
+public class FxLoader extends Loader implements LoadableInterface<Fx> {
 
 
 	// ===========================================================
@@ -52,8 +52,8 @@ public class FxLoader extends Loader implements LoadableInterface<FxData> {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	@Override
-	public Vector<FxData> load(String initFileName) {
-		Vector<FxData> fxs = new Vector<FxData>();
+	public Vector<Fx> load(String initFileName) {
+		Vector<Fx> fxs = new Vector<Fx>();
 		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numFxs = 0;
 		
@@ -71,7 +71,7 @@ public class FxLoader extends Loader implements LoadableInterface<FxData> {
 				offsetX = Util.leShort(file.readShort());
 				offsetY = Util.leShort(file.readShort());
 				
-				fxs.setElementAt(new FxData(fxIndex, offsetX, offsetY), i);
+				fxs.setElementAt(new Fx(fxIndex, offsetX, offsetY), i);
 			}
 			Gdx.app.log(this.getClass().getSimpleName(), "Carga de " + initFileName + " con exito");
 			return fxs;

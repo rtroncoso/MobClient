@@ -21,8 +21,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.mob.client.components.ChunkComponent;
-import com.mob.client.components.ChunkComponent;
-import com.mob.client.components.HeadingComponent;
 import com.mob.client.components.StateComponent;
 import com.mob.client.textures.BundledAnimation;
 

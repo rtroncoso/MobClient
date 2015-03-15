@@ -14,27 +14,35 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components;
+package com.mob.client.components.physics;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Rectangle;
-import com.mob.client.data.MapBlock;
+import com.artemis.Component;
+import java.io.Serializable;
 
-public class ChunkComponent extends Component {
+/**
+ * Physics Class
+ *
+ * @author rt
+ * @package com.mob.client.components.physics
+ */
+public class PhysicsComponent extends Component implements Serializable {
 
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final int CHUNK_TILE_SIZE = 20;
-    public static final int CHUNK_LAYERS = 4;
 
 
     // ===========================================================
     // Fields
     // ===========================================================
-    public MapBlock tiles[][] = new MapBlock[CHUNK_TILE_SIZE + 1][CHUNK_TILE_SIZE + 1];
-    public Rectangle bounds = new Rectangle();
+    public float vx;
+    public float vy;
+    public float vr;
 
+    public float friction = 4f;
+    public float bounce = 0f;
+
+    public float maxVelocity = Float.MAX_VALUE;
 
     // ===========================================================
     // Constructors
@@ -44,16 +52,6 @@ public class ChunkComponent extends Component {
     // ===========================================================
     // Methods
     // ===========================================================
-    /**
-     * Wrapper para obtener un tile especifico de nuestra lista de tiles
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public MapBlock getTile(int x, int y) {
-        return this.tiles[x][y];
-    }
 
 
     // ===========================================================

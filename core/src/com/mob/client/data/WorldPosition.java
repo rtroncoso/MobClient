@@ -15,14 +15,14 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores information about a helmet
+ * Stores data about a position in the world
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
 package com.mob.client.data;
 
-public class HelmetData {
+public class WorldPosition {
 
 	// ===========================================================
 	// Constants
@@ -32,19 +32,27 @@ public class HelmetData {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private int[] mHelmetIndex;
+	private int mMap;
+	private int mPosX;
+	private int mPosY;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	/**
-	 * @param headIndex
-	 */
-	public HelmetData(int[] helmetIndex) {
-		super();
-		this.mHelmetIndex = helmetIndex;
+	public WorldPosition() {
+		this(0, 0, 0);
 	}
-
+	
+	/**
+	 * @param mMap
+	 * @param mPosX
+	 * @param mPosY
+	 */
+	public WorldPosition(int mMap, int mPosX, int mPosY) {
+		this.mMap = mMap;
+		this.setPosX(mPosX);
+		this.setPosY(mPosY);
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
@@ -54,22 +62,48 @@ public class HelmetData {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+
+
 	/**
-	 * @return the headIndex
+	 * @return the mMap
 	 */
-	public int[] getHelmetIndex() {
-		return mHelmetIndex;
+	public int getMap() {
+		return mMap;
 	}
 
 	/**
-	 * @param headIndex the headIndex to set
+	 * @param mMap the mMap to set
 	 */
-	public void setHelmetIndex(int[] helmetIndex) {
-		this.mHelmetIndex = helmetIndex;
+	public void setMap(int mMap) {
+		this.mMap = mMap;
 	}
-	
-	public int getHelmet(int pIndex) {
-		return this.mHelmetIndex[pIndex];
+
+	/**
+	 * @return the mPosX
+	 */
+	public int getPosX() {
+		return mPosX;
+	}
+
+	/**
+	 * @param mPosX the mPosX to set
+	 */
+	public void setPosX(int mPosX) {
+		this.mPosX = mPosX;
+	}
+
+	/**
+	 * @return the mPosY
+	 */
+	public int getPosY() {
+		return mPosY;
+	}
+
+	/**
+	 * @param mPosY the mPosY to set
+	 */
+	public void setPosY(int mPosY) {
+		this.mPosY = mPosY;
 	}
 
 	// ===========================================================
@@ -80,6 +114,5 @@ public class HelmetData {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 
 }
