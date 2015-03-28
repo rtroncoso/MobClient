@@ -14,21 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems.map;
+package com.mob.client.api.components.camera;
 
-import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
-import com.mob.client.data.Map;
-import com.mob.client.handlers.MapHandler;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+
+import java.io.Serializable;
 
 /**
- * TiledMapSystem Class
+ * CameraComponent Class
  *
  * @author rt
- * @package com.mob.client.systems.map
+ * @package com.mob.client.api.components.mCamera
  */
-@Wire
-public class TiledMapSystem extends VoidEntitySystem {
+public class CameraComponent implements Serializable {
 
     // ===========================================================
     // Constants
@@ -38,16 +37,12 @@ public class TiledMapSystem extends VoidEntitySystem {
     // ===========================================================
     // Fields
     // ===========================================================
-    public Map map;
-    public int mapNumber;
 
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    public TiledMapSystem(int pMapNumber) {
-        this.mapNumber = pMapNumber;
-    }
+
 
     // ===========================================================
     // Methods
@@ -57,15 +52,6 @@ public class TiledMapSystem extends VoidEntitySystem {
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
-    @Override
-    protected void initialize() {
-        this.map = MapHandler.get(this.mapNumber);
-    }
-
-    @Override
-    protected void processSystem() {
-
-    }
 
 
     // ===========================================================

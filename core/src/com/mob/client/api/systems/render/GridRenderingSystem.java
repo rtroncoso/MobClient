@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems.render;
+package com.mob.client.api.systems.render;
 
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
@@ -25,13 +25,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mob.client.components.graphics.LineComponent;
-import com.mob.client.systems.camera.CameraSystem;
+import com.mob.client.api.components.graphics.LineComponent;
+import com.mob.client.api.systems.camera.CameraSystem;
 
 /**
  * GridRenderingSystem Class
  * @author rt
- * @package com.mob.client.systems.render
+ * @package com.mob.client.api.systems.render
  */
 @Wire
 public class GridRenderingSystem extends EntityProcessingSystem {

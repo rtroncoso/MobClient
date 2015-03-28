@@ -26,9 +26,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.data.*;
-import com.mob.client.engine.PhysicsEngine;
 import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.handlers.CharacterHandler;
 import com.mob.client.handlers.MapHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
@@ -55,10 +53,7 @@ public abstract class Game implements ApplicationListener, Constants {
     
 	protected MapHandler mMapHandler;
     protected SurfaceHandler mSurfaceHandler;
-    protected CharacterHandler mCharacterHandler;
     protected AssetsHandler mDataHandler;
-
-	protected PhysicsEngine mEngine;
 
 	protected Screen mCurrentScreen;
     
@@ -72,7 +67,6 @@ public abstract class Game implements ApplicationListener, Constants {
         this.mMapHandler = new MapHandler(this);
 
     	this.mScreens = new HashMap<String, Screen>();  
-        this.mEngine = new PhysicsEngine(this);
     }
 
 	// ===========================================================
@@ -243,34 +237,6 @@ public abstract class Game implements ApplicationListener, Constants {
 	 */
 	public void setSpriteBatch(SpriteBatch mSpriteBatch) {
 		this.mSpriteBatch = mSpriteBatch;
-	}
-	
-	/**
-	 * @return the mCurrentMap
-	 */
-	public PhysicsEngine getEngine() {
-		return mEngine;
-	}
-
-	/**
-	 * @param mCurrentMap the mCurrentMap to set
-	 */
-	public void setEngine(PhysicsEngine mCurrentMap) {
-		this.mEngine = mCurrentMap;
-	}    
-	
-	/**
-	 * @return the mCharacterHandler
-	 */
-	public CharacterHandler getCharacterHandler() {
-		return mCharacterHandler;
-	}
-
-	/**
-	 * @param mCharacterHandler the mCharacterHandler to set
-	 */
-	public void setCharacterHandler(CharacterHandler mCharacterHandler) {
-		this.mCharacterHandler = mCharacterHandler;
 	}
 
 	/**

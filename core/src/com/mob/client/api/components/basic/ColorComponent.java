@@ -14,20 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.character;
+package com.mob.client.api.components.basic;
 
 import com.artemis.Component;
-import com.badlogic.gdx.utils.IntMap;
-import com.mob.client.textures.BundledAnimation;
+import com.badlogic.gdx.graphics.Color;
 
 import java.io.Serializable;
 
 /**
- * BodyComponent Class
- * @author rt
- * @package com.mob.clients.components.character
+ * ColorComponent Class
+ * @author Rodrigo
+ * @package com.mob.client.api.components.basic
  */
-public class BodyComponent extends Component implements Serializable {
+public class ColorComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -36,14 +35,16 @@ public class BodyComponent extends Component implements Serializable {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+	public Color tint = new Color(Color.WHITE);
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public BodyComponent(IntMap<BundledAnimation> animations) {
-        this.animations = animations;
+    public ColorComponent(Color tint) {
+        this.tint = tint;
     }
+
+    public ColorComponent() {}
 
 	// ===========================================================
 	// Methods

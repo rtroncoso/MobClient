@@ -14,38 +14,32 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.position;
+package com.mob.client.api.components.basic;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector3;
-import com.mob.client.data.WorldPosition;
+import com.artemis.Component;
 
 /**
- * WorldPositionComponent Class
- *
  * @author Rodrigo
- * @package com.mob.client.components.position
+ *
  */
-public class WorldPositionComponent extends Component {
+public class StateComponent extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-    public int map;
-    public int x;
-    public int y;
+	public int current = STATE_NORMAL;
+	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public WorldPositionComponent(int x, int y, int map) {
-        this.x = x;
-        this.y = y;
-        this.map = map;
+    public StateComponent(int state) {
+        this.current = state;
     }
 
 	// ===========================================================
@@ -60,9 +54,7 @@ public class WorldPositionComponent extends Component {
 	// Getter & Setter
 	// ===========================================================
 
-
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }

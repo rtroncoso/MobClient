@@ -19,8 +19,9 @@ package com.mob.client.screens;
 import com.artemis.World;
 import com.badlogic.gdx.ScreenAdapter;
 import com.mob.client.TestGame;
-import com.mob.client.handlers.CharacterHandler;
-import com.mob.client.systems.render.MapRenderingSystem;
+import com.mob.client.api.systems.camera.CameraSystem;
+import com.mob.client.api.systems.map.TiledMapSystem;
+import com.mob.client.api.systems.render.MapRenderingSystem;
 
 /**
  * @author Rodrigo
@@ -65,14 +66,16 @@ public class GameScreen extends ScreenAdapter {
 //		this.mWorld.setSystem(new MovementSystem());
 //		this.mWorld.setSystem(new CharacterAnimationSystem());
 //		this.mWorld.setSystem(new TileAnimationSystem());
+        this.mWorld.setSystem(new CameraSystem());
+        this.mWorld.setSystem(new TiledMapSystem(1));
 		this.mWorld.setSystem(new MapRenderingSystem(this.mGame.getSpriteBatch()));
 //		this.mWorld.setSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
 //		this.mWorld.setSystem(new GridSystem());
+        this.mWorld.initialize();
 	}
 
 	private void initScene() {
 
-		CharacterHandler.add(this.mDummyCharacter);
 	}
 
 	/**

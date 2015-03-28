@@ -14,19 +14,21 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.position;
+package com.mob.client.api.systems.map;
 
-import com.artemis.Component;
-
-import java.io.Serializable;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.VoidEntitySystem;
+import com.mob.client.data.Map;
+import com.mob.client.handlers.MapHandler;
 
 /**
- * PositionComponent Class
+ * TiledMapSystem Class
  *
  * @author rt
- * @package com.mob.client.components.basic
+ * @package com.mob.client.api.systems.map
  */
-public class PositionComponent extends Component implements Serializable {
+@Wire
+public class TiledMapSystem extends VoidEntitySystem {
 
     // ===========================================================
     // Constants
@@ -36,18 +38,16 @@ public class PositionComponent extends Component implements Serializable {
     // ===========================================================
     // Fields
     // ===========================================================
-    public float x;
-    public float y;
+    public Map map;
+    public int mapNumber;
+
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    public PositionComponent(float pX, float pY) {
-        this.x = pX;
-        this.y = pY;
+    public TiledMapSystem(int pMapNumber) {
+        this.mapNumber = pMapNumber;
     }
-
-    public PositionComponent() {}
 
     // ===========================================================
     // Methods
@@ -57,6 +57,15 @@ public class PositionComponent extends Component implements Serializable {
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
+    @Override
+    protected void initialize() {
+        this.map = MapHandler.get(this.mapNumber);
+    }
+
+    @Override
+    protected void processSystem() {
+
+    }
 
 
     // ===========================================================

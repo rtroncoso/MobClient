@@ -14,19 +14,17 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.basic;
+package com.mob.client.api.components.position;
 
 import com.artemis.Component;
-import com.badlogic.gdx.graphics.Color;
-
-import java.io.Serializable;
 
 /**
- * ColorComponent Class
+ * WorldPositionComponent Class
+ *
  * @author Rodrigo
- * @package com.mob.client.components.basic
+ * @package com.mob.client.api.components.position
  */
-public class ColorComponent extends Component implements Serializable {
+public class WorldPositionComponent extends Component {
 
 	// ===========================================================
 	// Constants
@@ -35,16 +33,16 @@ public class ColorComponent extends Component implements Serializable {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Color tint = new Color(Color.WHITE);
+    public int x;
+    public int y;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public ColorComponent(Color tint) {
-        this.tint = tint;
+    public WorldPositionComponent(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
-
-    public ColorComponent() {}
 
 	// ===========================================================
 	// Methods
@@ -58,7 +56,9 @@ public class ColorComponent extends Component implements Serializable {
 	// Getter & Setter
 	// ===========================================================
 
+
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

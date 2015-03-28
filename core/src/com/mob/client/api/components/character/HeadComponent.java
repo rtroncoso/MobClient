@@ -14,16 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.character;
-
+package com.mob.client.api.components.character;
 
 import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
+
+import java.io.Serializable;
 
 /**
+ * HeadComponent Class
  * @author Rodrigo
- *
+ * @package com.mob.client.api.components.character
  */
-public class CharacterComponent extends Component {
+public class HeadComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -32,10 +36,17 @@ public class CharacterComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+    /**
+     * @param animations
+     */
+    public HeadComponent(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 
 	// ===========================================================
 	// Methods
@@ -52,4 +63,5 @@ public class CharacterComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

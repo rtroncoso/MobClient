@@ -63,16 +63,16 @@ public interface Constants {
     public static final float ALPHA_FXS = 0.6f;
     
     public static final int DEFAULT_NUM_RAYS = 128;
-    
+
     public enum Heading {
     	NORTH(0), EAST(1), SOUTH(2), WEST(3);
-    	
+
     	final int mHeading;
-    	
+
     	Heading(int pHeading) {
     		this.mHeading = pHeading;
     	}
-    	
+
     	public int toInt() {
     		return this.mHeading;
     	}

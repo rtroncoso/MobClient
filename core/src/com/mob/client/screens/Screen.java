@@ -25,7 +25,6 @@ package com.mob.client.screens;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.mob.client.Game;
-import com.mob.client.engine.Engine;
 
 public abstract class Screen  implements com.badlogic.gdx.Screen {
 
@@ -41,7 +40,6 @@ public abstract class Screen  implements com.badlogic.gdx.Screen {
 	private ShaderProgram mDefaultShader;
 	private ShaderProgram mLightShader;
 	protected Game mGame;
-	protected Engine mMap;
 
 	// ===========================================================
 	// Constructors

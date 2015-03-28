@@ -199,9 +199,7 @@ public abstract class GameSprite implements Constants {
 	    float bodyX = this.mX * TILE_PIXEL_WIDTH - 2;// + halfBodyWidth / 2f;
 	    float bodyY = this.mY * TILE_PIXEL_HEIGHT - halfBodyHeight - 1;
 	    tileBodyDef.position.set(bodyX, bodyY);
-	    Body tileBody = this.mGame.getEngine().getWorld().createBody(tileBodyDef);
-	    tileBody.createFixture(fixtureDef);
-	    
+
 	    tileShape.dispose();
 	}
 

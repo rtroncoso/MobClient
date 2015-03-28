@@ -14,32 +14,36 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.basic;
+package com.mob.client.api.components.graphics;
 
 import com.artemis.Component;
+import com.badlogic.gdx.math.Vector2;
+
+import java.io.Serializable;
 
 /**
- * @author Rodrigo
- *
+ * LineComponent Class
+ * @author rt
+ * @package com.mob.client.api.components.graphics
  */
-public class StateComponent extends Component {
+public class LineComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public int current = STATE_NORMAL;
-	public float time = 0.0f;
+	public Vector2 start = new Vector2();
+	public Vector2 end = new Vector2();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public StateComponent(int state) {
-        this.current = state;
+    public LineComponent(Vector2 start, Vector2 end) {
+        this.start = start;
+        this.end = end;
     }
 
 	// ===========================================================
@@ -57,4 +61,5 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.character;
+package com.mob.client.api.components.character;
 
 
 import com.artemis.Component;
@@ -24,7 +24,7 @@ import java.io.Serializable;
 /**
  * HeadingComponent Class
  * @author Rodrigo
- * @package com.mob.client.components.character
+ * @package com.mob.client.api.components.character
  */
 public class HeadingComponent extends Component implements Serializable {
 

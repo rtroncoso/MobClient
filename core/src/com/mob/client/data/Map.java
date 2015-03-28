@@ -34,17 +34,17 @@ public class Map implements Constants {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	protected MapBlock mTile[][];
+	protected MapBlock mTiles[][];
 	protected boolean mLoaded;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 	/**
-	 * @param mTile
+	 * @param mTiles
 	 */
 	public Map() {
-		this.mTile = new MapBlock[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
+		this.mTiles = new MapBlock[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
 		this.mLoaded = false;
 	}
 
@@ -57,25 +57,25 @@ public class Map implements Constants {
 	// Getter & Setter
 	// ===========================================================
 	/**
-	 * @return the mTile
+	 * @return the mTiles
 	 */
 	public MapBlock[][] getTileArray() {
-		return mTile;
+		return mTiles;
 	}
 
 	/**
-	 * @param mTile the mTile to set
+	 * @param mTiles the mTiles to set
 	 */
-	public void setTileArray(MapBlock mTile[][]) {
-		this.mTile = mTile;
+	public void setTileArray(MapBlock mTiles[][]) {
+		this.mTiles = mTiles;
 	}
 	
 	public MapBlock getTile(int pX, int pY) {
-		return this.mTile[pX][pY];
+		return this.mTiles[pX][pY];
 	}
 	
 	public void setTile(int pX, int pY, MapBlock pMapBlock) {
-		this.mTile[pX][pY] = pMapBlock;
+		this.mTiles[pX][pY] = pMapBlock;
 	}
 
 	public boolean isLoaded() {

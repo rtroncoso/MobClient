@@ -14,21 +14,24 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems.camera;
+package com.mob.client.api.systems.render;
 
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mob.client.data.Map;
+import com.mob.client.api.systems.camera.CameraSystem;
+import com.mob.client.api.systems.map.TiledMapSystem;
 
 /**
- * CameraSystem Class
+ * MapRenderSystem Class
  *
  * @author rt
- * @package com.mob.client.systems.mCamera
+ * @package com.mob.client.api.systems.render
  */
 @Wire
-public class CameraSystem extends VoidEntitySystem {
+public class MapRenderingSystem extends VoidEntitySystem {
 
     // ===========================================================
     // Constants
@@ -38,33 +41,49 @@ public class CameraSystem extends VoidEntitySystem {
     // ===========================================================
     // Fields
     // ===========================================================
-    public final OrthographicCamera camera;
-    public final OrthographicCamera guiCamera;
-
+    private TiledMapSystem mMapSystem;
+    private CameraSystem mCameraSystem;
+    private SpriteBatch mBatch;
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    /**
-     * @param zoom How much
-     */
-    public CameraSystem( float zoom ) {
-
-        float zoomFactorInverter = 1f/zoom;
-
-        camera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        camera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        camera.update();
-
-        guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        guiCamera.update();
+    public MapRenderingSystem(SpriteBatch pSpriteBatch) {
+        this.mBatch = pSpriteBatch;
     }
 
 
     // ===========================================================
     // Methods
     // ===========================================================
+    private void renderWorld() {
+        // Obtenemos los components del map
+        Map map = this.mMapSystem.map;
+
+        // Iteramos todas las layers del map y las renderizamos
+        for(int layer = 0; layer < 4; layer++) {
+
+            for(int y = 1; y <= 100; y++) {
+                for(int x = 1; x <= 100; x++) {
+
+                    // Obtenemos los values para esta layer
+                    TextureRegion tileRegion = map.getTile(x, y).getRegion(layer);
+
+                    // Si tiene region
+                    if(tileRegion != null) {
+                        // Acomodamos el tile
+                        final float mapPosX = (x * 32.0f);
+                        final float mapPosY = (y * 32.0f);
+                        final float tileOffsetX = mapPosX - (tileRegion.getRegionWidth() * 0.5f) - (16.0f);
+                        final float tileOffsetY = mapPosY - tileRegion.getRegionHeight();
+
+                        // Lo dibujamos
+                        this.mBatch.draw(tileRegion, tileOffsetX, tileOffsetY);
+                    }
+                }
+            }
+        }
+    }
 
 
     // ===========================================================
@@ -73,6 +92,16 @@ public class CameraSystem extends VoidEntitySystem {
     @Override
     protected void processSystem() {
 
+        // Obtenemos una entity de la queue y inicializamos el batch
+        this.mCameraSystem.camera.update();
+        this.mBatch.setProjectionMatrix(this.mCameraSystem.camera.combined);
+        this.mBatch.begin();
+
+        // Todas las calls al renderer irian aca
+        this.renderWorld();
+
+        // Finalizamos el batch
+        this.mBatch.end();
     }
 
 

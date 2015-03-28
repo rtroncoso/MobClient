@@ -14,18 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.components.physics;
+package com.mob.client.api.components.position;
 
 import com.artemis.Component;
+
 import java.io.Serializable;
 
 /**
- * Physics Class
+ * PositionComponent Class
  *
  * @author rt
- * @package com.mob.client.components.physics
+ * @package com.mob.client.api.components.basic
  */
-public class PhysicsComponent extends Component implements Serializable {
+public class PositionComponent extends Component implements Serializable {
 
     // ===========================================================
     // Constants
@@ -35,19 +36,18 @@ public class PhysicsComponent extends Component implements Serializable {
     // ===========================================================
     // Fields
     // ===========================================================
-    public float vx;
-    public float vy;
-    public float vr;
-
-    public float friction = 4f;
-    public float bounce = 0f;
-
-    public float maxVelocity = Float.MAX_VALUE;
+    public float x;
+    public float y;
 
     // ===========================================================
     // Constructors
     // ===========================================================
+    public PositionComponent(float pX, float pY) {
+        this.x = pX;
+        this.y = pY;
+    }
 
+    public PositionComponent() {}
 
     // ===========================================================
     // Methods

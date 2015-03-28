@@ -14,21 +14,24 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.systems;
+package com.mob.client.api.systems.physics;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
-import com.mob.client.components.map.MapComponent;
-import com.mob.client.components.basic.StateComponent;
-import com.mob.client.textures.BundledAnimation;
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.mob.client.api.components.physics.PhysicsComponent;
+import com.mob.client.api.components.position.PositionComponent;
 
 /**
  * @author Rodrigo
  *
  */
-public class TileAnimationSystem extends IteratingSystem {
+@Wire
+public class MovementSystem extends EntityProcessingSystem {
 
 	// ===========================================================
 	// Constants
@@ -37,20 +40,16 @@ public class TileAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<MapComponent> mChunkComponent;
-	private ComponentMapper<StateComponent> mStateMapper;
+	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
+	private ComponentMapper<PositionComponent> mPositionMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	public TileAnimationSystem() {
-		super(Family.all(MapComponent.class,
-						StateComponent.class)
-					.get());
-		
-		// Obtenemos nuestros Mappers
-		this.mChunkComponent = ComponentMapper.getFor(MapComponent.class);
-		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
+	@SuppressWarnings("unchecked")
+	public MovementSystem() {
+		super(Aspect.getAspectForAll(PhysicsComponent.class,
+                PositionComponent.class));
 	}
 
 	// ===========================================================
@@ -60,34 +59,24 @@ public class TileAnimationSystem extends IteratingSystem {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	@Override
-	public void processEntity(Entity entity, float deltaTime) {
-		
-		// Obtenemos los components necesarios
-		MapComponent chunk = this.mChunkComponent.get(entity);
-		StateComponent state = this.mStateMapper.get(entity);
+    @Override
+    protected void process(Entity entity) {
 
-		// Iteramos todos los tiles del chunk
-		for(int y = 1; y <= MapComponent.CHUNK_TILE_SIZE; y++) {
-			for (int x = 1; x <= MapComponent.CHUNK_TILE_SIZE; x++) {
-				for(int layer = 0; layer < MapComponent.CHUNK_LAYERS; layer++) {
+        // Obtenemos components de entity
+        final PhysicsComponent phys = this.mPhysicsMapper.get(entity);
+        final PositionComponent pos = this.mPositionMapper.get(entity);
 
-					// Obtenemos la animacion
-					BundledAnimation animation = chunk.getTile(x, y).getAnimation(layer);
+        // Setteamos la aceleración del cuerpo
+        pos.x += phys.velocity * world.getDelta();
+        pos.y += phys.velocity * world.getDelta();
 
-					// Si tiene una animacion cambiamos su timer
-					if (animation != null && animation.isAnimated()) {
-						animation.setAnimationTime(state.time);
-					}
-				}
-			}
-		}
-		
-		// Actualizamos nuestro DeltaTime interno de la Entity
-		state.time += deltaTime;
-	}
+        // Logueamos posición
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
 
-	// ===========================================================
+    }
+
+    // ===========================================================
 	// Getter & Setter
 	// ===========================================================
 
