@@ -18,6 +18,13 @@ package com.mob.client.api.systems.map;
 
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.mob.client.api.systems.render.MapRenderingSystem;
 import com.mob.client.data.Map;
 import com.mob.client.handlers.MapHandler;
 

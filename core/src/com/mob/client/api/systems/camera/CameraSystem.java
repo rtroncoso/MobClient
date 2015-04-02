@@ -34,6 +34,7 @@ public class CameraSystem extends VoidEntitySystem {
     // ===========================================================
     // Constants
     // ===========================================================
+    public static final float DEFAULT_GAME_ZOOM = 1.0f;
 
 
     // ===========================================================
@@ -50,7 +51,7 @@ public class CameraSystem extends VoidEntitySystem {
      * Unparametrized Camera System
      */
     public CameraSystem() {
-        this(1.0f);
+        this(DEFAULT_GAME_ZOOM);
     }
 
     /**
@@ -66,6 +67,8 @@ public class CameraSystem extends VoidEntitySystem {
         guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
         guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
         guiCamera.update();
+
+        camera.translate(1600, 1600);
     }
 
 

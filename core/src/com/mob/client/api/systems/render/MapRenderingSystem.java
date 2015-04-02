@@ -36,7 +36,8 @@ public class MapRenderingSystem extends VoidEntitySystem {
     // ===========================================================
     // Constants
     // ===========================================================
-
+    public static final int MAP_START_LAYER = 1;
+    public static final int MAP_END_LAYER = 4;
 
     // ===========================================================
     // Fields
@@ -57,31 +58,44 @@ public class MapRenderingSystem extends VoidEntitySystem {
     // Methods
     // ===========================================================
     private void renderWorld() {
-        // Obtenemos los components del map
+
+        // Variable Declarations
+        int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
         Map map = this.mMapSystem.map;
 
+        // Calculate visible part of the map
+        int cameraPosX = (int) (this.mCameraSystem.camera.position.x / Map.TILE_PIXEL_WIDTH);
+        int cameraPosY = (int) (this.mCameraSystem.camera.position.y / Map.TILE_PIXEL_HEIGHT);
+        int halfWindowTileWidth = (int) ((this.mCameraSystem.camera.viewportWidth / Map.TILE_PIXEL_WIDTH) / 2f);
+        int halfWindowTileHeight = (int) ((this.mCameraSystem.camera.viewportHeight / Map.TILE_PIXEL_HEIGHT) / 2f);
+
+        screenMinX = cameraPosX - halfWindowTileWidth - 1;
+        screenMaxX = cameraPosX + halfWindowTileWidth + 1;
+        screenMinY = cameraPosY - halfWindowTileHeight - 1;
+        screenMaxY = cameraPosY + halfWindowTileHeight + 1;
+
+        minAreaX = screenMinX - Map.TILE_BUFFER_SIZE;
+        maxAreaX = screenMaxX + Map.TILE_BUFFER_SIZE;
+        minAreaY = screenMinY - Map.TILE_BUFFER_SIZE;
+        maxAreaY = screenMaxY + Map.TILE_BUFFER_SIZE;
+
+        // Make sure it is between map bounds
+        if(minAreaX < Map.MIN_MAP_SIZE_WIDTH) minAreaX = Map.MIN_MAP_SIZE_WIDTH;
+        if(maxAreaX > Map.MAX_MAP_SIZE_WIDTH) maxAreaX = Map.MAX_MAP_SIZE_WIDTH;
+        if(minAreaY < Map.MIN_MAP_SIZE_HEIGHT) minAreaY = Map.MIN_MAP_SIZE_HEIGHT;
+        if(maxAreaY > Map.MAX_MAP_SIZE_HEIGHT) maxAreaY = Map.MAX_MAP_SIZE_HEIGHT;
+
+        if(screenMinX < Map.MIN_MAP_SIZE_WIDTH) screenMinX = Map.MIN_MAP_SIZE_WIDTH;
+        if(screenMaxX > Map.MAX_MAP_SIZE_WIDTH) screenMaxX = Map.MAX_MAP_SIZE_WIDTH;
+        if(screenMinY < Map.MIN_MAP_SIZE_HEIGHT) screenMinY = Map.MIN_MAP_SIZE_HEIGHT;
+        if(screenMaxY > Map.MAX_MAP_SIZE_HEIGHT) screenMaxY = Map.MAX_MAP_SIZE_HEIGHT;
+
+        // Start rendering our map's first layer (buffered)
+        this.mBatch.draw(map.getBufferedLayer(), screenMinX, screenMinY);
+
         // Iteramos todas las layers del map y las renderizamos
-        for(int layer = 0; layer < 4; layer++) {
-
-            for(int y = 1; y <= 100; y++) {
-                for(int x = 1; x <= 100; x++) {
-
-                    // Obtenemos los values para esta layer
-                    TextureRegion tileRegion = map.getTile(x, y).getRegion(layer);
-
-                    // Si tiene region
-                    if(tileRegion != null) {
-                        // Acomodamos el tile
-                        final float mapPosX = (x * 32.0f);
-                        final float mapPosY = (y * 32.0f);
-                        final float tileOffsetX = mapPosX - (tileRegion.getRegionWidth() * 0.5f) - (16.0f);
-                        final float tileOffsetY = mapPosY - tileRegion.getRegionHeight();
-
-                        // Lo dibujamos
-                        this.mBatch.draw(tileRegion, tileOffsetX, tileOffsetY);
-                    }
-                }
-            }
+        for(int layer = MAP_START_LAYER; layer < MAP_END_LAYER; layer++) {
+            map.renderLayer(this.mBatch, layer, screenMinX, screenMaxX, screenMinY, screenMaxY);
         }
     }
 
@@ -97,7 +111,7 @@ public class MapRenderingSystem extends VoidEntitySystem {
         this.mBatch.setProjectionMatrix(this.mCameraSystem.camera.combined);
         this.mBatch.begin();
 
-        // Todas las calls al renderer irian aca
+        // Render our world
         this.renderWorld();
 
         // Finalizamos el batch

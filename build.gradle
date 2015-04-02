@@ -7,10 +7,9 @@ buildscript {
     }
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.3'
+        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:1.12.3'
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.github.jtakakura:gradle-robovm-plugin:0.0.7'
-        classpath "net.onedaybeard.artemis:artemis-odb-gradle-plugin:0.9.0"
-        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:1.12.+'
     }
 }
 
@@ -23,13 +22,13 @@ allprojects {
         appName = 'MobClient'
         gdxVersion = '1.5.2'
         roboVMVersion = '0.0.11'
+        artemisVersion = '0.9.0'
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
 }
 
@@ -44,7 +43,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-        compile "net.onedaybeard.artemis:artemis-odb:0.9.0"
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
     }
 }
 
@@ -53,7 +52,6 @@ project(":android") {
 
     configurations {
         natives
-        all*.exclude group: 'com.android.support', module: 'support-v4'
     }
 
     dependencies {
@@ -108,14 +106,17 @@ project(":core") {
     apply plugin: "java"
     apply plugin: 'provided-base'
 
-
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "net.onedaybeard.artemis:artemis-odb:0.9.0"
-        provided "net.onedaybeard.artemis:artemis-odb-processor:0.9.0"
+
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
+        provided "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
+
+        compile "net.mostlyoriginal.artemis-odb:contrib-core:0.7.1"
+        compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.7.1"
     }
 }
 

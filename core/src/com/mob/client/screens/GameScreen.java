@@ -17,7 +17,9 @@
 package com.mob.client.screens;
 
 import com.artemis.World;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.TestGame;
 import com.mob.client.api.systems.camera.CameraSystem;
 import com.mob.client.api.systems.map.TiledMapSystem;
@@ -41,6 +43,7 @@ public class GameScreen extends ScreenAdapter {
 	private TestGame mGame;
     private World mWorld;
 	private int mState;
+    private FPSLogger logger;
 	
 	private Character mDummyCharacter;
 	
@@ -55,6 +58,9 @@ public class GameScreen extends ScreenAdapter {
 		this.mWorld = new World();
 		this.initSystems();
 		this.initScene();
+
+
+        this.logger = new FPSLogger();
 	}
 
 	// ===========================================================
@@ -85,6 +91,9 @@ public class GameScreen extends ScreenAdapter {
 	 */
 	public void update (float deltaTime) {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
+
+        this.logger.log();
+//        Gdx.app.log(this.getClass().getSimpleName(), String.valueOf(Gdx.graphics.getFramesPerSecond()));
 		
 		this.mWorld.setDelta(deltaTime);
         this.mWorld.process();

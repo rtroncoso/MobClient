@@ -1,6 +1,4 @@
 apply plugin: "java"
-apply plugin: "artemis"
-project.ext.weaveDir = new File("$buildDir/explodedForWeave")
 
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
@@ -16,45 +14,18 @@ task run(dependsOn: classes, type: JavaExec) {
     ignoreExitValue = true
 }
 
-//task dist(type: Jar) {
-//    from files(sourceSets.main.output.classesDir)
-//    from files(sourceSets.main.output.resourcesDir)
-//    from {configurations.compile.collect {zipTree(it)}}
-//    from files(project.assetsDir);
-//
-//    manifest {
-//        attributes 'Main-Class': project.mainClassName
-//    }
-//}
-
-// Prepare folder with all dependencies exploded.
-task explodeForWeave(type: Sync, dependsOn: classes) {
-    into project.weaveDir
+task dist(type: Jar) {
     from files(sourceSets.main.output.classesDir)
     from files(sourceSets.main.output.resourcesDir)
     from {configurations.compile.collect {zipTree(it)}}
-    from files(project.assetsDir)
-}
+    from files(project.assetsDir);
 
-// Apply weaving on dependency folder.
-weave {
-    dependsOn explodeForWeave
-    enableArtemisPlugin = true
-    enablePooledWeaving = true
-    ideFriendlyPacking = true
-    optimizeEntitySystems = true
-    classesDir = project.ext.weaveDir
-}
-
-// package woven classes into jar.
-task dist(type: Jar, dependsOn: weave) {
-    from project.ext.weaveDir
     manifest {
         attributes 'Main-Class': project.mainClassName
     }
 }
 
-//dist.dependsOn classes
+dist.dependsOn classes
 
 eclipse {
     project {
@@ -64,12 +35,12 @@ eclipse {
 }
 
 task afterEclipseImport(description: "Post processing after project generation", group: "IDE") {
-  doLast {
-    def classpath = new XmlParser().parse(file(".classpath"))
-    new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ]);
-    def writer = new FileWriter(file(".classpath"))
-    def printer = new XmlNodePrinter(new PrintWriter(writer))
-    printer.setPreserveWhitespace(true)
-    printer.print(classpath)
-  }
+    doLast {
+        def classpath = new XmlParser().parse(file(".classpath"))
+        new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ]);
+        def writer = new FileWriter(file(".classpath"))
+        def printer = new XmlNodePrinter(new PrintWriter(writer))
+        printer.setPreserveWhitespace(true)
+        printer.print(classpath)
+    }
 }

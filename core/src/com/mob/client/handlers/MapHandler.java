@@ -119,7 +119,11 @@ public class MapHandler implements Constants {
 					map.setTile(x, y, new MapBlock(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
 				}
 			}
-			
+
+            // Initialize our map
+            map.initialize();
+
+            // Set the map in our internal HashMap
 			MapHandler.set(map, pMapNumber);
 			Gdx.app.log(MapHandler.class.getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");
 			return true;
