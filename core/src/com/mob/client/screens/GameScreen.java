@@ -71,10 +71,10 @@ public class GameScreen extends ScreenAdapter {
 		// Agregamos los sistemas al engine
 //		this.mWorld.setSystem(new MovementSystem());
 //		this.mWorld.setSystem(new CharacterAnimationSystem());
-//		this.mWorld.setSystem(new TileAnimationSystem());
         this.mWorld.setSystem(new CameraSystem());
-        this.mWorld.setSystem(new TiledMapSystem(1));
+        this.mWorld.setSystem(new TiledMapSystem(34));
 		this.mWorld.setSystem(new MapRenderingSystem(this.mGame.getSpriteBatch()));
+//        this.mWorld.setSystem(new TileAnimationSystem());
 //		this.mWorld.setSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
 //		this.mWorld.setSystem(new GridSystem());
         this.mWorld.initialize();
@@ -93,8 +93,7 @@ public class GameScreen extends ScreenAdapter {
 		if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         this.logger.log();
-//        Gdx.app.log(this.getClass().getSimpleName(), String.valueOf(Gdx.graphics.getFramesPerSecond()));
-		
+
 		this.mWorld.setDelta(deltaTime);
         this.mWorld.process();
 		

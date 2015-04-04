@@ -99,6 +99,7 @@ public class MapBlock {
 						this.mTextures.get(pIndex).getGraphic()) :
 				null;
 	}
+
 	public BundledAnimation getAnimation(int pIndex) {
 		return (this.mTextures.get(pIndex) != null) ? this.mTextures.get(pIndex) : null;
 	}

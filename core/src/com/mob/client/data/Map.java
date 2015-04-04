@@ -31,8 +31,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.mob.client.interfaces.Constants;
+import com.mob.client.textures.BundledAnimation;
 
-public class Map{
+public class Map implements Constants {
 
 	// ===========================================================
 	// Constants
@@ -45,6 +46,9 @@ public class Map{
     public static final int MIN_MAP_SIZE_WIDTH = 1;
     public static final int MAX_MAP_SIZE_HEIGHT = 100;
     public static final int MIN_MAP_SIZE_HEIGHT = 1;
+
+    public static final int MAP_START_LAYER = 1;
+    public static final int MAP_END_LAYER = 4;
 
 
 	// ===========================================================
@@ -111,13 +115,17 @@ public class Map{
 	// ===========================================================
 	// Methods
 	// ===========================================================
+    /**
+     * Initializes map object, renders layer 2 to FrameBuffer and sets
+     * it to loaded=true
+     */
     public void initialize() {
-        this.renderLayerToBuffer();
+        this.renderLayerToBuffer(1);
         this.setLoaded(true);
     }
 
     /**
-     * Renders a map layer to it's internal FrameBuffer Object
+     * Renders map's first layer to it's internal FrameBuffer Object
      */
     public void renderLayerToBuffer() {
         this.renderLayerToBuffer(0);
@@ -135,17 +143,19 @@ public class Map{
         OrthographicCamera camera = new OrthographicCamera(width, height);
         camera.setToOrtho(true, width, height);
 
-        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
+        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
         SpriteBatch sb = new SpriteBatch();
         sb.setProjectionMatrix(camera.combined);
         fbo.begin();
 
+        sb.enableBlending();
+        Gdx.gl.glBlendFuncSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glViewport(0, 0, width, height);
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sb.begin();
-        this.renderLayer(sb);
+        this.renderLayer(sb, layer);
         sb.end();
 
         fbo.end();
@@ -157,7 +167,7 @@ public class Map{
      * @param batch
      */
     public void renderLayer(SpriteBatch batch) {
-        this.renderLayer(batch, 0, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
+        this.renderLayer(batch, 0, 0, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
     }
 
     /**
@@ -166,7 +176,16 @@ public class Map{
      * @param layer
      */
     public void renderLayer(SpriteBatch batch, int layer) {
-        this.renderLayer(batch, layer, MIN_MAP_SIZE_WIDTH - 1, MAX_MAP_SIZE_WIDTH - 1, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
+        this.renderLayer(batch, 0.0f, layer, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
+    }
+
+    /**
+     * Renders a Map Layer to a specific SpriteBatch
+     * @param batch
+     * @param layer
+     */
+    public void renderLayer(SpriteBatch batch, float delta, int layer) {
+        this.renderLayer(batch, delta, layer, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
     }
 
     /**
@@ -178,13 +197,19 @@ public class Map{
      * @param minY
      * @param maxY
      */
-    public void renderLayer(SpriteBatch batch, int layer, int minX, int maxX, int minY, int maxY) {
+    public void renderLayer(SpriteBatch batch, float delta, int layer, int minX, int maxX, int minY, int maxY) {
 
         for(int y = minY; y <= maxY; y++) {
             for(int x = minX; x <= maxX; x++) {
 
                 // Obtenemos los values para esta layer
+                BundledAnimation animation = this.getTile(x, y).getAnimation(layer);
                 TextureRegion tileRegion = this.getTile(x, y).getRegion(layer);
+
+                // Animamos la layer
+                if(animation != null && animation.isAnimated()) {
+                    animation.setAnimationTime(animation.getAnimationTime() + delta);
+                }
 
                 // Si tiene region
                 if(tileRegion != null) {

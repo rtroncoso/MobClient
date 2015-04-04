@@ -68,7 +68,6 @@ public class CameraSystem extends VoidEntitySystem {
         guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
         guiCamera.update();
 
-        camera.translate(1600, 1600);
     }
 
 

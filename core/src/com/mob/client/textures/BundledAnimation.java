@@ -125,9 +125,17 @@ public class BundledAnimation {
 	 * 
 	 * @return TextureRegion
 	 */
-	public TextureRegion getGraphic() {
-		return this.isAnimated() ? this.getAnimatedGraphic(false) : this.getGraphic(0);
+	public TextureRegion getGraphic(boolean loop) {
+		return this.isAnimated() ? this.getAnimatedGraphic(loop) : this.getGraphic(0);
 	}
+    /**
+     * Obtiene un gráfico (animado o no) de nuestra lista de frames
+     *
+     * @return TextureRegion
+     */
+    public TextureRegion getGraphic() {
+        return this.getGraphic(true);
+    }
 
 	/**
 	 * Obtenemos un índice específico de nuestra lista de frames

@@ -35,14 +35,12 @@ public class MapRenderingSystem extends VoidEntitySystem {
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final int MAP_START_LAYER = 1;
-    public static final int MAP_END_LAYER = 4;
 
     // ===========================================================
     // Fields
     // ===========================================================
-    private TiledMapSystem mMapSystem;
-    private CameraSystem mCameraSystem;
+    private TiledMapSystem mapSystem;
+    private CameraSystem cameraSystem;
     public SpriteBatch batch;
 
     // ===========================================================
@@ -61,13 +59,13 @@ public class MapRenderingSystem extends VoidEntitySystem {
 
         // Variable Declarations
         int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
-        Map map = this.mMapSystem.map;
+        Map map = this.mapSystem.map;
 
         // Calculate visible part of the map
-        int cameraPosX = (int) (this.mCameraSystem.camera.position.x / Map.TILE_PIXEL_WIDTH);
-        int cameraPosY = (int) (this.mCameraSystem.camera.position.y / Map.TILE_PIXEL_HEIGHT);
-        int halfWindowTileWidth = (int) ((this.mCameraSystem.camera.viewportWidth / Map.TILE_PIXEL_WIDTH) / 2f);
-        int halfWindowTileHeight = (int) ((this.mCameraSystem.camera.viewportHeight / Map.TILE_PIXEL_HEIGHT) / 2f);
+        int cameraPosX = (int) (this.cameraSystem.camera.position.x / Map.TILE_PIXEL_WIDTH);
+        int cameraPosY = (int) (this.cameraSystem.camera.position.y / Map.TILE_PIXEL_HEIGHT);
+        int halfWindowTileWidth = (int) ((this.cameraSystem.camera.viewportWidth / Map.TILE_PIXEL_WIDTH) / 2f);
+        int halfWindowTileHeight = (int) ((this.cameraSystem.camera.viewportHeight / Map.TILE_PIXEL_HEIGHT) / 2f);
 
         screenMinX = cameraPosX - halfWindowTileWidth - 1;
         screenMaxX = cameraPosX + halfWindowTileWidth + 1;
@@ -90,13 +88,17 @@ public class MapRenderingSystem extends VoidEntitySystem {
         if(screenMinY < Map.MIN_MAP_SIZE_HEIGHT) screenMinY = Map.MIN_MAP_SIZE_HEIGHT;
         if(screenMaxY > Map.MAX_MAP_SIZE_HEIGHT) screenMaxY = Map.MAX_MAP_SIZE_HEIGHT;
 
-        // Start rendering our map's first layer (buffered)
+        // LAYER 1 - ANIMATED
+        map.renderLayer(this.batch, world.getDelta(), 0, screenMinX, screenMaxX, screenMinY, screenMaxY);
+
+        // LAYER 2 - STATIC - FRAMEBUFFERED
         this.batch.draw(map.getBufferedLayer(), 0, 0);
 
-        // Iteramos todas las layers del map y las renderizamos
-        for(int layer = MAP_START_LAYER; layer < MAP_END_LAYER; layer++) {
-            map.renderLayer(this.batch, layer, screenMinX, screenMaxX, screenMinY, screenMaxY);
-        }
+        // LAYER 3 - ANIMATED (POSSIBLY?)
+        map.renderLayer(this.batch, world.getDelta(), 2, minAreaX, maxAreaX, minAreaY, maxAreaY);
+
+        // LAYER 4 - ANIMATED (POSSIBLY?)
+        map.renderLayer(this.batch, world.getDelta(), 3, minAreaX, maxAreaX, minAreaY, maxAreaY);
     }
 
 
@@ -107,8 +109,8 @@ public class MapRenderingSystem extends VoidEntitySystem {
     protected void processSystem() {
 
         // Obtenemos una entity de la queue y inicializamos el batch
-        this.mCameraSystem.camera.update();
-        this.batch.setProjectionMatrix(this.mCameraSystem.camera.combined);
+        this.cameraSystem.camera.update();
+        this.batch.setProjectionMatrix(this.cameraSystem.camera.combined);
         this.batch.begin();
 
         // Render our world
