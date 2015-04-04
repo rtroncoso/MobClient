@@ -120,9 +120,6 @@ public class MapHandler implements Constants {
 				}
 			}
 
-            // Initialize our map
-            map.initialize();
-
             // Set the map in our internal HashMap
 			MapHandler.set(map, pMapNumber);
 			Gdx.app.log(MapHandler.class.getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");

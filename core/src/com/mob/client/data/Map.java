@@ -24,6 +24,7 @@ package com.mob.client.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +32,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.mob.client.interfaces.Constants;
 
-public class Map implements Constants {
+public class Map{
 
 	// ===========================================================
 	// Constants
@@ -128,18 +129,18 @@ public class Map implements Constants {
      */
     public void renderLayerToBuffer(int layer) {
 
-//        int width = (int) (Map.MAX_MAP_SIZE_WIDTH * Map.TILE_PIXEL_WIDTH);
-//        int height = (int) (Map.MAX_MAP_SIZE_HEIGHT * Map.TILE_PIXEL_HEIGHT);
-        int width = Gdx.graphics.getWidth();
-        int height = Gdx.graphics.getHeight();
+        int width = (int) (Map.MAX_MAP_SIZE_WIDTH * Map.TILE_PIXEL_WIDTH);
+        int height = (int) (Map.MAX_MAP_SIZE_HEIGHT * Map.TILE_PIXEL_HEIGHT);
 
-        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        OrthographicCamera camera = new OrthographicCamera(width, height);
+        camera.setToOrtho(true, width, height);
+
+        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
         SpriteBatch sb = new SpriteBatch();
-
+        sb.setProjectionMatrix(camera.combined);
         fbo.begin();
-        sb.enableBlending();
-        Gdx.gl.glBlendFuncSeparate(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+        Gdx.gl.glViewport(0, 0, width, height);
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -148,7 +149,6 @@ public class Map implements Constants {
         sb.end();
 
         fbo.end();
-
         this.mBufferedLayer = fbo.getColorBufferTexture();
     }
 
@@ -166,7 +166,7 @@ public class Map implements Constants {
      * @param layer
      */
     public void renderLayer(SpriteBatch batch, int layer) {
-        this.renderLayer(batch, layer, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
+        this.renderLayer(batch, layer, MIN_MAP_SIZE_WIDTH - 1, MAX_MAP_SIZE_WIDTH - 1, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);
     }
 
     /**

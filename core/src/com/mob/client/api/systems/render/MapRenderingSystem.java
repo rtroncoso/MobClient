@@ -19,7 +19,6 @@ package com.mob.client.api.systems.render;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.data.Map;
 import com.mob.client.api.systems.camera.CameraSystem;
 import com.mob.client.api.systems.map.TiledMapSystem;
@@ -44,19 +43,20 @@ public class MapRenderingSystem extends VoidEntitySystem {
     // ===========================================================
     private TiledMapSystem mMapSystem;
     private CameraSystem mCameraSystem;
-    private SpriteBatch mBatch;
+    public SpriteBatch batch;
 
     // ===========================================================
     // Constructors
     // ===========================================================
     public MapRenderingSystem(SpriteBatch pSpriteBatch) {
-        this.mBatch = pSpriteBatch;
+        this.batch = pSpriteBatch;
     }
 
 
     // ===========================================================
     // Methods
     // ===========================================================
+
     private void renderWorld() {
 
         // Variable Declarations
@@ -91,11 +91,11 @@ public class MapRenderingSystem extends VoidEntitySystem {
         if(screenMaxY > Map.MAX_MAP_SIZE_HEIGHT) screenMaxY = Map.MAX_MAP_SIZE_HEIGHT;
 
         // Start rendering our map's first layer (buffered)
-        this.mBatch.draw(map.getBufferedLayer(), screenMinX, screenMinY);
+        this.batch.draw(map.getBufferedLayer(), 0, 0);
 
         // Iteramos todas las layers del map y las renderizamos
         for(int layer = MAP_START_LAYER; layer < MAP_END_LAYER; layer++) {
-            map.renderLayer(this.mBatch, layer, screenMinX, screenMaxX, screenMinY, screenMaxY);
+            map.renderLayer(this.batch, layer, screenMinX, screenMaxX, screenMinY, screenMaxY);
         }
     }
 
@@ -108,14 +108,14 @@ public class MapRenderingSystem extends VoidEntitySystem {
 
         // Obtenemos una entity de la queue y inicializamos el batch
         this.mCameraSystem.camera.update();
-        this.mBatch.setProjectionMatrix(this.mCameraSystem.camera.combined);
-        this.mBatch.begin();
+        this.batch.setProjectionMatrix(this.mCameraSystem.camera.combined);
+        this.batch.begin();
 
         // Render our world
         this.renderWorld();
 
         // Finalizamos el batch
-        this.mBatch.end();
+        this.batch.end();
     }
 
 

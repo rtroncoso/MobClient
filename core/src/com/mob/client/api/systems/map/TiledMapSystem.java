@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.mob.client.api.systems.camera.CameraSystem;
 import com.mob.client.api.systems.render.MapRenderingSystem;
 import com.mob.client.data.Map;
 import com.mob.client.handlers.MapHandler;
@@ -45,6 +46,8 @@ public class TiledMapSystem extends VoidEntitySystem {
     // ===========================================================
     // Fields
     // ===========================================================
+    public CameraSystem cameraSystem;
+    public MapRenderingSystem mapRenderingSystem;
     public Map map;
     public int mapNumber;
 
@@ -66,7 +69,9 @@ public class TiledMapSystem extends VoidEntitySystem {
     // ===========================================================
     @Override
     protected void initialize() {
+        // Inicializamos el mapa
         this.map = MapHandler.get(this.mapNumber);
+        this.map.initialize();
     }
 
     @Override
