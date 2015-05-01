@@ -72,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
 //		this.mWorld.setSystem(new MovementSystem());
 //		this.mWorld.setSystem(new CharacterAnimationSystem());
         this.mWorld.setSystem(new CameraSystem());
-        this.mWorld.setSystem(new TiledMapSystem(34));
+        this.mWorld.setSystem(new TiledMapSystem(1));
 		this.mWorld.setSystem(new MapRenderingSystem(this.mGame.getSpriteBatch()));
 //        this.mWorld.setSystem(new TileAnimationSystem());
 //		this.mWorld.setSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));

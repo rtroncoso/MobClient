@@ -58,7 +58,7 @@ public class Map implements Constants {
 	protected boolean mLoaded;
     protected Texture mBufferedLayer;
 
-// ===========================================================
+    // ===========================================================
 	// Constructors
 	// ===========================================================
 	public Map() {
