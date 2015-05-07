@@ -23,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mob.client.Game;
+import com.mob.client.data.Tile;
 import com.mob.client.interfaces.Constants;
 
 public abstract class GameSprite implements Constants {
@@ -180,7 +181,7 @@ public abstract class GameSprite implements Constants {
 	public void createBody(float tilePixelWidth, float tilePixelHeight) {
 
 		// Calculate half tile
-		float halfBodyWidth = TILE_PIXEL_WIDTH / 2f, halfBodyHeight = TILE_PIXEL_HEIGHT /2f;
+		float halfBodyWidth = Tile.TILE_PIXEL_WIDTH / 2f, halfBodyHeight = Tile.TILE_PIXEL_HEIGHT /2f;
 		
 		// Create polygonShap
 		PolygonShape tileShape = new PolygonShape();
@@ -196,8 +197,8 @@ public abstract class GameSprite implements Constants {
 		fixtureDef.filter.groupIndex = 0;
 
 		// Create box2d bodies for all layer 3 objects
-	    float bodyX = this.mX * TILE_PIXEL_WIDTH - 2;// + halfBodyWidth / 2f;
-	    float bodyY = this.mY * TILE_PIXEL_HEIGHT - halfBodyHeight - 1;
+	    float bodyX = this.mX * Tile.TILE_PIXEL_WIDTH - 2;// + halfBodyWidth / 2f;
+	    float bodyY = this.mY * Tile.TILE_PIXEL_HEIGHT - halfBodyHeight - 1;
 	    tileBodyDef.position.set(bodyX, bodyY);
 
 	    tileShape.dispose();

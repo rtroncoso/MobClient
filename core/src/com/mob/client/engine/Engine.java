@@ -38,7 +38,7 @@
 //	// ===========================================================
 //	// Fields
 //	// ===========================================================
-//	protected Tile[][] mTiles;
+//	protected Tile[][] tiles;
 //	protected float mTechoAB;
 //	protected int mMapNumber;
 //	protected Color mTint;
@@ -80,17 +80,17 @@
 //	// Getter & Setter
 //	// ===========================================================
 //	/**
-//	 * @return the mTiles
+//	 * @return the tiles
 //	 */
 //	public Tile[][] getTilesArray() {
-//		return mTiles;
+//		return tiles;
 //	}
 //
 //	/**
-//	 * @param mTiles the mTiles to set
+//	 * @param tiles the tiles to set
 //	 */
-//	public void setTilesArray(Tile[][] mTiles) {
-//		this.mTiles = mTiles;
+//	public void setTilesArray(Tile[][] tiles) {
+//		this.tiles = tiles;
 //	}
 //
 //	/**
@@ -135,20 +135,20 @@
 //	}
 //
 //	public Tile getTile(int pX, int pY) {
-//		return this.mTiles[pX][pY];
+//		return this.tiles[pX][pY];
 //	}
 //
 //	public void setTile(int pX, int pY, Tile pMapBlock) {
-//		this.mTiles[pX][pY] = pMapBlock;
+//		this.tiles[pX][pY] = pMapBlock;
 //	}
 //
 //	public Character getCharacter(int pX, int pY) {
-//		return this.mTiles[pX][pY].getCharacter();
+//		return this.tiles[pX][pY].getCharacter();
 //	}
 //
 //	public void setCharacter(int pX, int pY, Character pCharacter) {
-//		this.mTiles[pX][pY].setCharIndex(pCharacter.getCharIndex());
-//		this.mTiles[pX][pY].setCharacter(pCharacter);
+//		this.tiles[pX][pY].setCharIndex(pCharacter.getCharIndex());
+//		this.tiles[pX][pY].setCharacter(pCharacter);
 //	}
 //
 //	// ===========================================================

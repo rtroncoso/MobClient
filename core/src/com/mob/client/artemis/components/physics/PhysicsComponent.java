@@ -14,62 +14,32 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.systems.camera;
+package com.mob.client.artemis.components.physics;
 
-import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mob.client.api.components.camera.CameraComponent;
+import com.artemis.Component;
+import java.io.Serializable;
 
 /**
- * CameraSystem Class
+ * Physics Class
  *
  * @author rt
- * @package com.mob.client.api.systems
+ * @package com.mob.client.api.components.physics
  */
-@Wire
-public class CameraSystem extends VoidEntitySystem {
+public class PhysicsComponent extends Component implements Serializable {
 
     // ===========================================================
     // Constants
     // ===========================================================
-    public static final float DEFAULT_GAME_ZOOM = 1.0f;
-
+    public final static float MAX_VELOCITY = Float.MAX_VALUE;
 
     // ===========================================================
     // Fields
     // ===========================================================
-    public final OrthographicCamera camera;
-    public final OrthographicCamera guiCamera;
-
+    public float velocity;
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    /**
-     * Unparametrized Camera System
-     */
-    public CameraSystem() {
-        this(DEFAULT_GAME_ZOOM);
-    }
-
-    /**
-     * @param zoom How much
-     */
-    public CameraSystem(float zoom) {
-        float zoomFactorInverter = 1f/zoom;
-
-        camera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        camera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        camera.update();
-
-        guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        guiCamera.update();
-
-        camera.translate(1200, 1200);
-    }
 
 
     // ===========================================================
@@ -80,10 +50,6 @@ public class CameraSystem extends VoidEntitySystem {
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
-    @Override
-    protected void processSystem() {
-
-    }
 
 
     // ===========================================================

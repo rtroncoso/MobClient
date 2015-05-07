@@ -24,95 +24,65 @@ package com.mob.client.data;
 
 public class WorldPosition {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int map;
+	private int x;
+	private int y;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int mMap;
-	private int mPosX;
-	private int mPosY;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	public WorldPosition() {
 		this(0, 0, 0);
 	}
 	
 	/**
-	 * @param mMap
-	 * @param mPosX
-	 * @param mPosY
+	 * @param map
+	 * @param x
+	 * @param y
 	 */
-	public WorldPosition(int mMap, int mPosX, int mPosY) {
-		this.mMap = mMap;
-		this.setPosX(mPosX);
-		this.setPosY(mPosY);
+	public WorldPosition(int map, int x, int y) {
+		this.map = map;
+		this.setX(x);
+		this.setY(y);
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-
 	/**
-	 * @return the mMap
+	 * @return the map
 	 */
 	public int getMap() {
-		return mMap;
+		return map;
 	}
 
 	/**
-	 * @param mMap the mMap to set
+	 * @param map the map to set
 	 */
-	public void setMap(int mMap) {
-		this.mMap = mMap;
+	public void setMap(int map) {
+		this.map = map;
 	}
 
 	/**
-	 * @return the mPosX
+	 * @return the x
 	 */
-	public int getPosX() {
-		return mPosX;
+	public int getX() {
+		return x;
 	}
 
 	/**
-	 * @param mPosX the mPosX to set
+	 * @param x the x to set
 	 */
-	public void setPosX(int mPosX) {
-		this.mPosX = mPosX;
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	/**
-	 * @return the mPosY
+	 * @return the y
 	 */
-	public int getPosY() {
-		return mPosY;
+	public int getY() {
+		return y;
 	}
 
 	/**
-	 * @param mPosY the mPosY to set
+	 * @param y the y to set
 	 */
-	public void setPosY(int mPosY) {
-		this.mPosY = mPosY;
+	public void setY(int y) {
+		this.y = y;
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

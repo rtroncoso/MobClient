@@ -17,13 +17,12 @@
 package com.mob.client.screens;
 
 import com.artemis.World;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.TestGame;
-import com.mob.client.api.systems.camera.CameraSystem;
-import com.mob.client.api.systems.map.TiledMapSystem;
-import com.mob.client.api.systems.render.MapRenderingSystem;
+import com.mob.client.artemis.systems.camera.CameraSystem;
+import com.mob.client.artemis.systems.map.TiledMapSystem;
+import com.mob.client.artemis.systems.render.MapRenderingSystem;
 
 /**
  * @author Rodrigo
@@ -31,31 +30,21 @@ import com.mob.client.api.systems.render.MapRenderingSystem;
  */
 public class GameScreen extends ScreenAdapter {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
 	public static final int GAME_RUNNING = 0;
 	public static final int GAME_PAUSED = 1;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private TestGame mGame;
-    private World mWorld;
-	private int mState;
+	private TestGame game;
+    private World world;
+	private int state;
     private FPSLogger logger;
-	
-	private Character mDummyCharacter;
-	
-	// ===========================================================
-	// Constructors
-	// ===========================================================
+	private Character dummyCharacter;
+
 	public GameScreen(TestGame game) {
 		
 		// Inicializamos todo lo necesario
-		this.mGame = game;
-		this.mState = GAME_RUNNING;
-		this.mWorld = new World();
+		this.game = game;
+		this.state = GAME_RUNNING;
+		this.world = new World();
 		this.initSystems();
 		this.initScene();
 
@@ -63,21 +52,18 @@ public class GameScreen extends ScreenAdapter {
         this.logger = new FPSLogger();
 	}
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
 	private void initSystems() {
 
 		// Agregamos los sistemas al engine
-//		this.mWorld.setSystem(new MovementSystem());
-//		this.mWorld.setSystem(new CharacterAnimationSystem());
-        this.mWorld.setSystem(new CameraSystem());
-        this.mWorld.setSystem(new TiledMapSystem(1));
-		this.mWorld.setSystem(new MapRenderingSystem(this.mGame.getSpriteBatch()));
-//        this.mWorld.setSystem(new TileAnimationSystem());
-//		this.mWorld.setSystem(new CharacterRenderingSystem(this.mGame.getSpriteBatch()));
-//		this.mWorld.setSystem(new GridSystem());
-        this.mWorld.initialize();
+//		this.world.setSystem(new MovementSystem());
+//		this.world.setSystem(new CharacterAnimationSystem());
+        this.world.setSystem(new CameraSystem());
+        this.world.setSystem(new TiledMapSystem(1));
+		this.world.setSystem(new MapRenderingSystem(this.game.getSpriteBatch()));
+//        this.world.setSystem(new TileAnimationSystem());
+//		this.world.setSystem(new CharacterRenderingSystem(this.game.getSpriteBatch()));
+//		this.world.setSystem(new GridSystem());
+        this.world.initialize();
 	}
 
 	private void initScene() {
@@ -94,10 +80,10 @@ public class GameScreen extends ScreenAdapter {
 
         this.logger.log();
 
-		this.mWorld.setDelta(deltaTime);
-        this.mWorld.process();
+		this.world.setDelta(deltaTime);
+        this.world.process();
 		
-		switch (this.mState) {
+		switch (this.state) {
 			case GAME_RUNNING: {
 				updateRunning(deltaTime);
 				break;
@@ -109,41 +95,30 @@ public class GameScreen extends ScreenAdapter {
 		}
 	}
 
-	/**
-	 * Loop llamado sólo cuando el juego esté corriendo
-	 * 
-	 * @param deltaTime
-	 */
 	private void updateRunning (float deltaTime) {
 
 	}
 
-	/**
-	 * Loop llamado solo cuando el juego esté en pausa
-	 */
 	private void updatePaused () {
 
 	}
 	
 	private void pauseSystems() {
 		
-//		this.mWorld.getSystem(MovementSystem.class).setProcessing(false);
-//		this.mWorld.getSystem(MapRenderingSystem.class).setProcessing(false);
-//		this.mWorld.getSystem(CharacterAnimationSystem.class).setProcessing(false);
-//		this.mWorld.getSystem(CharacterRenderingSystem.class).setProcessing(false);
+//		this.world.getSystem(MovementSystem.class).setProcessing(false);
+//		this.world.getSystem(MapRenderingSystem.class).setProcessing(false);
+//		this.world.getSystem(CharacterAnimationSystem.class).setProcessing(false);
+//		this.world.getSystem(CharacterRenderingSystem.class).setProcessing(false);
 	}
 	
 	private void resumeSystems() {
 		
-//		this.mWorld.getSystem(MovementSystem.class).setProcessing(true);
-//		this.mWorld.getSystem(MapRenderingSystem.class).setProcessing(true);
-//		this.mWorld.getSystem(CharacterAnimationSystem.class).setProcessing(true);
-//		this.mWorld.getSystem(CharacterRenderingSystem.class).setProcessing(true);
+//		this.world.getSystem(MovementSystem.class).setProcessing(true);
+//		this.world.getSystem(MapRenderingSystem.class).setProcessing(true);
+//		this.world.getSystem(CharacterAnimationSystem.class).setProcessing(true);
+//		this.world.getSystem(CharacterRenderingSystem.class).setProcessing(true);
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
 	@Override
 	public void render (float delta) {
 		this.update(delta);
@@ -152,24 +127,17 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void pause () {
-		if (this.mState == GAME_RUNNING) {
-			this.mState = GAME_PAUSED;
+		if (this.state == GAME_RUNNING) {
+			this.state = GAME_PAUSED;
 			this.pauseSystems();
 		}
 	}
 	@Override
 	public void resume() {
-		if(this.mState == GAME_PAUSED) {
-			this.mState = GAME_RUNNING;
+		if(this.state == GAME_PAUSED) {
+			this.state = GAME_RUNNING;
 			this.resumeSystems();
 		}
 	}
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 }

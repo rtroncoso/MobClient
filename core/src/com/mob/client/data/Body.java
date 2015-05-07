@@ -24,97 +24,69 @@ package com.mob.client.data;
 
 public class Body {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int[] grhCuerpo;
+	private int headOffsetX;
+	private int headOffsetY;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int[] mGrhCuerpo;
-	private int mHeadOffsetX;
-	private int mHeadOffsetY;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	/**
 	 * @param grhIndex
 	 * @param headOffsetX
 	 * @param headOffsetY
 	 */
 	public Body(int[] grhIndex, int headOffsetX, int headOffsetY) {
-		this.mGrhCuerpo = grhIndex;
-		this.mHeadOffsetX = headOffsetX;
-		this.mHeadOffsetY = headOffsetY;
+		this.grhCuerpo = grhIndex;
+		this.headOffsetX = headOffsetX;
+		this.headOffsetY = headOffsetY;
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	public int getGraphic(int pIndex) {
-		return this.mGrhCuerpo[pIndex];
+	public int getGraphic(int index) {
+		return this.grhCuerpo[index];
 	}
 	
-	public void setGraphic(int pIndex, int pGraphic) {
-		this.mGrhCuerpo[pIndex] = pGraphic;
+	public void setGraphic(int index, int graphic) {
+		this.grhCuerpo[index] = graphic;
 	}
 	
 	/**
 	 * @return the grhIndex
 	 */
 	public int[] getBodyArray() {
-		return mGrhCuerpo;
+		return grhCuerpo;
 	}
 
 	/**
 	 * @param grhIndex the grhIndex to set
 	 */
 	public void setBodyArray(int[] grhCuerpo) {
-		this.mGrhCuerpo = grhCuerpo;
+		this.grhCuerpo = grhCuerpo;
 	}
 
 	/**
 	 * @return the headOffsetX
 	 */
 	public int getHeadOffsetX() {
-		return mHeadOffsetX;
+		return headOffsetX;
 	}
 
 	/**
 	 * @param headOffsetX the headOffsetX to set
 	 */
 	public void setHeadOffsetX(int headOffsetX) {
-		this.mHeadOffsetX = headOffsetX;
+		this.headOffsetX = headOffsetX;
 	}
 
 	/**
 	 * @return the headOffsetY
 	 */
 	public int getHeadOffsetY() {
-		return mHeadOffsetY;
+		return headOffsetY;
 	}
 
 	/**
 	 * @param headOffsetY the headOffsetY to set
 	 */
 	public void setHeadOffsetY(int headOffsetY) {
-		this.mHeadOffsetY = headOffsetY;
+		this.headOffsetY = headOffsetY;
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 	
 }

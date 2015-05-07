@@ -14,14 +14,14 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.systems.render;
+package com.mob.client.artemis.systems.render;
 
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.data.Map;
-import com.mob.client.api.systems.camera.CameraSystem;
-import com.mob.client.api.systems.map.TiledMapSystem;
+import com.mob.client.artemis.systems.camera.CameraSystem;
+import com.mob.client.artemis.systems.map.TiledMapSystem;
 
 /**
  * MapRenderSystem Class

@@ -116,15 +116,15 @@ public abstract class Game implements ApplicationListener, Constants {
 	/**
 	* @return the _grhData
 	*/
-	public Vector<Grh> getGrhData() {
+	public Vector<Graphic> getGrhData() {
 		return AssetsHandler.getGrhData();
 	}
 	
 	/**
-	* @param _grh the _grh to set
+	* @param _graphic the _graphic to set
 	*/
-	public void setGrhData(Vector<Grh> _grh) {
-		AssetsHandler.setGrhData(_grh);
+	public void setGrhData(Vector<Graphic> _graphic) {
+		AssetsHandler.setGrhData(_graphic);
 	}
 	
 	/**

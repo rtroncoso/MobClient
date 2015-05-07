@@ -40,9 +40,7 @@ public interface Constants {
     public static final int GAME_STATE_PLAY = 0;  
     public static final int GAME_STATE_PAUSE = 1;  
     public static final int GAME_STATE_ANIMATE = 2;
-    
-    public static final float TILE_PIXEL_WIDTH = 32.0f;
-    public static final float TILE_PIXEL_HEIGHT = 32.0f;
+
     public static final int TILE_BUFFER_SIZE = 7;
     
     public static final int MAX_MAP_SIZE_WIDTH = 100;

@@ -19,7 +19,7 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.mob.client.data.Grh;
+import com.mob.client.data.Graphic;
 import com.mob.client.handlers.AssetsHandler;
 
 /**
@@ -44,10 +44,10 @@ public class BundledAnimation {
 	// Constructors
 	// ===========================================================
 	
-	public BundledAnimation(Grh grh) {
+	public BundledAnimation(Graphic graphic) {
 		
 		// Declaramos algunos datos a usar e internals
-		int numFrames = grh.getFrames().length;
+		int numFrames = graphic.getFrames().length;
 		Array<TextureRegion> tmpRegions = new Array<TextureRegion>();
 		this.setAnimationTime(0.0f);
 		
@@ -55,7 +55,7 @@ public class BundledAnimation {
 		if(numFrames > 0) {
 			
 			// Iteramos la lista de frames y los agregamos a nuestro array interno
-			for(int frame : grh.getFrames()) {
+			for(int frame : graphic.getFrames()) {
 				
 				// Cargamos una nueva GameTexture usando el frame actual
 				this.mFrames.add(new GameTexture(AssetsHandler.getGrh(frame)));
@@ -71,13 +71,13 @@ public class BundledAnimation {
 			}
 			
 			// Setteamos nuestro animation object
-			this.setAnimation(new Animation(grh.getSpeed() / 1000.0f, textures));
+			this.setAnimation(new Animation(graphic.getSpeed() / 1000.0f, textures));
 			this.mAnimated = true;
 			
 		} else {
 			
 			// Vamos a usar un solo frame
-			this.mFrames.add(new GameTexture(grh));
+			this.mFrames.add(new GameTexture(graphic));
 		}
 	}
 

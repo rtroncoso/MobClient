@@ -18,7 +18,7 @@ package com.mob.client.loaders;
 
 import com.badlogic.gdx.Gdx;
 import com.mob.client.data.Map;
-import com.mob.client.data.MapBlock;
+import com.mob.client.data.Tile;
 import com.mob.client.data.WorldPosition;
 import com.mob.client.util.Util;
 
@@ -73,7 +73,7 @@ public class MapLoader extends Loader {
                     trigger = Util.leShort(file.readShort());
                 }
 
-                map.setTile(x, y, new MapBlock(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
+                map.setTile(x, y, new Tile(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
             }
         }
 

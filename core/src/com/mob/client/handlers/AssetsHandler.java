@@ -44,7 +44,7 @@ public class AssetsHandler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private static Vector<Grh> mGrh;
+	private static Vector<Graphic> mGraphic;
 	private static Vector<Body> mBody;
 	private static Vector<Head> mHead;
 	private static Vector<Helmet> mHelmet;
@@ -63,7 +63,7 @@ public class AssetsHandler {
 	public static void load() {
 
     	// Init our vectors
-        mGrh = new Vector<Grh>();
+        mGraphic = new Vector<Graphic>();
         mBody = new Vector<Body>();
         mHead = new Vector<Head>();
         mHelmet = new Vector<Helmet>();
@@ -72,7 +72,7 @@ public class AssetsHandler {
         mFx = new Vector<Fx>();
         
         // Load all INITs
-        mGrh = new GrhLoader().load("Graficos.ind");
+        mGraphic = new GrhLoader().load("Graficos.ind");
         mBody = new BodyLoader().load("Personajes.ind");
         mWeapon = new WeaponLoader().load("Armas.dat");
         mShield = new ShieldLoader().load("Escudos.dat");
@@ -110,22 +110,22 @@ public class AssetsHandler {
 	 * @param pIndex
 	 * @return grh data of a specified index
 	 */
-	public static Grh getGrh(int pIndex) {
+	public static Graphic getGrh(int pIndex) {
 		return AssetsHandler.getGrhData().get(pIndex);
 	}
 	
 	/**
-	 * @return the mGrh
+	 * @return the mGraphic
 	 */
-	public static Vector<Grh> getGrhData() {
-		return mGrh;
+	public static Vector<Graphic> getGrhData() {
+		return mGraphic;
 	}
 
 	/**
-	 * @param mGrh the mGrh to set
+	 * @param mGraphic the mGraphic to set
 	 */
-	public static void setGrhData(Vector<Grh> mGrh) {
-		AssetsHandler.mGrh = mGrh;
+	public static void setGrhData(Vector<Graphic> mGraphic) {
+		AssetsHandler.mGraphic = mGraphic;
 	}
 
 	/**

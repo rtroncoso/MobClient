@@ -26,7 +26,7 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
-import com.mob.client.data.Grh;
+import com.mob.client.data.Graphic;
 import com.mob.client.handlers.AssetsHandler;
 
 public class BundledTexture {
@@ -61,37 +61,37 @@ public class BundledTexture {
 			this.mFrames[0] = new GameTexture(_game, grhIndex);
 			this.mAnimated = false;
 		} else {
-			Grh grh = _game.getGrhData().get(grhIndex);
-			int numFrames = grh.getFrames().length;
+			Graphic graphic = _game.getGrhData().get(grhIndex);
+			int numFrames = graphic.getFrames().length;
 			
 			this.mFrames = new GameTexture[numFrames];
 			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
 			for(int i = 0; i < numFrames; i++) {
-				this.mFrames[i] = new GameTexture(_game, grh.getFrame(i));
+				this.mFrames[i] = new GameTexture(_game, graphic.getFrame(i));
 				tmpFrames[i] = this.mFrames[i].getGraphic();
 			}
-			this.mAnimation = new Animation(grh.getSpeed() / 1000, tmpFrames);
+			this.mAnimation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
 			this.mAnimated = true;
 		}
 	}
 	
-	public BundledTexture (Grh grh, boolean pAnimated) {
+	public BundledTexture (Graphic graphic, boolean pAnimated) {
 		this.mAnimationTime = 0.0f;
 		
 		if(!pAnimated) {
 			this.mFrames = new GameTexture[1];
-			this.mFrames[0] = new GameTexture(grh);
+			this.mFrames[0] = new GameTexture(graphic);
 			this.mAnimated = false;
 		} else {
-			int numFrames = grh.getFrames().length;
+			int numFrames = graphic.getFrames().length;
 			
 			this.mFrames = new GameTexture[numFrames];
 			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
 			for(int i = 0; i < numFrames; i++) {
-				this.mFrames[i] = new GameTexture(AssetsHandler.getGrhData().get(grh.getFrame(i)));
+				this.mFrames[i] = new GameTexture(AssetsHandler.getGrhData().get(graphic.getFrame(i)));
 				tmpFrames[i] = this.mFrames[i].getGraphic();
 			}
-			this.mAnimation = new Animation(grh.getSpeed() / 1000, tmpFrames);
+			this.mAnimation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
 			this.mAnimated = true;
 		}
 	}

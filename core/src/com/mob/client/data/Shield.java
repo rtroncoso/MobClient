@@ -24,61 +24,32 @@ package com.mob.client.data;
 
 public class Shield {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int[] graphic;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int[] mGraphic;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public Shield(int[] pGraphic) {
-		this.setGraphicArray(pGraphic);
+	public Shield(int[] graphic) {
+		this.setGraphicArray(graphic);
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	public int getGraphic(int pIndex) {
-		return this.mGraphic[pIndex];
+	public int getGraphic(int index) {
+		return this.graphic[index];
 	}
 	
-	public void setGraphic(int pIndex, int pGraphic) {
-		this.mGraphic[pIndex] = pGraphic;
+	public void setGraphic(int index, int graphic) {
+		this.graphic[index] = graphic;
 	}
 	
 	/**
-	 * @return the mGraphic
+	 * @return the graphic
 	 */
 	public int[] getGraphicArray() {
-		return mGraphic;
+		return graphic;
 	}
 
 	/**
-	 * @param mGraphic the mGraphic to set
+	 * @param graphic the graphic to set
 	 */
-	public void setGraphicArray(int[] mGraphic) {
-		this.mGraphic = mGraphic;
+	public void setGraphicArray(int[] graphic) {
+		this.graphic = graphic;
 	}
-
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

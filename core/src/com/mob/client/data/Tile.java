@@ -29,14 +29,10 @@ import com.mob.client.textures.BundledAnimation;
 import java.util.Vector;
 
 public class Tile {
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
+	public static final float TILE_PIXEL_WIDTH = 32.0f;
+	public static final float TILE_PIXEL_HEIGHT = 32.0f;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
 	private int[] mGraphic;
 	private Vector<BundledAnimation> mTextures = new Vector<BundledAnimation>();
 	

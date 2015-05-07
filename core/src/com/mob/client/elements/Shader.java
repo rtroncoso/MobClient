@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
+import com.mob.client.data.Tile;
 import com.mob.client.interfaces.Constants;
 
 public class Shader implements Constants {
@@ -70,8 +71,8 @@ public class Shader implements Constants {
 		super();
 		this.mGame = mGame;
 		this.mTexture = new Texture(GAME_SHADERS_PATH + mTexture);
-		this.mX = mX * TILE_PIXEL_WIDTH;
-		this.mY = mY * TILE_PIXEL_HEIGHT;
+		this.mX = mX * Tile.TILE_PIXEL_WIDTH;
+		this.mY = mY * Tile.TILE_PIXEL_HEIGHT;
 		this.mColor = mColor;
 		this.mSize = pSize * 100.0f;
 		this.mSpeed = mSpeed;

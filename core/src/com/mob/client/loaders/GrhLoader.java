@@ -22,15 +22,16 @@ import java.io.IOException;
 import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
-import com.mob.client.data.Grh;
+import com.mob.client.data.Graphic;
+import com.mob.client.data.Tile;
 import com.mob.client.interfaces.Loadable;
 import com.mob.client.util.Util;
 
-public class GrhLoader extends Loader implements Loadable<Grh> {
+public class GrhLoader extends Loader implements Loadable<Graphic> {
 
 	@Override
-	public Vector<Grh> load(String initFileName) {
-		Vector<Grh> inits = new Vector<Grh>();
+	public Vector<Graphic> load(String initFileName) {
+		Vector<Graphic> inits = new Vector<Graphic>();
 		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		
 		try {
@@ -40,7 +41,7 @@ public class GrhLoader extends Loader implements Loadable<Grh> {
 			file.skipBytes(2);
 			
 			inits.setSize(numGrhs + 1);
-			inits.setElementAt(new Grh(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
+			inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
 			
 			int grh = Util.leShort(file.readShort());
 			file.skipBytes(2); // no es negro si nadie lo ve
@@ -92,10 +93,10 @@ public class GrhLoader extends Loader implements Loadable<Grh> {
 					pixelHeight = Util.leShort(file.readShort());
 					if(pixelHeight <= 0) throw new IOException("pixelHeight (numFrames < 1)");
 
-					tileWidth = (float) pixelWidth / TILE_PIXEL_WIDTH;
-					tileHeight = (float) pixelHeight / TILE_PIXEL_HEIGHT;
+					tileWidth = (float) pixelWidth / Tile.TILE_PIXEL_WIDTH;
+					tileHeight = (float) pixelHeight / Tile.TILE_PIXEL_HEIGHT;
 				}
-				inits.setElementAt(new Grh(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
+				inits.setElementAt(new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
 				grh = Util.leShort(file.readShort());
 				file.skipBytes(2);
 			}

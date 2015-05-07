@@ -22,203 +22,176 @@
  */
 package com.mob.client.data;
 
-public class Grh {
+public class Graphic {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int x;
+	private int y;
+	private int fileNum;
+	private int grhIndex;
+	private int pixelWidth;
+	private int pixelHeight;
+	private float tileWidth;
+	private float tileHeight;
+	private int[] frames;
+	private float speed;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int mX;
-	private int mY;
-	private int mFileNum;
-	private int mGrhIndex;
-	private int mPixelWidth;
-	private int mPixelHeight;
-	private float mTileWidth;
-	private float mTileHeight;
-	private int[] mFrames;
-	private float mSpeed;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public Grh(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
-               float tileWidth, float tileHeight, int[] frames, float speed) {
+	public Graphic(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
+				   float tileWidth, float tileHeight, int[] frames, float speed) {
 		super();
-		this.mX = x;
-		this.mY = y;
-		this.mFileNum = fileNum;
-		this.mPixelWidth = pixelWidth;
-		this.mPixelHeight = pixelHeight;
-		this.mTileWidth = tileWidth;
-		this.mTileHeight = tileHeight;
-		this.mFrames = frames;
-		this.mSpeed = speed;
+		this.x = x;
+		this.y = y;
+		this.fileNum = fileNum;
+		this.pixelWidth = pixelWidth;
+		this.pixelHeight = pixelHeight;
+		this.tileWidth = tileWidth;
+		this.tileHeight = tileHeight;
+		this.frames = frames;
+		this.speed = speed;
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
 	 * @return the x
 	 */
 	public int getX() {
-		return mX;
+		return x;
 	}
 
 	/**
 	 * @param x the x to set
 	 */
 	public void setX(int x) {
-		this.mX = x;
+		this.x = x;
 	}
 
 	/**
 	 * @return the y
 	 */
 	public int getY() {
-		return mY;
+		return y;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
 	public void setY(int y) {
-		this.mY = y;
+		this.y = y;
 	}
 
 	/**
 	 * @return the fileNum
 	 */
 	public int getFileNum() {
-		return mFileNum;
+		return fileNum;
 	}
 
 	/**
 	 * @param fileNum the fileNum to set
 	 */
 	public void setFileNum(int fileNum) {
-		this.mFileNum = fileNum;
+		this.fileNum = fileNum;
 	}
 
 	/**
 	 * @return the pixelWidth
 	 */
 	public int getPixelWidth() {
-		return mPixelWidth;
+		return pixelWidth;
 	}
 
 	/**
 	 * @param pixelWidth the pixelWidth to set
 	 */
 	public void setPixelWidth(int pixelWidth) {
-		this.mPixelWidth = pixelWidth;
+		this.pixelWidth = pixelWidth;
 	}
 
 	/**
 	 * @return the pixelHeight
 	 */
 	public int getPixelHeight() {
-		return mPixelHeight;
+		return pixelHeight;
 	}
 
 	/**
 	 * @param pixelHeight the pixelHeight to set
 	 */
 	public void setPixelHeight(int pixelHeight) {
-		this.mPixelHeight = pixelHeight;
+		this.pixelHeight = pixelHeight;
 	}
 
 	/**
 	 * @return the tileWidth
 	 */
 	public float getTileWidth() {
-		return mTileWidth;
+		return tileWidth;
 	}
 
 	/**
 	 * @param tileWidth the tileWidth to set
 	 */
 	public void setTileWidth(float tileWidth) {
-		this.mTileWidth = tileWidth;
+		this.tileWidth = tileWidth;
 	}
 
 	/**
 	 * @return the tileHeight
 	 */
 	public float getTileHeight() {
-		return mTileHeight;
+		return tileHeight;
 	}
 
 	/**
 	 * @param tileHeight the tileHeight to set
 	 */
 	public void setTileHeight(float tileHeight) {
-		this.mTileHeight = tileHeight;
+		this.tileHeight = tileHeight;
 	}
 
 	/**
 	 * @return the frames
 	 */
 	public int[] getFrames() {
-		return mFrames;
+		return frames;
 	}
 	
 	public int getFrame(int pIndex) {
-		return mFrames[pIndex];
+		return frames[pIndex];
 	}
 
 	/**
 	 * @param frames the frames to set
 	 */
 	public void setFrames(int[] frames) {
-		this.mFrames = frames;
+		this.frames = frames;
 	}
 
 	/**
 	 * @return the speed
 	 */
 	public float getSpeed() {
-		return mSpeed;
+		return speed;
 	}
 
 	/**
 	 * @param speed the speed to set
 	 */
 	public void setSpeed(float speed) {
-		this.mSpeed = speed;
+		this.speed = speed;
 	}
 
 	/**
 	 * @return the grhIndex
 	 */
 	public int getGrhIndex() {
-		return mGrhIndex;
+		return grhIndex;
 	}
 
 	/**
 	 * @param grhIndex the grhIndex to set
 	 */
 	public void setGrhIndex(int grhIndex) {
-		this.mGrhIndex = grhIndex;
+		this.grhIndex = grhIndex;
 	}
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

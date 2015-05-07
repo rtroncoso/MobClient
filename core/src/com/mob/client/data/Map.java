@@ -35,9 +35,6 @@ import com.mob.client.textures.BundledAnimation;
 
 public class Map implements Constants {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
     public static final float TILE_PIXEL_WIDTH = 32.0f;
     public static final float TILE_PIXEL_HEIGHT = 32.0f;
     public static final int TILE_BUFFER_SIZE = 7;
@@ -50,71 +47,53 @@ public class Map implements Constants {
     public static final int MAP_START_LAYER = 1;
     public static final int MAP_END_LAYER = 4;
 
+	protected Tile tiles[][];
+	protected boolean loaded;
+    protected Texture bufferedLayer;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	protected MapBlock mTiles[][];
-	protected boolean mLoaded;
-    protected Texture mBufferedLayer;
-
-    // ===========================================================
-	// Constructors
-	// ===========================================================
 	public Map() {
-		this.mTiles = new MapBlock[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
-		this.mLoaded = false;
-	}
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	/**
-	 * @return the mTiles
-	 */
-	public MapBlock[][] getTileArray() {
-		return mTiles;
+		this.tiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
+		this.loaded = false;
 	}
 
 	/**
-	 * @param mTiles the mTiles to set
+	 * @return the tiles
 	 */
-	public void setTileArray(MapBlock mTiles[][]) {
-		this.mTiles = mTiles;
+	public Tile[][] getTileArray() {
+		return tiles;
+	}
+
+	/**
+	 * @param tiles the tiles to set
+	 */
+	public void setTileArray(Tile tiles[][]) {
+		this.tiles = tiles;
 	}
 	
-	public MapBlock getTile(int pX, int pY) {
-		return this.mTiles[pX][pY];
+	public Tile getTile(int x, int y) {
+		return this.tiles[x][y];
 	}
 	
-	public void setTile(int pX, int pY, MapBlock pMapBlock) {
-		this.mTiles[pX][pY] = pMapBlock;
+	public void setTile(int x, int y, Tile tile) {
+		this.tiles[x][y] = tile;
 	}
 
 	public boolean isLoaded() {
-		return mLoaded;
+		return loaded;
 	}
 
 	public void setLoaded(boolean pLoaded) {
-		this.mLoaded = pLoaded;
+		this.loaded = pLoaded;
 	}
 
     public Texture getBufferedLayer() {
-        return mBufferedLayer;
+        return bufferedLayer;
     }
 
-    public void setBufferedLayer(Texture mBufferedLayer) {
-        this.mBufferedLayer = mBufferedLayer;
+    public void setBufferedLayer(Texture bufferedLayer) {
+        this.bufferedLayer = bufferedLayer;
     }
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
     /**
      * Initializes map object, renders layer 2 to FrameBuffer and sets
      * it to loaded=true
@@ -159,7 +138,7 @@ public class Map implements Constants {
         sb.end();
 
         fbo.end();
-        this.mBufferedLayer = fbo.getColorBufferTexture();
+        this.bufferedLayer = fbo.getColorBufferTexture();
     }
 
     /**
@@ -202,32 +181,22 @@ public class Map implements Constants {
         for(int y = minY; y <= maxY; y++) {
             for(int x = minX; x <= maxX; x++) {
 
-                // Obtenemos los values para esta layer
                 BundledAnimation animation = this.getTile(x, y).getAnimation(layer);
                 TextureRegion tileRegion = this.getTile(x, y).getRegion(layer);
 
-                // Animamos la layer
                 if(animation != null && animation.isAnimated()) {
                     animation.setAnimationTime(animation.getAnimationTime() + delta);
                 }
 
-                // Si tiene region
                 if(tileRegion != null) {
-                    // Acomodamos el tile
                     final float mapPosX = (x * TILE_PIXEL_WIDTH);
                     final float mapPosY = (y * TILE_PIXEL_HEIGHT);
                     final float tileOffsetX = mapPosX - (tileRegion.getRegionWidth() * 0.5f) - (16.0f);
                     final float tileOffsetY = mapPosY - tileRegion.getRegionHeight();
 
-                    // Lo dibujamos
                     batch.draw(tileRegion, tileOffsetX, tileOffsetY);
                 }
             }
         }
     }
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
 }

@@ -24,59 +24,31 @@ package com.mob.client.data;
 
 public class Head {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int[] headIndex;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int[] mHeadIndex;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	/**
 	 * @param headIndex
 	 */
 	public Head(int[] headIndex) {
-		this.mHeadIndex = headIndex;
+		this.headIndex = headIndex;
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
 	 * @return the headIndex
 	 */
 	public int[] getHeadIndex() {
-		return mHeadIndex;
+		return headIndex;
 	}
 
 	/**
 	 * @param headIndex the headIndex to set
 	 */
 	public void setHeadIndex(int[] headIndex) {
-		this.mHeadIndex = headIndex;
+		this.headIndex = headIndex;
 	}
 	
 	public int getHead(int pIndex) {
-		return this.mHeadIndex[pIndex];
+		return this.headIndex[pIndex];
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

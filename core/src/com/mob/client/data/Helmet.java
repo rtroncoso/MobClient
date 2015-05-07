@@ -24,62 +24,32 @@ package com.mob.client.data;
 
 public class Helmet {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private int[] helmetIndex;
 
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private int[] mHelmetIndex;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	/**
 	 * @param headIndex
 	 */
 	public Helmet(int[] helmetIndex) {
 		super();
-		this.mHelmetIndex = helmetIndex;
+		this.helmetIndex = helmetIndex;
 	}
 
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
 	 * @return the headIndex
 	 */
 	public int[] getHelmetIndex() {
-		return mHelmetIndex;
+		return helmetIndex;
 	}
 
 	/**
 	 * @param headIndex the headIndex to set
 	 */
 	public void setHelmetIndex(int[] helmetIndex) {
-		this.mHelmetIndex = helmetIndex;
+		this.helmetIndex = helmetIndex;
 	}
 	
 	public int getHelmet(int pIndex) {
-		return this.mHelmetIndex[pIndex];
+		return this.helmetIndex[pIndex];
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
 
 }

@@ -24,13 +24,13 @@ package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.client.Game;
-import com.mob.client.data.Grh;
+import com.mob.client.data.Graphic;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
 
 /**
  * Este objeto permite una simple implementaci�n e instanciaci�n de 
- * cualquier {@link com.mob.client.data.Grh} encapsulando y cargando su respectiva
+ * cualquier {@link Graphic} encapsulando y cargando su respectiva
  * {@link TextureRegion}
  * 
  * @author Rodrigo
@@ -51,14 +51,14 @@ public class GameTexture implements Constants {
 	// Constructors
 	// ===========================================================
 	public GameTexture(Game _game, int grhIndex) {
-		Grh grh = _game.getGrhData().get(grhIndex);
+		Graphic graphic = _game.getGrhData().get(grhIndex);
 		
-		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())), graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 	
-	public GameTexture(Grh grh) {
-		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(grh.getFileNum())), grh.getX(), grh.getY(), grh.getPixelWidth(), grh.getPixelHeight());
+	public GameTexture(Graphic graphic) {
+		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())), graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
 		this.mTextureRegion.flip(false, true);
 	}
 

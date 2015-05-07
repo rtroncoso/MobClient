@@ -14,19 +14,17 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.components.graphics;
+package com.mob.client.artemis.components.position;
 
 import com.artemis.Component;
-import com.badlogic.gdx.math.Vector2;
-
-import java.io.Serializable;
 
 /**
- * LineComponent Class
- * @author rt
- * @package com.mob.client.api.components.graphics
+ * WorldPositionComponent Class
+ *
+ * @author Rodrigo
+ * @package com.mob.client.api.components.position
  */
-public class LineComponent extends Component implements Serializable {
+public class WorldPositionComponent extends Component {
 
 	// ===========================================================
 	// Constants
@@ -35,15 +33,15 @@ public class LineComponent extends Component implements Serializable {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Vector2 start = new Vector2();
-	public Vector2 end = new Vector2();
+    public int x;
+    public int y;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public LineComponent(Vector2 start, Vector2 end) {
-        this.start = start;
-        this.end = end;
+    public WorldPositionComponent(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
 	// ===========================================================
@@ -57,6 +55,7 @@ public class LineComponent extends Component implements Serializable {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+
 
 	// ===========================================================
 	// Inner and Anonymous Classes

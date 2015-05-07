@@ -229,7 +229,7 @@ public abstract class CharacterSprite extends MovingSprite implements Constants 
 	 * @param mUserPosX the mUserPosX to set
 	 */
 	public void setUserPosX(int mUserPosX) {
-		this.mX = (mUserPosX * TILE_PIXEL_WIDTH);
+		this.mX = (mUserPosX * Tile.TILE_PIXEL_WIDTH);
 		this.mUserPosX = mUserPosX;
 	}
 
@@ -244,7 +244,7 @@ public abstract class CharacterSprite extends MovingSprite implements Constants 
 	 * @param mUserPosY the mUserPosY to set
 	 */
 	public void setUserPosY(int mUserPosY) {
-		this.mY = (mUserPosY * TILE_PIXEL_HEIGHT);
+		this.mY = (mUserPosY * Tile.TILE_PIXEL_HEIGHT);
 		this.mUserPosY = mUserPosY;
 	}
 	

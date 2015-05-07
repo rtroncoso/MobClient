@@ -14,35 +14,32 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.components.character;
+package com.mob.client.artemis.components.basic;
 
 import com.artemis.Component;
-import com.badlogic.gdx.utils.IntMap;
-import com.mob.client.textures.BundledAnimation;
-
-import java.io.Serializable;
 
 /**
- * BodyComponent Class
- * @author rt
- * @package com.mob.clients.components.character
+ * @author Rodrigo
+ *
  */
-public class BodyComponent extends Component implements Serializable {
+public class StateComponent extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+	public int current = STATE_NORMAL;
+	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public BodyComponent(IntMap<BundledAnimation> animations) {
-        this.animations = animations;
+    public StateComponent(int state) {
+        this.current = state;
     }
 
 	// ===========================================================

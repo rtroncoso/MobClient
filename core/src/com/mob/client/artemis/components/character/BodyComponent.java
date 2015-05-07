@@ -14,24 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.systems.physics;
+package com.mob.client.artemis.components.character;
 
-import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
-import com.artemis.Entity;
-import com.artemis.annotations.Wire;
-import com.artemis.systems.EntityProcessingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.mob.client.api.components.physics.PhysicsComponent;
-import com.mob.client.api.components.position.PositionComponent;
+import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
+
+import java.io.Serializable;
 
 /**
- * @author Rodrigo
- *
+ * BodyComponent Class
+ * @author rt
+ * @package com.mob.clients.components.character
  */
-@Wire
-public class MovementSystem extends EntityProcessingSystem {
+public class BodyComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -40,17 +36,14 @@ public class MovementSystem extends EntityProcessingSystem {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
-	private ComponentMapper<PositionComponent> mPositionMapper;
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	@SuppressWarnings("unchecked")
-	public MovementSystem() {
-		super(Aspect.getAspectForAll(PhysicsComponent.class,
-                PositionComponent.class));
-	}
+    public BodyComponent(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 
 	// ===========================================================
 	// Methods
@@ -59,24 +52,8 @@ public class MovementSystem extends EntityProcessingSystem {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-    @Override
-    protected void process(Entity entity) {
 
-        // Obtenemos components de entity
-        final PhysicsComponent phys = this.mPhysicsMapper.get(entity);
-        final PositionComponent pos = this.mPositionMapper.get(entity);
-
-        // Setteamos la aceleración del cuerpo
-        pos.x += phys.velocity * world.getDelta();
-        pos.y += phys.velocity * world.getDelta();
-
-        // Logueamos posición
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
-
-    }
-
-    // ===========================================================
+	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
 

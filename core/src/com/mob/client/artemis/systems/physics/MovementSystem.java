@@ -14,33 +14,43 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.components.basic;
+package com.mob.client.artemis.systems.physics;
 
-import com.artemis.Component;
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.EntityProcessingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.mob.client.artemis.components.physics.PhysicsComponent;
+import com.mob.client.artemis.components.position.PositionComponent;
 
 /**
  * @author Rodrigo
  *
  */
-public class StateComponent extends Component {
+@Wire
+public class MovementSystem extends EntityProcessingSystem {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public int current = STATE_NORMAL;
-	public float time = 0.0f;
+	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
+	private ComponentMapper<PositionComponent> mPositionMapper;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public StateComponent(int state) {
-        this.current = state;
-    }
+	@SuppressWarnings("unchecked")
+	public MovementSystem() {
+		super(Aspect.getAspectForAll(PhysicsComponent.class,
+                PositionComponent.class));
+	}
 
 	// ===========================================================
 	// Methods
@@ -49,8 +59,24 @@ public class StateComponent extends Component {
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
+    @Override
+    protected void process(Entity entity) {
 
-	// ===========================================================
+        // Obtenemos components de entity
+        final PhysicsComponent phys = this.mPhysicsMapper.get(entity);
+        final PositionComponent pos = this.mPositionMapper.get(entity);
+
+        // Setteamos la aceleración del cuerpo
+        pos.x += phys.velocity * world.getDelta();
+        pos.y += phys.velocity * world.getDelta();
+
+        // Logueamos posición
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
+
+    }
+
+    // ===========================================================
 	// Getter & Setter
 	// ===========================================================
 

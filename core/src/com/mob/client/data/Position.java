@@ -25,108 +25,78 @@ package com.mob.client.data;
 import com.mob.client.interfaces.Constants;
 
 public class Position implements Constants {
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
+	private float x;
+	private float y;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private float mX;
-	private float mY;
-
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	public Position() {
 		this(0, 0);
 	}
 	
-	public Position(float mX, float mY) {
-		this.setX(mX);
-		this.setY(mY);
+	public Position(float x, float y) {
+		this.setX(x);
+		this.setY(y);
 	}
 
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
-	 * @return the mX
+	 * @return the x
 	 */
 	public float getX() {
-		return mX;
+		return x;
 	}
 
 
 	/**
-	 * @param mX the mX to set
+	 * @param mX the x to set
 	 */
 	public void setX(float mX) {
-		this.mX = mX;
+		this.x = mX;
 	}
 	
 	/**
-	 * @return the mY
+	 * @return the y
 	 */
 	public float getY() {
-		return mY;
+		return y;
 	}
 
 
 	/**
-	 * @param mY the mY to set
+	 * @param mY the y to set
 	 */
 	public void setY(float mY) {
-		this.mY = mY;
+		this.y = mY;
 	}
 
 
 	/**
-	 * @return the mX
+	 * @return the x
 	 */
 	public float getTileX() {
-		return mX * TILE_PIXEL_WIDTH;
+		return x * Tile.TILE_PIXEL_WIDTH;
 	}
 
 
 	/**
-	 * @param mX the mX to set
+	 * @param x the x to set
 	 */
-	public void setTileX(int mX) {
-		this.mX = mX * TILE_PIXEL_WIDTH;
-	
+	public void setTileX(int x) {
+		this.x = x * Tile.TILE_PIXEL_WIDTH;
 	}
 	
 	/**
-	 * @return the mY
+	 * @return the y
 	 */
 	public float getTileY() {
-		return mY * TILE_PIXEL_HEIGHT;
+		return y * Tile.TILE_PIXEL_HEIGHT;
 	}
 
 
 	/**
-	 * @param mY the mY to set
+	 * @param y the y to set
 	 */
-	public void setTileY(int mY) {
-		this.mY = mY * TILE_PIXEL_HEIGHT;
+	public void setTileY(int y) {
+		this.y = y * Tile.TILE_PIXEL_HEIGHT;
 	}
-	
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

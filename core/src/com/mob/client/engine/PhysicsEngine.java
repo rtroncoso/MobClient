@@ -29,7 +29,7 @@
 //import com.badlogic.gdx.physics.box2d.World;
 //import com.badlogic.gdx.utils.Array;
 //import com.mob.client.Game;
-//import com.mob.client.data.MapBlock;
+//import com.mob.client.data.Tile;
 //import com.mob.client.data.Map;
 //import com.mob.client.elements.Tile;
 //import com.mob.client.handlers.MapHandler;
@@ -245,14 +245,14 @@
 //		this.reset();
 //
 //		// Move Map tiles into our array
-//		this.mTiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
+//		this.tiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
 //		for(int y = MIN_MAP_SIZE_HEIGHT; y <= MAX_MAP_SIZE_HEIGHT; y++) {
 //			for(int x = MIN_MAP_SIZE_WIDTH; x <= MAX_MAP_SIZE_WIDTH; x++) {
 //
-//				MapBlock tile = map.getTile(x, y);
-//				this.mTiles[x][y] = new Tile(this.mGame, x, y, tile.getGraphic());
-//				this.mTiles[x][y].setBlocked(tile.isBlocked());
-//				this.mTiles[x][y].setTrigger(tile.getTrigger());
+//				Tile tile = map.getTile(x, y);
+//				this.tiles[x][y] = new Tile(this.mGame, x, y, tile.getGraphic());
+//				this.tiles[x][y].setBlocked(tile.isBlocked());
+//				this.tiles[x][y].setTrigger(tile.getTrigger());
 //			}
 //		}
 //	}
@@ -263,7 +263,7 @@
 //		// Dispose all map tiles
 //		for(int y = MIN_MAP_SIZE_HEIGHT; y <= MAX_MAP_SIZE_HEIGHT; y++) {
 //			for(int x = MIN_MAP_SIZE_WIDTH; x <= MAX_MAP_SIZE_WIDTH; x++) {
-//				if(this.mTiles[x][y] != null) this.mTiles[x][y].dispose();
+//				if(this.tiles[x][y] != null) this.tiles[x][y].dispose();
 //			}
 //		}
 //	}

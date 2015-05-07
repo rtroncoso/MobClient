@@ -14,17 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.components.position;
+package com.mob.client.artemis.components.character;
 
 import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
+
+import java.io.Serializable;
 
 /**
- * WorldPositionComponent Class
- *
+ * HeadComponent Class
  * @author Rodrigo
- * @package com.mob.client.api.components.position
+ * @package com.mob.client.api.components.character
  */
-public class WorldPositionComponent extends Component {
+public class HeadComponent extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -33,15 +36,16 @@ public class WorldPositionComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-    public int x;
-    public int y;
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public WorldPositionComponent(int x, int y) {
-        this.x = x;
-        this.y = y;
+    /**
+     * @param animations
+     */
+    public HeadComponent(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
     }
 
 	// ===========================================================
@@ -55,7 +59,6 @@ public class WorldPositionComponent extends Component {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-
 
 	// ===========================================================
 	// Inner and Anonymous Classes

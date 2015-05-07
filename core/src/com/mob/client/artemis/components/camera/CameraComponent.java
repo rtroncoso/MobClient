@@ -14,19 +14,17 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.api.components.position;
-
-import com.artemis.Component;
+package com.mob.client.artemis.components.camera;
 
 import java.io.Serializable;
 
 /**
- * PositionComponent Class
+ * CameraComponent Class
  *
  * @author rt
- * @package com.mob.client.api.components.basic
+ * @package com.mob.client.api.components.mCamera
  */
-public class PositionComponent extends Component implements Serializable {
+public class CameraComponent implements Serializable {
 
     // ===========================================================
     // Constants
@@ -36,18 +34,12 @@ public class PositionComponent extends Component implements Serializable {
     // ===========================================================
     // Fields
     // ===========================================================
-    public float x;
-    public float y;
+
 
     // ===========================================================
     // Constructors
     // ===========================================================
-    public PositionComponent(float pX, float pY) {
-        this.x = pX;
-        this.y = pY;
-    }
 
-    public PositionComponent() {}
 
     // ===========================================================
     // Methods
