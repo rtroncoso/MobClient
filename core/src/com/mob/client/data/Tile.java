@@ -33,136 +33,126 @@ public class Tile {
 	public static final float TILE_PIXEL_WIDTH = 32.0f;
 	public static final float TILE_PIXEL_HEIGHT = 32.0f;
 
-	private int[] mGraphic;
-	private Vector<BundledAnimation> mTextures = new Vector<BundledAnimation>();
+	private int[] graphic;
+	private Vector<BundledAnimation> textures = new Vector<BundledAnimation>();
 	
-	private int mCharIndex;
-	private int mObjIndex;
-	private int mNpcIndex;
+	private int charIndex;
+	private int objIndex;
+	private int npcIndex;
 	
-	private WorldPosition mTileExit;
-	private boolean mBlocked;
+	private WorldPosition tileExit;
+	private boolean blocked;
 	
-	private int mTrigger;
+	private int trigger;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	/**
-	 * @param mGraphic
-	 * @param mCharIndex
-	 * @param mObjIndex
-	 * @param mNpcIndex
+	 * @param graphic
+	 * @param charIndex
+	 * @param objIndex
+	 * @param npcIndex
 	 * @param tileExit
-	 * @param mBlocked
-	 * @param mTrigger
+	 * @param blocked
+	 * @param trigger
 	 */
-	public Tile(int[] mGraphic, int mCharIndex, int mObjIndex,
-				int mNpcIndex, WorldPosition tileExit, boolean mBlocked,
-				int mTrigger) {
+	public Tile(int[] graphic, int charIndex, int objIndex,
+				int npcIndex, WorldPosition tileExit, boolean blocked,
+				int trigger) {
 		super();
-		this.setGraphic(mGraphic);
-		this.setCharIndex(mCharIndex);
-		this.setObjIndex(mObjIndex);
-		this.setNpcIndex(mNpcIndex);
+		this.setGraphic(graphic);
+		this.setCharIndex(charIndex);
+		this.setObjIndex(objIndex);
+		this.setNpcIndex(npcIndex);
 		this.setTileExit(tileExit);
-		this.setBlocked(mBlocked);
-		this.setTrigger(mTrigger);
+		this.setBlocked(blocked);
+		this.setTrigger(trigger);
 		this.loadTextures();
 	}
 
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
 	public void loadTextures() {
 		int layer = 0;
-		this.mTextures.setSize(this.getGraphic().length);
+		this.textures.setSize(this.getGraphic().length);
 		for(int grhIndex : this.getGraphic()) {
-			if(grhIndex > 0) this.mTextures.setElementAt(new BundledAnimation(AssetsHandler.getGrh(grhIndex)), layer);
+			if(grhIndex > 0) this.textures.setElementAt(new BundledAnimation(AssetsHandler.getGrh(grhIndex)), layer);
 			layer++;
 		}
 	}
 
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	public TextureRegion getRegion(int pIndex) {
-		return (this.getGraphic(pIndex) > 0) ?
-				(this.mTextures.get(pIndex).isAnimated() ?
-						this.mTextures.get(pIndex).getAnimatedGraphic(true) :
-						this.mTextures.get(pIndex).getGraphic()) :
+	public TextureRegion getRegion(int index) {
+		return (this.getGraphic(index) > 0) ?
+				(this.textures.get(index).isAnimated() ?
+						this.textures.get(index).getAnimatedGraphic(true) :
+						this.textures.get(index).getGraphic()) :
 				null;
 	}
 
-	public BundledAnimation getAnimation(int pIndex) {
-		return (this.mTextures.get(pIndex) != null) ? this.mTextures.get(pIndex) : null;
+	public BundledAnimation getAnimation(int index) {
+		return (this.textures.get(index) != null) ? this.textures.get(index) : null;
 	}
 
-	public int getGraphic(int pIndex) {
-		return this.mGraphic[pIndex];
+	public int getGraphic(int index) {
+		return this.graphic[index];
 	}
 	/**
-	 * @return the mGraphic
+	 * @return the graphic
 	 */
 	public int[] getGraphic() {
-		return this.mGraphic;
+		return this.graphic;
 	}
 
 	/**
-	 * @param mGraphic the mGraphic to set
+	 * @param graphic the graphic to set
 	 */
-	public void setGraphic(int[] mGraphic) {
-		this.mGraphic = mGraphic;
+	public void setGraphic(int[] graphic) {
+		this.graphic = graphic;
 	}
 
 
 	/**
-	 * @return the mCharIndex
+	 * @return the charIndex
 	 */
 	public int getCharIndex() {
-		return mCharIndex;
+		return charIndex;
 	}
 
 
 	/**
-	 * @param mCharIndex the mCharIndex to set
+	 * @param charIndex the charIndex to set
 	 */
-	public void setCharIndex(int mCharIndex) {
-		this.mCharIndex = mCharIndex;
+	public void setCharIndex(int charIndex) {
+		this.charIndex = charIndex;
 	}
 
 
 	/**
-	 * @return the mObjIndex
+	 * @return the objIndex
 	 */
 	public int getObjIndex() {
-		return mObjIndex;
+		return objIndex;
 	}
 
 
 	/**
-	 * @param mObjIndex the mObjIndex to set
+	 * @param objIndex the objIndex to set
 	 */
-	public void setObjIndex(int mObjIndex) {
-		this.mObjIndex = mObjIndex;
+	public void setObjIndex(int objIndex) {
+		this.objIndex = objIndex;
 	}
 
 
 	/**
-	 * @return the mNpcIndex
+	 * @return the npcIndex
 	 */
 	public int getNpcIndex() {
-		return mNpcIndex;
+		return npcIndex;
 	}
 
 
 	/**
-	 * @param mNpcIndex the mNpcIndex to set
+	 * @param npcIndex the npcIndex to set
 	 */
-	public void setNpcIndex(int mNpcIndex) {
-		this.mNpcIndex = mNpcIndex;
+	public void setNpcIndex(int npcIndex) {
+		this.npcIndex = npcIndex;
 	}
 
 
@@ -170,7 +160,7 @@ public class Tile {
 	 * @return the tileExit
 	 */
 	public WorldPosition getTileExit() {
-		return mTileExit;
+		return tileExit;
 	}
 
 
@@ -178,48 +168,39 @@ public class Tile {
 	 * @param tileExit the tileExit to set
 	 */
 	public void setTileExit(WorldPosition tileExit) {
-		this.mTileExit = tileExit;
+		this.tileExit = tileExit;
 	}
 
 
 	/**
-	 * @return the mBlocked
+	 * @return the blocked
 	 */
 	public boolean isBlocked() {
-		return mBlocked;
+		return blocked;
 	}
 
 
 	/**
-	 * @param mBlocked the mBlocked to set
+	 * @param blocked the blocked to set
 	 */
-	public void setBlocked(boolean mBlocked) {
-		this.mBlocked = mBlocked;
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
 	}
 
 
 	/**
-	 * @return the mTrigger
+	 * @return the trigger
 	 */
 	public int getTrigger() {
-		return mTrigger;
+		return trigger;
 	}
 
 
 	/**
-	 * @param mTrigger the mTrigger to set
+	 * @param trigger the trigger to set
 	 */
-	public void setTrigger(int mTrigger) {
-		this.mTrigger = mTrigger;
+	public void setTrigger(int trigger) {
+		this.trigger = trigger;
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

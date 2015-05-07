@@ -23,79 +23,53 @@
 package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.Game;
 import com.mob.client.data.Graphic;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
 
 /**
- * Este objeto permite una simple implementaci�n e instanciaci�n de 
+ * Class GameTexture
+ * Este objeto permite una simple implementación e instanciación de
  * cualquier {@link Graphic} encapsulando y cargando su respectiva
  * {@link TextureRegion}
  * 
  * @author Rodrigo
- *
  */
-public class GameTexture implements Constants {
-	// ===========================================================
-	// Constants
-	// ===========================================================
+public class GameTexture {
 
+	private TextureRegion textureRegion;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private TextureRegion mTextureRegion;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public GameTexture(Game _game, int grhIndex) {
-		Graphic graphic = _game.getGrhData().get(grhIndex);
+	public GameTexture(int grhIndex) {
+		Graphic graphic = AssetsHandler.getGrhData().get(grhIndex);
 		
-		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())), graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
-		this.mTextureRegion.flip(false, true);
+		this.textureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())),
+				graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
+		this.textureRegion.flip(false, true);
 	}
 	
 	public GameTexture(Graphic graphic) {
-		this.mTextureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())), graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
-		this.mTextureRegion.flip(false, true);
+		this.textureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())),
+				graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
+		this.textureRegion.flip(false, true);
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
 	public void dispose() {
-		this.mTextureRegion.getTexture().dispose();
+		this.textureRegion.getTexture().dispose();
 	}
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
-	 * @return the mTextureRegion
+	 * @return the textureRegion
 	 */
 	public TextureRegion getGraphic() {
-		return mTextureRegion;
+		return textureRegion;
 	}
 
 	/**
-	 * @param mTextureRegion the mTextureRegion to set
+	 * @param textureRegion the textureRegion to set
 	 */
-	public void setGraphic(TextureRegion mTextureRegion) {
-		this.mTextureRegion = mTextureRegion;
+	public void setGraphic(TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
-
-	  
 
 }

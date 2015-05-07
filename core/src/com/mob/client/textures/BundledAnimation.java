@@ -28,38 +28,24 @@ import com.mob.client.handlers.AssetsHandler;
  */
 public class BundledAnimation {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+	private Array<GameTexture> frames = new Array<GameTexture>();
+	private Animation animation;
+	private float animationTime;
+	private boolean animated = false;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private Array<GameTexture> mFrames = new Array<GameTexture>();
-	private Animation mAnimation;
-	private float mAnimationTime;
-	private boolean mAnimated = false;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	
 	public BundledAnimation(Graphic graphic) {
 		
-		// Declaramos algunos datos a usar e internals
 		int numFrames = graphic.getFrames().length;
 		Array<TextureRegion> tmpRegions = new Array<TextureRegion>();
 		this.setAnimationTime(0.0f);
 		
-		// Si es una animación
 		if(numFrames > 0) {
 			
-			// Iteramos la lista de frames y los agregamos a nuestro array interno
 			for(int frame : graphic.getFrames()) {
 				
-				// Cargamos una nueva GameTexture usando el frame actual
-				this.mFrames.add(new GameTexture(AssetsHandler.getGrh(frame)));
-				tmpRegions.add(this.mFrames.peek().getGraphic());
+				this.frames.add(new GameTexture(AssetsHandler.getGrh(frame)));
+				tmpRegions.add(this.frames.peek().getGraphic());
 			}
 			
 			// TODO : Manual array conversion por error en toArray de gdxArray
@@ -70,67 +56,49 @@ public class BundledAnimation {
 				index++;
 			}
 			
-			// Setteamos nuestro animation object
 			this.setAnimation(new Animation(graphic.getSpeed() / 1000.0f, textures));
-			this.mAnimated = true;
+			this.animated = true;
 			
 		} else {
-			
-			// Vamos a usar un solo frame
-			this.mFrames.add(new GameTexture(graphic));
+			this.frames.add(new GameTexture(graphic));
 		}
 	}
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
-	 * @return the mFrames
+	 * @return the frames
 	 */
 	public Array<GameTexture> getFrames() {
-		return mFrames;
+		return frames;
 	}
 
 	/**
-	 * @param mFrames the mFrames to set
+	 * @param frames the frames to set
 	 */
-	public void setFrames(Array<GameTexture> mFrames) {
-		this.mFrames = mFrames;
+	public void setFrames(Array<GameTexture> frames) {
+		this.frames = frames;
 	}
 
 	/**
-	 * @return the mAnimation
+	 * @return the animation
 	 */
 	public Animation getAnimation() {
-		return mAnimation;
+		return animation;
 	}
 
 	/**
-	 * @param mAnimation the mAnimation to set
+	 * @param animation the animation to set
 	 */
-	public void setAnimation(Animation mAnimation) {
-		this.mAnimation = mAnimation;
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
 	}
 	
 	/**
-	 * Obtiene el primer index de nuestra lista de frames
-	 * 
 	 * @return TextureRegion
 	 */
 	public TextureRegion getGraphic(boolean loop) {
 		return this.isAnimated() ? this.getAnimatedGraphic(loop) : this.getGraphic(0);
 	}
     /**
-     * Obtiene un gráfico (animado o no) de nuestra lista de frames
-     *
      * @return TextureRegion
      */
     public TextureRegion getGraphic() {
@@ -138,51 +106,41 @@ public class BundledAnimation {
     }
 
 	/**
-	 * Obtenemos un índice específico de nuestra lista de frames
-	 * 
-	 * @param pIndex
+	 * @param index
 	 * @return TextureRegion
 	 */
-	public TextureRegion getGraphic(int pIndex) {
-		return this.mFrames.get(pIndex).getGraphic();
+	public TextureRegion getGraphic(int index) {
+		return this.frames.get(index).getGraphic();
 	}
 	
 	/**
-	 * Obtiene un graphic (con o sin animación) de este objeto
-	 * 
 	 * @param loop 
 	 * @return TextureRegion
 	 */
 	public TextureRegion getAnimatedGraphic(boolean loop) {
-		return this.mAnimation.getKeyFrame(this.getAnimationTime(), loop);
+		return this.animation.getKeyFrame(this.getAnimationTime(), loop);
 	}
 	
 	/**
-	 * Devuelve si está animado o no
-	 * 
 	 * @return boolean
 	 */
 	public boolean isAnimated() {
-		return this.mAnimated;
+		return this.animated;
 	}
 
 	/**
-	 * @return the mAnimationTime
+	 * @return the animationTime
 	 */
 	public float getAnimationTime() {
-		return mAnimationTime;
+		return animationTime;
 	}
 
 	/**
-	 * @param mAnimationTime the mAnimationTime to set
+	 * @param animationTime the animationTime to set
 	 */
-	public void setAnimationTime(float mAnimationTime) {
-		this.mAnimationTime = mAnimationTime;
+	public void setAnimationTime(float animationTime) {
+		this.animationTime = animationTime;
 	}
 
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

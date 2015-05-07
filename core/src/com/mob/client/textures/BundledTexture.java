@@ -30,127 +30,89 @@ import com.mob.client.data.Graphic;
 import com.mob.client.handlers.AssetsHandler;
 
 public class BundledTexture {
-	
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
+	private GameTexture[] frames;
+	private Animation animation;
+	private float animationTime;
+	private boolean animated;
+	private float x;
+	private float y;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private GameTexture[] mFrames;
-	private Animation mAnimation;
-	private float mAnimationTime;
-	private boolean mAnimated;
-	private float mX;
-	private float mY;
+    public BundledTexture (Graphic graphic, boolean animated) {
+        this.animationTime = 0.0f;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public BundledTexture (Game _game, int grhIndex) {
-		this(_game, grhIndex, false);
-	}
-	
-	public BundledTexture (Game _game, int grhIndex, boolean pAnimated) {
-		this.mAnimationTime = 0.0f;
-		
-		if(!pAnimated) {
-			this.mFrames = new GameTexture[1];
-			this.mFrames[0] = new GameTexture(_game, grhIndex);
-			this.mAnimated = false;
-		} else {
-			Graphic graphic = _game.getGrhData().get(grhIndex);
-			int numFrames = graphic.getFrames().length;
-			
-			this.mFrames = new GameTexture[numFrames];
-			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
-			for(int i = 0; i < numFrames; i++) {
-				this.mFrames[i] = new GameTexture(_game, graphic.getFrame(i));
-				tmpFrames[i] = this.mFrames[i].getGraphic();
-			}
-			this.mAnimation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
-			this.mAnimated = true;
-		}
-	}
-	
-	public BundledTexture (Graphic graphic, boolean pAnimated) {
-		this.mAnimationTime = 0.0f;
-		
-		if(!pAnimated) {
-			this.mFrames = new GameTexture[1];
-			this.mFrames[0] = new GameTexture(graphic);
-			this.mAnimated = false;
-		} else {
-			int numFrames = graphic.getFrames().length;
-			
-			this.mFrames = new GameTexture[numFrames];
-			TextureRegion tmpFrames[] = new TextureRegion[numFrames];
-			for(int i = 0; i < numFrames; i++) {
-				this.mFrames[i] = new GameTexture(AssetsHandler.getGrhData().get(graphic.getFrame(i)));
-				tmpFrames[i] = this.mFrames[i].getGraphic();
-			}
-			this.mAnimation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
-			this.mAnimated = true;
-		}
+        if(!animated) {
+            this.frames = new GameTexture[1];
+            this.frames[0] = new GameTexture(graphic);
+            this.animated = false;
+        } else {
+            int numFrames = graphic.getFrames().length;
+
+            this.frames = new GameTexture[numFrames];
+            TextureRegion tmpFrames[] = new TextureRegion[numFrames];
+            for(int i = 0; i < numFrames; i++) {
+                this.frames[i] = new GameTexture(AssetsHandler.getGrhData().get(graphic.getFrame(i)));
+                tmpFrames[i] = this.frames[i].getGraphic();
+            }
+            this.animation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
+            this.animated = true;
+        }
+    }
+
+	public BundledTexture (int grhIndex, boolean animated) {
+		this(AssetsHandler.getGrh(grhIndex), animated);
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
+    public BundledTexture (int grhIndex) {
+        this(grhIndex, false);
+    }
+
 	public void dispose() {
-		
-		// Dispose all our frames
-		for(GameTexture t : this.mFrames) {
+		for(GameTexture t : this.frames) {
 			t.dispose();
 		}
 	}
-	
-	
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
+
 	/**
-	 * @return the mAnimation
+	 * @return the animation
 	 */
 	public Animation getAnimation() {
-		return mAnimation;
+		return animation;
 	}
 
 	/**
-	 * @param mAnimation the mAnimation to set
+	 * @param animation the animation to set
 	 */
-	public void setAnimation(Animation mAnimation) {
-		this.mAnimation = mAnimation;
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
 	}
 
 	/**
-	 * @return the mAnimationTime
+	 * @return the animationTime
 	 */
 	public float getAnimationTime() {
-		return mAnimationTime;
+		return animationTime;
 	}
 
 	/**
-	 * @param mAnimationTime the mAnimationTime to set
+	 * @param animationTime the animationTime to set
 	 */
-	public void setAnimationTime(float mAnimationTime) {
-		this.mAnimationTime = mAnimationTime;
+	public void setAnimationTime(float animationTime) {
+		this.animationTime = animationTime;
 	}
 
 	/**
-	 * @return the mFrames
+	 * @return the frames
 	 */
 	public GameTexture[] getFrames() {
-		return mFrames;
+		return frames;
 	}
 
 	/**
-	 * @param mFrames the mFrames to set
+	 * @param mFrames the frames to set
 	 */
 	public void setFrames(GameTexture[] mFrames) {
-		this.mFrames = mFrames;
+		this.frames = mFrames;
 	}
 	
 	public TextureRegion getGraphic() {
@@ -158,64 +120,58 @@ public class BundledTexture {
 	}
 
 	
-	public TextureRegion getGraphic(int pIndex) {
-		return this.mFrames[pIndex].getGraphic();
+	public TextureRegion getGraphic(int index) {
+		return this.frames[index].getGraphic();
 	}
 	
 	public TextureRegion getGraphic(boolean loop) {
-		if(this.mAnimated)
-			return this.mAnimation.getKeyFrame(this.mAnimationTime, loop);
-		else
-			return this.getGraphic();
+		if(this.animated) {
+			return this.animation.getKeyFrame(this.animationTime, loop);
+		}
+
+		return this.getGraphic();
 	}
 
 	/**
-	 * @return the mX
+	 * @return the x
 	 */
 	public float getX() {
-		return mX;
+		return x;
 	}
 
 	/**
-	 * @param mX the mX to set
+	 * @param mX the x to set
 	 */
 	public void setX(float mX) {
-		this.mX = mX;
+		this.x = mX;
 	}
 
 	/**
-	 * @return the mY
+	 * @return the y
 	 */
 	public float getY() {
-		return mY;
+		return y;
 	}
 
 	/**
-	 * @param mY the mY to set
+	 * @param mY the y to set
 	 */
 	public void setY(float mY) {
-		this.mY = mY;
+		this.y = mY;
 	}
-	// ===========================================================
-	// Methods
-	// ===========================================================
 
 	/**
-	 * @return the mAnimated
+	 * @return the animated
 	 */
 	public boolean isAnimated() {
-		return mAnimated;
+		return animated;
 	}
 
 	/**
-	 * @param mAnimated the mAnimated to set
+	 * @param mAnimated the animated to set
 	 */
 	public void setAnimated(boolean mAnimated) {
-		this.mAnimated = mAnimated;
+		this.animated = mAnimated;
 	}
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 	
 }
