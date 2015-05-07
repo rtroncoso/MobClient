@@ -17,13 +17,14 @@
 package com.mob.client;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.interfaces.Constants;
-import com.mob.client.screens.Screen;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.ScreenHandler;
+import com.mob.client.handlers.SurfaceHandler;
 
-import java.util.HashMap;
-
-public abstract class Game implements ApplicationListener, Constants {
+public class Game implements ApplicationListener {
 
     public static final String GAME_GRAPHICS_PATH = "data/graficos/";
     public static final String GAME_FONTS_PATH = "data/fonts/";
@@ -37,12 +38,50 @@ public abstract class Game implements ApplicationListener, Constants {
     public static final boolean GAME_FULL_SCREEN = false;
     public static final boolean GAME_VSYNC_ENABLED = true;
 
-    protected HashMap<String, Screen> screens;
     protected SpriteBatch spriteBatch;
-	protected Screen currentScreen;
 
-    public Game() {
-    	this.screens = new HashMap<String, Screen>();
+    @Override
+    public void create() {
+
+        // Init spritebatch
+        this.spriteBatch = new SpriteBatch();
+
+        // Load resources
+        SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
+        AssetsHandler.load();
+
+
+        // Create Game Screen and present it
+        ScreenHandler.load("GameScreen", this);
+    }
+
+    @Override
+    public void render() {
+        GL20 gl = Gdx.gl;
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        ScreenHandler.getCurrent().render(Gdx.graphics.getDeltaTime());
+    }
+
+    @Override
+    public void dispose() {
+        ScreenHandler.getCurrent().dispose();
+    }
+
+    @Override
+    public void pause() {
+        ScreenHandler.getCurrent().pause();
+    }
+
+    @Override
+    public void resize(int arg0, int arg1) {
+        ScreenHandler.getCurrent().resize(arg0, arg1);
+    }
+
+    @Override
+    public void resume() {
+        ScreenHandler.getCurrent().resume();
     }
 
 	/**
@@ -58,7 +97,5 @@ public abstract class Game implements ApplicationListener, Constants {
 	public void setSpriteBatch(SpriteBatch spriteBatch) {
 		this.spriteBatch = spriteBatch;
 	}
-
-
 
 }  

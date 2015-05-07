@@ -30,7 +30,7 @@ public class ScreenHandler {
     protected static HashMap<String, Screen> screens = new HashMap<String, Screen>();
     protected static Screen currentScreen;
 
-    public static void load(String screenClassName, Game game) {
+    public static Screen load(String screenClassName, Game game) {
 
         screenClassName = "com.mob.client.screens." + screenClassName;
         Screen newScreen = null;
@@ -55,29 +55,27 @@ public class ScreenHandler {
             newScreen = screens.get(screenClassName);
         }
 
-        if(newScreen == null) return;
-
         if(currentScreen != null) {
             //remove current screen!
             currentScreen.dispose();
         }
 
         currentScreen = newScreen;
-    }
-
-
-    /**
-     * @return the currentScreen
-     */
-    public static Screen setCurrent() {
         return currentScreen;
     }
 
     /**
      * @param currentScreen the currentScreen to set
      */
-    public static void getCurrent(Screen currentScreen) {
-        ScreenHandler.currentScreen = currentScreen;
+    public static void setCurrent(Screen currentScreen) {
+        currentScreen = currentScreen;
+    }
+
+    /**
+     * @return the currentScreen
+     */
+    public static Screen getCurrent() {
+        return ScreenHandler.currentScreen;
     }
 
 }

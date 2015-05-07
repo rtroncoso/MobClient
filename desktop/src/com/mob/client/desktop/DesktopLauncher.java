@@ -19,7 +19,6 @@ package com.mob.client.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mob.client.Game;
-import com.mob.client.TestGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -32,6 +31,6 @@ public class DesktopLauncher {
         cfg.foregroundFPS = 0;
         cfg.resizable = false;
         
-        new LwjglApplication(new TestGame(), cfg);
+        new LwjglApplication(new Game(), cfg);
 	}
 }
