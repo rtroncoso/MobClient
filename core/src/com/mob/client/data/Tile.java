@@ -28,7 +28,7 @@ import com.mob.client.textures.BundledAnimation;
 
 import java.util.Vector;
 
-public class MapBlock {
+public class Tile {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -61,9 +61,9 @@ public class MapBlock {
 	 * @param mBlocked
 	 * @param mTrigger
 	 */
-	public MapBlock(int[] mGraphic, int mCharIndex, int mObjIndex,
-                    int mNpcIndex, WorldPosition tileExit, boolean mBlocked,
-                    int mTrigger) {
+	public Tile(int[] mGraphic, int mCharIndex, int mObjIndex,
+				int mNpcIndex, WorldPosition tileExit, boolean mBlocked,
+				int mTrigger) {
 		super();
 		this.setGraphic(mGraphic);
 		this.setCharIndex(mCharIndex);
