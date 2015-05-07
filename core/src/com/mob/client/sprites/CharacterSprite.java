@@ -80,7 +80,7 @@
 //		super(_game, x , y);
 //
 //		// Init class
-//		this.mFont = this.mGame.getFont();
+//		this.mFont = this.game.getFont();
 //		this.mFont.setColor(0.0f, 0.6f, 0.0f, 1.0f);
 //		this.mHeading = mHeading;
 //		this.mDeltaTime = 0.0f;
@@ -101,16 +101,16 @@
 //		if(shieldIndex == 0) shieldIndex = 2;
 //
 //		// Load graphics
-//		if(bodyIndex != 0) this.loadBody(this.mGame.getBodyData().get(bodyIndex));
-//		if(weaponIndex != 0) this.loadWeapon(this.mGame.getWeaponData().get(weaponIndex));
-//		if(shieldIndex != 0) this.loadShield(this.mGame.getShieldData().get(shieldIndex));
-//		if(headIndex != 0) this.loadHead(this.mGame.getHeadData().get(headIndex));
-//		if(helmetIndex != 0) this.loadHelmet(this.mGame.getHelmetData().get(helmetIndex));
-//		if(fxIndex != 0) this.loadFx(this.mGame.getFxData().get(fxIndex));
+//		if(bodyIndex != 0) this.loadBody(this.game.getBodyData().get(bodyIndex));
+//		if(weaponIndex != 0) this.loadWeapon(this.game.getWeaponData().get(weaponIndex));
+//		if(shieldIndex != 0) this.loadShield(this.game.getShieldData().get(shieldIndex));
+//		if(headIndex != 0) this.loadHead(this.game.getHeadData().get(headIndex));
+//		if(helmetIndex != 0) this.loadHelmet(this.game.getHelmetData().get(helmetIndex));
+//		if(fxIndex != 0) this.loadFx(this.game.getFxData().get(fxIndex));
 //
 //		// Calculate offsets
-//		this.mHeadOffsetX = this.mGame.getBodyData().get(bodyIndex).getHeadOffsetX();
-//		this.mHeadOffsetY = this.mGame.getBodyData().get(bodyIndex).getHeadOffsetY();
+//		this.mHeadOffsetX = this.game.getBodyData().get(bodyIndex).getHeadOffsetX();
+//		this.mHeadOffsetY = this.game.getBodyData().get(bodyIndex).getHeadOffsetY();
 //	}
 //
 //	// ===========================================================
@@ -156,7 +156,7 @@
 //
 //	public void setBody(int bodyIndex) {
 //		if(bodyIndex > 0) {
-//			loadBody(this.mGame.getBodyData().get(bodyIndex));
+//			loadBody(this.game.getBodyData().get(bodyIndex));
 //		} else {
 //			this.mBodyGrhIndex = 0;
 //		}
@@ -164,7 +164,7 @@
 //
 //	public void setWeapon(int weaponIndex) {
 //		if(weaponIndex > 0) {
-//			loadWeapon(this.mGame.getWeaponData().get(weaponIndex));
+//			loadWeapon(this.game.getWeaponData().get(weaponIndex));
 //		} else {
 //			this.mWeaponGrhIndex = 0;
 //		}
@@ -172,7 +172,7 @@
 //
 //	public void setShield(int shieldIndex) {
 //		if(shieldIndex > 0) {
-//			loadShield(this.mGame.getShieldData().get(shieldIndex));
+//			loadShield(this.game.getShieldData().get(shieldIndex));
 //		} else {
 //			this.mShieldGrhIndex = 0;
 //		}
@@ -180,7 +180,7 @@
 //
 //	public void setHead(int headIndex) {
 //		if(headIndex > 0) {
-//			loadHead(this.mGame.getHeadData().get(headIndex));
+//			loadHead(this.game.getHeadData().get(headIndex));
 //		} else {
 //			this.mHeadGrhIndex = 0;
 //		}
@@ -188,7 +188,7 @@
 //
 //	public void setHelmet(int helmetIndex) {
 //		if(helmetIndex > 0) {
-//			loadHelmet(this.mGame.getHelmetData().get(helmetIndex));
+//			loadHelmet(this.game.getHelmetData().get(helmetIndex));
 //		} else {
 //			this.mHelmetGrhIndex = 0;
 //		}
@@ -196,7 +196,7 @@
 //
 //	public void setFx(int fxIndex) {
 //		if(fxIndex > 0) {
-//			loadFx(this.mGame.getFxData().get(fxIndex));
+//			loadFx(this.game.getFxData().get(fxIndex));
 //			this.mFxTimer = TimeUtils.millis();
 //		} else {
 //			this.mFxGrhIndex = 0;
@@ -254,50 +254,50 @@
 //	public void loadBody(Body body) {
 //		this.mBodyGrhIndex = body.getGraphic(Heading.NORTH.toInt());
 //		this.mBodySkin = new BundledTexture[4];
-//		this.mBodySkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.NORTH.toInt()), true);
-//		this.mBodySkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.SOUTH.toInt()), true);
-//		this.mBodySkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.WEST.toInt()), true);
-//		this.mBodySkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, body.getGraphic(Heading.EAST.toInt()), true);
+//		this.mBodySkin[Heading.NORTH.toInt()] = new BundledTexture(this.game, body.getGraphic(Heading.NORTH.toInt()), true);
+//		this.mBodySkin[Heading.SOUTH.toInt()] = new BundledTexture(this.game, body.getGraphic(Heading.SOUTH.toInt()), true);
+//		this.mBodySkin[Heading.WEST.toInt()] = new BundledTexture(this.game, body.getGraphic(Heading.WEST.toInt()), true);
+//		this.mBodySkin[Heading.EAST.toInt()] = new BundledTexture(this.game, body.getGraphic(Heading.EAST.toInt()), true);
 //	}
 //
 //	public void loadWeapon(Weapon weapon) {
 //		this.mWeaponGrhIndex = weapon.getGraphic(Heading.NORTH.toInt());
 //		this.mWeaponSkin = new BundledTexture[4];
-//		this.mWeaponSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.NORTH.toInt()), true);
-//		this.mWeaponSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.SOUTH.toInt()), true);
-//		this.mWeaponSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.WEST.toInt()), true);
-//		this.mWeaponSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, weapon.getGraphic(Heading.EAST.toInt()), true);
+//		this.mWeaponSkin[Heading.NORTH.toInt()] = new BundledTexture(this.game, weapon.getGraphic(Heading.NORTH.toInt()), true);
+//		this.mWeaponSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.game, weapon.getGraphic(Heading.SOUTH.toInt()), true);
+//		this.mWeaponSkin[Heading.WEST.toInt()] = new BundledTexture(this.game, weapon.getGraphic(Heading.WEST.toInt()), true);
+//		this.mWeaponSkin[Heading.EAST.toInt()] = new BundledTexture(this.game, weapon.getGraphic(Heading.EAST.toInt()), true);
 //	}
 //
 //	public void loadShield(Shield shield) {
 //		this.mShieldGrhIndex = shield.getGraphic(Heading.NORTH.toInt());
 //		this.mShieldSkin = new BundledTexture[4];
-//		this.mShieldSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.NORTH.toInt()), true);
-//		this.mShieldSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.SOUTH.toInt()), true);
-//		this.mShieldSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.WEST.toInt()), true);
-//		this.mShieldSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, shield.getGraphic(Heading.EAST.toInt()), true);
+//		this.mShieldSkin[Heading.NORTH.toInt()] = new BundledTexture(this.game, shield.getGraphic(Heading.NORTH.toInt()), true);
+//		this.mShieldSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.game, shield.getGraphic(Heading.SOUTH.toInt()), true);
+//		this.mShieldSkin[Heading.WEST.toInt()] = new BundledTexture(this.game, shield.getGraphic(Heading.WEST.toInt()), true);
+//		this.mShieldSkin[Heading.EAST.toInt()] = new BundledTexture(this.game, shield.getGraphic(Heading.EAST.toInt()), true);
 //	}
 //
 //	public void loadHead(Head head) {
 //		this.mHeadSkin = new BundledTexture[4];
 //		this.mHeadGrhIndex = head.getHead(Heading.NORTH.toInt());
-//		this.mHeadSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.NORTH.toInt()));
-//		this.mHeadSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.SOUTH.toInt()));
-//		this.mHeadSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.WEST.toInt()));
-//		this.mHeadSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, head.getHead(Heading.EAST.toInt()));
+//		this.mHeadSkin[Heading.NORTH.toInt()] = new BundledTexture(this.game, head.getHead(Heading.NORTH.toInt()));
+//		this.mHeadSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.game, head.getHead(Heading.SOUTH.toInt()));
+//		this.mHeadSkin[Heading.WEST.toInt()] = new BundledTexture(this.game, head.getHead(Heading.WEST.toInt()));
+//		this.mHeadSkin[Heading.EAST.toInt()] = new BundledTexture(this.game, head.getHead(Heading.EAST.toInt()));
 //	}
 //
 //	public void loadHelmet(Helmet helmet) {
 //		this.mHelmetSkin = new BundledTexture[4];
 //		this.mHelmetGrhIndex = helmet.getHelmet(Heading.NORTH.toInt());
-//		this.mHelmetSkin[Heading.NORTH.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.NORTH.toInt()));
-//		this.mHelmetSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.SOUTH.toInt()));
-//		this.mHelmetSkin[Heading.WEST.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.WEST.toInt()));
-//		this.mHelmetSkin[Heading.EAST.toInt()] = new BundledTexture(this.mGame, helmet.getHelmet(Heading.EAST.toInt()));
+//		this.mHelmetSkin[Heading.NORTH.toInt()] = new BundledTexture(this.game, helmet.getHelmet(Heading.NORTH.toInt()));
+//		this.mHelmetSkin[Heading.SOUTH.toInt()] = new BundledTexture(this.game, helmet.getHelmet(Heading.SOUTH.toInt()));
+//		this.mHelmetSkin[Heading.WEST.toInt()] = new BundledTexture(this.game, helmet.getHelmet(Heading.WEST.toInt()));
+//		this.mHelmetSkin[Heading.EAST.toInt()] = new BundledTexture(this.game, helmet.getHelmet(Heading.EAST.toInt()));
 //	}
 //
 //	public void loadFx(Fx fx) {
-//		this.mFxSkin = new BundledTexture(this.mGame, fx.getGraphic(), true);
+//		this.mFxSkin = new BundledTexture(this.game, fx.getGraphic(), true);
 //		this.mFxGrhIndex = fx.getGraphic();
 //		this.mFxOffsetX = fx.getOffsetX();
 //		this.mFxOffsetY = fx.getOffsetY();

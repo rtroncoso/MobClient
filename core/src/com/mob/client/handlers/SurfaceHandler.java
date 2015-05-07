@@ -86,7 +86,7 @@ public class SurfaceHandler implements Constants {
 		FileHandle file = Gdx.app.getFiles().internal(SurfaceHandler.mGraphicsPath);
 		if(file.isDirectory()) {
 			for(FileHandle tmp : file.list()) {
-				if(tmp.extension() == GAME_GRAPHICS_EXTENSION) {
+				if(tmp.extension() == Game.GAME_GRAPHICS_EXTENSION) {
 					Gdx.app.log(SurfaceHandler.class.getSimpleName(), "Cargando " + tmp.name());
 					SurfaceHandler.loadTexture(tmp.nameWithoutExtension());
 				}
@@ -98,7 +98,7 @@ public class SurfaceHandler implements Constants {
 	 * @param fileName Name of the file found in the graphics folder
 	 */
 	public static void loadTexture(String fileName) {
-		Texture texture = new Texture(SurfaceHandler.mGraphicsPath + fileName + GAME_GRAPHICS_EXTENSION);
+		Texture texture = new Texture(SurfaceHandler.mGraphicsPath + fileName + Game.GAME_GRAPHICS_EXTENSION);
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		SurfaceHandler.add(fileName, texture);

@@ -70,7 +70,7 @@ public class Shader implements Constants {
 	public Shader(Game mGame, int mX, int mY, String mTexture, Color mColor, int pSize, float mSpeed) {
 		super();
 		this.mGame = mGame;
-		this.mTexture = new Texture(GAME_SHADERS_PATH + mTexture);
+		this.mTexture = new Texture(Game.GAME_SHADERS_PATH + mTexture);
 		this.mX = mX * Tile.TILE_PIXEL_WIDTH;
 		this.mY = mY * Tile.TILE_PIXEL_HEIGHT;
 		this.mColor = mColor;

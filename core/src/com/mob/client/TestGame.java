@@ -16,85 +16,52 @@
  *******************************************************************************/
 package com.mob.client;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.ScreenHandler;
 import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
-import com.mob.client.screens.GameScreen;
-import com.mob.client.screens.Screen;
 
-/**
- * @author Rodrigo
- *
- */
 public class TestGame extends Game implements Constants {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private SpriteBatch mSpriteBatch;
-	private Screen mCurrentScreen;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
 	@Override
 	public void create() {
 		
-		// Cargamos resources
+		// Load resources
 		SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
 		AssetsHandler.load();
 		
-		// Inicializamos SpriteBatch
-		this.mSpriteBatch = new SpriteBatch();
-		
-		// Setteamos la screen a usar inicialmente
-		this.setScreen(new GameScreen(this));
+		// Create Game Screen and present it
+		ScreenHandler.load("GameScreen", this);
 	}
-	
+
 	@Override
 	public void render() {
 		GL20 gl = Gdx.gl;
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		super.render();
 	}
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	/**
-	 * @return the mSpriteBatch
-	 */
-	public SpriteBatch getSpriteBatch() {
-		return mSpriteBatch;
+	@Override
+	public void dispose() {
+
 	}
 
-	/**
-	 * @param mSpriteBatch the mSpriteBatch to set
-	 */
-	public void setSpriteBatch(SpriteBatch mSpriteBatch) {
-		this.mSpriteBatch = mSpriteBatch;
+	@Override
+	public void pause() {
+
 	}
 
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
+	@Override
+	public void resize(int arg0, int arg1) {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
 }

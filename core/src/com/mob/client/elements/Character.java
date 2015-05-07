@@ -89,7 +89,7 @@
 //		// Render sprite
 //		this.charRender(dt);
 //
-//		// If moving and focused we set mCamera position to ourselves
+//		// If moving and focused we set camera position to ourselves
 //		if(this.mFocused) this.focusCamera();
 //	}
 //
@@ -144,8 +144,8 @@
 //				helmetPixelOffsetX = 0, helmetPixelOffsetY = 0, fxPixelOffsetX = 0, fxPixelOffsetY = 0, shieldPixelOffsetX = 0, shieldPixelOffsetY = 0;
 //
 //		// Set our sprite color
-//		Color oldColor = this.mGame.getSpriteBatch().getColor();
-//		this.mGame.getSpriteBatch().setColor(this.mColor);
+//		Color oldColor = this.game.getSpriteBatch().getColor();
+//		this.game.getSpriteBatch().setColor(this.mColor);
 //
 //		// Calculate offset to draw and update internal timers
 //		if(this.mBodyGrhIndex > 0) {
@@ -193,37 +193,37 @@
 //		if(this.mHeadGrhIndex > 0) {
 //			if(this.mVisible) {
 //				if(this.mShieldGrhIndex > 0 && this.mHeading == Heading.EAST)
-//					this.mGame.getSpriteBatch().draw(this.getShield(), shieldPixelOffsetX, shieldPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getShield(), shieldPixelOffsetX, shieldPixelOffsetY);
 //
 //				if(this.mBodyGrhIndex > 0)
-//					this.mGame.getSpriteBatch().draw(this.getBody(), bodyPixelOffsetX, bodyPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getBody(), bodyPixelOffsetX, bodyPixelOffsetY);
 //
 //				if(this.mHeadGrhIndex > 0)
-//					this.mGame.getSpriteBatch().draw(this.getHead(), headPixelOffsetX, headPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getHead(), headPixelOffsetX, headPixelOffsetY);
 //
 //				if(this.mWeaponGrhIndex > 0)
-//					this.mGame.getSpriteBatch().draw(this.getWeapon(), weaponPixelOffsetX, weaponPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getWeapon(), weaponPixelOffsetX, weaponPixelOffsetY);
 //
 //				if(this.mHelmetGrhIndex > 0)
-//					this.mGame.getSpriteBatch().draw(this.getHelmet(), helmetPixelOffsetX, helmetPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getHelmet(), helmetPixelOffsetX, helmetPixelOffsetY);
 //
 //				if(this.mShieldGrhIndex > 0 && this.mHeading != Heading.EAST)
-//					this.mGame.getSpriteBatch().draw(this.getShield(), shieldPixelOffsetX, shieldPixelOffsetY);
+//					this.game.getSpriteBatch().draw(this.getShield(), shieldPixelOffsetX, shieldPixelOffsetY);
 //			}
 //		} else { // Draw only body
 //			if(this.mBodyGrhIndex > 0)
-//				this.mGame.getSpriteBatch().draw(this.getBody(), bodyPixelOffsetX, bodyPixelOffsetY);
+//				this.game.getSpriteBatch().draw(this.getBody(), bodyPixelOffsetX, bodyPixelOffsetY);
 //		}
 //
 //		// Replace old color
-//		this.mGame.getSpriteBatch().setColor(oldColor);
+//		this.game.getSpriteBatch().setColor(oldColor);
 //
 //		// Draw Fx
 //		if(this.mFxGrhIndex > 0) {
 //			// Draw fx
-//			this.mGame.getSpriteBatch().setColor(1.0f, 1.0f, 1.0f, .6f);
-//			this.mGame.getSpriteBatch().draw(this.getFx(), fxPixelOffsetX, fxPixelOffsetY);
-//			this.mGame.getSpriteBatch().setColor(oldColor);
+//			this.game.getSpriteBatch().setColor(1.0f, 1.0f, 1.0f, .6f);
+//			this.game.getSpriteBatch().draw(this.getFx(), fxPixelOffsetX, fxPixelOffsetY);
+//			this.game.getSpriteBatch().setColor(oldColor);
 //		}
 //
 //		// Draw name
@@ -231,7 +231,7 @@
 //
 //			String line = this.mName + "\n<Clan>";
 //			float textWidth = this.mFont.getMultiLineBounds(line).width;
-//			this.mFont.drawMultiLine(this.mGame.getSpriteBatch(), line, this.mX - (textWidth * 0.5f), this.mY, textWidth, HAlignment.CENTER);
+//			this.mFont.drawMultiLine(this.game.getSpriteBatch(), line, this.mX - (textWidth * 0.5f), this.mY, textWidth, HAlignment.CENTER);
 //		}
 //	}
 //
@@ -271,7 +271,7 @@
 //		}
 //
 //		// Check if legal pos
-//		if(!this.mGame.getEngine().getTile(this.mUserPosX + nextX, this.mUserPosY + nextY).isLegalPos()) return;
+//		if(!this.game.getEngine().getTile(this.mUserPosX + nextX, this.mUserPosY + nextY).isLegalPos()) return;
 //
 //		// Fill destination
 //		this.mNextX = nextX;
@@ -342,17 +342,17 @@
 //	public void setUserPos(int x, int y) {
 //
 //		// Delete old player position from map
-//		this.mGame.getEngine().getTile(this.mLastUserPosX, this.mLastUserPosY).setCharacter(null);;
+//		this.game.getEngine().getTile(this.mLastUserPosX, this.mLastUserPosY).setCharacter(null);;
 //
 //		// Change our graphic position
 //		this.setUserPosX(x);
 //		this.setUserPosY(y);
 //
 //		// Plot on map
-//		this.mGame.getEngine().setCharacter(this.mUserPosX, this.mUserPosY, this);
+//		this.game.getEngine().setCharacter(this.mUserPosX, this.mUserPosY, this);
 //
 //		// Check if we see a roof
-//		if(this.mGame.getEngine().getTile(this.mUserPosX, this.mUserPosY).isRoof())
+//		if(this.game.getEngine().getTile(this.mUserPosX, this.mUserPosY).isRoof())
 //			this.mSeesRoof = true;
 //		else
 //			this.mSeesRoof = false;
@@ -366,7 +366,7 @@
 //	}
 //
 //	/**
-//	 * Focuses mCamera to player position and snaps it to the map borders
+//	 * Focuses camera to player position and snaps it to the map borders
 //	 */
 //	public void focusCamera() {
 //
@@ -374,24 +374,24 @@
 //		float halfWindowWidth = 0, halfWindowHeight = 0, newPosX = 0, newPosY = 0;
 //
 //		// Fill vars
-//		halfWindowWidth = this.mGame.getCamera().viewportWidth * 0.5f;
-//		halfWindowHeight = this.mGame.getCamera().viewportHeight * 0.5f;
+//		halfWindowWidth = this.game.getCamera().viewportWidth * 0.5f;
+//		halfWindowHeight = this.game.getCamera().viewportHeight * 0.5f;
 //
-//		// Do not move mCamera if in map bounds
+//		// Do not move camera if in map bounds
 //		if(this.mX - halfWindowWidth < TILE_PIXEL_WIDTH || this.mX + halfWindowWidth > MAX_MAP_SIZE_WIDTH * TILE_PIXEL_WIDTH)
-//			newPosX = this.mGame.getCamera().position.x;
+//			newPosX = this.game.getCamera().position.x;
 //		else
-//			newPosX = this.mX;//(this.mX - this.mGame.getCamera().position.x) * 0.1f;
+//			newPosX = this.mX;//(this.mX - this.game.getCamera().position.x) * 0.1f;
 //
 //		if(this.mY - halfWindowHeight < TILE_PIXEL_HEIGHT || this.mY + halfWindowHeight > MAX_MAP_SIZE_HEIGHT * TILE_PIXEL_HEIGHT)
-//			newPosY = this.mGame.getCamera().position.y;
+//			newPosY = this.game.getCamera().position.y;
 //		else
-//			newPosY = this.mY;//(this.mY - this.mGame.getCamera().position.y) * 0.1f;
+//			newPosY = this.mY;//(this.mY - this.game.getCamera().position.y) * 0.1f;
 //
-//		//Update mCamera
-//		this.mGame.getCamera().position.set(newPosX, newPosY, 0);
-//		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
-//		this.mGame.getCamera().update();
+//		//Update camera
+//		this.game.getCamera().position.set(newPosX, newPosY, 0);
+//		this.game.getSpriteBatch().setProjectionMatrix(this.game.getCamera().combined);
+//		this.game.getCamera().update();
 //	}
 //
 //	public void moveUp() {
@@ -498,7 +498,7 @@
 //		// Set our focus
 //		this.mFocused = mFocused;
 //
-//		// Fix for new focused characters not drawing (wasn't in old mCamera offset)
+//		// Fix for new focused characters not drawing (wasn't in old camera offset)
 //		if(this.mFocused) this.focusCamera();
 //	}
 //

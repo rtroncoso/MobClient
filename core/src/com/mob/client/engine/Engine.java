@@ -42,13 +42,13 @@
 //	protected float mTechoAB;
 //	protected int mMapNumber;
 //	protected Color mTint;
-//	protected Game mGame;
+//	protected Game game;
 //
 //	// ===========================================================
 //	// Constructors
 //	// ===========================================================
 //	public Engine(Game pGame) {
-//		this.mGame = pGame;
+//		this.game = pGame;
 //		this.mTint = new Color(Color.WHITE);
 //		this.mTechoAB = 1.0f;
 //		this.mMapNumber = 0;
@@ -56,12 +56,12 @@
 //
 //	/**
 //	 * @param mMapNumber
-//	 * @param mGame
+//	 * @param game
 //	 */
 //	public Engine(Game pGame, int pMapNumber) {
 //
 //		this.mMapNumber = pMapNumber;
-//		this.mGame = pGame;
+//		this.game = pGame;
 //
 //		this.load();
 //	}
@@ -108,16 +108,16 @@
 //	}
 //
 //	/**
-//	 * @return the mGame
+//	 * @return the game
 //	 */
 //	public Game getGame() {
-//		return mGame;
+//		return game;
 //	}
 //	/**
-//	 * @param mGame the mGame to set
+//	 * @param game the game to set
 //	 */
-//	public void setGame(Game mGame) {
-//		this.mGame = mGame;
+//	public void setGame(Game game) {
+//		this.game = game;
 //	}
 //
 //	/**

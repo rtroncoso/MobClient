@@ -14,299 +14,51 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Game's main class. 
- * @author Rodrigo Troncoso
- * @version 0.1
- */
 package com.mob.client;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.data.*;
-import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.handlers.MapHandler;
-import com.mob.client.handlers.SurfaceHandler;
 import com.mob.client.interfaces.Constants;
 import com.mob.client.screens.Screen;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Vector;
-  
+
 public abstract class Game implements ApplicationListener, Constants {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+    public static final String GAME_GRAPHICS_PATH = "data/graficos/";
+    public static final String GAME_FONTS_PATH = "data/fonts/";
+    public static final String GAME_GRAPHICS_EXTENSION = ".png";
+    public static final String GAME_SHADERS_PATH = "data/shaders/";
+    public static final String GAME_SHADERS_LIGHT = "light.png";
 
+    public static final int GAME_SCREEN_WIDTH = 1366;
+    public static final int GAME_SCREEN_HEIGHT = 768;
+    public static final float GAME_SCREEN_ZOOM = 1.0f;
+    public static final boolean GAME_FULL_SCREEN = false;
+    public static final boolean GAME_VSYNC_ENABLED = true;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-    protected OrthographicCamera mCamera;  
-    protected HashMap<String, Screen> mScreens;  
-    protected SpriteBatch mSpriteBatch;  
-    
-	protected MapHandler mMapHandler;
-    protected SurfaceHandler mSurfaceHandler;
-    protected AssetsHandler mDataHandler;
+    protected HashMap<String, Screen> screens;
+    protected SpriteBatch spriteBatch;
+	protected Screen currentScreen;
 
-	protected Screen mCurrentScreen;
-    
-    protected BitmapFont mFont;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
     public Game() {
-
-        this.mMapHandler = new MapHandler(this);
-
-    	this.mScreens = new HashMap<String, Screen>();  
+    	this.screens = new HashMap<String, Screen>();
     }
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-    /**
-     * Init everything
-     */
-    public abstract void create();
-    public abstract void update (float dt);
-    public abstract void dispose();
-    public abstract void pause();
-    public abstract void render();
-    public abstract void resize(int arg0, int arg1);
-    public abstract void resume();
-    
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
-	 * @return the mShieldData
-	 */
-	public Vector<Shield> getShieldData() {
-		return AssetsHandler.getShieldData();
-	}
-
-	/**
-	 * @param mShield the mShield to set
-	 */
-	public void setShieldData(Vector<Shield> mShield) {
-		AssetsHandler.setShieldData(mShield);
-	}
-    /**
-	 * @return the mWeaponData
-	 */
-	public Vector<Weapon> getWeaponData() {
-		return AssetsHandler.getWeaponData();
-	}
-
-	/**
-	 * @param mWeapon the mWeapon to set
-	 */
-	public void setWeaponData(Vector<Weapon> mWeapon) {
-		AssetsHandler.setWeaponData(mWeapon);
-	}
-	
-	/**
-	* @return the _grhData
-	*/
-	public Vector<Graphic> getGrhData() {
-		return AssetsHandler.getGrhData();
-	}
-	
-	/**
-	* @param _graphic the _graphic to set
-	*/
-	public void setGrhData(Vector<Graphic> _graphic) {
-		AssetsHandler.setGrhData(_graphic);
-	}
-	
-	/**
-	* @return the _bodyData
-	*/
-	public Vector<Body> getBodyData() {
-		return AssetsHandler.getBodyData();
-	}
-	
-	/**
-	* @param _body the _body to set
-	*/
-	public void setBodyData(Vector<Body> _body) {
-		AssetsHandler.setBodyData(_body);
-	}
-
-	/**
-	 * @return the _headData
-	 */
-	public Vector<Head> getHeadData() {
-		return AssetsHandler.getHeadData();
-	}
-
-	/**
-	 * @param _head the _head to set
-	 */
-	public void setHeadData(Vector<Head> _head) {
-		AssetsHandler.setHeadData(_head);
-	}
-
-	/**
-	 * @return the _helmetData
-	 */
-	public Vector<Helmet> getHelmetData() {
-		return AssetsHandler.getHelmetData();
-	}
-
-	/**
-	 * @param _helmet the _helmet to set
-	 */
-	public void setHelmetData(Vector<Helmet> _helmet) {
-		AssetsHandler.setHelmetData(_helmet);
-	}
-	
-	/**
-	 * @return the mFxData
-	 */
-	public Vector<Fx> getFxData() {
-		return AssetsHandler.getFxData();
-	}
-
-	/**
-	 * @param mFx the mFx to set
-	 */
-	public void setFxData(Vector<Fx> mFx) {
-		AssetsHandler.setFxData(mFx);
-	}
-
-	/**
-	 * @return the _surfaceHandler
-	 */
-	public SurfaceHandler getSurfaceHandler() {
-		return mSurfaceHandler;
-	}
-
-	/**
-	 * @param _surfaceHandler the _surfaceHandler to set
-	 */
-	public void setSurfaceHandler(SurfaceHandler _surfaceHandler) {
-		this.mSurfaceHandler = _surfaceHandler;
-	}
-
-	/**
-	 * @return the mCamera
-	 */
-	public OrthographicCamera getCamera() {
-		return mCamera;
-	}
-
-	/**
-	 * @param mCamera the mCamera to set
-	 */
-	public void setCamera(OrthographicCamera mCamera) {
-		this.mCamera = mCamera;
-	}
-
-    /**
-	 * @return the mMapHandler
-	 */
-	public MapHandler getMapHandler() {
-		return mMapHandler;
-	}
-
-	/**
-	 * @param mMapHandler the mMapHandler to set
-	 */
-	public void setMapHandler(MapHandler mMapHandler) {
-		this.mMapHandler = mMapHandler;
-	}
-
-	/**
-	 * @return the mSpriteBatch
+	 * @return the spriteBatch
 	 */
 	public SpriteBatch getSpriteBatch() {
-		return mSpriteBatch;
+		return spriteBatch;
 	}
 
 	/**
-	 * @param mSpriteBatch the mSpriteBatch to set
+	 * @param spriteBatch the spriteBatch to set
 	 */
-	public void setSpriteBatch(SpriteBatch mSpriteBatch) {
-		this.mSpriteBatch = mSpriteBatch;
+	public void setSpriteBatch(SpriteBatch spriteBatch) {
+		this.spriteBatch = spriteBatch;
 	}
 
-	/**
-	 * @return the mFont
-	 */
-	public BitmapFont getFont() {
-		return mFont;
-	}
 
-	/**
-	 * @param mFont the mFont to set
-	 */
-	public void setFont(BitmapFont mFont) {
-		this.mFont = mFont;
-	}
-	
-	/**
-	 * @return the mCurrentScreen
-	 */
-	public Screen getCurrentScreen() {
-		return mCurrentScreen;
-	}
 
-	/**
-	 * @param mCurrentScreen the mCurrentScreen to set
-	 */
-	public void setCurrentScreen(Screen mCurrentScreen) {
-		this.mCurrentScreen = mCurrentScreen;
-	}
-	
-	// ===========================================================
-	// Methods
-	// ===========================================================
-	public void setScreen (String screenClassName) {  
-        
-        screenClassName = "com.mob.client.screens."+screenClassName;  
-        Screen newScreen = null;  
-          
-        if (this.mScreens.containsKey(screenClassName) == false) {  
-              
-            try {  
-                Class<?> screenClass =  Class.forName(screenClassName);   
-                Constructor<?> constructor = screenClass.getConstructor(Game.class);      
-                newScreen = (Screen) constructor.newInstance(this);  
-                this.mScreens.put(screenClassName, newScreen);  
-            } catch ( InvocationTargetException ex ){  
-                System.err.println( ex + " Screen with Wrong args in Constructor.");  
-            } catch ( NoSuchMethodException ex ){  
-            } catch ( ClassNotFoundException ex ){  
-              System.err.println( ex + " Screen Class Not Found.");  
-            } catch( InstantiationException ex ){  
-              System.err.println( ex + " Screen Must be a concrete class.");  
-            } catch( IllegalAccessException ex ){  
-              System.err.println( ex + " Screen with Wrong number of args.");  
-            }  
-        } else {  
-            newScreen = this.mScreens.get(screenClassName);  
-        }  
-          
-        if (newScreen == null) return;  
-          
-        if (this.mCurrentScreen != null) {  
-            //remove current screen!  
-            mCurrentScreen.destroy();  
-        }  
-        this.mCurrentScreen = newScreen;  
-        this.mCurrentScreen.createScreen();  
-	}
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 }  

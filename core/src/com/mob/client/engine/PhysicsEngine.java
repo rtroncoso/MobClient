@@ -45,7 +45,7 @@
 //	// ===========================================================
 //	// Fields
 //	// ===========================================================
-//	private Game mGame;
+//	private Game game;
 //	private World mWorld;
 //	private Box2DDebugRenderer mDebugRenderer;
 //
@@ -54,7 +54,7 @@
 //	// ===========================================================
 //	public PhysicsEngine(Game pGame) {
 //		super(pGame);
-//		this.mGame = pGame;
+//		this.game = pGame;
 //	}
 //
 //	// ===========================================================
@@ -76,13 +76,13 @@
 //
 //		// Vars
 //		int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
-//		Map map = this.mGame.getMapHandler().get(this.getMapNumber());
+//		Map map = this.game.getMapHandler().get(this.getMapNumber());
 //
 //		// Calculate visible part of the map
-//		int cameraPosX = (int) (this.mGame.getCamera().position.x / TILE_PIXEL_WIDTH);
-//		int cameraPosY = (int) (this.mGame.getCamera().position.y / TILE_PIXEL_HEIGHT);
-//		int halfWindowTileWidth = (int) ((this.mGame.getCamera().viewportWidth / TILE_PIXEL_WIDTH) / 2f);
-//		int halfWindowTileHeight = (int) ((this.mGame.getCamera().viewportHeight / TILE_PIXEL_HEIGHT) / 2f);
+//		int cameraPosX = (int) (this.game.getCamera().position.x / TILE_PIXEL_WIDTH);
+//		int cameraPosY = (int) (this.game.getCamera().position.y / TILE_PIXEL_HEIGHT);
+//		int halfWindowTileWidth = (int) ((this.game.getCamera().viewportWidth / TILE_PIXEL_WIDTH) / 2f);
+//		int halfWindowTileHeight = (int) ((this.game.getCamera().viewportHeight / TILE_PIXEL_HEIGHT) / 2f);
 //
 //		screenMinX = cameraPosX - halfWindowTileWidth - 1;
 //		screenMaxX = cameraPosX + halfWindowTileWidth + 1;
@@ -118,7 +118,7 @@
 //				layer.setAnimationTime(layer.getAnimationTime() + dt);
 //
 //				if(map.getTile(x, y).getGraphic()[0] != 0) {
-//					this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
+//					this.game.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 //				}
 //			}
 //		}
@@ -134,7 +134,7 @@
 //
 //				if(map.getTile(x, y).getGraphic()[1] != 0) {
 //					layer.setAnimationTime(layer.getAnimationTime() + dt);
-//					this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
+//					this.game.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 //				}
 //			}
 //		}
@@ -155,17 +155,17 @@
 //
 //					// If user is behind a tree draw it with alpha blend
 //					if(tile.hasTree()) {
-////						if(Math.abs(this.mGame.getCharacterHandler().getPlayer().getUserPosX() - x) < 4 &&
-////						   Math.abs(this.mGame.getCharacterHandler().getPlayer().getUserPosY() - y) < 4) {
-////							Color oldColor = this.mGame.getSpriteBatch().getColor();
-////							this.mGame.getSpriteBatch().setColor(new Color(oldColor.r, oldColor.g, oldColor.b, ALPHA_TREES));
-////							this.mGame.getSpriteBatch().draw(layer.getGraphic(), layer.getX(), layer.getY());
-////							this.mGame.getSpriteBatch().setColor(oldColor);
+////						if(Math.abs(this.game.getCharacterHandler().getPlayer().getUserPosX() - x) < 4 &&
+////						   Math.abs(this.game.getCharacterHandler().getPlayer().getUserPosY() - y) < 4) {
+////							Color oldColor = this.game.getSpriteBatch().getColor();
+////							this.game.getSpriteBatch().setColor(new Color(oldColor.r, oldColor.g, oldColor.b, ALPHA_TREES));
+////							this.game.getSpriteBatch().draw(layer.getGraphic(), layer.getX(), layer.getY());
+////							this.game.getSpriteBatch().setColor(oldColor);
 ////						} else {
-////							this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
+////							this.game.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 ////						}
 //					} else {
-//						this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
+//						this.game.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
 //					}
 //				}
 //
@@ -180,7 +180,7 @@
 //		 * Layer 4
 //		 ******************************************/
 //		// If user is under a roof we hide it
-////		if(this.mGame.getCharacterHandler().getPlayer().isUnderRoof()) {
+////		if(this.game.getCharacterHandler().getPlayer().isUnderRoof()) {
 ////			if(this.mTechoAB > 0) {
 ////				this.mTechoAB -= dt;
 ////			}
@@ -202,10 +202,10 @@
 //					layer.setAnimationTime(layer.getAnimationTime() + dt);
 //
 //					// Don't draw the shader above roofs
-//					Color oldColor = this.mGame.getSpriteBatch().getColor();
-//					this.mGame.getSpriteBatch().setColor(new Color(oldColor.r, oldColor.g, oldColor.b, this.mTechoAB));
-//					this.mGame.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
-//					this.mGame.getSpriteBatch().setColor(oldColor);
+//					Color oldColor = this.game.getSpriteBatch().getColor();
+//					this.game.getSpriteBatch().setColor(new Color(oldColor.r, oldColor.g, oldColor.b, this.mTechoAB));
+//					this.game.getSpriteBatch().draw(layer.getGraphic(true), layer.getX(), layer.getY());
+//					this.game.getSpriteBatch().setColor(oldColor);
 //				}
 //			}
 //		}
@@ -214,7 +214,7 @@
 //	public void updatePhysics(float dt) {
 //		// Render box2d world
 //		this.mWorld.step(1/45f, 6, 2);
-//		this.mDebugRenderer.render(this.mWorld, this.mGame.getCamera().combined);
+//		this.mDebugRenderer.render(this.mWorld, this.game.getCamera().combined);
 //	}
 //
 //	@Override
@@ -250,7 +250,7 @@
 //			for(int x = MIN_MAP_SIZE_WIDTH; x <= MAX_MAP_SIZE_WIDTH; x++) {
 //
 //				Tile tile = map.getTile(x, y);
-//				this.tiles[x][y] = new Tile(this.mGame, x, y, tile.getGraphic());
+//				this.tiles[x][y] = new Tile(this.game, x, y, tile.getGraphic());
 //				this.tiles[x][y].setBlocked(tile.isBlocked());
 //				this.tiles[x][y].setTrigger(tile.getTrigger());
 //			}

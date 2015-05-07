@@ -14,12 +14,6 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Game constants and enums
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
 package com.mob.client.interfaces;
 
 import com.badlogic.gdx.graphics.Color;
@@ -27,21 +21,8 @@ import com.badlogic.gdx.graphics.Color;
 public interface Constants {
 
 	public static final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
-    public static final int GAME_SCREEN_WIDTH = 1366;
-    public static final int GAME_SCREEN_HEIGHT = 768;
-	public static final float GAME_SCREEN_ZOOM = 1.0f;
-	public static final boolean GAME_FULL_SCREEN = false;
-	public static final String GAME_GRAPHICS_PATH = "data/graficos/";
-	public static final String GAME_GRAPHICS_EXTENSION = ".png";
-	public static final String GAME_FONTS_PATH = "data/fonts/";
-	public static final String GAME_SHADERS_PATH = "data/shaders/";
-	public static final String GAME_SHADERS_LIGHT = "light.png";
-    public static final int GAME_FILE_HEADER_SIZE = 263; 
-    public static final int GAME_STATE_PLAY = 0;  
-    public static final int GAME_STATE_PAUSE = 1;  
-    public static final int GAME_STATE_ANIMATE = 2;
 
-    public static final int TILE_BUFFER_SIZE = 7;
+    public static final int GAME_FILE_HEADER_SIZE = 263;
     
     public static final int MAX_MAP_SIZE_WIDTH = 100;
     public static final int MIN_MAP_SIZE_WIDTH = 1;

@@ -111,7 +111,7 @@
 //
 //		// Draw tile into spritebatch
 //		if(this.getGrhIndex(pLayer) != 0) {
-//			this.mGame.getSpriteBatch().draw(this.getGraphic(pLayer).getGraphic(true), this.getGraphic(pLayer).getX(), this.getGraphic(pLayer).getY());
+//			this.game.getSpriteBatch().draw(this.getGraphic(pLayer).getGraphic(true), this.getGraphic(pLayer).getX(), this.getGraphic(pLayer).getY());
 //		}
 //
 //	}

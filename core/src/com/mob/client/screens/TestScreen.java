@@ -58,21 +58,21 @@
 //	public void createScreen() {
 //
 //		// Init box2d Engine
-//		this.mGame.getEngine().initEngine();
+//		this.game.getEngine().initEngine();
 //
 //		// Load a map
 //		this.map = 1;
-//		this.mGame.getEngine().setMap(this.map);
-//		this.mGame.getEngine().setTint(COLOR_NIGHT);
+//		this.game.getEngine().setMap(this.map);
+//		this.game.getEngine().setTint(COLOR_NIGHT);
 //
 //		// Plot a character
-////		this.mGame.getCharacterHandler().makeChar(1, 51, 50, Heading.SOUTH, 1, 13, 6, 4, 6);
-////		this.mGame.getCharacterHandler().getPlayer().setName("BetaTester");
-////		this.mGame.getCharacterHandler().getPlayer().createLight(Color.WHITE, 300.0f);
-////		this.mGame.getCharacterHandler().getPlayer().setFocus();
+////		this.game.getCharacterHandler().makeChar(1, 51, 50, Heading.SOUTH, 1, 13, 6, 4, 6);
+////		this.game.getCharacterHandler().getPlayer().setName("BetaTester");
+////		this.game.getCharacterHandler().getPlayer().createLight(Color.WHITE, 300.0f);
+////		this.game.getCharacterHandler().getPlayer().setFocus();
 //
 //		// Plot a npc
-////		this.mGame.getCharacterHandler().makeChar(2, 50, 50, Heading.SOUTH, 17, 0, 0, 0, 0);
+////		this.game.getCharacterHandler().makeChar(2, 50, 50, Heading.SOUTH, 17, 0, 0, 0, 0);
 //
 //		this.mInputMultiplexer = new InputMultiplexer();
 //		this.mInputMultiplexer.addProcessor(new InputProcessor() {
@@ -81,26 +81,26 @@
 //			public boolean keyDown(int keycode) {
 //				switch(keycode) {
 //				case(Keys.SPACE):
-////					mGame.getCharacterHandler().getPlayer().setFx(13);
+////					game.getCharacterHandler().getPlayer().setFx(13);
 //					break;
 //				case(Keys.NUM_1):
-//					mGame.getEngine().setTint(COLOR_NIGHT);
+//					game.getEngine().setTint(COLOR_NIGHT);
 //					break;
 //				case(Keys.NUM_2):
-//					mGame.getEngine().setTint(COLOR_DAWN);
+//					game.getEngine().setTint(COLOR_DAWN);
 //					break;
 //				case(Keys.NUM_3):
-//					mGame.getEngine().setTint(COLOR_DAYLIGHT);
+//					game.getEngine().setTint(COLOR_DAYLIGHT);
 //					break;
 //				case(Keys.PLUS):
 //					map += 1;
-//					mGame.getEngine().setMap(map);
-////					mGame.getCharacterHandler().getPlayer().updateUserPos();
+//					game.getEngine().setMap(map);
+////					game.getCharacterHandler().getPlayer().updateUserPos();
 //					break;
 //				case(Keys.MINUS):
 //					map -= 1;
-//					mGame.getEngine().setMap(map);
-////					mGame.getCharacterHandler().getPlayer().updateUserPos();
+//					game.getEngine().setMap(map);
+////					game.getCharacterHandler().getPlayer().updateUserPos();
 //					break;
 //				}
 //				return true;
@@ -120,8 +120,8 @@
 //			public boolean touchDown(int screenX, int screenY, int pointer,
 //					int button) {
 //				if(button == Input.Buttons.LEFT) {
-//				//mGame.getEngine().getLightHandler().createLight((int) ((mGame.getCamera().position.x - (mGame.getCamera().viewportWidth / 2)) / TILE_PIXEL_WIDTH) + (screenX / TILE_PIXEL_WIDTH),
-//							//(int) ((mGame.getCamera().position.y  - (mGame.getCamera().viewportHeight / 2)) / TILE_PIXEL_HEIGHT) + (screenY / TILE_PIXEL_HEIGHT), Color.GREEN, 4f);
+//				//game.getEngine().getLightHandler().createLight((int) ((game.getCamera().position.x - (game.getCamera().viewportWidth / 2)) / TILE_PIXEL_WIDTH) + (screenX / TILE_PIXEL_WIDTH),
+//							//(int) ((game.getCamera().position.y  - (game.getCamera().viewportHeight / 2)) / TILE_PIXEL_HEIGHT) + (screenY / TILE_PIXEL_HEIGHT), Color.GREEN, 4f);
 //				}
 //				return true;
 //			}
@@ -156,22 +156,22 @@
 //
 //		Gdx.graphics.setTitle("FPS: " + String.valueOf(Gdx.graphics.getFramesPerSecond()
 //				+ " Map: " + map
-////				+ " X: " + this.mGame.getCharacterHandler().getPlayer().getUserPosX()
-////				+ " Y: " + this.mGame.getCharacterHandler().getPlayer().getUserPosY()));
+////				+ " X: " + this.game.getCharacterHandler().getPlayer().getUserPosX()
+////				+ " Y: " + this.game.getCharacterHandler().getPlayer().getUserPosY()));
 //				));
 //
 //		// Input detection
 //		if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-////			this.mGame.getCharacterHandler().getPlayer().moveUp();
+////			this.game.getCharacterHandler().getPlayer().moveUp();
 //		}
 //		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-////			this.mGame.getCharacterHandler().getPlayer().moveLeft();
+////			this.game.getCharacterHandler().getPlayer().moveLeft();
 //		}
 //		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-////			this.mGame.getCharacterHandler().getPlayer().moveDown();
+////			this.game.getCharacterHandler().getPlayer().moveDown();
 //		}
 //		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-////			this.mGame.getCharacterHandler().getPlayer().moveRight();
+////			this.game.getCharacterHandler().getPlayer().moveRight();
 //		}
 //
 //		// Clean up Scene
@@ -180,24 +180,24 @@
 //		Gdx.gl.glEnable(GL20.GL_BLEND);
 //        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 //
-//		// Update mCamera projection
-//		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
-//		this.mGame.getCamera().update();
+//		// Update camera projection
+//		this.game.getSpriteBatch().setProjectionMatrix(this.game.getCamera().combined);
+//		this.game.getCamera().update();
 //
 //        // Start our spritebatch
-//		this.mGame.getSpriteBatch().begin();
+//		this.game.getSpriteBatch().begin();
 //
 //			// Render our engine
-//        	this.mGame.getEngine().update(dt);
+//        	this.game.getEngine().update(dt);
 //
-//		this.mGame.getSpriteBatch().end();
+//		this.game.getSpriteBatch().end();
 //
-//		// Update mCamera projection
-//		this.mGame.getSpriteBatch().setProjectionMatrix(this.mGame.getCamera().combined);
-//		this.mGame.getCamera().update();
+//		// Update camera projection
+//		this.game.getSpriteBatch().setProjectionMatrix(this.game.getCamera().combined);
+//		this.game.getCamera().update();
 //
 //		// Render Box2D Engine
-//		this.mGame.getEngine().updatePhysics(dt);
+//		this.game.getEngine().updatePhysics(dt);
 //	}
 //
 //	@Override
@@ -208,7 +208,7 @@
 //	@Override
 //	public void dispose() {
 //		// Dispose engine
-//		this.mGame.getEngine().dispose();
+//		this.game.getEngine().dispose();
 //
 //	}
 //

@@ -14,86 +14,83 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Common screen class. Inherit for individual screen handling
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
 package com.mob.client.screens;
 
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.artemis.World;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.Game;
 
-public abstract class Screen implements com.badlogic.gdx.Screen {
+public abstract class Screen extends ScreenAdapter {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+    public static final int GAME_RUNNING = 0;
+    public static final int GAME_PAUSED = 1;
 
+    protected Game game;
+    protected World world;
+    protected FPSLogger logger;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	protected InputMultiplexer mInputMultiplexer;
-	private ShaderProgram mDefaultShader;
-	private ShaderProgram mLightShader;
-	protected Game mGame;
+    protected int state;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public Screen (Game game) {
-		this.mGame = game;
+	public Screen(Game game) {
+		this.game = game;
+        this.logger = new FPSLogger();
+
+        this.world = new World();
+        this.initSystems();
+        this.initScene();
+        this.world.initialize();
+
+        this.state = GAME_RUNNING;
 	}
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-	
-	public abstract void createScreen ();
-	public abstract void update (float dt);
-	public abstract void destroy();
-	
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	/**
-	 * @return the mDefaultShader
-	 */
-	public ShaderProgram getDefaultShader() {
-		return mDefaultShader;
-	}
+    @Override
+    public void render (float delta) {
+        this.update(delta);
+//		this.drawUI();
+    }
 
-	/**
-	 * @param mDefaultShader the mDefaultShader to set
-	 */
-	public void setDefaultShader(ShaderProgram mDefaultShader) {
-		this.mDefaultShader = mDefaultShader;
-	}
+    @Override
+    public void pause () {
+        if (this.state == GAME_RUNNING) {
+            this.state = GAME_PAUSED;
+            this.pauseSystems();
+        }
+    }
+    @Override
+    public void resume() {
+        if(this.state == GAME_PAUSED) {
+            this.state = GAME_RUNNING;
+            this.resumeSystems();
+        }
+    }
 
-	/**
-	 * @return the mLightShader
-	 */
-	public ShaderProgram getLightShader() {
-		return mLightShader;
-	}
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
 
-	/**
-	 * @param mLightShader the mLightShader to set
-	 */
-	public void setLightShader(ShaderProgram mLightShader) {
-		this.mLightShader = mLightShader;
-	}
+    abstract protected void initSystems();
+    abstract protected void initScene();
+    abstract protected void resumeSystems();
+    abstract protected void pauseSystems();
+    abstract protected void updatePaused();
+    abstract protected void updateRunning(float deltaTime);
+    abstract protected void update(float deltaTime);
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
+    public Game getGame() {
+        return game;
+    }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
+    public int getState() {
+        return state;
+    }
 
+    public void setState(int state) {
+        this.state = state;
+    }
 }

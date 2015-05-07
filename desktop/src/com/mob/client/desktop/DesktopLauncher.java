@@ -18,17 +18,17 @@ package com.mob.client.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mob.client.MobClient;
+import com.mob.client.Game;
 import com.mob.client.TestGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Client";
-        cfg.width = MobClient.GAME_SCREEN_WIDTH;
-        cfg.height = MobClient.GAME_SCREEN_HEIGHT;
-        cfg.fullscreen = MobClient.GAME_FULL_SCREEN;
-        cfg.vSyncEnabled = false;
+        cfg.width = Game.GAME_SCREEN_WIDTH;
+        cfg.height = Game.GAME_SCREEN_HEIGHT;
+        cfg.fullscreen = Game.GAME_FULL_SCREEN;
+        cfg.vSyncEnabled = Game.GAME_VSYNC_ENABLED;
         cfg.foregroundFPS = 0;
         cfg.resizable = false;
         
