@@ -32,17 +32,16 @@ public class Game implements ApplicationListener {
     public static final String GAME_SHADERS_PATH = "data/shaders/";
     public static final String GAME_SHADERS_LIGHT = "light.png";
 
-    public static final int GAME_SCREEN_WIDTH = 1366;
-    public static final int GAME_SCREEN_HEIGHT = 768;
+    public static final int GAME_SCREEN_WIDTH = 1280;
+    public static final int GAME_SCREEN_HEIGHT = 720;
     public static final float GAME_SCREEN_ZOOM = 1.0f;
     public static final boolean GAME_FULL_SCREEN = false;
-    public static final boolean GAME_VSYNC_ENABLED = true;
+    public static final boolean GAME_VSYNC_ENABLED = false;
 
     protected SpriteBatch spriteBatch;
 
     @Override
     public void create() {
-
         // Init spritebatch
         this.spriteBatch = new SpriteBatch();
 
@@ -50,9 +49,9 @@ public class Game implements ApplicationListener {
         SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
         AssetsHandler.load();
 
-
-        // Create Game Screen and present it
-        ScreenHandler.load("GameScreen", this);
+        // Set ScreenHandler Game instance to this and load GameScreen
+        ScreenHandler.setGameInstance(this);
+        ScreenHandler.load("GameScreen");
     }
 
     @Override

@@ -29,8 +29,9 @@ public class ScreenHandler {
 
     protected static HashMap<String, Screen> screens = new HashMap<String, Screen>();
     protected static Screen currentScreen;
+    private static Game game;
 
-    public static Screen load(String screenClassName, Game game) {
+    public static Screen load(String screenClassName) {
 
         screenClassName = "com.mob.client.screens." + screenClassName;
         Screen newScreen = null;
@@ -78,4 +79,11 @@ public class ScreenHandler {
         return ScreenHandler.currentScreen;
     }
 
+    public static Game getGameInstance() {
+        return game;
+    }
+
+    public static void setGameInstance(Game game) {
+        ScreenHandler.game = game;
+    }
 }
