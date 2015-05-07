@@ -54,10 +54,10 @@ public class GrhLoader extends Loader implements Loadable<Grh> {
 	@Override
 	public Vector<Grh> load(String initFileName) {
 		Vector<Grh> inits = new Vector<Grh>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
+		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		
 		try {
-			DataInputStream file = new DataInputStream(mFileHandle.read());
+			DataInputStream file = new DataInputStream(fileHandle.read());
 			file.skipBytes(4);
 			int numGrhs = Util.leShort(file.readShort());
 			file.skipBytes(2);

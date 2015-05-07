@@ -53,10 +53,10 @@ public class HeadLoader extends Loader implements Loadable<Head> {
 	@Override
 	public Vector<Head> load(String initFileName) {
 		Vector<Head> heads = new Vector<Head>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
+		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numHeads;
 		
-		DataInputStream file = new DataInputStream(mFileHandle.read());
+		DataInputStream file = new DataInputStream(fileHandle.read());
 		
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE);

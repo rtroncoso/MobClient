@@ -62,3 +62,4 @@ build/
 ## OS specifics
 Thumbs.db
 .DS_Store
+local.properties

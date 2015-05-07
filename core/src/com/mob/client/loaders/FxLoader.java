@@ -54,10 +54,10 @@ public class FxLoader extends Loader implements Loadable<Fx> {
 	@Override
 	public Vector<Fx> load(String initFileName) {
 		Vector<Fx> fxs = new Vector<Fx>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
+		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numFxs;
 		
-		DataInputStream file = new DataInputStream(mFileHandle.read());
+		DataInputStream file = new DataInputStream(fileHandle.read());
 		
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE);

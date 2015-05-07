@@ -54,10 +54,10 @@ public class BodyLoader extends Loader implements Loadable<Body> {
 	@Override
 	public Vector<Body> load(String initFileName) {
 		Vector<Body> bodys = new Vector<Body>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
+		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numBodys;
 		
-		DataInputStream file = new DataInputStream(mFileHandle.read());
+		DataInputStream file = new DataInputStream(fileHandle.read());
 		
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE);

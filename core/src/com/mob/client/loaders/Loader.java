@@ -29,7 +29,7 @@ public abstract class Loader implements Constants {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	protected FileHandle mFileHandle;
+	protected FileHandle fileHandle;
 
 	// ===========================================================
 	// Constructors
@@ -44,17 +44,17 @@ public abstract class Loader implements Constants {
 	// Getter & Setter
 	// ===========================================================
 	/**
-	 * @return the mFileHandle
+	 * @return the fileHandle
 	 */
 	public FileHandle getFileHandle() {
-		return mFileHandle;
+		return fileHandle;
 	}
 
 	/**
-	 * @param mFileHandle the mFileHandle to set
+	 * @param fileHandle the fileHandle to set
 	 */
-	public void setFileHandle(FileHandle mFileHandle) {
-		this.mFileHandle = mFileHandle;
+	public void setFileHandle(FileHandle fileHandle) {
+		this.fileHandle = fileHandle;
 	}
 
 	// ===========================================================

@@ -26,7 +26,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.mob.client.Game;
 
-public abstract class Screen  implements com.badlogic.gdx.Screen {
+public abstract class Screen implements com.badlogic.gdx.Screen {
 
 	// ===========================================================
 	// Constants

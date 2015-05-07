@@ -27,6 +27,7 @@ import com.mob.client.data.Map;
 import com.mob.client.data.MapBlock;
 import com.mob.client.data.WorldPosition;
 import com.mob.client.interfaces.Constants;
+import com.mob.client.loaders.MapLoader;
 import com.mob.client.util.Util;
 
 public class MapHandler implements Constants {
@@ -39,8 +40,9 @@ public class MapHandler implements Constants {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private static FileHandle mFileHandle;
-	private static HashMap<Integer, Map> mMapData = new HashMap<Integer, Map>();
+	private static FileHandle fileHandle;
+	private static HashMap<Integer, Map> mapData = new HashMap<Integer, Map>();
+	private static MapLoader loader = new MapLoader();
 
 	// ===========================================================
 	// Constructors
@@ -59,76 +61,32 @@ public class MapHandler implements Constants {
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
-	public static void set(Map pMap, int pMapNumber) {
-		if(MapHandler.mMapData.containsKey(pMapNumber)) return;
-		MapHandler.mMapData.put(pMapNumber, pMap);
+	public static void set(Map map, int mapNumber) {
+		if(MapHandler.mapData.containsKey(mapNumber)) return;
+		MapHandler.mapData.put(mapNumber, map);
 	}
 	
-	public static Map get(int pMapNumber) {
-		if(!MapHandler.mMapData.containsKey(pMapNumber)) loadMap(pMapNumber);
-		return MapHandler.mMapData.get(pMapNumber);
+	public static Map get(int mapNumber) {
+		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);
+		return MapHandler.mapData.get(mapNumber);
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	private static boolean loadMap(int pMapNumber) {
-		
-		MapHandler.mFileHandle = new FileHandle(GAME_MAPS_PATH + "Mapa" + String.valueOf(pMapNumber) + ".map");
-		
-		DataInputStream file = new DataInputStream(MapHandler.mFileHandle.read());
+	private static boolean load(int mapNumber) {
+
 		try {
-			file.skipBytes(GAME_FILE_HEADER_SIZE + (2 * 5)); // Skip complete map header
-			Map map = new Map();
-
-			// Read map info (rows first, then columns)
-			for(int y = MIN_MAP_SIZE_WIDTH; y <= MAX_MAP_SIZE_WIDTH; y++) {
-				for(int x = MIN_MAP_SIZE_HEIGHT; x <= MAX_MAP_SIZE_HEIGHT; x++) {
-					int charIndex = 0, objIndex = 0, npcIndex = 0, trigger = 0, graphic[] = new int[4];
-					WorldPosition tileExit = new WorldPosition(0, 0, 0);
-					boolean blocked = false;
-					byte byFlags = 0;
-					
-					byFlags = file.readByte();
-					blocked = (1 == (byFlags & 1));
-					
-					graphic[0] = Util.leShort(file.readShort());
-					
-					if((byFlags & 2) == 2) {
-						graphic[1] = Util.leShort(file.readShort());
-					} else {
-						graphic[1] = 0;
-					}
-					
-					if((byFlags & 4) == 4) {
-						graphic[2] = Util.leShort(file.readShort());
-					} else {
-						graphic[2] = 0;
-					}
-					
-					if((byFlags & 8) == 8) {
-						graphic[3] = Util.leShort(file.readShort());
-					} else {
-						graphic[3] = 0;
-					}
-					
-					if((byFlags & 16) == 16) {
-						trigger = Util.leShort(file.readShort());
-					}
-					
-					map.setTile(x, y, new MapBlock(graphic, charIndex, objIndex, npcIndex, tileExit, blocked, trigger));
-				}
-			}
-
-            // Set the map in our internal HashMap
-			MapHandler.set(map, pMapNumber);
-			Gdx.app.log(MapHandler.class.getSimpleName(), "Mapa" + String.valueOf(pMapNumber) + ".map cargado con exito.");
-			return true;
+			Map map = loader.load(String.valueOf(mapNumber) + ".map");
+            set(map, mapNumber);
 		} catch(IOException e) {
 			Gdx.app.log(MapHandler.class.getSimpleName(), e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
+
+		Gdx.app.log(MapHandler.class.getSimpleName(), "Map" + String.valueOf(mapNumber) + ".map successfully loaded");
+		return true;
 	}
 
 	// ===========================================================

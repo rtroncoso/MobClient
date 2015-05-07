@@ -53,10 +53,10 @@ public class HelmetLoader extends Loader implements Loadable<Helmet> {
 	@Override
 	public Vector<Helmet> load(String initFileName) {
 		Vector<Helmet> helmets = new Vector<Helmet>();
-		this.mFileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
+		this.fileHandle = Gdx.files.internal(GAME_INIT_PATH + initFileName);
 		int numHelmets;
 		
-		DataInputStream file = new DataInputStream(mFileHandle.read());
+		DataInputStream file = new DataInputStream(fileHandle.read());
 		
 		try {
 			file.skipBytes(GAME_FILE_HEADER_SIZE);
