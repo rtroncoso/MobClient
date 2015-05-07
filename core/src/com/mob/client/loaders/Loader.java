@@ -20,29 +20,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.mob.client.interfaces.Constants;
 
 public abstract class Loader implements Constants {
-	
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
+    public static final String GAME_INIT_PATH = "data/init/";
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
 	protected FileHandle fileHandle;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-	
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
 	/**
 	 * @return the fileHandle
 	 */
@@ -56,15 +38,5 @@ public abstract class Loader implements Constants {
 	public void setFileHandle(FileHandle fileHandle) {
 		this.fileHandle = fileHandle;
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-	
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
 
 }
