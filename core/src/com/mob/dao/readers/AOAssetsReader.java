@@ -38,7 +38,7 @@ public class AOAssetsReader implements AssetsReader {
         Reader<Map> reader = new Reader<Map>();
         MapLoader loader = new MapLoader();
 
-        return reader.read(Game.GAME_MAPS_PATH + map + ".map", loader);
+        return reader.read(Game.GAME_MAPS_PATH + "Mapa" + map + ".map", loader);
     }
 
     @Override

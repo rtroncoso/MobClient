@@ -31,17 +31,17 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
 	public Vector<Graphic> load(DataInputStream file) throws IOException {
 		Vector<Graphic> inits = new Vector<Graphic>();
 
+        file.skipBytes(4);
+        int numGraphics = Util.leShort(file.readShort());
+        file.skipBytes(2);
+
+        inits.setSize(numGraphics + 1);
+        inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
+
+        int grh = Util.leShort(file.readShort());
+        file.skipBytes(2); // no es negro si nadie lo ve
+
         try {
-            file.skipBytes(4);
-            int numGraphics = Util.leShort(file.readShort());
-            file.skipBytes(2);
-
-            inits.setSize(numGraphics + 1);
-            inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
-
-            int grh = Util.leShort(file.readShort());
-            file.skipBytes(2); // no es negro si nadie lo ve
-
             while(grh > 0) {
                 int fileNum = 0, sX = 0, sY = 0, numFrames, pixelWidth, pixelHeight, frames[] = new int[0];
                 float speed = 0.0f, tileWidth, tileHeight;

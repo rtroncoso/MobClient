@@ -84,6 +84,4 @@ public class GameScreen extends Screen {
         //
 	}
 
-
-
 }

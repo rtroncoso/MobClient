@@ -43,7 +43,7 @@ public class ScreenHandler {
                 newScreen = (Screen) constructor.newInstance(game);
                 screens.put(screenClassName, newScreen);
             } catch ( InvocationTargetException ex ){
-                System.err.println( ex + " Screen with Wrong args in Constructor.");
+                System.err.println( ex.getMessage() + " Screen with Wrong args in Constructor.");
             } catch ( NoSuchMethodException ex ){
             } catch ( ClassNotFoundException ex ){
                 System.err.println( ex + " Screen Class Not Found.");
