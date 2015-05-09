@@ -33,61 +33,19 @@ import com.mob.client.Game;
 import com.mob.client.interfaces.Constants;
 
 public class SurfaceHandler implements Constants {
-	
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
+	private static HashMap<String, Texture> surfaces = new HashMap<String, Texture>();
+	private static String graphicsPath = Game.GAME_GRAPHICS_PATH;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	private static HashMap<String, Texture> mDict = new HashMap<String, Texture>();
-	private static String mGraphicsPath;
-	
-	protected Game mGame;
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-	public SurfaceHandler(Game game) {
-		this.mGame = game;
-	}
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-	/**
-	 * @return the mGraphicsPath
-	 */
-	public static String getGraphicsPath() {
-		return mGraphicsPath;
-	}
-
-	/**
-	 * @param mGraphicsPath the mGraphicsPath to set
-	 */
-	public static void setGraphicsPath(String mGraphicsPath) {
-		SurfaceHandler.mGraphicsPath = mGraphicsPath;
-	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
 	/**
 	 * Loads into memory ALL the textures in the graphics path
 	 */
 	public static void loadAllTextures() {
-		FileHandle file = Gdx.app.getFiles().internal(SurfaceHandler.mGraphicsPath);
+		FileHandle file = Gdx.app.getFiles().internal(graphicsPath);
 		if(file.isDirectory()) {
 			for(FileHandle tmp : file.list()) {
 				if(tmp.extension() == Game.GAME_GRAPHICS_EXTENSION) {
-					Gdx.app.log(SurfaceHandler.class.getSimpleName(), "Cargando " + tmp.name());
+					Gdx.app.debug(SurfaceHandler.class.getSimpleName(), "Cargando " + tmp.name());
 					SurfaceHandler.loadTexture(tmp.nameWithoutExtension());
 				}
 			}
@@ -98,7 +56,7 @@ public class SurfaceHandler implements Constants {
 	 * @param fileName Name of the file found in the graphics folder
 	 */
 	public static void loadTexture(String fileName) {
-		Texture texture = new Texture(SurfaceHandler.mGraphicsPath + fileName + Game.GAME_GRAPHICS_EXTENSION);
+		Texture texture = new Texture(graphicsPath + fileName + Game.GAME_GRAPHICS_EXTENSION);
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		SurfaceHandler.add(fileName, texture);
@@ -109,11 +67,11 @@ public class SurfaceHandler implements Constants {
 	 * @param texture Texture to add
 	 */
 	 public static void add(final String key, final Texture texture) {
-		 if (SurfaceHandler.mDict.containsKey(key)) {
+		 if (SurfaceHandler.surfaces.containsKey(key)) {
 			 return;
 		 }
 	   
-		 SurfaceHandler.mDict.put(key, texture);
+		 SurfaceHandler.surfaces.put(key, texture);
 	 }
 
 	/**
@@ -122,8 +80,8 @@ public class SurfaceHandler implements Constants {
 	 * @return BundledTexture inside the map
 	 */
 	 public static Texture get(final String key) {
-		 if(!SurfaceHandler.mDict.containsKey(key)) SurfaceHandler.loadTexture(key);
-		 return SurfaceHandler.mDict.get(key);
+		 if(!SurfaceHandler.surfaces.containsKey(key)) SurfaceHandler.loadTexture(key);
+		 return SurfaceHandler.surfaces.get(key);
 	 }
 	  
 	 /**
@@ -131,26 +89,21 @@ public class SurfaceHandler implements Constants {
 	  * @param key Index in map
 	  */
 	public static void dispose(final String key) {
-		if (!SurfaceHandler.mDict.containsKey(key)) {
+		if (!SurfaceHandler.surfaces.containsKey(key)) {
 			return;
 		}
 	   
-		final Texture t = SurfaceHandler.mDict.get(key);
+		final Texture t = SurfaceHandler.surfaces.get(key);
 		t.dispose();
-		SurfaceHandler.mDict.remove(key);
+		SurfaceHandler.surfaces.remove(key);
 	}
 	  
 	public static void disposeAll() {
-		for (final Texture t : SurfaceHandler.mDict.values()) {
+		for (final Texture t : SurfaceHandler.surfaces.values()) {
 			t.dispose();
 		}
    
-		SurfaceHandler.mDict.clear();
+		SurfaceHandler.surfaces.clear();
 	 }
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
 
 }

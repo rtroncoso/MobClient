@@ -41,7 +41,6 @@ public class MapRenderingSystem extends VoidEntitySystem {
     }
 
     private void renderWorld() {
-
         // Variable Declarations
         int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
         Map map = this.mapSystem.map;
@@ -88,7 +87,6 @@ public class MapRenderingSystem extends VoidEntitySystem {
 
     @Override
     protected void processSystem() {
-
         // Obtenemos una entity de la queue y inicializamos el batch
         this.cameraSystem.camera.update();
         this.batch.setProjectionMatrix(this.cameraSystem.camera.combined);

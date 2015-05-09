@@ -24,7 +24,6 @@ import com.mob.client.handlers.AssetsHandler;
 
 /**
  * @author Rodrigo
- *
  */
 public class BundledAnimation {
 

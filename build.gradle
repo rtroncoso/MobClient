@@ -52,14 +52,12 @@ project(":desktop") {
 
 project(":android") {
     apply plugin: "android"
-    apply plugin: 'com.neenbedankt.android-apt'
 
     configurations { natives }
 
     dependencies {
         compile project(":core")
 
-        apt "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"

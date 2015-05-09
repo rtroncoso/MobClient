@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.ScreenHandler;
-import com.mob.client.handlers.SurfaceHandler;
 
 public class Game implements ApplicationListener {
 
@@ -48,7 +47,6 @@ public class Game implements ApplicationListener {
         this.spriteBatch = new SpriteBatch();
 
         // Load resources
-        SurfaceHandler.setGraphicsPath(GAME_GRAPHICS_PATH);
         AssetsHandler.load();
 
         // Set ScreenHandler Game instance to this and load GameScreen
