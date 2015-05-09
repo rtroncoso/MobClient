@@ -17,6 +17,7 @@
 package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -30,71 +31,75 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
 	public Vector<Graphic> load(DataInputStream file) throws IOException {
 		Vector<Graphic> inits = new Vector<Graphic>();
 
-		file.skipBytes(4);
-		int numGrhs = Util.leShort(file.readShort());
-		file.skipBytes(2);
+        try {
+            file.skipBytes(4);
+            int numGraphics = Util.leShort(file.readShort());
+            file.skipBytes(2);
 
-		inits.setSize(numGrhs + 1);
-		inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
+            inits.setSize(numGraphics + 1);
+            inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
 
-		int grh = Util.leShort(file.readShort());
-		file.skipBytes(2); // no es negro si nadie lo ve
+            int grh = Util.leShort(file.readShort());
+            file.skipBytes(2); // no es negro si nadie lo ve
 
-		while(grh > 0) {
-			int fileNum = 0, sX = 0, sY = 0, numFrames, pixelWidth, pixelHeight, frames[] = new int[0];
-			float speed = 0.0f, tileWidth, tileHeight;
-			numFrames = Util.leShort(file.readShort());
+            while(grh > 0) {
+                int fileNum = 0, sX = 0, sY = 0, numFrames, pixelWidth, pixelHeight, frames[] = new int[0];
+                float speed = 0.0f, tileWidth, tileHeight;
+                numFrames = Util.leShort(file.readShort());
 
-			if(numFrames > 1) {
-				frames = new int[numFrames];
-				for(int j=0; j < numFrames; j++) {
-					frames[j] = Util.leShort(file.readShort());
-					file.skipBytes(2);
-					if(frames[j] <= 0) throw new IOException("frames[]: " + frames[j]);
-				}
+                if(numFrames > 1) {
+                    frames = new int[numFrames];
+                    for(int j=0; j < numFrames; j++) {
+                        frames[j] = Util.leShort(file.readShort());
+                        file.skipBytes(2);
+                        if(frames[j] <= 0) throw new IOException("frames[]: " + frames[j]);
+                    }
 
-				// Hardcodeamos speed (Java no lee single floating points de VB)
-				file.skipBytes(4);
-				speed = (numFrames * 1000) / 60;
-				if(speed <= 0) throw new IOException("speed (numFrames > 1)");
+                    // Hardcodeamos speed (Java no lee single floating points de VB)
+                    file.skipBytes(4);
+                    speed = (numFrames * 1000) / 60;
+                    if(speed <= 0) throw new IOException("speed (numFrames > 1)");
 
-				pixelWidth = inits.get(frames[0]).getPixelWidth();
-				if(pixelWidth <= 0) throw new IOException("pixelWidth (numFrames > 1)");
+                    pixelWidth = inits.get(frames[0]).getPixelWidth();
+                    if(pixelWidth <= 0) throw new IOException("pixelWidth (numFrames > 1)");
 
-				pixelHeight = inits.get(frames[0]).getPixelHeight();
-				if(pixelHeight <= 0) throw new IOException("pixelHeight (numFrames > 1)");
+                    pixelHeight = inits.get(frames[0]).getPixelHeight();
+                    if(pixelHeight <= 0) throw new IOException("pixelHeight (numFrames > 1)");
 
-				tileWidth = inits.get(frames[0]).getTileWidth();
-				if(tileWidth <= 0) throw new IOException("tileWidth (numFrames > 1)");
-				tileHeight = inits.get(frames[0]).getTileHeight();
-				if(tileHeight <= 0) throw new IOException("tileHeight (numFrames > 1)");
-			} else {
-				// Read normal GRH
-				fileNum = Util.leShort(file.readShort());
-				file.skipBytes(2);
+                    tileWidth = inits.get(frames[0]).getTileWidth();
+                    if(tileWidth <= 0) throw new IOException("tileWidth (numFrames > 1)");
+                    tileHeight = inits.get(frames[0]).getTileHeight();
+                    if(tileHeight <= 0) throw new IOException("tileHeight (numFrames > 1)");
+                } else {
+                    // Read normal GRH
+                    fileNum = Util.leShort(file.readShort());
+                    file.skipBytes(2);
 
-				if(fileNum <= 0) throw new IOException("fileNum");
+                    if(fileNum <= 0) throw new IOException("fileNum");
 
-				sX = Util.leShort(file.readShort());
-				if(sX < 0) throw new IOException("sX (numFrames < 1)");
+                    sX = Util.leShort(file.readShort());
+                    if(sX < 0) throw new IOException("sX (numFrames < 1)");
 
-				sY = Util.leShort(file.readShort());
-				if(sY < 0) throw new IOException("sY (numFrames < 1)");
+                    sY = Util.leShort(file.readShort());
+                    if(sY < 0) throw new IOException("sY (numFrames < 1)");
 
-				pixelWidth = Util.leShort(file.readShort());
-				if(pixelWidth <= 0) throw new IOException("pixelWidth (numFrames < 1)");
+                    pixelWidth = Util.leShort(file.readShort());
+                    if(pixelWidth <= 0) throw new IOException("pixelWidth (numFrames < 1)");
 
-				pixelHeight = Util.leShort(file.readShort());
-				if(pixelHeight <= 0) throw new IOException("pixelHeight (numFrames < 1)");
+                    pixelHeight = Util.leShort(file.readShort());
+                    if(pixelHeight <= 0) throw new IOException("pixelHeight (numFrames < 1)");
 
-				tileWidth = (float) pixelWidth / Tile.TILE_PIXEL_WIDTH;
-				tileHeight = (float) pixelHeight / Tile.TILE_PIXEL_HEIGHT;
-			}
-			inits.setElementAt(new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
-			grh = Util.leShort(file.readShort());
-			file.skipBytes(2);
-		}
+                    tileWidth = (float) pixelWidth / Tile.TILE_PIXEL_WIDTH;
+                    tileHeight = (float) pixelHeight / Tile.TILE_PIXEL_HEIGHT;
+                }
 
+                inits.setElementAt(new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
+                grh = Util.leShort(file.readShort());
+                file.skipBytes(2);
+            }
+        } catch(EOFException ex) {
+            return inits;
+        }
 		
 		return null;
 	}

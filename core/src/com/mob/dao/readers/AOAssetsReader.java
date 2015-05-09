@@ -18,6 +18,7 @@
  */
 package com.mob.dao.readers;
 
+import com.badlogic.gdx.Gdx;
 import com.mob.client.Game;
 import com.mob.dao.objects.*;
 import com.mob.dao.loaders.*;
@@ -30,8 +31,9 @@ import java.util.Vector;
  * This class handles all the logic for parsing
  * Argentum Online's data objects.
  */
-public class AOAssetsReader {
+public class AOAssetsReader implements AssetsReader {
 
+    @Override
     public Map loadMap(String map) {
         Reader<Map> reader = new Reader<Map>();
         MapLoader loader = new MapLoader();
@@ -39,6 +41,7 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_MAPS_PATH + map + ".map", loader);
     }
 
+    @Override
     public Vector<Graphic> loadGraphics() {
         Reader<Vector<Graphic>> reader = new Reader<Vector<Graphic>>();
         GraphicLoader loader = new GraphicLoader();
@@ -46,6 +49,7 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_INIT_PATH + "graficos.ind", loader);
     }
 
+    @Override
     public Vector<Body> loadBodies() {
         Reader<Vector<Body>> reader = new Reader<Vector<Body>>();
         BodyLoader loader = new BodyLoader();
@@ -53,6 +57,7 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_INIT_PATH + "Personajes.ind", loader);
     }
 
+    @Override
     public Vector<Fx> loadFxs() {
         Reader<Vector<Fx>> reader = new Reader<Vector<Fx>>();
         FxLoader loader = new FxLoader();
@@ -60,6 +65,7 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_INIT_PATH + "Fxs.ind", loader);
     }
 
+    @Override
     public Vector<Head> loadHeads() {
         Reader<Vector<Head>> reader = new Reader<Vector<Head>>();
         HeadLoader loader = new HeadLoader();
@@ -67,12 +73,14 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_INIT_PATH + "Cabezas.ind", loader);
     }
 
+    @Override
     public Vector<Helmet> loadHelmets() {
         Reader<Vector<Helmet>> reader = new Reader<Vector<Helmet>>();
         HelmetLoader loader = new HelmetLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Cascos.ind", loader);
     }
+    @Override
     public Vector<Shield> loadShields() {
         Reader<Vector<Shield>> reader = new Reader<Vector<Shield>>();
         ShieldLoader loader = new ShieldLoader();
@@ -80,6 +88,7 @@ public class AOAssetsReader {
         return reader.read(Game.GAME_INIT_PATH + "Escudos.dat", loader);
     }
 
+    @Override
     public Vector<Weapon> loadWeapons() {
         Reader<Vector<Weapon>> reader = new Reader<Vector<Weapon>>();
         WeaponLoader loader = new WeaponLoader();

@@ -18,28 +18,24 @@
  */
 package com.mob.dao.readers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.mob.dao.loaders.Loader;
+import com.mob.dao.objects.*;
 
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.util.Vector;
 
-public class Reader<T> {
+public interface AssetsReader {
+    Map loadMap(String map);
 
-    public T read(String path, Loader<T> loader) {
+    Vector<Graphic> loadGraphics();
 
-        try {
-            Gdx.app.log(getClass().getSimpleName(), path);
-            FileHandle fileHandle = Gdx.files.internal(path);
-            T loadedFile = loader.load(new DataInputStream(fileHandle.read()));
+    Vector<Body> loadBodies();
 
-            Gdx.app.log(this.getClass().getSimpleName(), "[Reader] Asset " + path + " successfully loaded");
-            return loadedFile;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    Vector<Fx> loadFxs();
 
+    Vector<Head> loadHeads();
+
+    Vector<Helmet> loadHelmets();
+
+    Vector<Shield> loadShields();
+
+    Vector<Weapon> loadWeapons();
 }

@@ -22,11 +22,12 @@ import com.badlogic.gdx.Gdx;
 import com.mob.dao.objects.Map;
 import com.mob.client.interfaces.Constants;
 import com.mob.dao.readers.AOAssetsReader;
+import com.mob.dao.readers.AssetsReader;
 
 public class MapHandler implements Constants {
 
 	private static HashMap<Long, Map> mapData = new HashMap<Long, Map>();
-	private static AOAssetsReader reader = new AOAssetsReader();
+	private static AssetsReader reader = new AOAssetsReader();
 
 	public static Map get(long mapNumber) {
 		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);

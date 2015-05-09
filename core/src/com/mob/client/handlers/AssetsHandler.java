@@ -37,7 +37,7 @@ public class AssetsHandler {
 	private static Vector<Weapon> weapons = new Vector<Weapon>();
     private static Vector<Shield> shields = new Vector<Shield>();
     private static Vector<Fx> fxs = new Vector<Fx>();
-    private static AOAssetsReader reader = new AOAssetsReader();
+    private static AssetsReader reader = new AOAssetsReader();
 
 	public static void load() {
 
