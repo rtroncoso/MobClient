@@ -19,7 +19,7 @@ package com.mob.client.artemis.systems.render;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.data.Map;
+import com.mob.shared.data.Map;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 
@@ -32,28 +32,13 @@ import com.mob.client.artemis.systems.map.TiledMapSystem;
 @Wire
 public class MapRenderingSystem extends VoidEntitySystem {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
     private TiledMapSystem mapSystem;
     private CameraSystem cameraSystem;
     public SpriteBatch batch;
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-    public MapRenderingSystem(SpriteBatch pSpriteBatch) {
-        this.batch = pSpriteBatch;
+    public MapRenderingSystem(SpriteBatch spriteBatch) {
+        this.batch = spriteBatch;
     }
-
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
 
     private void renderWorld() {
 
@@ -101,10 +86,6 @@ public class MapRenderingSystem extends VoidEntitySystem {
         map.renderLayer(this.batch, world.getDelta(), 3, minAreaX, maxAreaX, minAreaY, maxAreaY);
     }
 
-
-    // ===========================================================
-    // Methods for/from SuperClass/Interfaces
-    // ===========================================================
     @Override
     protected void processSystem() {
 
@@ -119,16 +100,6 @@ public class MapRenderingSystem extends VoidEntitySystem {
         // Finalizamos el batch
         this.batch.end();
     }
-
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 
 
 }

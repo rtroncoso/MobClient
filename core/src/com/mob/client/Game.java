@@ -20,16 +20,18 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.handlers.ScreenHandler;
-import com.mob.client.handlers.SurfaceHandler;
+import com.mob.shared.handlers.AssetsHandler;
+import com.mob.shared.handlers.ScreenHandler;
+import com.mob.shared.handlers.SurfaceHandler;
 
 public class Game implements ApplicationListener {
 
     public static final String GAME_GRAPHICS_PATH = "data/graficos/";
     public static final String GAME_FONTS_PATH = "data/fonts/";
-    public static final String GAME_GRAPHICS_EXTENSION = ".png";
+    public static final String GAME_MAPS_PATH = "data/mapas/";
+    public static final String GAME_INIT_PATH = "data/init/";
     public static final String GAME_SHADERS_PATH = "data/shaders/";
+    public static final String GAME_GRAPHICS_EXTENSION = ".png";
     public static final String GAME_SHADERS_LIGHT = "light.png";
 
     public static final int GAME_SCREEN_WIDTH = 1280;

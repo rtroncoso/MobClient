@@ -17,10 +17,9 @@
 package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.data.Graphic;
-import com.mob.client.handlers.AssetsHandler;
-import com.mob.client.handlers.SurfaceHandler;
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.data.Graphic;
+import com.mob.shared.handlers.AssetsHandler;
+import com.mob.shared.handlers.SurfaceHandler;
 
 /**
  * Class GameTexture

@@ -25,9 +25,8 @@ package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.Game;
-import com.mob.client.data.Graphic;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.shared.data.Graphic;
+import com.mob.shared.handlers.AssetsHandler;
 
 public class BundledTexture {
 

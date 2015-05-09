@@ -32,7 +32,7 @@
 //import com.mob.client.api.components.character.HeadComponent;
 //import com.mob.client.api.components.character.HeadingComponent;
 //import com.mob.client.api.components.TransformComponent;
-//import com.mob.client.handlers.CameraHandler;
+//import com.mob.shared.handlers.CameraHandler;
 //import com.mob.client.interfaces.Constants;
 //
 ///**

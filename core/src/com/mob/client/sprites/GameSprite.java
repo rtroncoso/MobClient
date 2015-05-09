@@ -23,7 +23,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.mob.client.Game;
-import com.mob.client.data.Tile;
+import com.mob.shared.data.Tile;
 import com.mob.client.interfaces.Constants;
 
 public abstract class GameSprite implements Constants {

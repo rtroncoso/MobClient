@@ -20,8 +20,8 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
-import com.mob.client.data.Map;
-import com.mob.client.handlers.MapHandler;
+import com.mob.shared.data.Map;
+import com.mob.shared.handlers.MapHandler;
 
 /**
  * TiledMapSystem Class

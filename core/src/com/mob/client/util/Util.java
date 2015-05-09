@@ -27,18 +27,6 @@ package com.mob.client.util;
 
 public class Util {
 
-	public static boolean asciiValidos(String str) {
-		// Function AsciiValidos(ByVal cad As String) As Boolean
-		byte[] bytes = str.toLowerCase().getBytes();
-		for (byte element : bytes) {
-			if ((element < 97 || element > 122) && element != 255
-					&& element != 32) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	public static short leShort(short n) {
 		return (short) (((n & 0xff) << 8) | (((n & 0xff00) >> 8) & 0xff));
 	}
