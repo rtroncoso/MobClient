@@ -26,165 +26,151 @@ import java.util.Vector;
 
 import com.mob.shared.data.*;
 import com.mob.shared.data.Body;
-import com.mob.shared.loaders.FxLoader;
-import com.mob.shared.loaders.GraphicLoader;
-import com.mob.shared.loaders.HeadLoader;
-import com.mob.shared.loaders.HelmetLoader;
-import com.mob.shared.loaders.ShieldLoader;
-import com.mob.shared.loaders.WeaponLoader;
 import com.mob.shared.readers.*;
 
 public class AssetsHandler {
 
-	private static Vector<Graphic> graphic;
-	private static Vector<Body> body;
-	private static Vector<Head> head;
-	private static Vector<Helmet> helmet;
-	private static Vector<Weapon> weapon;
-    private static Vector<Shield> shield;
-    private static Vector<Fx> fx;
+	private static Vector<Graphic> graphics = new Vector<Graphic>();
+	private static Vector<Body> bodies = new Vector<Body>();
+	private static Vector<Head> heads = new Vector<Head>();
+	private static Vector<Helmet> helmets = new Vector<Helmet>();
+	private static Vector<Weapon> weapons = new Vector<Weapon>();
+    private static Vector<Shield> shields = new Vector<Shield>();
+    private static Vector<Fx> fxs = new Vector<Fx>();
+    private static AOAssetsReader reader = new AOAssetsReader();
 
 	public static void load() {
 
-    	// Init our vectors
-        graphic = new Vector<Graphic>();
-        body = new Vector<Body>();
-        head = new Vector<Head>();
-        helmet = new Vector<Helmet>();
-        weapon = new Vector<Weapon>();
-        shield = new Vector<Shield>();
-        fx = new Vector<Fx>();
-        
-        // Load all INITs
-        graphic = new GraphicReader("Graficos").read();
-        body = new BodyReader("Personajes").read();
-        weapon = new WeaponReader("Armas").read();
-        shield = new ShieldReader("Escudos").read();
-        head = new HeadReader("Cabezas").read();
-        helmet = new HelmetReader("Cascos").read();
-        fx = new FxReader("Fxs").read();
+        graphics = reader.loadGraphics();
+        bodies = reader.loadBodies();
+        weapons = reader.loadWeapons();
+        shields = reader.loadShields();
+        heads = reader.loadHeads();
+        helmets = reader.loadHelmets();
+        fxs = reader.loadFxs();
 		
 	}
 
 	/**
-	 * @param pIndex
-	 * @return body data of a specified index
+	 * @param index
+	 * @return bodies data of a specified index
 	 */
-	public static Body getBody(int pIndex) {
-		return AssetsHandler.getBodyData().get(pIndex);
+	public static Body getBodies(int index) {
+		return AssetsHandler.getBodies().get(index);
 	}
+
 	/**
-	 * @param pIndex
-	 * @return head data of a specified index
+	 * @param index
+	 * @return heads data of a specified index
 	 */
-	public static Head getHead(int pIndex) {
-		return AssetsHandler.getHeadData().get(pIndex);
+	public static Head getHeads(int index) {
+		return AssetsHandler.getHeads().get(index);
 	}
 	
 	/**
-	 * @param pIndex
+	 * @param index
 	 * @return grh data of a specified index
 	 */
-	public static Graphic getGrh(int pIndex) {
-		return AssetsHandler.getGrhData().get(pIndex);
+	public static Graphic getGraphic(int index) {
+		return AssetsHandler.getGraphics().get(index);
 	}
 	
 	/**
-	 * @return the graphic
+	 * @return the graphics
 	 */
-	public static Vector<Graphic> getGrhData() {
-		return graphic;
+	public static Vector<Graphic> getGraphics() {
+		return graphics;
 	}
 
 	/**
-	 * @param mGraphic the graphic to set
+	 * @param graphic the graphics to set
 	 */
-	public static void setGrhData(Vector<Graphic> mGraphic) {
-		AssetsHandler.graphic = mGraphic;
+	public static void setGraphics(Vector<Graphic> graphic) {
+		AssetsHandler.graphics = graphic;
 	}
 
 	/**
-	 * @return the body
+	 * @return the bodies
 	 */
-	public static Vector<Body> getBodyData() {
-		return body;
+	public static Vector<Body> getBodies() {
+		return bodies;
 	}
 
 	/**
-	 * @param mBody the body to set
+	 * @param body the bodies to set
 	 */
-	public static void setBodyData(Vector<Body> mBody) {
-		AssetsHandler.body = mBody;
+	public static void setBodies(Vector<Body> body) {
+		AssetsHandler.bodies = body;
 	}
 
 	/**
-	 * @return the head
+	 * @return the heads
 	 */
-	public static Vector<Head> getHeadData() {
-		return head;
+	public static Vector<Head> getHeads() {
+		return heads;
 	}
 
 	/**
-	 * @param mHead the head to set
+	 * @param heads the heads to set
 	 */
-	public static void setHeadData(Vector<Head> mHead) {
-		AssetsHandler.head = mHead;
+	public static void setHeads(Vector<Head> heads) {
+		AssetsHandler.heads = heads;
 	}
 
 	/**
-	 * @return the helmet
+	 * @return the helmets
 	 */
-	public static Vector<Helmet> getHelmetData() {
-		return helmet;
+	public static Vector<Helmet> getHelmets() {
+		return helmets;
 	}
 
 	/**
-	 * @param mHelmet the helmet to set
+	 * @param helmets the helmets to set
 	 */
-	public static void setHelmetData(Vector<Helmet> mHelmet) {
-		AssetsHandler.helmet = mHelmet;
+	public static void setHelmets(Vector<Helmet> helmets) {
+		AssetsHandler.helmets = helmets;
 	}
 
 	/**
-	 * @return the weapon
+	 * @return the weapons
 	 */
-	public static Vector<Weapon> getWeaponData() {
-		return weapon;
+	public static Vector<Weapon> getWeapons() {
+		return weapons;
 	}
 
 	/**
-	 * @param mWeapon the weapon to set
+	 * @param weapons the weapons to set
 	 */
-	public static void setWeaponData(Vector<Weapon> mWeapon) {
-		AssetsHandler.weapon = mWeapon;
+	public static void setWeapons(Vector<Weapon> weapons) {
+		AssetsHandler.weapons = weapons;
 	}
 
 	/**
-	 * @return the shield
+	 * @return the shields
 	 */
-	public static Vector<Shield> getShieldData() {
-		return shield;
+	public static Vector<Shield> getShields() {
+		return shields;
 	}
 
 	/**
-	 * @param mShield the shield to set
+	 * @param shields the shields to set
 	 */
-	public static void setShieldData(Vector<Shield> mShield) {
-		AssetsHandler.shield = mShield;
+	public static void setShields(Vector<Shield> shields) {
+		AssetsHandler.shields = shields;
 	}
 
 	/**
-	 * @return the fx
+	 * @return the fxs
 	 */
-	public static Vector<Fx> getFxData() {
-		return fx;
+	public static Vector<Fx> getFxs() {
+		return fxs;
 	}
 
 	/**
-	 * @param mFx the fx to set
+	 * @param fxs the fxs to set
 	 */
-	public static void setFxData(Vector<Fx> mFx) {
-		AssetsHandler.fx = mFx;
+	public static void setFxs(Vector<Fx> fxs) {
+		AssetsHandler.fxs = fxs;
 	}
 
 

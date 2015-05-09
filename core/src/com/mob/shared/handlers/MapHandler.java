@@ -19,33 +19,26 @@ package com.mob.shared.handlers;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.mob.shared.data.Map;
 import com.mob.client.interfaces.Constants;
-import com.mob.shared.readers.MapReader;
+import com.mob.shared.readers.AOAssetsReader;
 
 public class MapHandler implements Constants {
 
-	private static FileHandle fileHandle;
-	private static HashMap<Integer, Map> mapData = new HashMap<Integer, Map>();
-	private static MapReader reader = new MapReader();
+	private static HashMap<Long, Map> mapData = new HashMap<Long, Map>();
+	private static AOAssetsReader reader = new AOAssetsReader();
 
-	public static void set(Map map, int mapNumber) {
-		if(MapHandler.mapData.containsKey(mapNumber)) return;
-		MapHandler.mapData.put(mapNumber, map);
-	}
-	
-	public static Map get(int mapNumber) {
+	public static Map get(long mapNumber) {
 		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);
 		return MapHandler.mapData.get(mapNumber);
 	}
 
-	private static boolean load(int mapNumber) {
+	private static boolean load(long mapNumber) {
 
-		Map map = reader.read(String.valueOf(mapNumber));
-		set(map, mapNumber);
+		Map map = reader.loadMap(String.valueOf(mapNumber));
+		mapData.put(mapNumber, map);
 
-		Gdx.app.log(MapHandler.class.getSimpleName(), "Map" + String.valueOf(mapNumber) + ".map successfully loaded");
+		Gdx.app.log(MapHandler.class.getSimpleName(), "[MapHandler] Map " + String.valueOf(mapNumber) + ".map successfully loaded");
 		return true;
 	}
 

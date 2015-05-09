@@ -62,27 +62,37 @@ public class Game implements ApplicationListener {
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        ScreenHandler.getCurrent().render(Gdx.graphics.getDeltaTime());
+        if(ScreenHandler.getCurrent() != null) {
+            ScreenHandler.getCurrent().render(Gdx.graphics.getDeltaTime());
+        }
     }
 
     @Override
     public void dispose() {
-        ScreenHandler.getCurrent().dispose();
+        if(ScreenHandler.getCurrent() != null) {
+            ScreenHandler.getCurrent().dispose();
+        }
     }
 
     @Override
     public void pause() {
-        ScreenHandler.getCurrent().pause();
+        if(ScreenHandler.getCurrent() != null) {
+            ScreenHandler.getCurrent().pause();
+        }
     }
 
     @Override
     public void resize(int arg0, int arg1) {
-        ScreenHandler.getCurrent().resize(arg0, arg1);
+        if(ScreenHandler.getCurrent() != null) {
+            ScreenHandler.getCurrent().resize(arg0, arg1);
+        }
     }
 
     @Override
     public void resume() {
-        ScreenHandler.getCurrent().resume();
+        if(ScreenHandler.getCurrent() != null) {
+            ScreenHandler.getCurrent().resume();
+        }
     }
 
 	/**

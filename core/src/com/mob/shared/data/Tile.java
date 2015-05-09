@@ -72,7 +72,7 @@ public class Tile {
 		int layer = 0;
 		this.textures.setSize(this.getGraphic().length);
 		for(int grhIndex : this.getGraphic()) {
-			if(grhIndex > 0) this.textures.setElementAt(new BundledAnimation(AssetsHandler.getGrh(grhIndex)), layer);
+			if(grhIndex > 0) this.textures.setElementAt(new BundledAnimation(AssetsHandler.getGraphic(grhIndex)), layer);
 			layer++;
 		}
 	}

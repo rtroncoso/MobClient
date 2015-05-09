@@ -18,16 +18,27 @@
  */
 package com.mob.shared.readers;
 
-import com.mob.client.Game;
-import com.mob.shared.data.Fx;
-import com.mob.shared.data.Helmet;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.mob.shared.loaders.Loader;
 
-import java.util.Vector;
+import java.io.DataInputStream;
+import java.io.IOException;
 
-public class FxReader extends AssetReader<Vector<Fx>> {
+public class Reader<T> {
 
-    public Vector<Fx> read(String fileName) {
-        return super.read(Game.GAME_INIT_PATH, fileName + ".ind");
+    public T read(String path, Loader<T> loader) {
+
+        try {
+            FileHandle fileHandle = Gdx.files.internal(path);
+            T loadedFile = loader.load(new DataInputStream(fileHandle.read()));
+
+            Gdx.app.log(this.getClass().getSimpleName(), "[Reader] Asset " + path + " successfully loaded");
+            return loadedFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

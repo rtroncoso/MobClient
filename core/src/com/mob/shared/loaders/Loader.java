@@ -25,5 +25,4 @@ public abstract class Loader<T> implements Constants {
 
 	public abstract T load(DataInputStream fileName) throws IOException;
 
-
 }

@@ -28,7 +28,7 @@ import org.ini4j.InvalidFileFormatException;
 public class ShieldLoader extends Loader<Vector<Shield>> {
 
 	@Override
-	public Vector<Shield> load(DataInputStream file) {
+	public Vector<Shield> load(DataInputStream file) throws IOException {
 		Vector<Shield> shields = new Vector<Shield>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
@@ -63,9 +63,6 @@ public class ShieldLoader extends Loader<Vector<Shield>> {
 
 			return shields;
 		} catch (InvalidFileFormatException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}

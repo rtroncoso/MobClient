@@ -50,7 +50,7 @@ public class BundledTexture {
             this.frames = new GameTexture[numFrames];
             TextureRegion tmpFrames[] = new TextureRegion[numFrames];
             for(int i = 0; i < numFrames; i++) {
-                this.frames[i] = new GameTexture(AssetsHandler.getGrhData().get(graphic.getFrame(i)));
+                this.frames[i] = new GameTexture(AssetsHandler.getGraphics().get(graphic.getFrame(i)));
                 tmpFrames[i] = this.frames[i].getGraphic();
             }
             this.animation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
@@ -59,7 +59,7 @@ public class BundledTexture {
     }
 
 	public BundledTexture (int grhIndex, boolean animated) {
-		this(AssetsHandler.getGrh(grhIndex), animated);
+		this(AssetsHandler.getGraphic(grhIndex), animated);
 	}
 
     public BundledTexture (int grhIndex) {

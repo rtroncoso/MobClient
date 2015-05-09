@@ -44,7 +44,7 @@ public class BundledAnimation {
 			
 			for(int frame : graphic.getFrames()) {
 				
-				this.frames.add(new GameTexture(AssetsHandler.getGrh(frame)));
+				this.frames.add(new GameTexture(AssetsHandler.getGraphic(frame)));
 				tmpRegions.add(this.frames.peek().getGraphic());
 			}
 			
