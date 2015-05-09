@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * *****************************************************************************
  */
-package com.mob.shared.readers;
+package com.mob.dao.readers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.mob.shared.loaders.Loader;
+import com.mob.dao.loaders.Loader;
 
 import java.io.DataInputStream;
 import java.io.IOException;

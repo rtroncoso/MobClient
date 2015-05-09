@@ -20,7 +20,7 @@
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

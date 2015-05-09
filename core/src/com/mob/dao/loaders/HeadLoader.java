@@ -14,37 +14,39 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.loaders;
+package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.mob.shared.data.Fx;
+import com.mob.dao.objects.Head;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader<Vector<Fx>> {
+public class HeadLoader extends Loader<Vector<Head>> {
 
 	@Override
-	public Vector<Fx> load(DataInputStream file) throws IOException {
-		Vector<Fx> fxs = new Vector<Fx>();
-		int numFxs;
+	public Vector<Head> load(DataInputStream file) throws IOException {
+		Vector<Head> heads = new Vector<Head>();
+		int numHeads;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
-        numFxs = Util.leShort(file.readShort());
-        fxs.setSize(numFxs + 1);
+		numHeads = Util.leShort(file.readShort());
+		heads.setSize(numHeads + 1);
 
-		for(int i = 1; i <= numFxs; i++) {
-			int offsetX, offsetY, fxIndex;
+		for(int i = 1; i <= numHeads; i++) {
+			int headIndex[] = new int[4];
 
-			fxIndex = Util.leShort(file.readShort());
-			offsetX = Util.leShort(file.readShort());
-			offsetY = Util.leShort(file.readShort());
+			headIndex[Heading.NORTH.toInt()] = Util.leShort(file.readShort());
+			headIndex[Heading.EAST.toInt()] = Util.leShort(file.readShort());
+			headIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
+			headIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 
-			fxs.setElementAt(new Fx(fxIndex, offsetX, offsetY), i);
+			heads.setElementAt(new Head(headIndex), i);
 		}
 
-		return fxs;
+		return heads;
+
 	}
 
 }

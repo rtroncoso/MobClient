@@ -14,14 +14,14 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.loaders;
+package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.mob.shared.data.Graphic;
-import com.mob.shared.data.Tile;
+import com.mob.dao.objects.Graphic;
+import com.mob.dao.objects.Tile;
 import com.mob.client.util.Util;
 
 public class GraphicLoader extends Loader<Vector<Graphic>> {

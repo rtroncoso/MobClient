@@ -15,66 +15,40 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Store information about an FX
+ * Stores information about a head
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
-public class Fx {
+public class Head {
 
-	private int grhIndex;
-	private int offsetX;
-	private int offsetY;
+	private int[] headIndex;
 
 	/**
-	 * @param grhIndex
-	 * @param offsetX
-	 * @param offsetY
+	 * @param headIndex
 	 */
-	public Fx(int grhIndex, int offsetX, int offsetY) {
-		this.grhIndex = grhIndex;
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
+	public Head(int[] headIndex) {
+		this.headIndex = headIndex;
 	}
 
 	/**
-	 * @return the grhIndex
+	 * @return the headIndex
 	 */
-	public int getGraphic() {
-		return grhIndex;
+	public int[] getHeadIndex() {
+		return headIndex;
 	}
+
 	/**
-	 * @param grhIndex the grhIndex to set
+	 * @param headIndex the headIndex to set
 	 */
-	public void setGraphic(int grhIndex) {
-		this.grhIndex = grhIndex;
+	public void setHeadIndex(int[] headIndex) {
+		this.headIndex = headIndex;
 	}
 	
-	/**
-	 * @return the offsetX
-	 */
-	public int getOffsetX() {
-		return offsetX;
-	}
-	/**
-	 * @param offsetX the offsetX to set
-	 */
-	public void setOffsetX(int offsetX) {
-		this.offsetX = offsetX;
-	}
-	/**
-	 * @return the offsetY
-	 */
-	public int getOffsetY() {
-		return offsetY;
-	}
-	/**
-	 * @param offsetY the offsetY to set
-	 */
-	public void setOffsetY(int offsetY) {
-		this.offsetY = offsetY;
+	public int getHead(int pIndex) {
+		return this.headIndex[pIndex];
 	}
 
 }

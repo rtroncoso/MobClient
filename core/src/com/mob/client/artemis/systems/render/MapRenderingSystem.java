@@ -19,7 +19,7 @@ package com.mob.client.artemis.systems.render;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.shared.data.Map;
+import com.mob.dao.objects.Map;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 

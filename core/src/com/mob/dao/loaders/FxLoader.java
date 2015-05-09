@@ -14,41 +14,37 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Stores information about a head
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
-package com.mob.shared.data;
+package com.mob.dao.loaders;
 
-public class Head {
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.Vector;
 
-	private int[] headIndex;
+import com.mob.dao.objects.Fx;
+import com.mob.client.util.Util;
 
-	/**
-	 * @param headIndex
-	 */
-	public Head(int[] headIndex) {
-		this.headIndex = headIndex;
-	}
+public class FxLoader extends Loader<Vector<Fx>> {
 
-	/**
-	 * @return the headIndex
-	 */
-	public int[] getHeadIndex() {
-		return headIndex;
-	}
+	@Override
+	public Vector<Fx> load(DataInputStream file) throws IOException {
+		Vector<Fx> fxs = new Vector<Fx>();
+		int numFxs;
 
-	/**
-	 * @param headIndex the headIndex to set
-	 */
-	public void setHeadIndex(int[] headIndex) {
-		this.headIndex = headIndex;
-	}
-	
-	public int getHead(int pIndex) {
-		return this.headIndex[pIndex];
+		file.skipBytes(GAME_FILE_HEADER_SIZE);
+        numFxs = Util.leShort(file.readShort());
+        fxs.setSize(numFxs + 1);
+
+		for(int i = 1; i <= numFxs; i++) {
+			int offsetX, offsetY, fxIndex;
+
+			fxIndex = Util.leShort(file.readShort());
+			offsetX = Util.leShort(file.readShort());
+			offsetY = Util.leShort(file.readShort());
+
+			fxs.setElementAt(new Fx(fxIndex, offsetX, offsetY), i);
+		}
+
+		return fxs;
 	}
 
 }

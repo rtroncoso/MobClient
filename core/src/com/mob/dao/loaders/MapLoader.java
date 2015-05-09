@@ -14,11 +14,11 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.loaders;
+package com.mob.dao.loaders;
 
-import com.mob.shared.data.Map;
-import com.mob.shared.data.Tile;
-import com.mob.shared.data.WorldPosition;
+import com.mob.dao.objects.Map;
+import com.mob.dao.objects.Tile;
+import com.mob.dao.objects.WorldPosition;
 import com.mob.client.util.Util;
 
 import java.io.DataInputStream;

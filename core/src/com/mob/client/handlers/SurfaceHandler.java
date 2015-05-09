@@ -20,7 +20,7 @@
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.handlers;
+package com.mob.client.handlers;
 
 import java.util.HashMap;
 

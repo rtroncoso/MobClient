@@ -14,22 +14,22 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.loaders;
+package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.mob.shared.data.Shield;
+import com.mob.dao.objects.Weapon;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
-public class ShieldLoader extends Loader<Vector<Shield>> {
+public class WeaponLoader extends Loader<Vector<Weapon>> {
 
 	@Override
-	public Vector<Shield> load(DataInputStream file) throws IOException {
-		Vector<Shield> shields = new Vector<Shield>();
+	public Vector<Weapon> load(DataInputStream file) {
+		Vector<Weapon> weapons = new Vector<Weapon>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -38,34 +38,38 @@ public class ShieldLoader extends Loader<Vector<Shield>> {
 		try {
 			iniFile.load(file);
 			
-			int numShields = Integer.parseInt(iniFile.get("init", "NumEscudos"));
-			shields.setSize(numShields + 1);
+			int numArmas = Integer.parseInt(iniFile.get("init", "NumArmas"));
+			weapons.setSize(numArmas + 1);
 			
-			for(int i = 1; i <= numShields; i++) {
-				int[] shieldIndex = new int[4];
+			for(int i = 1; i <= numArmas; i++) {
+				int[] weaponIndex = new int[4];
 				
-				if(iniFile.get("esc" + String.valueOf(i), "Dir1") == null) { 
-					shieldIndex[Heading.NORTH.toInt()] = 0;
-					shieldIndex[Heading.EAST.toInt()] = 0; 
-					shieldIndex[Heading.SOUTH.toInt()] = 0; 
-					shieldIndex[Heading.WEST.toInt()] = 0; 
-					shields.setElementAt(new Shield(shieldIndex), i);
+				if(iniFile.get("arma" + String.valueOf(i), "Dir1") == null) { 
+					weaponIndex[Heading.NORTH.toInt()] = 0;
+					weaponIndex[Heading.EAST.toInt()] = 0; 
+					weaponIndex[Heading.SOUTH.toInt()] = 0; 
+					weaponIndex[Heading.WEST.toInt()] = 0; 
+					weapons.setElementAt(new Weapon(weaponIndex), i);
 					continue; 
 				}
 				
-				shieldIndex[Heading.NORTH.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir1"));
-				shieldIndex[Heading.EAST.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir2"));
-				shieldIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir3"));
-				shieldIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir4"));
+				weaponIndex[Heading.NORTH.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir1"));
+				weaponIndex[Heading.EAST.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir2"));
+				weaponIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir3"));
+				weaponIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir4"));
 				
-				shields.setElementAt(new Shield(shieldIndex), i);
+				weapons.setElementAt(new Weapon(weaponIndex), i);
 			}
 
-			return shields;
+			return weapons;
 		} catch (InvalidFileFormatException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
 
 }

@@ -20,9 +20,9 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.shared.handlers.AssetsHandler;
-import com.mob.shared.handlers.ScreenHandler;
-import com.mob.shared.handlers.SurfaceHandler;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.ScreenHandler;
+import com.mob.client.handlers.SurfaceHandler;
 
 public class Game implements ApplicationListener {
 

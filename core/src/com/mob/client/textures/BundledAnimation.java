@@ -19,8 +19,8 @@ package com.mob.client.textures;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.mob.shared.data.Graphic;
-import com.mob.shared.handlers.AssetsHandler;
+import com.mob.dao.objects.Graphic;
+import com.mob.client.handlers.AssetsHandler;
 
 /**
  * @author Rodrigo

@@ -15,18 +15,18 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores weapon data
+ * Stores shield data
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
-public class Weapon {
+public class Shield {
 
 	private int[] graphic;
 
-	public Weapon(int[] graphic) {
+	public Shield(int[] graphic) {
 		this.setGraphicArray(graphic);
 	}
 

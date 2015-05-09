@@ -14,32 +14,42 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.handlers;
+/**
+ * Stores weapon data
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-04-10
+ */
+package com.mob.dao.objects;
 
-import java.util.HashMap;
+public class Weapon {
 
-import com.badlogic.gdx.Gdx;
-import com.mob.shared.data.Map;
-import com.mob.client.interfaces.Constants;
-import com.mob.shared.readers.AOAssetsReader;
+	private int[] graphic;
 
-public class MapHandler implements Constants {
-
-	private static HashMap<Long, Map> mapData = new HashMap<Long, Map>();
-	private static AOAssetsReader reader = new AOAssetsReader();
-
-	public static Map get(long mapNumber) {
-		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);
-		return MapHandler.mapData.get(mapNumber);
+	public Weapon(int[] graphic) {
+		this.setGraphicArray(graphic);
 	}
 
-	private static boolean load(long mapNumber) {
+	public int getGraphic(int index) {
+		return this.graphic[index];
+	}
+	
+	public void setGraphic(int index, int graphic) {
+		this.graphic[index] = graphic;
+	}
+	
+	/**
+	 * @return the graphic
+	 */
+	public int[] getGraphicArray() {
+		return graphic;
+	}
 
-		Map map = reader.loadMap(String.valueOf(mapNumber));
-		mapData.put(mapNumber, map);
-
-		Gdx.app.log(MapHandler.class.getSimpleName(), "[MapHandler] Map " + String.valueOf(mapNumber) + ".map successfully loaded");
-		return true;
+	/**
+	 * @param graphic the graphic to set
+	 */
+	public void setGraphicArray(int[] graphic) {
+		this.graphic = graphic;
 	}
 
 }

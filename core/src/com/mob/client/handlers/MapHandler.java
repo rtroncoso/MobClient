@@ -14,42 +14,32 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-/**
- * Stores information about a helmet
- * @author Rodrigo Troncoso
- * @version 0.1
- * @since 2014-04-10
- */
-package com.mob.shared.data;
+package com.mob.client.handlers;
 
-public class Helmet {
+import java.util.HashMap;
 
-	private int[] helmetIndex;
+import com.badlogic.gdx.Gdx;
+import com.mob.dao.objects.Map;
+import com.mob.client.interfaces.Constants;
+import com.mob.dao.readers.AOAssetsReader;
 
-	/**
-	 * @param headIndex
-	 */
-	public Helmet(int[] helmetIndex) {
-		super();
-		this.helmetIndex = helmetIndex;
+public class MapHandler implements Constants {
+
+	private static HashMap<Long, Map> mapData = new HashMap<Long, Map>();
+	private static AOAssetsReader reader = new AOAssetsReader();
+
+	public static Map get(long mapNumber) {
+		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);
+		return MapHandler.mapData.get(mapNumber);
 	}
 
-	/**
-	 * @return the headIndex
-	 */
-	public int[] getHelmetIndex() {
-		return helmetIndex;
-	}
+	private static boolean load(long mapNumber) {
 
-	/**
-	 * @param headIndex the headIndex to set
-	 */
-	public void setHelmetIndex(int[] helmetIndex) {
-		this.helmetIndex = helmetIndex;
-	}
-	
-	public int getHelmet(int pIndex) {
-		return this.helmetIndex[pIndex];
+		Map map = reader.loadMap(String.valueOf(mapNumber));
+		mapData.put(mapNumber, map);
+
+		Gdx.app.log(MapHandler.class.getSimpleName(), "[MapHandler] Map " + String.valueOf(mapNumber) + ".map successfully loaded");
+		return true;
 	}
 
 }

@@ -20,10 +20,10 @@
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.shared.handlers.AssetsHandler;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.textures.BundledAnimation;
 
 import java.util.Vector;

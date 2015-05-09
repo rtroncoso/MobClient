@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * *****************************************************************************
  */
-package com.mob.shared.readers;
+package com.mob.dao.readers;
 
 import com.mob.client.Game;
-import com.mob.shared.data.*;
-import com.mob.shared.loaders.*;
+import com.mob.dao.objects.*;
+import com.mob.dao.loaders.*;
 
 import java.util.Vector;
 

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * *****************************************************************************
  */
-package com.mob.shared.handlers;
+package com.mob.client.handlers;
 
 import com.mob.client.Game;
 import com.mob.client.screens.Screen;
@@ -57,7 +57,6 @@ public class ScreenHandler {
         }
 
         if(currentScreen != null) {
-            //remove current screen!
             currentScreen.dispose();
         }
 

@@ -15,88 +15,74 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores position information
+ * Stores data about a position in the world
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
-import com.mob.client.interfaces.Constants;
+public class WorldPosition {
 
-public class Position implements Constants {
+	private int map;
+	private int x;
+	private int y;
 
-	private float x;
-	private float y;
-
-	public Position() {
-		this(0, 0);
+	public WorldPosition() {
+		this(0, 0, 0);
 	}
 	
-	public Position(float x, float y) {
+	/**
+	 * @param map
+	 * @param x
+	 * @param y
+	 */
+	public WorldPosition(int map, int x, int y) {
+		this.map = map;
 		this.setX(x);
 		this.setY(y);
 	}
 
 	/**
+	 * @return the map
+	 */
+	public int getMap() {
+		return map;
+	}
+
+	/**
+	 * @param map the map to set
+	 */
+	public void setMap(int map) {
+		this.map = map;
+	}
+
+	/**
 	 * @return the x
 	 */
-	public float getX() {
+	public int getX() {
 		return x;
 	}
-
-
-	/**
-	 * @param mX the x to set
-	 */
-	public void setX(float mX) {
-		this.x = mX;
-	}
-	
-	/**
-	 * @return the y
-	 */
-	public float getY() {
-		return y;
-	}
-
-
-	/**
-	 * @param mY the y to set
-	 */
-	public void setY(float mY) {
-		this.y = mY;
-	}
-
-
-	/**
-	 * @return the x
-	 */
-	public float getTileX() {
-		return x * Tile.TILE_PIXEL_WIDTH;
-	}
-
 
 	/**
 	 * @param x the x to set
 	 */
-	public void setTileX(int x) {
-		this.x = x * Tile.TILE_PIXEL_WIDTH;
+	public void setX(int x) {
+		this.x = x;
 	}
-	
+
 	/**
 	 * @return the y
 	 */
-	public float getTileY() {
-		return y * Tile.TILE_PIXEL_HEIGHT;
+	public int getY() {
+		return y;
 	}
-
 
 	/**
 	 * @param y the y to set
 	 */
-	public void setTileY(int y) {
-		this.y = y * Tile.TILE_PIXEL_HEIGHT;
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

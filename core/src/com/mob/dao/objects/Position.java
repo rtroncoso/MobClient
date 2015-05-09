@@ -15,41 +15,88 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores shield data
+ * Stores position information
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
-public class Shield {
+import com.mob.client.interfaces.Constants;
 
-	private int[] graphic;
+public class Position implements Constants {
 
-	public Shield(int[] graphic) {
-		this.setGraphicArray(graphic);
-	}
+	private float x;
+	private float y;
 
-	public int getGraphic(int index) {
-		return this.graphic[index];
-	}
-	
-	public void setGraphic(int index, int graphic) {
-		this.graphic[index] = graphic;
+	public Position() {
+		this(0, 0);
 	}
 	
-	/**
-	 * @return the graphic
-	 */
-	public int[] getGraphicArray() {
-		return graphic;
+	public Position(float x, float y) {
+		this.setX(x);
+		this.setY(y);
 	}
 
 	/**
-	 * @param graphic the graphic to set
+	 * @return the x
 	 */
-	public void setGraphicArray(int[] graphic) {
-		this.graphic = graphic;
+	public float getX() {
+		return x;
+	}
+
+
+	/**
+	 * @param mX the x to set
+	 */
+	public void setX(float mX) {
+		this.x = mX;
+	}
+	
+	/**
+	 * @return the y
+	 */
+	public float getY() {
+		return y;
+	}
+
+
+	/**
+	 * @param mY the y to set
+	 */
+	public void setY(float mY) {
+		this.y = mY;
+	}
+
+
+	/**
+	 * @return the x
+	 */
+	public float getTileX() {
+		return x * Tile.TILE_PIXEL_WIDTH;
+	}
+
+
+	/**
+	 * @param x the x to set
+	 */
+	public void setTileX(int x) {
+		this.x = x * Tile.TILE_PIXEL_WIDTH;
+	}
+	
+	/**
+	 * @return the y
+	 */
+	public float getTileY() {
+		return y * Tile.TILE_PIXEL_HEIGHT;
+	}
+
+
+	/**
+	 * @param y the y to set
+	 */
+	public void setTileY(int y) {
+		this.y = y * Tile.TILE_PIXEL_HEIGHT;
 	}
 
 }

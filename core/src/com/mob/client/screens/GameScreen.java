@@ -27,11 +27,11 @@ import com.mob.client.artemis.systems.render.MapRenderingSystem;
  */
 public class GameScreen extends Screen {
 
-    public GameScreen(Game game) {
-        super(game);
-    }
+	public GameScreen(Game game) {
+		super(game);
+	}
 
-    @Override
+	@Override
     protected void initSystems() {
         this.world.setSystem(new CameraSystem());
         this.world.setSystem(new TiledMapSystem(1));

@@ -15,74 +15,41 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 /**
- * Stores data about a position in the world
+ * Stores information about a helmet
  * @author Rodrigo Troncoso
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.shared.data;
+package com.mob.dao.objects;
 
-public class WorldPosition {
+public class Helmet {
 
-	private int map;
-	private int x;
-	private int y;
+	private int[] helmetIndex;
 
-	public WorldPosition() {
-		this(0, 0, 0);
+	/**
+	 * @param headIndex
+	 */
+	public Helmet(int[] helmetIndex) {
+		super();
+		this.helmetIndex = helmetIndex;
+	}
+
+	/**
+	 * @return the headIndex
+	 */
+	public int[] getHelmetIndex() {
+		return helmetIndex;
+	}
+
+	/**
+	 * @param headIndex the headIndex to set
+	 */
+	public void setHelmetIndex(int[] helmetIndex) {
+		this.helmetIndex = helmetIndex;
 	}
 	
-	/**
-	 * @param map
-	 * @param x
-	 * @param y
-	 */
-	public WorldPosition(int map, int x, int y) {
-		this.map = map;
-		this.setX(x);
-		this.setY(y);
-	}
-
-	/**
-	 * @return the map
-	 */
-	public int getMap() {
-		return map;
-	}
-
-	/**
-	 * @param map the map to set
-	 */
-	public void setMap(int map) {
-		this.map = map;
-	}
-
-	/**
-	 * @return the x
-	 */
-	public int getX() {
-		return x;
-	}
-
-	/**
-	 * @param x the x to set
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	/**
-	 * @return the y
-	 */
-	public int getY() {
-		return y;
-	}
-
-	/**
-	 * @param y the y to set
-	 */
-	public void setY(int y) {
-		this.y = y;
+	public int getHelmet(int pIndex) {
+		return this.helmetIndex[pIndex];
 	}
 
 }

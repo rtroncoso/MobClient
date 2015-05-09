@@ -14,14 +14,13 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.shared.loaders;
+package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.badlogic.gdx.Gdx;
-import com.mob.shared.data.Body;
+import com.mob.dao.objects.Body;
 import com.mob.client.util.Util;
 
 public class BodyLoader extends Loader<Vector<Body>> {

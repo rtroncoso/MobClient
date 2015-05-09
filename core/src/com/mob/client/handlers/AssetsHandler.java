@@ -20,13 +20,13 @@
  * @version 0.1
  * @since 2014-06-26
  */
-package com.mob.shared.handlers;
+package com.mob.client.handlers;
 
 import java.util.Vector;
 
-import com.mob.shared.data.*;
-import com.mob.shared.data.Body;
-import com.mob.shared.readers.*;
+import com.mob.dao.objects.*;
+import com.mob.dao.objects.Body;
+import com.mob.dao.readers.*;
 
 public class AssetsHandler {
 
