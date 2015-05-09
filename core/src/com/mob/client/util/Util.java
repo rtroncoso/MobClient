@@ -25,6 +25,9 @@
 package com.mob.client.util;
 
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 public class Util {
 
 	public static short leShort(short n) {
@@ -32,58 +35,22 @@ public class Util {
 	}
 
 	public static int leInt(int n) {
-		return (((n & 0xff) << 24) | ((n & 0xff00) << 8) | ((n & 0xff0000) >> 8) | ((n & 0xff000000) >> 24));
+		ByteBuffer buf = ByteBuffer.allocate(4);
+		buf.order(ByteOrder.BIG_ENDIAN);
+		buf.putInt(n);
+		buf.order(ByteOrder.LITTLE_ENDIAN);
+
+		return buf.getInt(0);
 	}
 	
-	public static int leMix(short j, short k) {
-		int a = j & 0xffff;
-		int b = k & 0xffff0000;
-		return (int) ((b << 16) | a) >> 31;
+	public static int leFloat(float n) {
+
+        ByteBuffer buf = ByteBuffer.allocate(4);
+        buf.order(ByteOrder.BIG_ENDIAN);
+        buf.putFloat(n);
+        buf.order(ByteOrder.LITTLE_ENDIAN);
+
+        return buf.getInt(0);
 	}
 
-	public static double distance(int x1, int y1, int x2, int y2) {
-		// Encuentra la distancia entre dos puntos
-		return Math.sqrt(((y1 - y2) * (y1 - y2)) + ((x1 - x2) * (x1 - x2)));
-	}
-
-	public static int porcentaje(long total, long porc) {
-		return (int) Math.round((total * porc) / 100.0);
-	}
-
-	public static int randomInt(int min, int max) {
-		int valor = (int) ((Math.random() * (max - min + 1)) + min);
-		return (valor < min) ? min : valor;
-	}
-
-	public static short Min(short a, short b) {
-		return a < b ? a : b;
-	}
-
-	public static int Min(int a, int b) {
-		return a < b ? a : b;
-	}
-
-	public static long Min(long a, long b) {
-		return a < b ? a : b;
-	}
-
-	public static double Min(double a, double b) {
-		return a < b ? a : b;
-	}
-
-	public static short Max(short a, short b) {
-		return a > b ? a : b;
-	}
-
-	public static int Max(int a, int b) {
-		return a > b ? a : b;
-	}
-
-	public static long Max(long a, long b) {
-		return a > b ? a : b;
-	}
-
-	public static double Max(double a, double b) {
-		return a > b ? a : b;
-	}
 }

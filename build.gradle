@@ -10,6 +10,7 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'org.robovm:robovm-gradle-plugin:1.0.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
 
@@ -52,6 +53,7 @@ project(":desktop") {
 
 project(":android") {
     apply plugin: "android"
+    apply plugin: 'com.neenbedankt.android-apt'
 
     configurations { natives }
 
@@ -72,6 +74,10 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+
+        compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
+        apt "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
+        compile "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
     }
 }
 
@@ -123,6 +129,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.0.8"
@@ -131,18 +138,13 @@ project(":core") {
 
         compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
         provided "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
-
         compile "net.mostlyoriginal.artemis-odb:contrib-core:0.7.1"
         compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.7.1"
 
         compile 'junit:junit:4.+'
         compile "org.mockito:mockito-all:1.9.5"
-
-        compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-
         testCompile 'junit:junit:4.+'
         testCompile "org.mockito:mockito-all:1.9.5"
-
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"

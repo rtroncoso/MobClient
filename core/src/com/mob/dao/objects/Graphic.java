@@ -35,6 +35,10 @@ public class Graphic {
 	private int[] frames;
 	private float speed;
 
+	public Graphic() {
+		this(0, 0, 0, 0, 0, 0.0f, 0.0f, new int[0], 0.0f);
+	}
+
 	public Graphic(int x, int y, int fileNum, int pixelWidth, int pixelHeight,
 				   float tileWidth, float tileHeight, int[] frames, float speed) {
 		super();

@@ -30,28 +30,25 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
 	@Override
 	public Vector<Graphic> load(DataInputStream file) throws IOException {
 		Vector<Graphic> inits = new Vector<Graphic>();
+        int grh = 0;
 
         file.skipBytes(4);
-        int numGraphics = Util.leShort(file.readShort());
-        file.skipBytes(2);
-
+        int numGraphics = Util.leInt(file.readInt());
         inits.setSize(numGraphics + 1);
-        inits.setElementAt(new Graphic(0, 0, 0, 0, 0, 0, 0, new int[0], 0), 0);
-
-        int grh = Util.leShort(file.readShort());
-        file.skipBytes(2); // no es negro si nadie lo ve
+        inits.setElementAt(new Graphic(), 0);
 
         try {
-            while(grh > 0) {
+            do {
                 int fileNum = 0, sX = 0, sY = 0, numFrames, pixelWidth, pixelHeight, frames[] = new int[0];
                 float speed = 0.0f, tileWidth, tileHeight;
+
+                grh = Util.leInt(file.readInt());
                 numFrames = Util.leShort(file.readShort());
 
                 if(numFrames > 1) {
                     frames = new int[numFrames];
                     for(int j=0; j < numFrames; j++) {
-                        frames[j] = Util.leShort(file.readShort());
-                        file.skipBytes(2);
+                        frames[j] = Util.leInt(file.readInt());
                         if(frames[j] <= 0) throw new IOException("frames[]: " + frames[j]);
                     }
 
@@ -72,8 +69,7 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
                     if(tileHeight <= 0) throw new IOException("tileHeight (numFrames > 1)");
                 } else {
                     // Read normal GRH
-                    fileNum = Util.leShort(file.readShort());
-                    file.skipBytes(2);
+                    fileNum = Util.leInt(file.readInt());
 
                     if(fileNum <= 0) throw new IOException("fileNum");
 
@@ -94,14 +90,12 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
                 }
 
                 inits.setElementAt(new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
-                grh = Util.leShort(file.readShort());
-                file.skipBytes(2);
-            }
+            } while(grh > 0);
         } catch(EOFException ex) {
             return inits;
         }
 		
-		return null;
+		throw new RuntimeException("Unable to read graphics assets file");
 	}
 
 }
