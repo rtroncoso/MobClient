@@ -18,21 +18,20 @@ package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Vector;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.Helmet;
 import com.mob.client.util.Util;
 
-public class HelmetLoader extends Loader<Vector<Helmet>> {
+public class HelmetLoader extends Loader<LongMap<Helmet>> {
 
 	@Override
-	public Vector<Helmet> load(DataInputStream file) throws IOException {
-		Vector<Helmet> helmets = new Vector<Helmet>();
+	public LongMap<Helmet> load(DataInputStream file) throws IOException {
+		LongMap<Helmet> helmets = new LongMap<Helmet>();
 		int numHelmets;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
 		numHelmets = Util.leShort(file.readShort());
-		helmets.setSize(numHelmets + 1);
 
 		for(int i = 1; i <= numHelmets; i++) {
 			int helmetIndex[] = new int[4];
@@ -42,7 +41,7 @@ public class HelmetLoader extends Loader<Vector<Helmet>> {
 			helmetIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
 			helmetIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 
-			helmets.setElementAt(new Helmet(helmetIndex), i);
+			helmets.put(i, new Helmet(helmetIndex));
 		}
 		return helmets;
 

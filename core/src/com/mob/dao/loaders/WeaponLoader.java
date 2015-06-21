@@ -18,18 +18,18 @@ package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Vector;
+import com.badlogic.gdx.utils.LongMap;
 
 import com.mob.dao.objects.Weapon;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
-public class WeaponLoader extends Loader<Vector<Weapon>> {
+public class WeaponLoader extends Loader<LongMap<Weapon>> {
 
 	@Override
-	public Vector<Weapon> load(DataInputStream file) {
-		Vector<Weapon> weapons = new Vector<Weapon>();
+	public LongMap<Weapon> load(DataInputStream file) {
+		LongMap<Weapon> weapons = new LongMap<Weapon>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -39,8 +39,7 @@ public class WeaponLoader extends Loader<Vector<Weapon>> {
 			iniFile.load(file);
 			
 			int numArmas = Integer.parseInt(iniFile.get("init", "NumArmas"));
-			weapons.setSize(numArmas + 1);
-			
+
 			for(int i = 1; i <= numArmas; i++) {
 				int[] weaponIndex = new int[4];
 				
@@ -49,7 +48,7 @@ public class WeaponLoader extends Loader<Vector<Weapon>> {
 					weaponIndex[Heading.EAST.toInt()] = 0; 
 					weaponIndex[Heading.SOUTH.toInt()] = 0; 
 					weaponIndex[Heading.WEST.toInt()] = 0; 
-					weapons.setElementAt(new Weapon(weaponIndex), i);
+					weapons.put(i, new Weapon(weaponIndex));
 					continue; 
 				}
 				
@@ -58,7 +57,7 @@ public class WeaponLoader extends Loader<Vector<Weapon>> {
 				weaponIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir3"));
 				weaponIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir4"));
 				
-				weapons.setElementAt(new Weapon(weaponIndex), i);
+				weapons.put(i, new Weapon(weaponIndex));
 			}
 
 			return weapons;

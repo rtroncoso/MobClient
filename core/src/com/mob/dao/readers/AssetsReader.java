@@ -18,24 +18,25 @@
  */
 package com.mob.dao.readers;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.*;
 
-import java.util.Vector;
 
 public interface AssetsReader {
+
     Map loadMap(String map);
 
-    Vector<Graphic> loadGraphics();
+    LongMap<Graphic> loadGraphics();
 
-    Vector<Body> loadBodies();
+    LongMap<Body> loadBodies();
 
-    Vector<Fx> loadFxs();
+    LongMap<Fx> loadFxs();
 
-    Vector<Head> loadHeads();
+    LongMap<Head> loadHeads();
 
-    Vector<Helmet> loadHelmets();
+    LongMap<Helmet> loadHelmets();
 
-    Vector<Shield> loadShields();
+    LongMap<Shield> loadShields();
 
-    Vector<Weapon> loadWeapons();
+    LongMap<Weapon> loadWeapons();
 }

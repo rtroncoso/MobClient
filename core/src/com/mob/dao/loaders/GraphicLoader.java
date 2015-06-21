@@ -19,23 +19,22 @@ package com.mob.dao.loaders;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.util.Vector;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.Graphic;
 import com.mob.dao.objects.Tile;
 import com.mob.client.util.Util;
 
-public class GraphicLoader extends Loader<Vector<Graphic>> {
+public class GraphicLoader extends Loader<LongMap<Graphic>> {
 
 	@Override
-	public Vector<Graphic> load(DataInputStream file) throws IOException {
-		Vector<Graphic> inits = new Vector<Graphic>();
+	public LongMap<Graphic> load(DataInputStream file) throws IOException {
         int grh = 0;
+        LongMap<Graphic> inits = new LongMap<Graphic>();
 
         file.skipBytes(4);
         int numGraphics = Util.leInt(file.readInt());
-        inits.setSize(numGraphics + 1);
-        inits.setElementAt(new Graphic(), 0);
+        //inits.ensureCapacity(numGraphics);
 
         try {
             do {
@@ -89,7 +88,7 @@ public class GraphicLoader extends Loader<Vector<Graphic>> {
                     tileHeight = (float) pixelHeight / Tile.TILE_PIXEL_HEIGHT;
                 }
 
-                inits.setElementAt(new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed), grh);
+                inits.put(grh, new Graphic(sX, sY, fileNum, pixelWidth, pixelHeight, tileWidth, tileHeight, frames, speed));
             } while(grh > 0);
         } catch(EOFException ex) {
             return inits;

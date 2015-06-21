@@ -18,21 +18,20 @@ package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Vector;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.Body;
 import com.mob.client.util.Util;
 
-public class BodyLoader extends Loader<Vector<Body>> {
+public class BodyLoader extends Loader<LongMap<Body>> {
 
 	@Override
-	public Vector<Body> load(DataInputStream file) throws IOException {
-		Vector<Body> bodys = new Vector<Body>();
+	public LongMap<Body> load(DataInputStream file) throws IOException {
+		LongMap<Body> bodys = new LongMap<Body>();
 		int numBodys;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
 		numBodys = Util.leShort(file.readShort());
-		bodys.setSize(numBodys + 1);
 
 		for(int i = 1; i <= numBodys; i++) {
 			int grhArray[] = new int[4], headOffSetX, headOffSetY;
@@ -45,7 +44,7 @@ public class BodyLoader extends Loader<Vector<Body>> {
 			headOffSetX = Util.leShort(file.readShort());
 			headOffSetY = Util.leShort(file.readShort());
 
-			bodys.setElementAt(new Body(grhArray, headOffSetX, headOffSetY), i);
+			bodys.put(i, new Body(grhArray, headOffSetX, headOffSetY));
 		}
 
 		return bodys;

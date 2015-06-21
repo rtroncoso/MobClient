@@ -34,11 +34,7 @@ public class GameTexture {
 	private TextureRegion textureRegion;
 
 	public GameTexture(int grhIndex) {
-		Graphic graphic = AssetsHandler.getGraphics().get(grhIndex);
-		
-		this.textureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())),
-				graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
-		this.textureRegion.flip(false, true);
+		this(AssetsHandler.getGraphics().get(grhIndex));
 	}
 	
 	public GameTexture(Graphic graphic) {

@@ -27,7 +27,7 @@ public class Helmet {
 	private int[] helmetIndex;
 
 	/**
-	 * @param headIndex
+	 * @param helmetIndex
 	 */
 	public Helmet(int[] helmetIndex) {
 		super();
@@ -35,14 +35,14 @@ public class Helmet {
 	}
 
 	/**
-	 * @return the headIndex
+	 * @return the helmetIndex
 	 */
 	public int[] getHelmetIndex() {
 		return helmetIndex;
 	}
 
 	/**
-	 * @param headIndex the headIndex to set
+	 * @param helmetIndex the helmetIndex to set
 	 */
 	public void setHelmetIndex(int[] helmetIndex) {
 		this.helmetIndex = helmetIndex;

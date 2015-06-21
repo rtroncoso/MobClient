@@ -34,8 +34,6 @@ public class BundledTexture {
 	private Animation animation;
 	private float animationTime;
 	private boolean animated;
-	private float x;
-	private float y;
 
     public BundledTexture (Graphic graphic, boolean animated) {
         this.animationTime = 0.0f;
@@ -129,34 +127,6 @@ public class BundledTexture {
 		}
 
 		return this.getGraphic();
-	}
-
-	/**
-	 * @return the x
-	 */
-	public float getX() {
-		return x;
-	}
-
-	/**
-	 * @param mX the x to set
-	 */
-	public void setX(float mX) {
-		this.x = mX;
-	}
-
-	/**
-	 * @return the y
-	 */
-	public float getY() {
-		return y;
-	}
-
-	/**
-	 * @param mY the y to set
-	 */
-	public void setY(float mY) {
-		this.y = mY;
 	}
 
 	/**

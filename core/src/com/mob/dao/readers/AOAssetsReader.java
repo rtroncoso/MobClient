@@ -18,12 +18,10 @@
  */
 package com.mob.dao.readers;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.client.Game;
 import com.mob.dao.objects.*;
 import com.mob.dao.loaders.*;
-
-import java.util.Vector;
 
 /**
  * Class AOAssetsReader
@@ -42,55 +40,55 @@ public class AOAssetsReader implements AssetsReader {
     }
 
     @Override
-    public Vector<Graphic> loadGraphics() {
-        Reader<Vector<Graphic>> reader = new Reader<Vector<Graphic>>();
+    public LongMap<Graphic> loadGraphics() {
+        Reader<LongMap<Graphic>> reader = new Reader<LongMap<Graphic>>();
         GraphicLoader loader = new GraphicLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "graficos.ind", loader);
     }
 
     @Override
-    public Vector<Body> loadBodies() {
-        Reader<Vector<Body>> reader = new Reader<Vector<Body>>();
+    public LongMap<Body> loadBodies() {
+        Reader<LongMap<Body>> reader = new Reader<LongMap<Body>>();
         BodyLoader loader = new BodyLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Personajes.ind", loader);
     }
 
     @Override
-    public Vector<Fx> loadFxs() {
-        Reader<Vector<Fx>> reader = new Reader<Vector<Fx>>();
+    public LongMap<Fx> loadFxs() {
+        Reader<LongMap<Fx>> reader = new Reader<LongMap<Fx>>();
         FxLoader loader = new FxLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Fxs.ind", loader);
     }
 
     @Override
-    public Vector<Head> loadHeads() {
-        Reader<Vector<Head>> reader = new Reader<Vector<Head>>();
+    public LongMap<Head> loadHeads() {
+        Reader<LongMap<Head>> reader = new Reader<LongMap<Head>>();
         HeadLoader loader = new HeadLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Cabezas.ind", loader);
     }
 
     @Override
-    public Vector<Helmet> loadHelmets() {
-        Reader<Vector<Helmet>> reader = new Reader<Vector<Helmet>>();
+    public LongMap<Helmet> loadHelmets() {
+        Reader<LongMap<Helmet>> reader = new Reader<LongMap<Helmet>>();
         HelmetLoader loader = new HelmetLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Cascos.ind", loader);
     }
     @Override
-    public Vector<Shield> loadShields() {
-        Reader<Vector<Shield>> reader = new Reader<Vector<Shield>>();
+    public LongMap<Shield> loadShields() {
+        Reader<LongMap<Shield>> reader = new Reader<LongMap<Shield>>();
         ShieldLoader loader = new ShieldLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Escudos.dat", loader);
     }
 
     @Override
-    public Vector<Weapon> loadWeapons() {
-        Reader<Vector<Weapon>> reader = new Reader<Vector<Weapon>>();
+    public LongMap<Weapon> loadWeapons() {
+        Reader<LongMap<Weapon>> reader = new Reader<LongMap<Weapon>>();
         WeaponLoader loader = new WeaponLoader();
 
         return reader.read(Game.GAME_INIT_PATH + "Armas.dat", loader);

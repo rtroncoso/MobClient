@@ -22,21 +22,21 @@
  */
 package com.mob.client.handlers;
 
-import java.util.Vector;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.*;
 import com.mob.dao.objects.Body;
 import com.mob.dao.readers.*;
 
 public class AssetsHandler {
 
-	private static Vector<Graphic> graphics = new Vector<Graphic>();
-	private static Vector<Body> bodies = new Vector<Body>();
-	private static Vector<Head> heads = new Vector<Head>();
-	private static Vector<Helmet> helmets = new Vector<Helmet>();
-	private static Vector<Weapon> weapons = new Vector<Weapon>();
-    private static Vector<Shield> shields = new Vector<Shield>();
-    private static Vector<Fx> fxs = new Vector<Fx>();
+	private static LongMap<Graphic> graphics = new LongMap<Graphic>();
+	private static LongMap<Body> bodies = new LongMap<Body>();
+	private static LongMap<Head> heads = new LongMap<Head>();
+	private static LongMap<Helmet> helmets = new LongMap<Helmet>();
+	private static LongMap<Weapon> weapons = new LongMap<Weapon>();
+    private static LongMap<Shield> shields = new LongMap<Shield>();
+    private static LongMap<Fx> fxs = new LongMap<Fx>();
     private static AssetsReader reader = new AOAssetsReader();
 
 	public static void load() {
@@ -78,98 +78,84 @@ public class AssetsHandler {
 	/**
 	 * @return the graphics
 	 */
-	public static Vector<Graphic> getGraphics() {
+	public static LongMap<Graphic> getGraphics() {
 		return graphics;
 	}
 
 	/**
 	 * @param graphic the graphics to set
 	 */
-	public static void setGraphics(Vector<Graphic> graphic) {
+	public static void setGraphics(LongMap<Graphic> graphic) {
 		AssetsHandler.graphics = graphic;
 	}
 
 	/**
 	 * @return the bodies
 	 */
-	public static Vector<Body> getBodies() {
+	public static LongMap<Body> getBodies() {
 		return bodies;
 	}
 
 	/**
 	 * @param body the bodies to set
 	 */
-	public static void setBodies(Vector<Body> body) {
+	public static void setBodies(LongMap<Body> body) {
 		AssetsHandler.bodies = body;
 	}
 
 	/**
 	 * @return the heads
 	 */
-	public static Vector<Head> getHeads() {
+	public static LongMap<Head> getHeads() {
 		return heads;
 	}
 
 	/**
 	 * @param heads the heads to set
 	 */
-	public static void setHeads(Vector<Head> heads) {
+	public static void setHeads(LongMap<Head> heads) {
 		AssetsHandler.heads = heads;
 	}
 
 	/**
 	 * @return the helmets
 	 */
-	public static Vector<Helmet> getHelmets() {
+	public static LongMap<Helmet> getHelmets() {
 		return helmets;
 	}
 
 	/**
 	 * @param helmets the helmets to set
 	 */
-	public static void setHelmets(Vector<Helmet> helmets) {
+	public static void setHelmets(LongMap<Helmet> helmets) {
 		AssetsHandler.helmets = helmets;
 	}
 
 	/**
 	 * @return the weapons
 	 */
-	public static Vector<Weapon> getWeapons() {
+	public static LongMap<Weapon> getWeapons() {
 		return weapons;
 	}
 
 	/**
 	 * @param weapons the weapons to set
 	 */
-	public static void setWeapons(Vector<Weapon> weapons) {
+	public static void setWeapons(LongMap<Weapon> weapons) {
 		AssetsHandler.weapons = weapons;
 	}
 
 	/**
 	 * @return the shields
 	 */
-	public static Vector<Shield> getShields() {
-		return shields;
-	}
-
-	/**
-	 * @param shields the shields to set
-	 */
-	public static void setShields(Vector<Shield> shields) {
-		AssetsHandler.shields = shields;
-	}
-
-	/**
-	 * @return the fxs
-	 */
-	public static Vector<Fx> getFxs() {
+	public static LongMap<Fx> getFxs() {
 		return fxs;
 	}
 
 	/**
 	 * @param fxs the fxs to set
 	 */
-	public static void setFxs(Vector<Fx> fxs) {
+	public static void setFxs(LongMap<Fx> fxs) {
 		AssetsHandler.fxs = fxs;
 	}
 

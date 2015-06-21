@@ -18,18 +18,18 @@ package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Vector;
+import com.badlogic.gdx.utils.LongMap;
 
 import com.mob.dao.objects.Shield;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
-public class ShieldLoader extends Loader<Vector<Shield>> {
+public class ShieldLoader extends Loader<LongMap<Shield>> {
 
 	@Override
-	public Vector<Shield> load(DataInputStream file) throws IOException {
-		Vector<Shield> shields = new Vector<Shield>();
+	public LongMap<Shield> load(DataInputStream file) throws IOException {
+		LongMap<Shield> shields = new LongMap<Shield>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -39,8 +39,7 @@ public class ShieldLoader extends Loader<Vector<Shield>> {
 			iniFile.load(file);
 			
 			int numShields = Integer.parseInt(iniFile.get("init", "NumEscudos"));
-			shields.setSize(numShields + 1);
-			
+
 			for(int i = 1; i <= numShields; i++) {
 				int[] shieldIndex = new int[4];
 				
@@ -49,7 +48,7 @@ public class ShieldLoader extends Loader<Vector<Shield>> {
 					shieldIndex[Heading.EAST.toInt()] = 0; 
 					shieldIndex[Heading.SOUTH.toInt()] = 0; 
 					shieldIndex[Heading.WEST.toInt()] = 0; 
-					shields.setElementAt(new Shield(shieldIndex), i);
+					shields.put(i, new Shield(shieldIndex));
 					continue; 
 				}
 				
@@ -58,7 +57,7 @@ public class ShieldLoader extends Loader<Vector<Shield>> {
 				shieldIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir3"));
 				shieldIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir4"));
 				
-				shields.setElementAt(new Shield(shieldIndex), i);
+				shields.put(i, new Shield(shieldIndex));
 			}
 
 			return shields;

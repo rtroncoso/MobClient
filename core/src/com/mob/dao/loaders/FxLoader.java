@@ -18,21 +18,20 @@ package com.mob.dao.loaders;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Vector;
 
+import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.Fx;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader<Vector<Fx>> {
+public class FxLoader extends Loader<LongMap<Fx>> {
 
 	@Override
-	public Vector<Fx> load(DataInputStream file) throws IOException {
-		Vector<Fx> fxs = new Vector<Fx>();
+	public LongMap<Fx> load(DataInputStream file) throws IOException {
+		LongMap<Fx> fxs = new LongMap<Fx>();
 		int numFxs;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
         numFxs = Util.leShort(file.readShort());
-        fxs.setSize(numFxs + 1);
 
 		for(int i = 1; i <= numFxs; i++) {
 			int offsetX, offsetY, fxIndex;
@@ -41,7 +40,7 @@ public class FxLoader extends Loader<Vector<Fx>> {
 			offsetX = Util.leShort(file.readShort());
 			offsetY = Util.leShort(file.readShort());
 
-			fxs.setElementAt(new Fx(fxIndex, offsetX, offsetY), i);
+			fxs.put(i, new Fx(fxIndex, offsetX, offsetY));
 		}
 
 		return fxs;
