@@ -19,6 +19,7 @@
 package com.mob.client.handlers;
 
 import com.mob.client.Game;
+import com.mob.client.screens.GameScreen;
 import com.mob.client.screens.Screen;
 
 import java.lang.reflect.Constructor;
@@ -43,7 +44,7 @@ public class ScreenHandler {
                 newScreen = (Screen) constructor.newInstance(game);
                 screens.put(screenClassName, newScreen);
             } catch ( InvocationTargetException ex ){
-                System.err.println( ex.getMessage() + " Screen with Wrong args in Constructor.");
+                System.err.println( ex.getMessage() + " Exception in Screen's constructor.");
             } catch ( NoSuchMethodException ex ){
             } catch ( ClassNotFoundException ex ){
                 System.err.println( ex + " Screen Class Not Found.");

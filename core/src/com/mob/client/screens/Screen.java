@@ -17,6 +17,7 @@
 package com.mob.client.screens;
 
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.Game;
@@ -28,6 +29,7 @@ public abstract class Screen extends ScreenAdapter {
 
     protected Game game;
     protected World world;
+    protected WorldConfiguration worldConfiguration;
     protected FPSLogger logger;
 
     protected int state;
@@ -35,11 +37,11 @@ public abstract class Screen extends ScreenAdapter {
 	public Screen(Game game) {
 		this.game = game;
         this.logger = new FPSLogger();
+        this.worldConfiguration = new WorldConfiguration();
 
-        this.world = new World();
         this.initSystems();
         this.initScene();
-        this.world.initialize();
+        this.world = new World(this.worldConfiguration);
 
         this.state = GAME_RUNNING;
 	}

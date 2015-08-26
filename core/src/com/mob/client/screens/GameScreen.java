@@ -33,9 +33,9 @@ public class GameScreen extends Screen {
 
 	@Override
     protected void initSystems() {
-        this.world.setSystem(new CameraSystem());
-        this.world.setSystem(new TiledMapSystem(1));
-		this.world.setSystem(new MapRenderingSystem(this.game.getSpriteBatch()));
+        this.worldConfiguration.setSystem(new CameraSystem());
+        this.worldConfiguration.setSystem(new TiledMapSystem(1));
+		this.worldConfiguration.setSystem(new MapRenderingSystem(this.game.getSpriteBatch()));
 	}
 
     @Override
