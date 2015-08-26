@@ -26,51 +26,26 @@ import com.badlogic.gdx.Input;
 import com.mob.client.artemis.components.physics.PhysicsComponent;
 import com.mob.client.artemis.components.position.PositionComponent;
 
-/**
- * @author Rodrigo
- *
- */
 @Wire
 public class MovementSystem extends EntityProcessingSystem {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
 	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
 	private ComponentMapper<PositionComponent> mPositionMapper;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
 	@SuppressWarnings("unchecked")
 	public MovementSystem() {
 		super(Aspect.getAspectForAll(PhysicsComponent.class,
                 PositionComponent.class));
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
     @Override
     protected void process(Entity entity) {
 
-        // Obtenemos components de entity
         final PhysicsComponent phys = this.mPhysicsMapper.get(entity);
         final PositionComponent pos = this.mPositionMapper.get(entity);
 
-        // Setteamos la aceleración del cuerpo
         pos.x += phys.velocity * world.getDelta();
         pos.y += phys.velocity * world.getDelta();
 
-        // Logueamos posición
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
 

@@ -87,15 +87,12 @@ public class MapRenderingSystem extends VoidEntitySystem {
 
     @Override
     protected void processSystem() {
-        // Obtenemos una entity de la queue y inicializamos el batch
         this.cameraSystem.camera.update();
         this.batch.setProjectionMatrix(this.cameraSystem.camera.combined);
         this.batch.begin();
 
-        // Render our world
         this.renderWorld();
 
-        // Finalizamos el batch
         this.batch.end();
     }
 

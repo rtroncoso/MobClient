@@ -39,7 +39,9 @@ public class MapHandler implements Constants {
 		Map map = reader.loadMap(String.valueOf(mapNumber));
 		mapData.put(mapNumber, map);
 
-		Gdx.app.log(MapHandler.class.getSimpleName(), "[MapHandler] Map " + String.valueOf(mapNumber) + ".map successfully loaded");
+		Gdx.app.log(MapHandler.class.getSimpleName(),
+				"[MapHandler] Map " + String.valueOf(mapNumber)
+						+ ".map successfully loaded");
 		return true;
 	}
 
