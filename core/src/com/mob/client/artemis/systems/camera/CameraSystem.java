@@ -16,6 +16,7 @@
  *******************************************************************************/
 package com.mob.client.artemis.systems.camera;
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
@@ -28,24 +29,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
  * @package com.mob.client.api.systems
  */
 @Wire
-public class CameraSystem extends VoidEntitySystem {
+public class CameraSystem extends BaseSystem {
 
-    // ===========================================================
-    // Constants
-    // ===========================================================
     public static final float DEFAULT_GAME_ZOOM = 1.0f;
 
-
-    // ===========================================================
-    // Fields
-    // ===========================================================
     public final OrthographicCamera camera;
     public final OrthographicCamera guiCamera;
 
-
-    // ===========================================================
-    // Constructors
-    // ===========================================================
     /**
      * Unparametrized Camera System
      */
@@ -70,29 +60,7 @@ public class CameraSystem extends VoidEntitySystem {
         camera.translate(1200, 1200);
     }
 
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
-
-    // ===========================================================
-    // Methods for/from SuperClass/Interfaces
-    // ===========================================================
     @Override
-    protected void processSystem() {
-
-    }
-
-
-    // ===========================================================
-    // Getter & Setter
-    // ===========================================================
-
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
-
+    protected void processSystem() {}
 
 }

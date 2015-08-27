@@ -44,7 +44,7 @@ public class AOAssetsReader implements AssetsReader {
         Reader<LongMap<Graphic>> reader = new Reader<LongMap<Graphic>>();
         GraphicLoader loader = new GraphicLoader();
 
-        return reader.read(Game.GAME_INIT_PATH + "graficos.ind", loader);
+        return reader.read(Game.GAME_INIT_PATH + "Graficos.ind", loader);
     }
 
     @Override

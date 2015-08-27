@@ -52,7 +52,7 @@ public class GridRenderingSystem extends EntityProcessingSystem {
 	// ===========================================================
     @SuppressWarnings("unchecked")
 	public GridRenderingSystem() {
-		super(Aspect.getAspectForAll(LineComponent.class));
+		super(Aspect.all(LineComponent.class));
 
 		// Necesario para el ShapeRenderer
 		this.mShapeRenderer.setAutoShapeType(true);

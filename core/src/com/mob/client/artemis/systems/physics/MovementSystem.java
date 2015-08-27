@@ -32,9 +32,8 @@ public class MovementSystem extends EntityProcessingSystem {
 	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
 	private ComponentMapper<PositionComponent> mPositionMapper;
 
-	@SuppressWarnings("unchecked")
 	public MovementSystem() {
-		super(Aspect.getAspectForAll(PhysicsComponent.class,
+		super(Aspect.all(PhysicsComponent.class,
                 PositionComponent.class));
 	}
     @Override
@@ -51,11 +50,4 @@ public class MovementSystem extends EntityProcessingSystem {
 
     }
 
-    // ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 }

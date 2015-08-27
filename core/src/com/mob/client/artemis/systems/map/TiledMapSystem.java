@@ -16,8 +16,8 @@
  *******************************************************************************/
 package com.mob.client.artemis.systems.map;
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
 import com.mob.dao.objects.Map;
@@ -30,7 +30,7 @@ import com.mob.client.handlers.MapHandler;
  * @package com.mob.client.api.systems.map
  */
 @Wire
-public class TiledMapSystem extends VoidEntitySystem {
+public class TiledMapSystem extends BaseSystem {
 
     public CameraSystem cameraSystem;
     public MapRenderingSystem mapRenderingSystem;

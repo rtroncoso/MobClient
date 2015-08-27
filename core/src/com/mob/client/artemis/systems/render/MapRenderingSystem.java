@@ -16,8 +16,8 @@
  *******************************************************************************/
 package com.mob.client.artemis.systems.render;
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.dao.objects.Map;
 import com.mob.client.artemis.systems.camera.CameraSystem;
@@ -30,7 +30,7 @@ import com.mob.client.artemis.systems.map.TiledMapSystem;
  * @package com.mob.client.api.systems.render
  */
 @Wire
-public class MapRenderingSystem extends VoidEntitySystem {
+public class MapRenderingSystem extends BaseSystem {
 
     private TiledMapSystem mapSystem;
     private CameraSystem cameraSystem;
