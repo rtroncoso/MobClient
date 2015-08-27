@@ -18,6 +18,8 @@
  */
 package com.mob.client.handlers;
 
+import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.utils.reflect.ReflectionException;
 import com.mob.client.Game;
 import com.mob.client.screens.GameScreen;
 import com.mob.client.screens.Screen;
@@ -25,6 +27,8 @@ import com.mob.client.screens.Screen;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+
+import javafx.scene.effect.Reflection;
 
 public class ScreenHandler {
 
@@ -39,15 +43,15 @@ public class ScreenHandler {
 
         if(!screens.containsKey(screenClassName)) {
             try {
-                Class<?> screenClass =  Class.forName(screenClassName);
+                Class<?> screenClass =  ClassReflection.forName(screenClassName);
                 Constructor<?> constructor = screenClass.getConstructor(Game.class);
                 newScreen = (Screen) constructor.newInstance(game);
                 screens.put(screenClassName, newScreen);
-            } catch ( InvocationTargetException ex ){
-                System.err.println( ex.getMessage() + " Exception in Screen's constructor.");
+            } catch ( InvocationTargetException ex ) {
+                System.err.println(ex.getMessage() + " Exception in Screen.");
+            } catch ( ReflectionException ex ) {
+                System.err.println(ex.getMessage() + " Exception in Screen.");
             } catch ( NoSuchMethodException ex ){
-            } catch ( ClassNotFoundException ex ){
-                System.err.println( ex + " Screen Class Not Found.");
             } catch( InstantiationException ex ){
                 System.err.println( ex + " Screen Must be a concrete class.");
             } catch( IllegalAccessException ex ){
