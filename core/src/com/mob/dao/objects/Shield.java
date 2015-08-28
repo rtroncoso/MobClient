@@ -24,32 +24,32 @@ package com.mob.dao.objects;
 
 public class Shield {
 
-	private int[] graphic;
+	private int[] grhIndex;
 
-	public Shield(int[] graphic) {
-		this.setGraphicArray(graphic);
+	public Shield(int[] grhIndex) {
+		this.setGraphicArray(grhIndex);
 	}
 
 	public int getGraphic(int index) {
-		return this.graphic[index];
+		return this.grhIndex[index];
 	}
 	
-	public void setGraphic(int index, int graphic) {
-		this.graphic[index] = graphic;
+	public void setGraphic(int index, int grhIndex) {
+		this.grhIndex[index] = grhIndex;
 	}
 	
 	/**
-	 * @return the graphic
+	 * @return the grhIndex
 	 */
 	public int[] getGraphicArray() {
-		return graphic;
+		return grhIndex;
 	}
 
 	/**
-	 * @param graphic the graphic to set
+	 * @param grhIndex the grhIndex to set
 	 */
-	public void setGraphicArray(int[] graphic) {
-		this.graphic = graphic;
+	public void setGraphicArray(int[] grhIndex) {
+		this.grhIndex = grhIndex;
 	}
 
 }

@@ -24,7 +24,7 @@ package com.mob.dao.objects;
 
 public class Body {
 
-	private int[] grhCuerpo;
+	private int[] grhIndex;
 	private int headOffsetX;
 	private int headOffsetY;
 
@@ -34,31 +34,31 @@ public class Body {
 	 * @param headOffsetY
 	 */
 	public Body(int[] grhIndex, int headOffsetX, int headOffsetY) {
-		this.grhCuerpo = grhIndex;
+		this.grhIndex = grhIndex;
 		this.headOffsetX = headOffsetX;
 		this.headOffsetY = headOffsetY;
 	}
 
 	public int getGraphic(int index) {
-		return this.grhCuerpo[index];
+		return this.grhIndex[index];
 	}
 	
 	public void setGraphic(int index, int graphic) {
-		this.grhCuerpo[index] = graphic;
+		this.grhIndex[index] = graphic;
 	}
 	
 	/**
 	 * @return the grhIndex
 	 */
 	public int[] getBodyArray() {
-		return grhCuerpo;
+		return grhIndex;
 	}
 
 	/**
 	 * @param grhIndex the grhIndex to set
 	 */
-	public void setBodyArray(int[] grhCuerpo) {
-		this.grhCuerpo = grhCuerpo;
+	public void setBodyArray(int[] grhIndex) {
+		this.grhIndex = grhIndex;
 	}
 
 	/**

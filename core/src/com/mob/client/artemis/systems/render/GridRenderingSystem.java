@@ -36,20 +36,10 @@ import com.mob.client.artemis.systems.camera.CameraSystem;
 @Wire
 public class GridRenderingSystem extends EntityProcessingSystem {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
 	private ComponentMapper<LineComponent> lm;
     private CameraSystem mCameraSystem;
 	private ShapeRenderer mShapeRenderer = new ShapeRenderer();
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
     @SuppressWarnings("unchecked")
 	public GridRenderingSystem() {
 		super(Aspect.all(LineComponent.class));
@@ -57,14 +47,6 @@ public class GridRenderingSystem extends EntityProcessingSystem {
 		// Necesario para el ShapeRenderer
 		this.mShapeRenderer.setAutoShapeType(true);
 	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
 
     @Override
     protected void begin() {
@@ -104,13 +86,5 @@ public class GridRenderingSystem extends EntityProcessingSystem {
         this.mShapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
-
-    // ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }
