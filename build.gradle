@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'org.robovm:robovm-gradle-plugin:1.5.0'
+        classpath 'org.robovm:robovm-gradle-plugin:1.5.1-SNAPSHOT'
 
         // lib for artemis-odb weaving.
         // see https://github.com/junkdog/artemis-odb/wiki/Bytecode-weaving
@@ -134,7 +134,7 @@ project(":core") {
     sourceSets {
         // run the annotation processor compile time.
         main { compileClasspath += [configurations.provided] }
-        test.java.srcDirs = ["src/"]
+        test.java.srcDirs = ["tests/"]
     }
 
     dependencies {
@@ -144,7 +144,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-//        compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.0.8"
+        compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.0.8"
 
         compile "net.onedaybeard.artemis:artemis-odb:$artemisVersion"
         provided "net.onedaybeard.artemis:artemis-odb-processor:$artemisVersion"
@@ -152,15 +152,15 @@ project(":core") {
         compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion"
         compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion"
 
-//        compile 'junit:junit:4.+'
-//        compile "org.mockito:mockito-all:1.9.5"
-//        testCompile 'junit:junit:4.+'
-//        testCompile "org.mockito:mockito-all:1.9.5"
-//        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-//        testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
-//        testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-//        testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-//        testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+        compile 'junit:junit:4.+'
+        compile "org.mockito:mockito-all:1.9.5"
+        testCompile 'junit:junit:4.+'
+        testCompile "org.mockito:mockito-all:1.9.5"
+        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
     }
 }
 
