@@ -32,8 +32,6 @@ import com.mob.client.handlers.MapHandler;
 @Wire
 public class TiledMapSystem extends BaseSystem {
 
-    public CameraSystem cameraSystem;
-    public MapRenderingSystem mapRenderingSystem;
     public Map map;
     public int mapNumber;
 

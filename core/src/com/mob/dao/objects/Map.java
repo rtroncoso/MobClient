@@ -105,6 +105,8 @@ public class Map implements Constants {
 
     /**
      * Renders map's first layer to it's internal FrameBuffer Object
+     *
+     * @return void
      */
     public void renderLayerToBuffer() {
         this.renderLayerToBuffer(0);
@@ -112,7 +114,9 @@ public class Map implements Constants {
 
     /**
      * Renders a map layer to it's internal FrameBuffer Object
+     *
      * @param layer
+     * @return void
      */
     public void renderLayerToBuffer(int layer) {
 
@@ -143,7 +147,9 @@ public class Map implements Constants {
 
     /**
      * Renders a Map Layer to a specific SpriteBatch
+     *
      * @param batch
+     * @return void
      */
     public void renderLayer(SpriteBatch batch) {
         this.renderLayer(batch, 0, 0, MIN_MAP_SIZE_WIDTH, MAX_MAP_SIZE_WIDTH, MIN_MAP_SIZE_HEIGHT, MAX_MAP_SIZE_HEIGHT);

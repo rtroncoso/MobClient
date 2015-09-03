@@ -16,8 +16,11 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
+import com.mob.client.artemis.manager.EntityFactorySystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
+import com.mob.client.artemis.systems.camera.EntityCameraSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
 
@@ -33,9 +36,13 @@ public class GameScreen extends Screen {
 
 	@Override
     protected void initSystems() {
-        this.worldConfiguration.setSystem(new CameraSystem());
+		this.worldConfiguration.setSystem(new EntityFactorySystem());
+
+        this.worldConfiguration.setSystem(new CameraSystem(1));
         this.worldConfiguration.setSystem(new TiledMapSystem(1));
 		this.worldConfiguration.setSystem(new MapRenderingSystem(this.game.getSpriteBatch()));
+
+        this.worldConfiguration.setSystem(new EntityCameraSystem());
 	}
 
     @Override
@@ -45,11 +52,9 @@ public class GameScreen extends Screen {
 
     @Override
 	protected void update(float deltaTime) {
-		if (deltaTime > 0.1f) deltaTime = 0.1f;
-
         this.logger.log();
 
-		this.world.setDelta(deltaTime);
+		world.setDelta(MathUtils.clamp(deltaTime, 0, 1 / 15f));
         this.world.process();
 		
 		switch (this.state) {

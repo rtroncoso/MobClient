@@ -17,50 +17,48 @@
 package com.mob.client.artemis.systems.camera;
 
 import com.artemis.BaseSystem;
-import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 /**
- * CameraSystem Class
+ * Setup and manages basic orthographic camera.
  *
- * @author rt
- * @package com.mob.client.api.systems
+ * @author Daan van Yperen
  */
-@Wire
 public class CameraSystem extends BaseSystem {
 
-    public static final float DEFAULT_GAME_ZOOM = 1.0f;
+    public OrthographicCamera camera;
+    public OrthographicCamera guiCamera;
+    public final float zoom;
 
-    public final OrthographicCamera camera;
-    public final OrthographicCamera guiCamera;
-
-    /**
-     * Unparametrized Camera System
-     */
-    public CameraSystem() {
-        this(DEFAULT_GAME_ZOOM);
+    public CameraSystem( float width, float height )
+    {
+        this.zoom = 1;
+        setupViewport(width, height);
     }
 
     /**
      * @param zoom How much
      */
-    public CameraSystem(float zoom) {
+    public CameraSystem( float zoom ) {
+        this.zoom = zoom;
         float zoomFactorInverter = 1f/zoom;
+        setupViewport(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+    }
 
-        camera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        camera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+    protected void setupViewport( float width, float height) {
+        camera = new OrthographicCamera(width, height);
+        camera.setToOrtho(true, width, height);
         camera.update();
 
-        guiCamera = new OrthographicCamera(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
-        guiCamera.setToOrtho(true, Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        guiCamera = new OrthographicCamera(width, height);
+        guiCamera.setToOrtho(true, width, height);
         guiCamera.update();
-
-        camera.translate(1200, 1200);
     }
 
     @Override
-    protected void processSystem() {}
+    protected void processSystem() {
+
+    }
 
 }
