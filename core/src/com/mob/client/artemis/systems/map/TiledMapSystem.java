@@ -33,22 +33,31 @@ import com.mob.client.handlers.MapHandler;
 public class TiledMapSystem extends BaseSystem {
 
     public Map map;
-    public int mapNumber;
+    public long mapNumber;
 
-    public TiledMapSystem(int mapNumber) {
+    public TiledMapSystem(long mapNumber) {
         this.mapNumber = mapNumber;
     }
 
     @Override
     protected void initialize() {
-        // Inicializamos el mapa
-        this.map = MapHandler.get(this.mapNumber);
-        this.map.initialize();
+        changeMap(this.mapNumber);
     }
 
     @Override
     protected void processSystem() {
 
+    }
+
+    /**
+     * Change the currently loaded map
+     *
+     * @param number
+     */
+    public void changeMap(long number) {
+        this.mapNumber = number;
+        this.map = MapHandler.get(number);
+        this.map.initialize();
     }
 
 }

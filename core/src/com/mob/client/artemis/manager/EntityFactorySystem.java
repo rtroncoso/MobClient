@@ -3,8 +3,8 @@ package com.mob.client.artemis.manager;
 import com.artemis.Entity;
 import com.artemis.utils.EntityBuilder;
 import com.badlogic.gdx.maps.MapProperties;
-import com.mob.client.artemis.components.camera.CameraComponent;
-import com.mob.client.artemis.components.position.WorldPositionComponent;
+import com.mob.client.artemis.components.camera.Camera;
+import com.mob.client.artemis.components.position.WorldPosition;
 
 import net.mostlyoriginal.api.manager.AbstractEntityFactorySystem;
 
@@ -29,8 +29,8 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
 
     public void createCamera(int cx, int cy) {
         new EntityBuilder(world)
-            .with(new WorldPositionComponent(cx, cy))
-            .with(new CameraComponent())
+            .with(new WorldPosition(cx, cy))
+            .with(new Camera())
             .build();
     }
 

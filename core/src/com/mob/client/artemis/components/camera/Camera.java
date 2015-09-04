@@ -20,12 +20,12 @@ import com.artemis.Component;
 import java.io.Serializable;
 
 /**
- * CameraComponent Class
+ * Camera Class
  *
  * @author rt
  * @package com.mob.client.api.components.camera
  */
-public class CameraComponent extends Component implements Serializable {
+public class Camera extends Component implements Serializable {
 
 
 }

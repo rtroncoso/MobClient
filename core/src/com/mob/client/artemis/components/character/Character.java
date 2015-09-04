@@ -14,7 +14,8 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.artemis.components.basic;
+package com.mob.client.artemis.components.character;
+
 
 import com.artemis.Component;
 
@@ -22,25 +23,19 @@ import com.artemis.Component;
  * @author Rodrigo
  *
  */
-public class StateComponent extends Component {
+public class Character extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public int current = STATE_NORMAL;
-	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public StateComponent(int state) {
-        this.current = state;
-    }
 
 	// ===========================================================
 	// Methods

@@ -14,31 +14,20 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.artemis.components.position;
+package com.mob.client.artemis.components.physics;
 
 import com.artemis.Component;
-
 import java.io.Serializable;
 
 /**
- * PositionComponent Class
+ * Physics Class
  *
  * @author rt
- * @package com.mob.client.api.components.basic
  */
-public class PositionComponent extends Component implements Serializable {
+public class Physics extends Component implements Serializable {
 
-    public float x;
-    public float y;
+    public final static float MAX_VELOCITY = Float.MAX_VALUE;
 
-    public PositionComponent(float pX, float pY) {
-        this.x = pX;
-        this.y = pY;
-    }
-
-    public PositionComponent() {
-        this.x = 0;
-        this.y = 0;
-    }
+    public float velocity;
 
 }

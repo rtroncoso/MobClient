@@ -17,34 +17,30 @@
 package com.mob.client.artemis.components.basic;
 
 import com.artemis.Component;
-import com.badlogic.gdx.graphics.Color;
-
-import java.io.Serializable;
 
 /**
- * ColorComponent Class
  * @author Rodrigo
- * @package com.mob.client.api.components.basic
+ *
  */
-public class ColorComponent extends Component implements Serializable {
+public class State extends Component {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	public static final int STATE_NORMAL = 0;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Color tint = new Color(Color.WHITE);
+	public int current = STATE_NORMAL;
+	public float time = 0.0f;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public ColorComponent(Color tint) {
-        this.tint = tint;
+    public State(int state) {
+        this.current = state;
     }
-
-    public ColorComponent() {}
 
 	// ===========================================================
 	// Methods

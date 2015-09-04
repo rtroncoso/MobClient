@@ -14,19 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.artemis.components.graphics;
+package com.mob.client.artemis.components.basic;
 
 import com.artemis.Component;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Color;
 
 import java.io.Serializable;
 
 /**
- * LineComponent Class
- * @author rt
- * @package com.mob.client.api.components.graphics
+ * Tint Class
+ * @author Rodrigo
+ * @package com.mob.client.api.components.basic
  */
-public class LineComponent extends Component implements Serializable {
+public class Tint extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -35,16 +35,16 @@ public class LineComponent extends Component implements Serializable {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public Vector2 start = new Vector2();
-	public Vector2 end = new Vector2();
+	public Color tint = new Color(Color.WHITE);
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    public LineComponent(Vector2 start, Vector2 end) {
-        this.start = start;
-        this.end = end;
+    public Tint(Color tint) {
+        this.tint = tint;
     }
+
+    public Tint() {}
 
 	// ===========================================================
 	// Methods
@@ -61,5 +61,4 @@ public class LineComponent extends Component implements Serializable {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }

@@ -22,15 +22,15 @@
 //import com.badlogic.ashley.core.Entity;
 //import com.badlogic.ashley.core.Family;
 //import com.badlogic.ashley.systems.IteratingSystem;
-//import com.badlogic.gdx.graphics.Color;
+//import com.badlogic.gdx.graphics.Tint;
 //import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.badlogic.gdx.graphics.g2d.TextureRegion;
 //import com.badlogic.gdx.utils.Array;
-//import com.mob.client.api.components.character.BodyComponent;
-//import com.mob.client.api.components.character.CharacterComponent;
-//import com.mob.client.api.components.basic.ColorComponent;
-//import com.mob.client.api.components.character.HeadComponent;
-//import com.mob.client.api.components.character.HeadingComponent;
+//import com.mob.client.api.components.character.Body;
+//import com.mob.client.api.components.character.Character;
+//import com.mob.client.api.components.basic.Tint;
+//import com.mob.client.api.components.character.Head;
+//import com.mob.client.api.components.character.Heading;
 //import com.mob.client.api.components.TransformComponent;
 //import com.mob.client.handlers.CameraHandler;
 //import com.mob.client.interfaces.Constants;
@@ -49,12 +49,12 @@
 //	// ===========================================================
 //	// Fields
 //	// ===========================================================
-//	private ComponentMapper<BodyComponent> mBodyMapper;
-//	private ComponentMapper<HeadComponent> mHeadMapper;
+//	private ComponentMapper<Body> mBodyMapper;
+//	private ComponentMapper<Head> mHeadMapper;
 //	private ComponentMapper<TransformComponent> mTransformMapper;
-//	private ComponentMapper<CharacterComponent> mCharacterMapper;
-//	private ComponentMapper<HeadingComponent> mHeadingMapper;
-//	private ComponentMapper<ColorComponent> mColorMapper;
+//	private ComponentMapper<Character> mCharacterMapper;
+//	private ComponentMapper<Heading> mHeadingMapper;
+//	private ComponentMapper<Tint> mColorMapper;
 //
 //	private SpriteBatch mBatch;
 //	private Array<Entity> mRenderQueue;
@@ -65,21 +65,21 @@
 //	// ===========================================================
 //	@SuppressWarnings("unchecked")
 //	public CharacterRenderingSystem(SpriteBatch pBatch) {
-//		super(Family.all(BodyComponent.class,
-//						HeadComponent.class,
+//		super(Family.all(Body.class,
+//						Head.class,
 //						TransformComponent.class,
-//						CharacterComponent.class,
-//						HeadingComponent.class,
-//						ColorComponent.class)
+//						Character.class,
+//						Heading.class,
+//						Tint.class)
 //				.get());
 //
 //		// Obtenemos nuestros Mappers
-//		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
-//		this.mHeadMapper = ComponentMapper.getFor(HeadComponent.class);
+//		this.mBodyMapper = ComponentMapper.getFor(Body.class);
+//		this.mHeadMapper = ComponentMapper.getFor(Head.class);
 //		this.mTransformMapper = ComponentMapper.getFor(TransformComponent.class);
-//		this.mCharacterMapper = ComponentMapper.getFor(CharacterComponent.class);
-//		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
-//		this.mColorMapper = ComponentMapper.getFor(ColorComponent.class);
+//		this.mCharacterMapper = ComponentMapper.getFor(Character.class);
+//		this.mHeadingMapper = ComponentMapper.getFor(Heading.class);
+//		this.mColorMapper = ComponentMapper.getFor(Tint.class);
 //
 //		// Creamos la render queue
 //		this.mRenderQueue = new Array<Entity>();
@@ -136,10 +136,10 @@
 //		for (Entity entity : this.mRenderQueue) {
 //
 //			// Obtenemos los components del character
-//			BodyComponent body = this.mBodyMapper.get(entity);
-//			HeadComponent head = this.mHeadMapper.get(entity);
-//			ColorComponent color = this.mColorMapper.get(entity);
-//			HeadingComponent heading = this.mHeadingMapper.get(entity);
+//			Body body = this.mBodyMapper.get(entity);
+//			Head head = this.mHeadMapper.get(entity);
+//			Tint color = this.mColorMapper.get(entity);
+//			Heading heading = this.mHeadingMapper.get(entity);
 //			TransformComponent t = this.mTransformMapper.get(entity);
 //
 //			// Separamos las TextureRegion's en uso
@@ -147,7 +147,7 @@
 //			TextureRegion headRegion = head.animations.get(heading.current).getGraphic();
 //
 //			// Renderizamos el character
-//			Color previousColor = this.mBatch.getColor();
+//			Tint previousColor = this.mBatch.getColor();
 //			this.mBatch.setColor(color.tint);
 //
 //			// Preparamos variables para el render

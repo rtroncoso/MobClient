@@ -5,11 +5,9 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
-import com.mob.client.artemis.components.camera.CameraComponent;
-import com.mob.client.artemis.components.position.WorldPositionComponent;
+import com.mob.client.artemis.components.camera.Camera;
+import com.mob.client.artemis.components.position.WorldPosition;
 import com.mob.dao.objects.Tile;
-
-import net.mostlyoriginal.api.component.basic.Pos;
 
 /**
  * EntityCameraSystem Class
@@ -20,21 +18,19 @@ import net.mostlyoriginal.api.component.basic.Pos;
 public class EntityCameraSystem extends EntityProcessingSystem
 {
 
-    private ComponentMapper<WorldPositionComponent> pm;
+    private ComponentMapper<WorldPosition> pm;
     private CameraSystem cameraSystem;
 
     /**
-     * Creates a new EntityProcessingSystem.
-     *
-     * @param aspect the aspect to match entities
+     * Creates a new EntityCameraSystem.
      */
     public EntityCameraSystem() {
-        super(Aspect.all(WorldPositionComponent.class, CameraComponent.class));
+        super(Aspect.all(WorldPosition.class, Camera.class));
     }
 
     @Override
     protected void process(Entity e) {
-        final WorldPositionComponent pos = pm.get(e);
+        final WorldPosition pos = pm.get(e);
         cameraSystem.camera.position.x = (pos.x * Tile.TILE_PIXEL_WIDTH);
         cameraSystem.camera.position.y = (pos.y * Tile.TILE_PIXEL_HEIGHT);
         cameraSystem.camera.update();

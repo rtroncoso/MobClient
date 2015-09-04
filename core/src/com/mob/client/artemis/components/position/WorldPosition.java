@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2015  Rodrigo Troncoso
+ * Copyright (C) 2014  Rodrigo Troncoso
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU Affero General Public License as
@@ -14,20 +14,24 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.artemis.components.physics;
+package com.mob.client.artemis.components.position;
 
 import com.artemis.Component;
-import java.io.Serializable;
 
 /**
- * Physics Class
+ * WorldPosition Class
  *
- * @author rt
+ * @author Rodrigo
+ * @package com.mob.client.api.components.position
  */
-public class PhysicsComponent extends Component implements Serializable {
+public class WorldPosition extends Component {
 
-    public final static float MAX_VELOCITY = Float.MAX_VALUE;
+    public int x;
+    public int y;
 
-    public float velocity;
+    public WorldPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
 }

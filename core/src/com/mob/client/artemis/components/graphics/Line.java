@@ -14,20 +14,19 @@
  *     You should have received a copy of the GNU Affero General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-package com.mob.client.artemis.components.character;
+package com.mob.client.artemis.components.graphics;
 
 import com.artemis.Component;
-import com.badlogic.gdx.utils.IntMap;
-import com.mob.client.textures.BundledAnimation;
+import com.badlogic.gdx.math.Vector2;
 
 import java.io.Serializable;
 
 /**
- * HeadComponent Class
- * @author Rodrigo
- * @package com.mob.client.api.components.character
+ * Line Class
+ * @author rt
+ * @package com.mob.client.api.components.graphics
  */
-public class HeadComponent extends Component implements Serializable {
+public class Line extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -36,16 +35,15 @@ public class HeadComponent extends Component implements Serializable {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+	public Vector2 start = new Vector2();
+	public Vector2 end = new Vector2();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-    /**
-     * @param animations
-     */
-    public HeadComponent(IntMap<BundledAnimation> animations) {
-        this.animations = animations;
+    public Line(Vector2 start, Vector2 end) {
+        this.start = start;
+        this.end = end;
     }
 
 	// ===========================================================

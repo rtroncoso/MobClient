@@ -20,9 +20,9 @@
 //import com.badlogic.ashley.core.Entity;
 //import com.badlogic.ashley.core.Family;
 //import com.badlogic.ashley.systems.IteratingSystem;
-//import com.mob.client.api.components.character.BodyComponent;
-//import com.mob.client.api.components.character.HeadingComponent;
-//import com.mob.client.api.components.basic.StateComponent;
+//import com.mob.client.api.components.character.Body;
+//import com.mob.client.api.components.character.Heading;
+//import com.mob.client.api.components.basic.State;
 //import com.mob.client.textures.BundledAnimation;
 //
 ///**
@@ -38,24 +38,24 @@
 //	// ===========================================================
 //	// Fields
 //	// ===========================================================
-//	private ComponentMapper<BodyComponent> mBodyMapper;
-//	private ComponentMapper<StateComponent> mStateMapper;
-//	private ComponentMapper<HeadingComponent> mHeadingMapper;
+//	private ComponentMapper<Body> mBodyMapper;
+//	private ComponentMapper<State> mStateMapper;
+//	private ComponentMapper<Heading> mHeadingMapper;
 //
 //	// ===========================================================
 //	// Constructors
 //	// ===========================================================
 //	@SuppressWarnings("unchecked")
 //	public CharacterAnimationSystem() {
-//		super(Family.all(BodyComponent.class,
-//						StateComponent.class,
-//						HeadingComponent.class)
+//		super(Family.all(Body.class,
+//						State.class,
+//						Heading.class)
 //					.get());
 //
 //		// Obtenemos nuestros Mappers
-//		this.mBodyMapper = ComponentMapper.getFor(BodyComponent.class);
-//		this.mStateMapper = ComponentMapper.getFor(StateComponent.class);
-//		this.mHeadingMapper = ComponentMapper.getFor(HeadingComponent.class);
+//		this.mBodyMapper = ComponentMapper.getFor(Body.class);
+//		this.mStateMapper = ComponentMapper.getFor(State.class);
+//		this.mHeadingMapper = ComponentMapper.getFor(Heading.class);
 //	}
 //
 //	// ===========================================================
@@ -69,9 +69,9 @@
 //	public void processEntity(Entity entity, float deltaTime) {
 //
 //		// Obtenemos los components necesarios
-//		BodyComponent body = this.mBodyMapper.get(entity);
-//		StateComponent state = this.mStateMapper.get(entity);
-//		HeadingComponent heading = this.mHeadingMapper.get(entity);
+//		Body body = this.mBodyMapper.get(entity);
+//		State state = this.mStateMapper.get(entity);
+//		Heading heading = this.mHeadingMapper.get(entity);
 //		BundledAnimation animation = body.animations.get(heading.current);
 //
 //		// Si tiene una animación cambiamos la region

@@ -23,24 +23,24 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.mob.client.artemis.components.physics.PhysicsComponent;
-import com.mob.client.artemis.components.position.PositionComponent;
+import com.mob.client.artemis.components.physics.Physics;
+import com.mob.client.artemis.components.position.Position;
 
 @Wire
 public class MovementSystem extends EntityProcessingSystem {
 
-	private ComponentMapper<PhysicsComponent> mPhysicsMapper;
-	private ComponentMapper<PositionComponent> mPositionMapper;
+	private ComponentMapper<Physics> mPhysicsMapper;
+	private ComponentMapper<Position> mPositionMapper;
 
 	public MovementSystem() {
-		super(Aspect.all(PhysicsComponent.class,
-                PositionComponent.class));
+		super(Aspect.all(Physics.class,
+                Position.class));
 	}
     @Override
     protected void process(Entity entity) {
 
-        final PhysicsComponent phys = this.mPhysicsMapper.get(entity);
-        final PositionComponent pos = this.mPositionMapper.get(entity);
+        final Physics phys = this.mPhysicsMapper.get(entity);
+        final Position pos = this.mPositionMapper.get(entity);
 
         pos.x += phys.velocity * world.getDelta();
         pos.y += phys.velocity * world.getDelta();

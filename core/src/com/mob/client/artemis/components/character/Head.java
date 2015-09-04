@@ -16,14 +16,18 @@
  *******************************************************************************/
 package com.mob.client.artemis.components.character;
 
-
 import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
+
+import java.io.Serializable;
 
 /**
+ * Head Class
  * @author Rodrigo
- *
+ * @package com.mob.client.api.components.character
  */
-public class CharacterComponent extends Component {
+public class Head extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
@@ -32,10 +36,17 @@ public class CharacterComponent extends Component {
 	// ===========================================================
 	// Fields
 	// ===========================================================
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+    /**
+     * @param animations
+     */
+    public Head(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 
 	// ===========================================================
 	// Methods
@@ -52,4 +63,5 @@ public class CharacterComponent extends Component {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
+
 }

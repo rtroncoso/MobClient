@@ -16,36 +16,33 @@
  *******************************************************************************/
 package com.mob.client.artemis.components.character;
 
-
 import com.artemis.Component;
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.textures.BundledAnimation;
 
 import java.io.Serializable;
 
 /**
- * HeadingComponent Class
- * @author Rodrigo
- * @package com.mob.client.api.components.character
+ * Body Class
+ * @author rt
+ * @package com.mob.clients.components.character
  */
-public class HeadingComponent extends Component implements Serializable {
+public class Body extends Component implements Serializable {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	public static final int HEADING_NORTH = 0;
-	public static final int HEADING_EAST = 1;
-	public static final int HEADING_SOUTH = 2;
-	public static final int HEADING_WEST = 3;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public int current = HEADING_SOUTH;
+	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
-    public HeadingComponent(int heading) {
-        this.current = heading;
+	// ===========================================================
+	// Constructors
+	// ===========================================================
+    public Body(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
     }
 
 	// ===========================================================
@@ -63,5 +60,4 @@ public class HeadingComponent extends Component implements Serializable {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
 }

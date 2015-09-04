@@ -25,7 +25,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mob.client.artemis.components.graphics.LineComponent;
+import com.mob.client.artemis.components.graphics.Line;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 
 /**
@@ -36,13 +36,13 @@ import com.mob.client.artemis.systems.camera.CameraSystem;
 @Wire
 public class GridRenderingSystem extends EntityProcessingSystem {
 
-	private ComponentMapper<LineComponent> lm;
+	private ComponentMapper<Line> lm;
     private CameraSystem mCameraSystem;
 	private ShapeRenderer mShapeRenderer = new ShapeRenderer();
 
     @SuppressWarnings("unchecked")
 	public GridRenderingSystem() {
-		super(Aspect.all(LineComponent.class));
+		super(Aspect.all(Line.class));
 
 		// Necesario para el ShapeRenderer
 		this.mShapeRenderer.setAutoShapeType(true);
@@ -71,7 +71,7 @@ public class GridRenderingSystem extends EntityProcessingSystem {
     @Override
     protected void process(Entity entity) {
         // Obtenemos el component de cada línea
-        LineComponent line = this.lm.get(entity);
+        Line line = this.lm.get(entity);
 
         // Dibujamos la linea actual
         this.mShapeRenderer.setColor(new Color(0, 255, 0, 0.5f));
