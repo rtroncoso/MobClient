@@ -49,13 +49,17 @@ public class ScreenHandler {
                 screens.put(screenClassName, newScreen);
             } catch ( InvocationTargetException ex ) {
                 System.err.println(ex.getMessage() + " Exception in Screen.");
+                ex.printStackTrace();
             } catch ( ReflectionException ex ) {
                 System.err.println(ex.getMessage() + " Exception in Screen.");
+                ex.printStackTrace();
             } catch ( NoSuchMethodException ex ){
             } catch( InstantiationException ex ){
                 System.err.println( ex + " Screen Must be a concrete class.");
+                ex.printStackTrace();
             } catch( IllegalAccessException ex ){
                 System.err.println( ex + " Screen with Wrong number of args.");
+                ex.printStackTrace();
             }
         } else {
             newScreen = screens.get(screenClassName);

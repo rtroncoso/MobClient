@@ -19,10 +19,13 @@ package com.mob.client.screens;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
 import com.mob.client.artemis.manager.EntityFactorySystem;
+import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.artemis.systems.camera.EntityCameraSystem;
+import com.mob.client.artemis.systems.camera.CameraMovementSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
+
+import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 
 /**
  * Class GameScreen
@@ -35,14 +38,15 @@ public class GameScreen extends Screen {
 	}
 
 	@Override
-    protected void initSystems() {
-		this.worldConfiguration.setSystem(new EntityFactorySystem());
+    protected void initSystems(WorldConfigurationBuilder builder) {
+		builder.with(new EntityFactorySystem());
 
-        this.worldConfiguration.setSystem(new CameraSystem(1));
-        this.worldConfiguration.setSystem(new TiledMapSystem(1));
-		this.worldConfiguration.setSystem(new MapRenderingSystem(this.game.getSpriteBatch()));
+        builder.with(new CameraSystem(1));
+        builder.with(new TiledMapSystem(1));
+		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
 
-        this.worldConfiguration.setSystem(new EntityCameraSystem());
+        builder.with(new CameraMovementSystem());
+        builder.with(new CameraFocusSystem());
 	}
 
     @Override

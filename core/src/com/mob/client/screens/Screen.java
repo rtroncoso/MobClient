@@ -22,6 +22,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.Game;
 
+import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
+
 public abstract class Screen extends ScreenAdapter {
 
     public static final int GAME_RUNNING = 0;
@@ -29,20 +31,25 @@ public abstract class Screen extends ScreenAdapter {
 
     protected Game game;
     protected World world;
-    protected WorldConfiguration worldConfiguration;
     protected FPSLogger logger;
+    protected final WorldConfigurationBuilder builder = new WorldConfigurationBuilder();
 
     protected int state;
 
+    /**
+     * Screen constructor, calls abstract methods for scene
+     * initialization using a WorldConfigurationBuilder
+     *
+     * @param game
+     */
 	public Screen(Game game) {
 		this.game = game;
         this.logger = new FPSLogger();
-        this.worldConfiguration = new WorldConfiguration();
 
-        this.initSystems();
+        this.initSystems(builder);
         this.initScene();
-        this.world = new World(this.worldConfiguration);
 
+        this.world = new World(builder.build());
         this.state = GAME_RUNNING;
 	}
 
@@ -72,7 +79,7 @@ public abstract class Screen extends ScreenAdapter {
         super.dispose();
     }
 
-    abstract protected void initSystems();
+    abstract protected void initSystems(WorldConfigurationBuilder builder);
     abstract protected void initScene();
     abstract protected void resumeSystems();
     abstract protected void pauseSystems();

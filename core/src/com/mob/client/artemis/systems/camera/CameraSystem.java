@@ -40,13 +40,14 @@ public class CameraSystem extends BaseSystem {
     /**
      * @param zoom How much
      */
-    public CameraSystem( float zoom ) {
+    public CameraSystem(float zoom) {
         this.zoom = zoom;
-        float zoomFactorInverter = 1f/zoom;
-        setupViewport(Gdx.graphics.getWidth() * zoomFactorInverter, Gdx.graphics.getHeight() * zoomFactorInverter);
+        float zoomFactorInverter = 1f / zoom;
+        setupViewport(Gdx.graphics.getWidth() * zoomFactorInverter,
+                Gdx.graphics.getHeight() * zoomFactorInverter);
     }
 
-    protected void setupViewport( float width, float height) {
+    protected void setupViewport(float width, float height) {
         camera = new OrthographicCamera(width, height);
         camera.setToOrtho(true, width, height);
         camera.update();

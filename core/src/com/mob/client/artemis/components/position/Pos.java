@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (C) 2014  Rodrigo Troncoso
+ * Copyright (C) 2015  Rodrigo Troncoso
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU Affero General Public License as
@@ -17,21 +17,34 @@
 package com.mob.client.artemis.components.position;
 
 import com.artemis.Component;
+import com.mob.dao.objects.Tile;
+
+import java.io.Serializable;
 
 /**
- * WorldPosition Class
+ * Pos Class
  *
- * @author Rodrigo
- * @package com.mob.client.api.components.position
+ * @author rt
+ * @package com.mob.client.api.components.basic
  */
-public class WorldPosition extends Component {
+public class Pos extends Component implements Serializable {
 
-    public int x;
-    public int y;
+    public float x;
+    public float y;
 
-    public WorldPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Pos(float pX, float pY) {
+        this.x = pX;
+        this.y = pY;
+    }
+
+    public Pos() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    public WorldPos toWorld() {
+        return new WorldPos((int) (this.x / Tile.TILE_PIXEL_WIDTH),
+                (int) (this.y / Tile.TILE_PIXEL_HEIGHT));
     }
 
 }
