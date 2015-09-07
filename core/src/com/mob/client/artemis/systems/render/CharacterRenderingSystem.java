@@ -46,16 +46,16 @@ public class CharacterRenderingSystem extends EntityProcessingSystem {
         batch.setProjectionMatrix(cameraSystem.camera.combined);
         batch.begin();
 
-        Body body = bm.get(e);
-        Head head = hm.get(e);
-        Heading heading = xm.get(e);
-        Pos pos = pm.get(e);
+        final Body body = bm.get(e);
+        final Head head = hm.get(e);
+        final Heading heading = xm.get(e);
+        final Pos pos = pm.get(e);
 
         TextureRegion bodyRegion = body.body.getAnimation(heading.current).getAnimatedGraphic(true);
         TextureRegion headRegion = head.head.getAnimation(heading.current).getGraphic();
 
         float bodyPixelOffsetX = 0.0f, bodyPixelOffsetY = 0.0f,
-                headPixelOffsetX = 0.0f, headPixelOffsetY = 0.0f;
+            headPixelOffsetX = 0.0f, headPixelOffsetY = 0.0f;
 
         if (bodyRegion != null) {
             bodyPixelOffsetX = pos.x - 32.0f;// - bodyRegion.getRegionWidth() * 0.5f;

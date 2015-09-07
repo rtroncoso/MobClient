@@ -29,8 +29,8 @@ import com.mob.client.artemis.components.position.Pos;
 @Wire
 public class MovementSystem extends EntityProcessingSystem {
 
-	private ComponentMapper<Physics> mPhysicsMapper;
-	private ComponentMapper<Pos> mPositionMapper;
+	private ComponentMapper<Physics> xm;
+	private ComponentMapper<Pos> pm;
 
 	public MovementSystem() {
 		super(Aspect.all(Physics.class,
@@ -39,8 +39,8 @@ public class MovementSystem extends EntityProcessingSystem {
     @Override
     protected void process(Entity entity) {
 
-        final Physics phys = this.mPhysicsMapper.get(entity);
-        final Pos pos = this.mPositionMapper.get(entity);
+        final Physics phys = xm.get(entity);
+        final Pos pos = pm.get(entity);
 
         pos.x += phys.velocity * world.getDelta();
         pos.y += phys.velocity * world.getDelta();
