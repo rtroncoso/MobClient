@@ -16,6 +16,7 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
+import com.artemis.managers.TagManager;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
 import com.mob.client.artemis.manager.EntityFactorySystem;
@@ -39,14 +40,20 @@ public class GameScreen extends Screen {
 
 	@Override
     protected void initSystems(WorldConfigurationBuilder builder) {
+        // FACTORY SYSTEMS
 		builder.with(new EntityFactorySystem());
 
+        // WORLD SYSTEMS
         builder.with(new CameraSystem(1));
         builder.with(new TiledMapSystem(1));
 		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
 
+        // CAMERA SYSTEMS
         builder.with(new CameraMovementSystem());
         builder.with(new CameraFocusSystem());
+
+        // MANAGERS
+        builder.with(new TagManager());
 	}
 
     @Override

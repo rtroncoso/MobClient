@@ -46,6 +46,7 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
         Pos pos = new WorldPos(cx, cy).toScreen();
         Entity camera = cameraFactory
             .position(pos.x, pos.y)
+            .tag("camera")
             .create();
     }
 

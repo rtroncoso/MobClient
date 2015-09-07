@@ -4,6 +4,7 @@ import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
+import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
 import com.mob.client.artemis.components.camera.Camera;
 import com.mob.client.artemis.components.position.Pos;
@@ -31,6 +32,8 @@ public class CameraMovementSystem extends EntityProcessingSystem
 
     @Override
     protected void process(Entity e) {
+        world.getManager(TagManager.class);
+
         final Pos pos = pm.get(e);
         cameraSystem.camera.position.x = (pos.x);
         cameraSystem.camera.position.y = (pos.y);
