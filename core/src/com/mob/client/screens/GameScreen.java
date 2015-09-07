@@ -16,7 +16,9 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
+import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
+import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
 import com.mob.client.artemis.manager.EntityFactorySystem;
@@ -24,6 +26,7 @@ import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
+import com.mob.client.artemis.systems.render.CharacterRenderingSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
 
 import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
@@ -47,6 +50,7 @@ public class GameScreen extends Screen {
         builder.with(new CameraSystem(1));
         builder.with(new TiledMapSystem(1));
 		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
+		builder.with(new CharacterRenderingSystem(this.game.getSpriteBatch()));
 
         // CAMERA SYSTEMS
         builder.with(new CameraMovementSystem());
@@ -54,6 +58,8 @@ public class GameScreen extends Screen {
 
         // MANAGERS
         builder.with(new TagManager());
+        builder.with(new GroupManager());
+        builder.with(new UuidEntityManager());
 	}
 
     @Override

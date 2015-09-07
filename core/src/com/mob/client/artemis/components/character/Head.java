@@ -18,50 +18,26 @@ package com.mob.client.artemis.components.character;
 
 import com.artemis.Component;
 import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.textures.BundledAnimation;
 
 import java.io.Serializable;
 
 /**
  * Head Class
- * @author Rodrigo
- * @package com.mob.client.api.components.character
+ *
+ * @author rt
  */
 public class Head extends Component implements Serializable {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
+    public com.mob.dao.objects.Head head;
 
-	// ===========================================================
-	// Constructors
-	// ===========================================================
     /**
-     * @param animations
+     * @param index
      */
-    public Head(IntMap<BundledAnimation> animations) {
-        this.animations = animations;
+    public Head(int index) {
+        this.head = AssetsHandler.getHead(index);
     }
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }

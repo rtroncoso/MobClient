@@ -9,6 +9,8 @@ import com.mob.client.artemis.components.position.Pos;
 
 /**
  * CameraFactory Class
+ *
+ * @author rt
  */
 @Bind({Pos.class, Camera.class})
 public interface CameraFactory extends EntityFactory<CameraFactory> {

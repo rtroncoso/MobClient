@@ -22,8 +22,13 @@
  */
 package com.mob.dao.objects;
 
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.textures.BundledAnimation;
+
 public class Body {
 
+    private IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 	private int[] grhIndex;
 	private int headOffsetX;
 	private int headOffsetY;
@@ -37,7 +42,18 @@ public class Body {
 		this.grhIndex = grhIndex;
 		this.headOffsetX = headOffsetX;
 		this.headOffsetY = headOffsetY;
+
+        this.loadAnimations();
 	}
+
+    private void loadAnimations() {
+        for(int i = 0; i < grhIndex.length; i++) {
+            Graphic grh = AssetsHandler.getGraphic(grhIndex[i]);
+            if (grh != null) {
+                animations.put(i, new BundledAnimation(AssetsHandler.getGraphic(grhIndex[i])));
+            }
+        }
+    }
 
 	public int getGraphic(int index) {
 		return this.grhIndex[index];
@@ -88,5 +104,16 @@ public class Body {
 	public void setHeadOffsetY(int headOffsetY) {
 		this.headOffsetY = headOffsetY;
 	}
-	
+
+    public BundledAnimation getAnimation(int index) {
+        return animations.get(index);
+    }
+
+    public IntMap<BundledAnimation> getAnimations() {
+        return animations;
+    }
+
+    public void setAnimations(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 }

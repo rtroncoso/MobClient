@@ -18,46 +18,24 @@ package com.mob.client.artemis.components.character;
 
 import com.artemis.Component;
 import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.textures.BundledAnimation;
+import com.mob.dao.objects.*;
+import com.mob.dao.objects.Head;
 
 import java.io.Serializable;
 
 /**
  * Body Class
+ *
  * @author rt
- * @package com.mob.clients.components.character
  */
 public class Body extends Component implements Serializable {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+    public com.mob.dao.objects.Body body;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
-	public IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
-
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-    public Body(IntMap<BundledAnimation> animations) {
-        this.animations = animations;
+    public Body(int index) {
+        this.body = AssetsHandler.getBody(index);
     }
 
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 }

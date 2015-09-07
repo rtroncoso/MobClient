@@ -55,7 +55,7 @@ public class AssetsHandler {
 	 * @param index
 	 * @return bodies data of a specified index
 	 */
-	public static Body getBodies(int index) {
+	public static Body getBody(int index) {
 		return AssetsHandler.getBodies().get(index);
 	}
 
@@ -63,7 +63,7 @@ public class AssetsHandler {
 	 * @param index
 	 * @return heads data of a specified index
 	 */
-	public static Head getHeads(int index) {
+	public static Head getHead(int index) {
 		return AssetsHandler.getHeads().get(index);
 	}
 	

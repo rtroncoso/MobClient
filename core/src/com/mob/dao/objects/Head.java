@@ -22,16 +22,39 @@
  */
 package com.mob.dao.objects;
 
+import com.badlogic.gdx.utils.IntMap;
+import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.textures.BundledAnimation;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 public class Head {
 
+	private IntMap<BundledAnimation> animations = new IntMap<BundledAnimation>();
 	private int[] headIndex;
+
+	/**
+	 * No-params constructor
+	 */
+	public Head() {
+
+	}
 
 	/**
 	 * @param headIndex
 	 */
 	public Head(int[] headIndex) {
 		this.headIndex = headIndex;
+        this.loadAnimations();
 	}
+
+    private void loadAnimations() {
+        for(int i = 0; i < headIndex.length; i++) {
+            Graphic grh = AssetsHandler.getGraphic(headIndex[i]);
+            if (grh != null) {
+                animations.put(i, new BundledAnimation(AssetsHandler.getGraphic(headIndex[i])));
+            }
+        }
+    }
 
 	/**
 	 * @return the headIndex
@@ -50,5 +73,17 @@ public class Head {
 	public int getHead(int pIndex) {
 		return this.headIndex[pIndex];
 	}
+
+    public BundledAnimation getAnimation(int index) {
+        return animations.get(index);
+    }
+
+    public IntMap<BundledAnimation> getAnimations() {
+        return animations;
+    }
+
+    public void setAnimations(IntMap<BundledAnimation> animations) {
+        this.animations = animations;
+    }
 
 }

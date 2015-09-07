@@ -2,11 +2,11 @@ package com.mob.client.artemis.manager;
 
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
-import com.artemis.managers.TagManager;
 import com.artemis.utils.EntityBuilder;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
-import com.mob.client.artemis.components.camera.Camera;
+import com.mob.client.artemis.components.camera.Focused;
+import com.mob.client.artemis.components.character.*;
+import com.mob.client.artemis.components.character.Character;
 import com.mob.client.artemis.components.position.Pos;
 import com.mob.client.artemis.components.position.WorldPos;
 
@@ -27,6 +27,7 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
         super.initialize();
 
         createCamera(50, 50);
+        createCharacter(50, 50, 1, 1);
     }
 
     @Override
@@ -37,17 +38,38 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
 
     /**
      * Create a movable camera system in the given world
-     * positions cx and cy (integers, tiles)
+     * positions wx and wy (integers, tiles)
      *
-     * @param cx
-     * @param cy
+     * @param wx
+     * @param wy
      */
-    public void createCamera(int cx, int cy) {
-        Pos pos = new WorldPos(cx, cy).toScreen();
+    public void createCamera(int wx, int wy) {
+        Pos pos = new WorldPos(wx, wy).toScreen();
         Entity camera = cameraFactory
             .position(pos.x, pos.y)
             .tag("camera")
             .create();
+    }
+
+    /**
+     * Create a character with a given position
+     * and graphic components indexes
+     *
+     * @param wx
+     * @param wy
+     * @param body
+     */
+    public void createCharacter(int wx, int wy, int body, int head) {
+        EntityBuilder builder = new EntityBuilder(world)
+            .with(new WorldPos(wx, wy).toScreen())
+            .with(new Heading(Heading.HEADING_SOUTH))
+            .with(new Body(body))
+            .with(new Head(head))
+            .with(new Character())
+            .with(new Focused());
+
+        builder.group("characters")
+            .build();
     }
 
 }
