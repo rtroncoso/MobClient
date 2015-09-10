@@ -26,6 +26,7 @@ import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
+import com.mob.client.artemis.systems.physics.MovementSystem;
 import com.mob.client.artemis.systems.render.CharacterRenderingSystem;
 import com.mob.client.artemis.systems.render.MapRenderingSystem;
 
@@ -49,6 +50,9 @@ public class GameScreen extends Screen {
         // WORLD SYSTEMS
         builder.with(new CameraSystem(1));
         builder.with(new TiledMapSystem(1));
+        builder.with(new MovementSystem());
+
+        // RENDERING SYSTEMS
 		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
 		builder.with(new CharacterRenderingSystem(this.game.getSpriteBatch()));
 
@@ -71,7 +75,7 @@ public class GameScreen extends Screen {
 	protected void update(float deltaTime) {
         this.logger.log();
 
-		world.setDelta(MathUtils.clamp(deltaTime, 0, 1 / 15f));
+		world.setDelta(MathUtils.clamp(deltaTime, 0, 1 / 16f));
         this.world.process();
 		
 		switch (this.state) {

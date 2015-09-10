@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.mob.client.artemis.components.camera.Focused;
 import com.mob.client.artemis.components.character.*;
 import com.mob.client.artemis.components.character.Character;
+import com.mob.client.artemis.components.physics.Physics;
 import com.mob.client.artemis.components.position.Pos;
 import com.mob.client.artemis.components.position.WorldPos;
 
@@ -62,9 +63,10 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
     public void createCharacter(int wx, int wy, int body, int head) {
         EntityBuilder builder = new EntityBuilder(world)
             .with(new WorldPos(wx, wy).toScreen())
-            .with(new Heading(Heading.HEADING_SOUTH))
+//            .with(new Heading(Heading.HEADING_SOUTH))
             .with(new Body(body))
             .with(new Head(head))
+            .with(new Physics(Physics.WALKING_VELOCITY, 0))
             .with(new Character())
             .with(new Focused());
 

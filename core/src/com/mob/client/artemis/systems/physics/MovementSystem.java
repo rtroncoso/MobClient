@@ -42,8 +42,8 @@ public class MovementSystem extends EntityProcessingSystem {
         final Physics phys = xm.get(entity);
         final Pos pos = pm.get(entity);
 
-        pos.x += phys.velocity * world.getDelta();
-        pos.y += phys.velocity * world.getDelta();
+        pos.x += phys.speedX * world.getDelta();
+        pos.y += phys.speedY * world.getDelta();
 
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));

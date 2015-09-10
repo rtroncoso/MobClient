@@ -27,7 +27,14 @@ import java.io.Serializable;
 public class Physics extends Component implements Serializable {
 
     public final static float MAX_VELOCITY = Float.MAX_VALUE;
+    public final static float WALKING_VELOCITY = 50.0f;
 
-    public float velocity;
+    public float speedX;
+    public float speedY;
+
+    public Physics(float speedX, float speedY) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+    }
 
 }
