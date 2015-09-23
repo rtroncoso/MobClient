@@ -7,7 +7,10 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.mob.client.artemis.components.camera.Focused;
 import com.mob.client.artemis.components.character.*;
 import com.mob.client.artemis.components.character.Character;
+import com.mob.client.artemis.components.movement.*;
+import com.mob.client.artemis.components.movement.Moving;
 import com.mob.client.artemis.components.physics.Physics;
+import com.mob.client.artemis.components.player.PlayerControllable;
 import com.mob.client.artemis.components.position.Pos;
 import com.mob.client.artemis.components.position.WorldPos;
 
@@ -43,10 +46,12 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
      *
      * @param wx
      * @param wy
+     * @return Entity
      */
-    public void createCamera(int wx, int wy) {
+    public Entity createCamera(int wx, int wy) {
         Pos pos = new WorldPos(wx, wy).toScreen();
-        Entity camera = cameraFactory
+
+        return cameraFactory
             .position(pos.x, pos.y)
             .tag("camera")
             .create();
@@ -59,19 +64,38 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
      * @param wx
      * @param wy
      * @param body
+     * @return Entity
      */
-    public void createCharacter(int wx, int wy, int body, int head) {
+    public Entity createCharacter(int wx, int wy, int body, int head) {
         EntityBuilder builder = new EntityBuilder(world)
             .with(new WorldPos(wx, wy).toScreen())
             .with(new Heading(Heading.HEADING_SOUTH))
-            .with(new Physics(Physics.WALKING_VELOCITY, 0.0f))
+            .with(new Moving())
             .with(new Body(body))
             .with(new Head(head))
             .with(new Character())
             .with(new Focused());
 
-        builder.group("characters")
+        return builder.group("characters")
             .build();
+    }
+
+    /**
+     * Spawns a player entity with the given coordinates and attributes,
+     * adding the PlayerControllable Component and tagged as a player.
+     * There must be only ONE controllable player at a given time.
+     *
+     * @param wx
+     * @param wy
+     * @param body
+     * @param head
+     * @return
+     */
+    public Entity createPlayer(int wx, int wy, int body, int head) {
+        return this.createCharacter(wx, wy, body, head)
+            .edit()
+            .add(new PlayerControllable())
+            .getEntity();
     }
 
 }

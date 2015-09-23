@@ -1,4 +1,4 @@
-package com.mob.client.artemis.components.character;
+package com.mob.client.artemis.components.movement;
 
 import com.artemis.Component;
 

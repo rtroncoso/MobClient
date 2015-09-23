@@ -22,6 +22,7 @@ import com.mob.client.Game;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+        System.setProperty("org.lwjgl.opengl.Display.enableOSXFullscreenModeAPI", "true");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Client";
         cfg.width = Game.GAME_SCREEN_WIDTH;
