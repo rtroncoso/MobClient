@@ -52,13 +52,13 @@ public class GameScreen extends Screen {
         builder.with(new TiledMapSystem(1));
         builder.with(new MovementSystem());
 
+		// CAMERA SYSTEMS
+		builder.with(new CameraFocusSystem());
+		builder.with(new CameraMovementSystem());
+
         // RENDERING SYSTEMS
 		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
 		builder.with(new CharacterRenderingSystem(this.game.getSpriteBatch()));
-
-        // CAMERA SYSTEMS
-        builder.with(new CameraMovementSystem());
-        builder.with(new CameraFocusSystem());
 
         // MANAGERS
         builder.with(new TagManager());

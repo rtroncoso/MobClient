@@ -64,9 +64,9 @@ public class EntityFactorySystem extends AbstractEntityFactorySystem {
         EntityBuilder builder = new EntityBuilder(world)
             .with(new WorldPos(wx, wy).toScreen())
             .with(new Heading(Heading.HEADING_SOUTH))
+            .with(new Physics(Physics.WALKING_VELOCITY, 0.0f))
             .with(new Body(body))
             .with(new Head(head))
-//            .with(new Physics(Physics.WALKING_VELOCITY, 0))
             .with(new Character())
             .with(new Focused());
 

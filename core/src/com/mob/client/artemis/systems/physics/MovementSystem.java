@@ -36,6 +36,7 @@ public class MovementSystem extends EntityProcessingSystem {
 		super(Aspect.all(Physics.class,
                 Pos.class));
 	}
+
     @Override
     protected void process(Entity entity) {
 

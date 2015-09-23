@@ -37,7 +37,7 @@ public class Game implements ApplicationListener {
     public static final int GAME_SCREEN_HEIGHT = 720;
     public static final float GAME_SCREEN_ZOOM = 1.0f;
     public static final boolean GAME_FULL_SCREEN = false;
-    public static final boolean GAME_VSYNC_ENABLED = false;
+    public static final boolean GAME_VSYNC_ENABLED = true;
 
     protected SpriteBatch spriteBatch;
 

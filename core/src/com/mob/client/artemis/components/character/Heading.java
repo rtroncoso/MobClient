@@ -23,45 +23,20 @@ import java.io.Serializable;
 
 /**
  * Heading Class
- * @author Rodrigo
- * @package com.mob.client.api.components.character
+ *
+ * @author rt
  */
 public class Heading extends Component implements Serializable {
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
 	public static final int HEADING_NORTH = 0;
 	public static final int HEADING_EAST = 1;
 	public static final int HEADING_SOUTH = 2;
 	public static final int HEADING_WEST = 3;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
 	public int current = HEADING_SOUTH;
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
     public Heading(int heading) {
         this.current = heading;
     }
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
 
 }
