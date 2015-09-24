@@ -22,6 +22,7 @@ import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.math.MathUtils;
 import com.mob.client.Game;
 import com.mob.client.artemis.manager.EntityFactorySystem;
+import com.mob.client.artemis.systems.anim.CharacterAnimationSystem;
 import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
@@ -57,6 +58,9 @@ public class GameScreen extends Screen {
 		builder.with(new CharacterMovementStartSystem());
 		builder.with(new MovementSystem());
 		builder.with(new CharacterMovementStopSystem());
+
+		// ANIMATION SYSTEMS
+		builder.with(new CharacterAnimationSystem());
 
 		// CAMERA SYSTEMS
 		builder.with(new CameraFocusSystem());

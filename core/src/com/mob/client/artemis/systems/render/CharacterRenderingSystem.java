@@ -51,7 +51,7 @@ public class CharacterRenderingSystem extends EntityProcessingSystem {
         final Heading heading = xm.get(e);
         final Pos pos = pm.get(e);
 
-        TextureRegion bodyRegion = body.body.getAnimation(heading.current).getAnimatedGraphic(true);
+        TextureRegion bodyRegion = body.body.getAnimation(heading.current).getGraphic();
         TextureRegion headRegion = head.head.getAnimation(heading.current).getGraphic();
 
         float bodyPixelOffsetX = 0.0f, bodyPixelOffsetY = 0.0f,

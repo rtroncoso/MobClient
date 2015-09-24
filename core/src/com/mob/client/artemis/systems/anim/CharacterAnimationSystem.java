@@ -1,93 +1,43 @@
-///*******************************************************************************
-// * Copyright (C) 2014  Rodrigo Troncoso
-// *
-// *     This program is free software: you can redistribute it and/or modify
-// *     it under the terms of the GNU Affero General Public License as
-// *     published by the Free Software Foundation, either version 3 of the
-// *     License, or (at your option) any later version.
-// *
-// *     This program is distributed in the hope that it will be useful,
-// *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-// *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// *     GNU Affero General Public License for more details.
-// *
-// *     You should have received a copy of the GNU Affero General Public License
-// *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// *******************************************************************************/
-//package com.mob.client.api.systems.anim;
-//
-//import com.badlogic.ashley.core.ComponentMapper;
-//import com.badlogic.ashley.core.Entity;
-//import com.badlogic.ashley.core.Family;
-//import com.badlogic.ashley.systems.IteratingSystem;
-//import com.mob.client.api.components.character.Body;
-//import com.mob.client.api.components.character.Heading;
-//import com.mob.client.api.components.basic.State;
-//import com.mob.client.textures.BundledAnimation;
-//
-///**
-// * @author Rodrigo
-// *
-// */
-//public class CharacterAnimationSystem extends IteratingSystem {
-//
-//	// ===========================================================
-//	// Constants
-//	// ===========================================================
-//
-//	// ===========================================================
-//	// Fields
-//	// ===========================================================
-//	private ComponentMapper<Body> mBodyMapper;
-//	private ComponentMapper<State> mStateMapper;
-//	private ComponentMapper<Heading> mHeadingMapper;
-//
-//	// ===========================================================
-//	// Constructors
-//	// ===========================================================
-//	@SuppressWarnings("unchecked")
-//	public CharacterAnimationSystem() {
-//		super(Family.all(Body.class,
-//						State.class,
-//						Heading.class)
-//					.get());
-//
-//		// Obtenemos nuestros Mappers
-//		this.mBodyMapper = ComponentMapper.getFor(Body.class);
-//		this.mStateMapper = ComponentMapper.getFor(State.class);
-//		this.mHeadingMapper = ComponentMapper.getFor(Heading.class);
-//	}
-//
-//	// ===========================================================
-//	// Methods
-//	// ===========================================================
-//
-//	// ===========================================================
-//	// Methods for/from SuperClass/Interfaces
-//	// ===========================================================
-//	@Override
-//	public void processEntity(Entity entity, float deltaTime) {
-//
-//		// Obtenemos los components necesarios
-//		Body body = this.mBodyMapper.get(entity);
-//		State state = this.mStateMapper.get(entity);
-//		Heading heading = this.mHeadingMapper.get(entity);
-//		BundledAnimation animation = body.animations.get(heading.current);
-//
-//		// Si tiene una animación cambiamos la region
-//		if (animation != null) {
-//			animation.setAnimationTime(state.time);
-//		}
-//
-//		// Actualizamos nuestro DeltaTime interno de la Entity
-//		state.time += deltaTime;
-//	}
-//
-//	// ===========================================================
-//	// Getter & Setter
-//	// ===========================================================
-//
-//	// ===========================================================
-//	// Inner and Anonymous Classes
-//	// ===========================================================
-//}
+package com.mob.client.artemis.systems.anim;
+
+import com.artemis.Aspect;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.annotations.Wire;
+import com.artemis.systems.EntityProcessingSystem;
+import com.mob.client.artemis.components.character.*;
+import com.mob.client.artemis.components.character.Character;
+import com.mob.client.artemis.components.movement.Moving;
+import com.mob.client.textures.BundledAnimation;
+
+/**
+ * CharacterAnimationSystem Class
+ *
+ * @author rt
+ */
+@Wire
+public class CharacterAnimationSystem extends EntityProcessingSystem {
+
+    private ComponentMapper<Body> bm;
+    private ComponentMapper<Heading> hm;
+
+    /**
+     * Creates a new EntityProcessingSystem.
+     */
+    public CharacterAnimationSystem() {
+        super(Aspect.all(Character.class, Body.class,
+                Moving.class, Heading.class));
+    }
+
+    @Override
+    protected void process(Entity e) {
+        final Body body = bm.get(e);
+        final Heading heading = hm.get(e);
+        BundledAnimation animation = body.body.getAnimation(heading.current);
+
+        if(animation != null) {
+            animation.setAnimationTime(animation.getAnimationTime() + world.getDelta());
+        }
+    }
+
+}
