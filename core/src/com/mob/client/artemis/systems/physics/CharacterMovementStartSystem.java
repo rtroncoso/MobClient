@@ -44,27 +44,22 @@ public class CharacterMovementStartSystem extends EntityProcessingSystem {
             case Heading.HEADING_SOUTH:
                 physics.speedY = Physics.WALKING_VELOCITY;
                 dest.pos.y += 1;
-                e.edit().add(dest)
-                        .add(physics);
                 break;
             case Heading.HEADING_NORTH:
                 physics.speedY = -Physics.WALKING_VELOCITY;
                 dest.pos.y -= 1;
-                e.edit().add(dest)
-                        .add(physics);
                 break;
             case Heading.HEADING_EAST:
                 physics.speedX = Physics.WALKING_VELOCITY;
                 dest.pos.x += 1;
-                e.edit().add(dest)
-                        .add(physics);
                 break;
             case Heading.HEADING_WEST:
                 physics.speedX = -Physics.WALKING_VELOCITY;
                 dest.pos.x -= 1;
-                e.edit().add(dest)
-                        .add(physics);
                 break;
         }
+
+        e.edit().add(dest)
+                .add(physics);
     }
 }
