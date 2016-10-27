@@ -30,7 +30,7 @@ public class DesktopLauncher {
         cfg.fullscreen = Game.GAME_FULL_SCREEN;
         cfg.vSyncEnabled = Game.GAME_VSYNC_ENABLED;
         cfg.foregroundFPS = 0;
-        cfg.resizable = false;
+        cfg.resizable = true;
         
         new LwjglApplication(new Game(), cfg);
 	}
