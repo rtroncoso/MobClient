@@ -23,10 +23,7 @@
 package com.mob.dao.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
@@ -183,7 +180,10 @@ public class Map implements Constants {
      * @param maxY
      */
     public void renderLayer(SpriteBatch batch, float delta, int layer, int minX, int maxX, int minY, int maxY) {
-
+        Color color = batch.getColor();
+        if (layer >= 2) {
+            batch.setColor(color.r, color.g, color.b, 0.7f);
+        }
         for(int y = minY; y <= maxY; y++) {
             for(int x = minX; x <= maxX; x++) {
 

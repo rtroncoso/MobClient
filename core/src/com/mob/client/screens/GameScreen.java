@@ -16,24 +16,31 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
-import com.artemis.managers.GroupManager;
+import character.Heading;
+import com.artemis.Archetype;
+import com.artemis.Entity;
+import com.artemis.SuperMapper;
+import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.TagManager;
 import com.artemis.managers.UuidEntityManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mob.client.Game;
-import com.mob.client.artemis.manager.EntityFactorySystem;
-import com.mob.client.artemis.systems.anim.CharacterAnimationSystem;
+import com.mob.client.artemis.archetypes.AOArchetypes;
+import com.mob.client.artemis.systems.anim.AnimationSystem;
 import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
+import com.mob.client.artemis.systems.interactions.DialogSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
-import com.mob.client.artemis.systems.physics.CharacterMovementStartSystem;
-import com.mob.client.artemis.systems.physics.CharacterMovementStopSystem;
-import com.mob.client.artemis.systems.physics.MovementSystem;
-import com.mob.client.artemis.systems.render.CharacterRenderingSystem;
-import com.mob.client.artemis.systems.render.MapRenderingSystem;
+import com.mob.client.artemis.systems.physics.*;
+import com.mob.client.artemis.systems.render.*;
 
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
+import static com.artemis.E.E;
+
 
 /**
  * Class GameScreen
@@ -41,45 +48,116 @@ import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
  */
 public class GameScreen extends Screen {
 
-	public GameScreen(Game game) {
+    private Stage stage;
+    private Table table;
+
+    public GameScreen(Game game) {
 		super(game);
 	}
 
-	@Override
+    @Override
+    protected void postWorldInit() {
+        // register camera?
+        Entity cameraEntity = world.createEntity();
+        E(cameraEntity)
+                .aOCamera(true)
+                .pos2D();
+        world.getSystem(TagManager.class).register("camera", cameraEntity);
+        Archetype playerArchetype = AOArchetypes.player(world);
+
+	    Entity player = world.createEntity(playerArchetype);
+        E(player)
+                .pos2DX(50)
+                .pos2DY(50)
+                .worldPosX(50)
+                .worldPosY(50)
+                .focused(true)
+                .playerControllable(true)
+                .headingCurrent(Heading.HEADING_NORTH)
+                .headIndex(1)
+                .bodyIndex(1)
+				.statusHealth(100)
+                .statusMaxHealth(120)
+                .statusHungry(100)
+                .statusMana(1000)
+                .statusMaxMana(1000)
+                .statusStamina(100)
+                .statusThirst(100)
+                .infoName("guidota2")
+                .dialogText("Este es el dialogo papa")
+                .dialogAlpha(1)
+                .dialogTime(7)
+                .canWrite()
+                .aOPhysics();
+
+        Entity player2 = world.createEntity(playerArchetype);
+        E(player2)
+                .pos2DX(50)
+                .pos2DY(50)
+                .worldPosX(50)
+                .worldPosY(50)
+                .headingCurrent(Heading.HEADING_NORTH)
+                .headIndex(2)
+                .bodyIndex(2)
+                .dialogText("aa")
+                .dialogAlpha(1)
+                .dialogTime(7)
+                .randomMovement(true)
+                .infoName("guidota2")
+                .aOPhysics();
+    }
+
+    @Override
     protected void initSystems(WorldConfigurationBuilder builder) {
-        // FACTORY SYSTEMS
-		builder.with(new EntityFactorySystem());
-
         // WORLD SYSTEMS
-        builder.with(new CameraSystem(1));
-        builder.with(new TiledMapSystem(1));
-
-		// MOVEMENT SYSTEMS
-		builder.with(new CharacterMovementStartSystem());
-		builder.with(new MovementSystem());
-		builder.with(new CharacterMovementStopSystem());
-
-		// ANIMATION SYSTEMS
-		builder.with(new CharacterAnimationSystem());
-
-		// CAMERA SYSTEMS
-		builder.with(new CameraFocusSystem());
-		builder.with(new CameraMovementSystem());
-
-        // RENDERING SYSTEMS
-		builder.with(new MapRenderingSystem(this.game.getSpriteBatch()));
-		builder.with(new CharacterRenderingSystem(this.game.getSpriteBatch()));
-
-        // MANAGERS
-        builder.with(new TagManager());
-        builder.with(new GroupManager());
-        builder.with(new UuidEntityManager());
+        builder
+                .with(new SuperMapper())
+                // Player movement
+                .with(new PlayerInputSystem())
+                .with(new MovementSystem())
+                .with(new AnimationSystem())
+                // Camera
+                .with(new CameraSystem(Game.GAME_SCREEN_ZOOM))
+                .with(new CameraFocusSystem())
+                .with(new CameraMovementSystem())
+                // Rendering
+                .with(new TiledMapSystem(1))
+                .with(WorldConfigurationBuilder.Priority.NORMAL + 3, new MapLowerLayerRenderingSystem(this.game.getSpriteBatch()))
+                .with(WorldConfigurationBuilder.Priority.NORMAL + 2, new CharacterRenderingSystem(this.game.getSpriteBatch()))
+                .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new MapUpperLayerRenderingSystem(this.game.getSpriteBatch()))
+                .with(new CharacterStatusRenderingSystem(game.getSpriteBatch()))
+                .with(new NameRenderingSystem(game.getSpriteBatch()))
+                .with(new DialogRenderingSystem(game.getSpriteBatch()))
+                // Logic systems
+                .with(new DialogSystem(table))
+                .with(new RandomMovementSystem())
+                .with(new TagManager())
+                .with(new UuidEntityManager());
 	}
 
     @Override
 	protected void initScene() {
-        //
-	}
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+
+
+        Container<Table> tableContainer = new Container<Table>();
+
+        float sw = Gdx.graphics.getWidth();
+        float sh = Gdx.graphics.getHeight();
+
+        float cw = sw * 1f;
+        float ch = sh * 0.1f;
+
+        tableContainer.setSize(cw, ch);
+        tableContainer.setPosition((sw - cw) / 2.0f, sh - ch);
+        tableContainer.fillX();
+
+        table = new Table();
+
+        tableContainer.setActor(table);
+        stage.addActor(tableContainer);
+    }
 
     @Override
 	protected void update(float deltaTime) {
@@ -99,6 +177,17 @@ public class GameScreen extends Screen {
 			}
 		}
 	}
+
+    @Override
+    protected void drawUI() {
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 
     @Override
 	protected void updateRunning(float deltaTime) {

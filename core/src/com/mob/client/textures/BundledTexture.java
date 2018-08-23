@@ -31,7 +31,7 @@ import com.mob.client.handlers.AssetsHandler;
 public class BundledTexture {
 
 	private GameTexture[] frames;
-	private Animation animation;
+	private Animation<TextureRegion> animation;
 	private float animationTime;
 	private boolean animated;
 
@@ -51,7 +51,7 @@ public class BundledTexture {
                 this.frames[i] = new GameTexture(AssetsHandler.getGraphics().get(graphic.getFrame(i)));
                 tmpFrames[i] = this.frames[i].getGraphic();
             }
-            this.animation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
+            this.animation = new Animation<TextureRegion>(graphic.getSpeed() / 1000, tmpFrames);
             this.animated = true;
         }
     }

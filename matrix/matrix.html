@@ -220,18 +220,82 @@
 		<table border="0" class="matrix">
 			<thead style="background-color: #eee;">
 				<tr>
-					<th style="color: rgba(0,0,0,0)">_________________________</th>
-					<th class="vertical separator">LineComponent</th>
-					<th class="vertical">PhysicsComponent</th>
-					<th class="vertical">PositionComponent</th>
+					<th style="color: rgba(0,0,0,0)">__________________________________</th>
+					<th class="vertical separator">Body</th>
+					<th class="vertical">Camera</th>
+					<th class="vertical">Character</th>
+					<th class="vertical">Destination</th>
+					<th class="vertical">Focused</th>
+					<th class="vertical">Head</th>
+					<th class="vertical">Heading</th>
+					<th class="vertical">Line</th>
+					<th class="vertical">Moving</th>
+					<th class="vertical">Physics</th>
+					<th class="vertical">Pos</th>
 					<th class="vertical separator">CameraSystem</th>
-					<th class="vertical">MapRenderingSystem</th>
 					<th class="vertical">TiledMapSystem</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="systems">
+					<th style="padding-left: 5px; font-weight: bold; text-align: left;">anim	</th>
+				</tr>
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">CharacterAnimationSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class="R separator"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=" separator"></td>
+					<td class=""></td>
+				</tr>
+				<tr class="systems">
 					<th style="padding-left: 5px; font-weight: bold; text-align: left;">camera	</th>
+				</tr>
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">CameraFocusSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class=" separator"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="O"></td>
+					<td class=" separator"></td>
+					<td class=""></td>
+				</tr>
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">CameraMovementSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class=" separator"></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class="O separator"></td>
+					<td class=""></td>
 				</tr>
 				<tr class="systems">
 					<th class="horizontal" style="padding-right: 5px;">CameraSystem
@@ -240,8 +304,15 @@
 					<td class=" separator"></td>
 					<td class=""></td>
 					<td class=""></td>
-					<td class=" separator"></td>
 					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=" separator"></td>
 					<td class=""></td>
 				</tr>
 				<tr class="systems">
@@ -254,36 +325,111 @@
 					<td class=" separator"></td>
 					<td class=""></td>
 					<td class=""></td>
-					<td class="O separator"></td>
-					<td class="O"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=" separator"></td>
 					<td class=""></td>
 				</tr>
 				<tr class="systems">
 					<th style="padding-left: 5px; font-weight: bold; text-align: left;">physics	</th>
 				</tr>
 				<tr class="systems">
-					<th class="horizontal" style="padding-right: 5px;">MovementSystem
+					<th class="horizontal" style="padding-right: 5px;">CharacterMovementStartSystem
 						<i class="fa fa-gear"></i>
 					</th>
 					<td class=" separator"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="X"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class="X"></td>
+					<td class="R"></td>
+					<td class=" separator"></td>
+					<td class=""></td>
+				</tr>
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">CharacterMovementStopSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class=" separator"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class="R"></td>
 					<td class="R"></td>
 					<td class="R"></td>
 					<td class=" separator"></td>
 					<td class=""></td>
+				</tr>
+				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">MovementSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class=" separator"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class="R"></td>
+					<td class=" separator"></td>
 					<td class=""></td>
 				</tr>
 				<tr class="systems">
 					<th style="padding-left: 5px; font-weight: bold; text-align: left;">render	</th>
 				</tr>
 				<tr class="systems">
+					<th class="horizontal" style="padding-right: 5px;">CharacterRenderingSystem
+						<i class="fa fa-gear"></i>
+					</th>
+					<td class="A separator"></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="A"></td>
+					<td class="R"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class="O separator"></td>
+					<td class=""></td>
+				</tr>
+				<tr class="systems">
 					<th class="horizontal" style="padding-right: 5px;">GridRenderingSystem
 						<i class="fa fa-gear"></i>
 					</th>
-					<td class="R separator"></td>
+					<td class=" separator"></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="R"></td>
+					<td class=""></td>
 					<td class=""></td>
 					<td class=""></td>
 					<td class="O separator"></td>
-					<td class=""></td>
 					<td class=""></td>
 				</tr>
 				<tr class="systems">
@@ -293,8 +439,15 @@
 					<td class=" separator"></td>
 					<td class=""></td>
 					<td class=""></td>
-					<td class="O separator"></td>
 					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class=""></td>
+					<td class="O separator"></td>
 					<td class="O"></td>
 				</tr>
 			<tbody>

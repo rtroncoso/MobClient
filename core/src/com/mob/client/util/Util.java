@@ -25,6 +25,10 @@
 package com.mob.client.util;
 
 
+import com.mob.dao.objects.Tile;
+import position.Pos2D;
+import position.WorldPos;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -51,6 +55,26 @@ public class Util {
         buf.order(ByteOrder.LITTLE_ENDIAN);
 
         return buf.getInt(0);
+	}
+
+	public static Pos2D toScreen(WorldPos worldPos) {
+		return new Pos2D(worldPos.x * Tile.TILE_PIXEL_WIDTH,
+				worldPos.y * Tile.TILE_PIXEL_HEIGHT);
+	}
+
+	public static Pos2D toScreen(Pos2D pos) {
+		return new Pos2D(pos.x * Tile.TILE_PIXEL_WIDTH,
+				pos.y * Tile.TILE_PIXEL_HEIGHT);
+	}
+
+	public static Pos2D toGUI(Pos2D pos) {
+		return new Pos2D(pos.x * Tile.TILE_PIXEL_WIDTH,
+				pos.y * Tile.TILE_PIXEL_HEIGHT);
+	}
+
+	public static WorldPos toWorld(Pos2D pos) {
+		return new WorldPos((int) (pos.x / Tile.TILE_PIXEL_WIDTH),
+				(int) (pos.y / Tile.TILE_PIXEL_HEIGHT));
 	}
 
 }

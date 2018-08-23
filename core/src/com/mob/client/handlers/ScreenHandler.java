@@ -48,10 +48,10 @@ public class ScreenHandler {
                 newScreen = (Screen) constructor.newInstance(game);
                 screens.put(screenClassName, newScreen);
             } catch ( InvocationTargetException ex ) {
-                System.err.println(ex.getMessage() + " Exception in Screen.");
+                System.err.println(ex.getMessage() + " Exception in Screen. " + screenClassName);
                 ex.printStackTrace();
             } catch ( ReflectionException ex ) {
-                System.err.println(ex.getMessage() + " Exception in Screen.");
+                System.err.println(ex.getMessage() + " Reflection Exception in Screen." + screenClassName);
                 ex.printStackTrace();
             } catch ( NoSuchMethodException ex ){
             } catch( InstantiationException ex ){

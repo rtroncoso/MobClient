@@ -28,7 +28,7 @@ import com.mob.client.handlers.AssetsHandler;
 public class BundledAnimation {
 
 	private Array<GameTexture> frames = new Array<GameTexture>();
-	private Animation animation;
+	private Animation<TextureRegion> animation;
 	private float animationTime;
 	private boolean animated = false;
 
@@ -54,7 +54,7 @@ public class BundledAnimation {
 				index++;
 			}
 			
-			this.setAnimation(new Animation(graphic.getSpeed() / 1000.0f, textures));
+			this.setAnimation(new Animation<TextureRegion>(graphic.getSpeed() / 1000.0f, textures));
 			this.animated = true;
 			
 		} else {

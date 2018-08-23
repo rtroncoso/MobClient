@@ -25,7 +25,6 @@ package com.mob.dao.objects;
 import com.badlogic.gdx.utils.IntMap;
 import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.textures.BundledAnimation;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class Head {
 

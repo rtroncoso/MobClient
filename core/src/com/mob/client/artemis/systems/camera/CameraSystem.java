@@ -31,20 +31,19 @@ public class CameraSystem extends BaseSystem {
     public OrthographicCamera guiCamera;
     public final float zoom;
 
-    public CameraSystem( float width, float height )
+    public CameraSystem(float zoom, float width, float height )
     {
-        this.zoom = 1;
-        setupViewport(width, height);
+        this.zoom = zoom;
+        float zoomFactorInverter = 1f / zoom;
+        setupViewport(width * zoomFactorInverter,
+                height * zoomFactorInverter);
     }
 
     /**
      * @param zoom How much
      */
     public CameraSystem(float zoom) {
-        this.zoom = zoom;
-        float zoomFactorInverter = 1f / zoom;
-        setupViewport(Gdx.graphics.getWidth() * zoomFactorInverter,
-                Gdx.graphics.getHeight() * zoomFactorInverter);
+        this(zoom, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     protected void setupViewport(float width, float height) {
@@ -53,7 +52,7 @@ public class CameraSystem extends BaseSystem {
         camera.update();
 
         guiCamera = new OrthographicCamera(width, height);
-        guiCamera.setToOrtho(true, width, height);
+        guiCamera.setToOrtho(false, width, height);
         guiCamera.update();
     }
 
@@ -61,5 +60,4 @@ public class CameraSystem extends BaseSystem {
     protected void processSystem() {
 
     }
-
 }

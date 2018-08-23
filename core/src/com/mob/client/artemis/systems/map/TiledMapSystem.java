@@ -18,8 +18,6 @@ package com.mob.client.artemis.systems.map;
 
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.artemis.systems.render.MapRenderingSystem;
 import com.mob.dao.objects.Map;
 import com.mob.client.handlers.MapHandler;
 
@@ -40,13 +38,13 @@ public class TiledMapSystem extends BaseSystem {
     }
 
     @Override
-    protected void initialize() {
-        changeMap(this.mapNumber);
+    protected void processSystem() {
+
     }
 
     @Override
-    protected void processSystem() {
-
+    protected void initialize() {
+        changeMap(this.mapNumber);
     }
 
     /**
