@@ -3,6 +3,7 @@ com.badlogic.gdx.graphics.Color: {
 	green: { g: 1, a: 1 },
 	light_grey: { r: 0.8, g: 0.8, b: 0.8, a: 1 },
 	white: { r: 1, g: 1, b: 1, a: 1 },
+    transparentWhite: { r: 1, g: 1, b: 1, a: 0.8 },
 	red: { r: 1, a: 1 },
 	light_blue: { r: 0.64705884, g: 0.64705884, b: 1, a: 1 },
 	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
@@ -17,7 +18,15 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 	dialogDim: {
 		name: white,
 		color: { a: 1, b: 0.2, g: 0.2, r: 0.2 }
-	}
+	},
+    transparentDialog: {
+      name: white,
+      color: {a: 0.5 }
+    },
+    transparentCursor: {
+      name: grey,
+      color: transparentWhite
+    }
 },
 com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	default-horizontal: { background: progress-bar, knobBefore: progress-bar-knob }
@@ -86,11 +95,11 @@ com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 		messageFont: commodore-64,
 		messageFontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 }
 	},
-	dialog: {
+	transparent: {
 		font: commodore-64,
-		fontColor: black,
-		background: white,
-		cursor: cursor-black,
+		fontColor: transparentWhite,
+		background: transparentDialog,
+		cursor: transparentCursor,
 		selection: light-blue,
 		messageFont: commodore-64,
 		messageFontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 }

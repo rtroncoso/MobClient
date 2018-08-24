@@ -20,9 +20,10 @@ public class PlayerInputSystem extends IteratingSystem {
     @Override
     protected void process(int entityId) {
         AOPhysics aoPhysics = E(entityId).getAOPhysics();
-        aoPhysics.move(AOPhysics.Movement.UP, Gdx.input.isKeyPressed(Input.Keys.UP));
-        aoPhysics.move(AOPhysics.Movement.DOWN, Gdx.input.isKeyPressed(Input.Keys.DOWN));
-        aoPhysics.move(AOPhysics.Movement.LEFT, Gdx.input.isKeyPressed(Input.Keys.LEFT));
-        aoPhysics.move(AOPhysics.Movement.RIGHT, Gdx.input.isKeyPressed(Input.Keys.RIGHT));
+        boolean isWriting = !E(entityId).hasCanWrite();
+        aoPhysics.move(AOPhysics.Movement.UP, !isWriting && Gdx.input.isKeyPressed(Input.Keys.UP));
+        aoPhysics.move(AOPhysics.Movement.DOWN, !isWriting && Gdx.input.isKeyPressed(Input.Keys.DOWN));
+        aoPhysics.move(AOPhysics.Movement.LEFT, !isWriting && Gdx.input.isKeyPressed(Input.Keys.LEFT));
+        aoPhysics.move(AOPhysics.Movement.RIGHT, !isWriting && Gdx.input.isKeyPressed(Input.Keys.RIGHT));
     }
 }

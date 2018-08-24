@@ -10,4 +10,8 @@ public class States extends Component {
     public boolean resting;
 
     public States(){}
+
+    public boolean isInAnyState() {
+        return writing || meditating || resting;
+    }
 }

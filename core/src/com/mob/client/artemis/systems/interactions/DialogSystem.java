@@ -31,7 +31,7 @@ public class DialogSystem extends IteratingSystem {
         if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             E(player).removeCanWrite();
             final boolean[] firstOpened = {true};
-            textf = new TextField("", COMODORE_SKIN, "dialog") {
+            textf = new TextField("", COMODORE_SKIN, "transparent") {
                 @Override
                 protected InputListener createInputListener() {
                     return new TextField.TextFieldClickListener(){
@@ -43,6 +43,7 @@ public class DialogSystem extends IteratingSystem {
                                 E(player).dialogAlpha(1);
                                 E(player).dialogTime(7);
                                 E(player).canWrite(true);
+                                E(player).getStates().writing = false;
                                 table.removeActor(textf, true);
                             } else if (firstOpened[0]) {
                                 firstOpened[0] = false;
@@ -52,6 +53,7 @@ public class DialogSystem extends IteratingSystem {
                     };
                 }
             };
+            E(player).getStates().writing = true;
             table.row().colspan(1).expandX().fillX();
             table.add(textf).fillX();
             table.getStage().setKeyboardFocus(textf);

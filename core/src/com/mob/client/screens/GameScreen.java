@@ -25,9 +25,11 @@ import com.artemis.managers.TagManager;
 import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.mob.client.Game;
 import com.mob.client.artemis.archetypes.AOArchetypes;
 import com.mob.client.artemis.systems.anim.AnimationSystem;
@@ -40,6 +42,7 @@ import com.mob.client.artemis.systems.physics.*;
 import com.mob.client.artemis.systems.render.*;
 
 import static com.artemis.E.E;
+import static com.mob.client.util.Skins.COMODORE_SKIN;
 
 
 /**
@@ -48,8 +51,9 @@ import static com.artemis.E.E;
  */
 public class GameScreen extends Screen {
 
+    public static final int FONTS_PRIORITY = WorldConfigurationBuilder.Priority.NORMAL + 3;
     private Stage stage;
-    private Table table;
+    private Table dialog;
 
     public GameScreen(Game game) {
 		super(game);
@@ -122,14 +126,15 @@ public class GameScreen extends Screen {
                 .with(new CameraMovementSystem())
                 // Rendering
                 .with(new TiledMapSystem(1))
-                .with(WorldConfigurationBuilder.Priority.NORMAL + 3, new MapLowerLayerRenderingSystem(this.game.getSpriteBatch()))
+                .with(WorldConfigurationBuilder.Priority.NORMAL + 4, new MapLowerLayerRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 2, new CharacterRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new MapUpperLayerRenderingSystem(this.game.getSpriteBatch()))
                 .with(new CharacterStatusRenderingSystem(game.getSpriteBatch()))
-                .with(new NameRenderingSystem(game.getSpriteBatch()))
-                .with(new DialogRenderingSystem(game.getSpriteBatch()))
+                .with(FONTS_PRIORITY, new NameRenderingSystem(game.getSpriteBatch()))
+                .with(FONTS_PRIORITY, new DialogRenderingSystem(game.getSpriteBatch()))
+                .with(FONTS_PRIORITY, new CharacterStatesRenderingSystem(game.getSpriteBatch()))
                 // Logic systems
-                .with(new DialogSystem(table))
+                .with(new DialogSystem(dialog))
                 .with(new RandomMovementSystem())
                 .with(new TagManager())
                 .with(new UuidEntityManager());
@@ -140,23 +145,22 @@ public class GameScreen extends Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
+        Container<Table> dialogContainer = createDialogContainer();
+        stage.addActor(dialogContainer);
+    }
 
-        Container<Table> tableContainer = new Container<Table>();
+    private Container<Table> createDialogContainer() {
+        Container<Table> dialogContainer = new Container<Table>();
 
-        float sw = Gdx.graphics.getWidth();
-        float sh = Gdx.graphics.getHeight();
-
-        float cw = sw * 1f;
-        float ch = sh * 0.1f;
-
-        tableContainer.setSize(cw, ch);
-        tableContainer.setPosition((sw - cw) / 2.0f, sh - ch);
-        tableContainer.fillX();
-
-        table = new Table();
-
-        tableContainer.setActor(table);
-        stage.addActor(tableContainer);
+        float screenW = Gdx.graphics.getWidth();
+        float screenH = Gdx.graphics.getHeight();
+        float containerW = screenW * 0.8f;
+        dialogContainer.setWidth(containerW);
+        dialogContainer.setPosition((screenW - containerW) / 2.0f, screenH * 0.25f);
+        dialogContainer.fillX();
+        dialog = new Table();
+        dialogContainer.setActor(dialog);
+        return dialogContainer;
     }
 
     @Override
