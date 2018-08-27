@@ -11,18 +11,27 @@ import com.mob.client.Game;
 public class Fonts {
 
     public static final BitmapFont WHITE_FONT;
-    public static final BitmapFont NAME_FONT;
+    public static final BitmapFont GM_NAME_FONT;
+    public static final BitmapFont NEWBIE_NAME_FONT;
+    public static final BitmapFont CITIZEN_NAME_FONT;
+    public static final BitmapFont CRIMINAL_NAME_FONT;
     public static final BitmapFont DIALOG_FONT;
     public static final BitmapFont WRITING_FONT;
+    public static final BitmapFont CLAN_FONT;
 
     public static final GlyphLayout layout = new GlyphLayout();
     public static final GlyphLayout dialogLayout = new GlyphLayout();
     public static final String FONT_NAME = "Commodore Rounded v1.2.ttf";
 
 
+
     static {
-        WHITE_FONT = generate(Color.WHITE, 12, Color.BLACK, 0, 1, 0);
-        NAME_FONT = generate(rgb(9, 132, 227), 10, Color.BLACK, 0, 1, 0);
+        WHITE_FONT = generate(Color.WHITE, 9, Color.BLACK, 1, 0, 0);
+        GM_NAME_FONT = generate(rgb(46, 204, 113), 10, Color.BLACK, 0, 1, 0);
+        NEWBIE_NAME_FONT = generate(rgb(155, 89, 182), 10, Color.BLACK, 0, 1, 0);
+        CITIZEN_NAME_FONT = generate(rgb(52, 152, 219), 10, Color.BLACK, 0, 1, 0);
+        CRIMINAL_NAME_FONT = generate(rgb(231, 76, 60), 10, Color.BLACK, 0, 1, 0);
+        CLAN_FONT = generate(rgb(149, 165, 166), 9, Color.BLACK, 0, 1, 0);
         DIALOG_FONT = generate(Color.WHITE, 10, Color.BLACK, 0, 1, 0);
         WRITING_FONT = generate(Color.BLACK, 6, Color.WHITE, 1, 0, -2);
     }

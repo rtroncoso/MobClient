@@ -20,16 +20,17 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import com.badlogic.gdx.utils.LongMap;
 
-import com.mob.dao.objects.Weapon;
+import com.mob.dao.descriptors.WeaponDescriptor;
+import com.mob.dao.objects.WeaponAnimation;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
-public class WeaponLoader extends Loader<LongMap<Weapon>> {
+public class WeaponLoader extends Loader<LongMap<WeaponDescriptor>> {
 
 	@Override
-	public LongMap<Weapon> load(DataInputStream file) {
-		LongMap<Weapon> weapons = new LongMap<Weapon>();
+	public LongMap<WeaponDescriptor> load(DataInputStream file) {
+		LongMap<WeaponDescriptor> weapons = new LongMap<>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -48,7 +49,7 @@ public class WeaponLoader extends Loader<LongMap<Weapon>> {
 					weaponIndex[Heading.EAST.toInt()] = 0; 
 					weaponIndex[Heading.SOUTH.toInt()] = 0; 
 					weaponIndex[Heading.WEST.toInt()] = 0; 
-					weapons.put(i, new Weapon(weaponIndex));
+					weapons.put(i, new WeaponDescriptor(weaponIndex));
 					continue; 
 				}
 				
@@ -57,7 +58,7 @@ public class WeaponLoader extends Loader<LongMap<Weapon>> {
 				weaponIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir3"));
 				weaponIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("arma" + String.valueOf(i), "Dir4"));
 				
-				weapons.put(i, new Weapon(weaponIndex));
+				weapons.put(i, new WeaponDescriptor(weaponIndex));
 			}
 
 			return weapons;

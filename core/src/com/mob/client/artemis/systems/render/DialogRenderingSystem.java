@@ -53,7 +53,7 @@ public class DialogRenderingSystem extends OrderedEntityProcessingSystem {
             dialogLayout.setText(DIALOG_FONT, dialog.text);
             float width = Math.min(dialogLayout.width, MAX_LENGTH);
             dialogLayout.setText(DIALOG_FONT, dialog.text, DIALOG_FONT.getColor(), width, Align.center, true);
-            final float fontX = (cameraSystem.guiCamera.viewportWidth / 2) - screenPos.x - (width / 2) - (Tile.TILE_PIXEL_WIDTH / 2) - 2;
+            final float fontX = (cameraSystem.guiCamera.viewportWidth / 2) - screenPos.x - (width / 2) - (Tile.TILE_PIXEL_WIDTH / 2) - 4;
             final float fontY = (cameraSystem.guiCamera.viewportHeight / 2) + screenPos.y + 60 + dialogLayout.height;
             DIALOG_FONT.draw(batch, dialogLayout, fontX, fontY);
 

@@ -20,14 +20,14 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import com.badlogic.gdx.utils.LongMap;
-import com.mob.dao.objects.Helmet;
 import com.mob.client.util.Util;
+import com.mob.dao.descriptors.HelmetDescriptor;
 
-public class HelmetLoader extends Loader<LongMap<Helmet>> {
+public class HelmetLoader extends Loader<LongMap<HelmetDescriptor>> {
 
 	@Override
-	public LongMap<Helmet> load(DataInputStream file) throws IOException {
-		LongMap<Helmet> helmets = new LongMap<Helmet>();
+	public LongMap<HelmetDescriptor> load(DataInputStream file) throws IOException {
+		LongMap<HelmetDescriptor> helmets = new LongMap<>();
 		int numHelmets;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
@@ -41,7 +41,7 @@ public class HelmetLoader extends Loader<LongMap<Helmet>> {
 			helmetIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
 			helmetIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 
-			helmets.put(i, new Helmet(helmetIndex));
+			helmets.put(i, new HelmetDescriptor(helmetIndex));
 		}
 		return helmets;
 

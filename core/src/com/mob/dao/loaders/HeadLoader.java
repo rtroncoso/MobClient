@@ -20,14 +20,15 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import com.badlogic.gdx.utils.LongMap;
 
-import com.mob.dao.objects.Head;
+import com.mob.dao.descriptors.HeadDescriptor;
+import com.mob.dao.objects.HeadAnimation;
 import com.mob.client.util.Util;
 
-public class HeadLoader extends Loader<LongMap<Head>> {
+public class HeadLoader extends Loader<LongMap<HeadDescriptor>> {
 
 	@Override
-	public LongMap<Head> load(DataInputStream file) throws IOException {
-		LongMap<Head> heads = new LongMap<Head>();
+	public LongMap<HeadDescriptor> load(DataInputStream file) throws IOException {
+		LongMap<HeadDescriptor> heads = new LongMap<HeadDescriptor>();
 		int numHeads;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
@@ -41,7 +42,7 @@ public class HeadLoader extends Loader<LongMap<Head>> {
 			headIndex[Heading.SOUTH.toInt()] = Util.leShort(file.readShort());
 			headIndex[Heading.WEST.toInt()] = Util.leShort(file.readShort());
 
-			heads.put(i, new Head(headIndex));
+			heads.put(i, new HeadDescriptor(headIndex));
 		}
 
 		return heads;

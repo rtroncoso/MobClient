@@ -19,6 +19,8 @@ package com.mob.dao.loaders;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.badlogic.gdx.utils.LongMap;
 import com.mob.dao.objects.Graphic;

@@ -1,20 +1,21 @@
 package com.mob.client.artemis.systems.render;
 
-import character.Body;
-import character.Head;
+import character.*;
 import character.Character;
-import character.Heading;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.IntMap;
 import com.mob.client.artemis.systems.OrderedEntityProcessingSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.AnimationsHandler;
+import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.client.textures.BundledAnimation;
 import com.mob.client.util.Util;
+import com.mob.dao.descriptors.HeadDescriptor;
 import position.Pos2D;
 import position.WorldPos;
 
@@ -31,9 +32,7 @@ public class CharacterRenderingSystem extends OrderedEntityProcessingSystem {
     private CameraSystem cameraSystem;
 
     public CharacterRenderingSystem(SpriteBatch batch) {
-        super(Aspect.all(Character.class, WorldPos.class, Heading.class)
-                .one(Body.class, Head.class));
-
+        super(Aspect.all(Character.class, WorldPos.class, Heading.class));
         this.batch = batch;
     }
 
@@ -44,32 +43,17 @@ public class CharacterRenderingSystem extends OrderedEntityProcessingSystem {
         batch.begin();
 
         E player = E(e);
-        final Body body = player.getBody();
-        final Head head = player.getHead();
-        final Heading heading = player.getHeading();
         Pos2D currentPos = player.getPos2D();
         Pos2D screenPos = Util.toScreen(currentPos);
+        final Heading heading = player.getHeading();
 
-        BundledAnimation animation = AssetsHandler.getBody(body.index).getAnimation(heading.current);
-        TextureRegion bodyRegion = player.isMoving() ? animation.getGraphic() : animation.getGraphic(0);
-        TextureRegion headRegion = AssetsHandler.getHead(head.index).getAnimation(heading.current).getGraphic();
+        new CharacterDrawer(player, heading, screenPos)
+                .drawBody()
+                .drawHead()
+                .drawHelmet()
+                .drawShield()
+                .drawWeapon();
 
-        float bodyPixelOffsetX = 0.0f, bodyPixelOffsetY = 0.0f,
-            headPixelOffsetX = 0.0f, headPixelOffsetY = 0.0f;
-
-        if (bodyRegion != null) {
-            bodyPixelOffsetX = screenPos.x - 32.0f;// - bodyRegion.getRegionWidth() * 0.5f;
-            bodyPixelOffsetY = screenPos.y - (bodyRegion.getRegionHeight() - 32.0f) - 32.0f;
-
-            batch.draw(bodyRegion, bodyPixelOffsetX, bodyPixelOffsetY);
-        }
-
-        if (headRegion != null) {
-            headPixelOffsetX = bodyPixelOffsetX + 4.0f;
-            headPixelOffsetY = bodyPixelOffsetY - 8.0f;
-
-            batch.draw(headRegion, headPixelOffsetX, headPixelOffsetY);
-        }
         batch.end();
     }
 
@@ -77,6 +61,93 @@ public class CharacterRenderingSystem extends OrderedEntityProcessingSystem {
         return Comparator.comparingInt(entity -> E(entity).getWorldPos().y);
     }
 
+    private class CharacterDrawer {
+        private E player;
+        private Heading heading;
+        private Pos2D screenPos;
+
+        private float bodyPixelOffsetX;
+        private float bodyPixelOffsetY;
+
+        public CharacterDrawer(E player, Heading heading, Pos2D screenPos) {
+            this.player = player;
+            this.heading = heading;
+            this.screenPos = screenPos;
+            bodyPixelOffsetX = screenPos.x - 32.0f;
+            bodyPixelOffsetY = screenPos.x;
+        }
+
+        public CharacterDrawer drawBody() {
+            if (player.hasBody()) {
+                final Body body = player.getBody();
+                BundledAnimation animation = AnimationsHandler.getBodyAnimation(body.index, heading.current);
+                TextureRegion bodyRegion = player.isMoving() ? animation.getGraphic() : animation.getGraphic(0);
+                if (bodyRegion != null) {
+                    drawTexture(bodyRegion, bodyPixelOffsetX, bodyPixelOffsetY = screenPos.y - (bodyRegion.getRegionHeight() - 32.0f) - 32.0f, 0, 0);
+                }
+            }
+            return this;
+        }
+
+        public CharacterDrawer drawHead() {
+            if (player.hasHead()) {
+                final Head head = player.getHead();
+                BundledAnimation animation = AnimationsHandler.getHeadAnimation(head.index, heading.current);
+                if (animation != null) {
+                    TextureRegion headRegion = animation.getGraphic();
+                    drawTexture(headRegion, bodyPixelOffsetX, bodyPixelOffsetY, 4.0f, -8.0f);
+                }
+            }
+            return this;
+        }
+
+        public CharacterDrawer drawHelmet() {
+            if (player.hasHelmet()) {
+                Helmet helmet = player.getHelmet();
+                BundledAnimation animation = AnimationsHandler.getHelmetsAnimation(helmet.index, heading.current);
+                if (animation != null) {
+                    TextureRegion helmetRegion = animation.getGraphic();
+                    drawTexture(helmetRegion, bodyPixelOffsetX, bodyPixelOffsetY, 4.0f, -8.0f);
+                }
+            }
+            return this;
+        }
+
+        public CharacterDrawer drawWeapon() {
+            if (player.hasWeapon()) {
+                Weapon weapon = player.getWeapon();
+                BundledAnimation animation = AnimationsHandler.getWeaponAnimation(weapon.index, heading.current);
+                if (animation != null) {
+                    TextureRegion weaponRegion = player.isMoving() ? animation.getGraphic() : animation.getGraphic(0);
+                    if (weaponRegion != null) {
+                        drawTexture(weaponRegion, bodyPixelOffsetX, bodyPixelOffsetY, 0, 0);
+                    }
+                }
+            }
+            return this;
+        }
+
+        public CharacterDrawer drawShield() {
+            if (player.hasShield()) {
+                Shield shield = player.getShield();
+                BundledAnimation animation = AnimationsHandler.getShieldAnimation(shield.index, heading.current);
+                if (animation != null) {
+                    TextureRegion shieldRegion = player.isMoving() ? animation.getGraphic() : animation.getGraphic(0);
+                    if (shieldRegion != null) {
+                        drawTexture(shieldRegion, bodyPixelOffsetX, bodyPixelOffsetY, 0, 0);
+                    }
+                }
+            }
+            return this;
+        }
+
+        private void drawTexture(TextureRegion region, float x, float y, float offsetX, float offsetY) {
+            if (region != null) {
+                batch.draw(region, x + offsetX, y + offsetY);
+            }
+        }
+
+    }
 }
 
 

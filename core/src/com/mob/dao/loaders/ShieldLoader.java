@@ -20,16 +20,17 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import com.badlogic.gdx.utils.LongMap;
 
-import com.mob.dao.objects.Shield;
+import com.mob.dao.descriptors.ShieldDescriptor;
+import com.mob.dao.objects.ShieldAnimation;
 import org.ini4j.Config;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
-public class ShieldLoader extends Loader<LongMap<Shield>> {
+public class ShieldLoader extends Loader<LongMap<ShieldDescriptor>> {
 
 	@Override
-	public LongMap<Shield> load(DataInputStream file) throws IOException {
-		LongMap<Shield> shields = new LongMap<Shield>();
+	public LongMap<ShieldDescriptor> load(DataInputStream file) throws IOException {
+		LongMap<ShieldDescriptor> shields = new LongMap<>();
 		Ini iniFile = new Ini();
 		Config c = new Config();
 		c.setLowerCaseSection(true);
@@ -48,7 +49,7 @@ public class ShieldLoader extends Loader<LongMap<Shield>> {
 					shieldIndex[Heading.EAST.toInt()] = 0; 
 					shieldIndex[Heading.SOUTH.toInt()] = 0; 
 					shieldIndex[Heading.WEST.toInt()] = 0; 
-					shields.put(i, new Shield(shieldIndex));
+					shields.put(i, new ShieldDescriptor(shieldIndex));
 					continue; 
 				}
 				
@@ -57,7 +58,7 @@ public class ShieldLoader extends Loader<LongMap<Shield>> {
 				shieldIndex[Heading.SOUTH.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir3"));
 				shieldIndex[Heading.WEST.toInt()] = Integer.parseInt(iniFile.get("esc" + String.valueOf(i), "Dir4"));
 				
-				shields.put(i, new Shield(shieldIndex));
+				shields.put(i, new ShieldDescriptor(shieldIndex));
 			}
 
 			return shields;

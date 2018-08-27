@@ -20,14 +20,15 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import com.badlogic.gdx.utils.LongMap;
-import com.mob.dao.objects.Fx;
+import com.mob.dao.descriptors.FXDescriptor;
+import com.mob.dao.objects.FxAnimation;
 import com.mob.client.util.Util;
 
-public class FxLoader extends Loader<LongMap<Fx>> {
+public class FxLoader extends Loader<LongMap<FXDescriptor>> {
 
 	@Override
-	public LongMap<Fx> load(DataInputStream file) throws IOException {
-		LongMap<Fx> fxs = new LongMap<Fx>();
+	public LongMap<FXDescriptor> load(DataInputStream file) throws IOException {
+		LongMap<FXDescriptor> fxs = new LongMap<>();
 		int numFxs;
 
 		file.skipBytes(GAME_FILE_HEADER_SIZE);
@@ -40,7 +41,7 @@ public class FxLoader extends Loader<LongMap<Fx>> {
 			offsetX = Util.leShort(file.readShort());
 			offsetY = Util.leShort(file.readShort());
 
-			fxs.put(i, new Fx(fxIndex, offsetX, offsetY));
+			fxs.put(i, new FXDescriptor(fxIndex, offsetX, offsetY));
 		}
 
 		return fxs;

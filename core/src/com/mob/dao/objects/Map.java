@@ -30,7 +30,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.mob.client.interfaces.Constants;
 import com.mob.client.textures.BundledAnimation;
 
-public class Map implements Constants {
+public class Map<I extends Number, G> implements Constants {
 
     public static final float TILE_PIXEL_WIDTH = 32.0f;
     public static final float TILE_PIXEL_HEIGHT = 32.0f;

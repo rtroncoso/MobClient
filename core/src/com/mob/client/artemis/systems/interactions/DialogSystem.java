@@ -3,7 +3,10 @@ package com.mob.client.artemis.systems.interactions;
 import camera.Focused;
 import character.CanWrite;
 import character.Character;
+import character.Dialog;
 import com.artemis.Aspect;
+import com.artemis.E;
+import com.artemis.Entity;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -28,7 +31,7 @@ public class DialogSystem extends IteratingSystem {
 
     @Override
     protected void process(int player) {
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             E(player).removeCanWrite();
             final boolean[] firstOpened = {true};
             textf = new TextField("", COMODORE_SKIN, "transparent") {
@@ -39,9 +42,7 @@ public class DialogSystem extends IteratingSystem {
                         public boolean keyUp(InputEvent event, int keycode) {
                             if (keycode == Input.Keys.ENTER && !firstOpened[0]) {
                                 // remove textfield
-                                E(player).dialogText(textf.getText());
-                                E(player).dialogAlpha(1);
-                                E(player).dialogTime(7);
+                                talk(E(player), textf.getText());
                                 E(player).canWrite(true);
                                 E(player).getStates().writing = false;
                                 table.removeActor(textf, true);
@@ -58,5 +59,11 @@ public class DialogSystem extends IteratingSystem {
             table.add(textf).fillX();
             table.getStage().setKeyboardFocus(textf);
         }
+    }
+
+    public static void talk(E entity, String text) {
+        entity.dialogText(text);
+        entity.dialogAlpha(Dialog.DEFAULT_ALPHA);
+        entity.dialogTime(Dialog.DEFAULT_TIME);
     }
 }

@@ -23,7 +23,7 @@
 package com.mob.dao.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.client.textures.BundledAnimation;
 
 import java.util.Vector;
@@ -74,7 +74,7 @@ public class Tile {
 		for(int grhIndex : this.getGraphic()) {
 			if(grhIndex > 0)
 				this.textures.setElementAt(
-					new BundledAnimation(AssetsHandler.getGraphic(grhIndex)),
+					new BundledAnimation(DescriptorsHandler.getGraphic(grhIndex)),
 					layer
 				);
 			layer++;

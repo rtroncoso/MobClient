@@ -184,14 +184,14 @@ public class Graphic {
 	}
 
 	/**
-	 * @return the grhIndex
+	 * @return the indexs
 	 */
 	public int getGrhIndex() {
 		return grhIndex;
 	}
 
 	/**
-	 * @param grhIndex the grhIndex to set
+	 * @param grhIndex the indexs to set
 	 */
 	public void setGrhIndex(int grhIndex) {
 		this.grhIndex = grhIndex;

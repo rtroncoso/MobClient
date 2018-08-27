@@ -23,6 +23,7 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mob.client.artemis.systems.interactions.MeditateSystem;
 import com.mob.dao.objects.Tile;
 import movement.Destination;
 import physics.AOPhysics;
@@ -53,6 +54,8 @@ public class MovementSystem extends IteratingSystem {
                 WorldPos expectedPos = getExpectedPos(movement, pos);
                 player.destinationX(expectedPos.x);
                 player.destinationY(expectedPos.y);
+                // stop meditating
+                stopMeditating(player);
             });
         }
         player.moving(player.hasDestination());
@@ -65,9 +68,11 @@ public class MovementSystem extends IteratingSystem {
             }
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
+    }
 
+    private void stopMeditating(E player) {
+        player.getStates().meditating = false;
+        MeditateSystem.stopMeditating(player);
     }
 
     private boolean movePlayer(E player) {

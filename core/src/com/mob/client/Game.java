@@ -4,12 +4,15 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.AnimationsHandler;
+import com.mob.client.handlers.DescriptorsHandler;
+import com.mob.client.handlers.ParticlesHandler;
 import com.mob.client.handlers.ScreenHandler;
 
 public class Game implements ApplicationListener {
 
     public static final String GAME_GRAPHICS_PATH = "data/graficos/";
+    public static final String GAME_FXS_PATH = "data/fxs/";
     public static final String GAME_FONTS_PATH = "data/fonts/";
     public static final String GAME_MAPS_PATH = "data/mapas/";
     public static final String GAME_INIT_PATH = "data/init/";
@@ -31,7 +34,9 @@ public class Game implements ApplicationListener {
         this.spriteBatch = new SpriteBatch();
 
         // Load resources
-        AssetsHandler.load();
+        DescriptorsHandler.load();
+        AnimationsHandler.load();
+        ParticlesHandler.load();
 
         // Set ScreenHandler Game instance to this and load GameScreen
         ScreenHandler.setGameInstance(this);

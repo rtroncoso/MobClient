@@ -21,13 +21,13 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.mob.dao.objects.Map;
 import com.mob.client.interfaces.Constants;
-import com.mob.dao.readers.AOAssetsReader;
-import com.mob.dao.readers.AssetsReader;
+import com.mob.dao.readers.AODescriptorsReader;
+import com.mob.dao.readers.DescriptorsReader;
 
 public class MapHandler implements Constants {
 
 	private static HashMap<Long, Map> mapData = new HashMap<Long, Map>();
-	private static AssetsReader reader = new AOAssetsReader();
+	private static DescriptorsReader reader = new AODescriptorsReader();
 
 	public static Map get(long mapNumber) {
 		if(!MapHandler.mapData.containsKey(mapNumber)) load(mapNumber);

@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.mob.dao.objects.Graphic;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.DescriptorsHandler;
 
 /**
  * @author Rodrigo
@@ -42,7 +42,7 @@ public class BundledAnimation {
 		if(numFrames > 0) {
 			
 			for(int frame : graphic.getFrames()) {
-				this.frames.add(new GameTexture(AssetsHandler.getGraphic(frame)));
+				this.frames.add(new GameTexture(DescriptorsHandler.getGraphic(frame)));
 				tmpRegions.add(this.frames.peek().getGraphic());
 			}
 			

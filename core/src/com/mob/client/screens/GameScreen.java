@@ -25,24 +25,23 @@ import com.artemis.managers.TagManager;
 import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.mob.client.Game;
 import com.mob.client.artemis.archetypes.AOArchetypes;
-import com.mob.client.artemis.systems.anim.AnimationSystem;
+import com.mob.client.artemis.systems.anim.MovementAnimationSystem;
 import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
 import com.mob.client.artemis.systems.interactions.DialogSystem;
+import com.mob.client.artemis.systems.interactions.MeditateSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 import com.mob.client.artemis.systems.physics.*;
 import com.mob.client.artemis.systems.render.*;
+import com.mob.client.handlers.ParticlesHandler;
 
 import static com.artemis.E.E;
-import static com.mob.client.util.Skins.COMODORE_SKIN;
 
 
 /**
@@ -78,8 +77,11 @@ public class GameScreen extends Screen {
                 .focused(true)
                 .playerControllable(true)
                 .headingCurrent(Heading.HEADING_NORTH)
-                .headIndex(1)
-                .bodyIndex(1)
+                .headIndex(4)
+                .bodyIndex(100)
+                .weaponIndex(8)
+                .shieldIndex(3)
+                .helmetIndex(6)
 				.statusHealth(100)
                 .statusMaxHealth(120)
                 .statusHungry(100)
@@ -87,10 +89,9 @@ public class GameScreen extends Screen {
                 .statusMaxMana(1000)
                 .statusStamina(100)
                 .statusThirst(100)
-                .infoName("guidota2")
-                .dialogText("Este es el dialogo papa")
-                .dialogAlpha(1)
-                .dialogTime(7)
+                .statusCriminal(true)
+                .infoName("guidota")
+                .infoClan("Clarinete")
                 .canWrite()
                 .aOPhysics();
 
@@ -103,9 +104,11 @@ public class GameScreen extends Screen {
                 .headingCurrent(Heading.HEADING_NORTH)
                 .headIndex(2)
                 .bodyIndex(2)
+                .weaponIndex(3)
+                .shieldIndex(3)
+                .helmetIndex(3)
+                .statusNewbie(true)
                 .dialogText("aa")
-                .dialogAlpha(1)
-                .dialogTime(7)
                 .randomMovement(true)
                 .infoName("guidota2")
                 .aOPhysics();
@@ -119,7 +122,7 @@ public class GameScreen extends Screen {
                 // Player movement
                 .with(new PlayerInputSystem())
                 .with(new MovementSystem())
-                .with(new AnimationSystem())
+                .with(new MovementAnimationSystem())
                 // Camera
                 .with(new CameraSystem(Game.GAME_SCREEN_ZOOM))
                 .with(new CameraFocusSystem())
@@ -128,12 +131,14 @@ public class GameScreen extends Screen {
                 .with(new TiledMapSystem(1))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 4, new MapLowerLayerRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 2, new CharacterRenderingSystem(this.game.getSpriteBatch()))
+                .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new FXsRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new MapUpperLayerRenderingSystem(this.game.getSpriteBatch()))
                 .with(new CharacterStatusRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new NameRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new DialogRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new CharacterStatesRenderingSystem(game.getSpriteBatch()))
                 // Logic systems
+                .with(new MeditateSystem())
                 .with(new DialogSystem(dialog))
                 .with(new RandomMovementSystem())
                 .with(new TagManager())
