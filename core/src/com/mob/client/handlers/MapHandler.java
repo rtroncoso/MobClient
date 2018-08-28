@@ -16,9 +16,13 @@
  *******************************************************************************/
 package com.mob.client.handlers;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Json;
 import com.mob.dao.objects.Map;
 import com.mob.client.interfaces.Constants;
 import com.mob.dao.readers.AODescriptorsReader;
@@ -36,7 +40,7 @@ public class MapHandler implements Constants {
 
 	private static boolean load(long mapNumber) {
 
-		Map map = reader.loadMap(String.valueOf(mapNumber));
+		Map map = getJson().fromJson(Map.class, Gdx.files.internal("data/maps/" + "Mapa" + mapNumber + ".json"));
 		mapData.put(mapNumber, map);
 
 		Gdx.app.log(MapHandler.class.getSimpleName(),
@@ -45,4 +49,21 @@ public class MapHandler implements Constants {
 		return true;
 	}
 
+//	public static void mapsToJson() {
+//		for(int i = 1; i <= 290; i++) {
+//			Map map = reader.loadMap(String.valueOf(i));
+//			Json json = getJson();
+//			try (PrintWriter out = new PrintWriter("data/jsonMaps/" + "Mapa" + i + ".json")) {
+//				out.print(json.prettyPrint(map));
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+
+	private static Json getJson() {
+		Json json = new Json();
+		json.addClassTag("map", Map.class);
+		return json;
+	}
 }

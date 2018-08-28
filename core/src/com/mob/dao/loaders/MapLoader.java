@@ -16,6 +16,7 @@
  *******************************************************************************/
 package com.mob.dao.loaders;
 
+import com.badlogic.gdx.utils.Json;
 import com.mob.dao.objects.Map;
 import com.mob.dao.objects.Tile;
 import com.mob.dao.objects.WorldPosition;
@@ -28,7 +29,6 @@ public class MapLoader extends Loader<Map> {
 
     @Override
     public Map load(DataInputStream file) throws IOException {
-
         file.skipBytes(GAME_FILE_HEADER_SIZE + (2 * 5)); // Skip complete map header
         Map map = new Map();
 
@@ -73,4 +73,5 @@ public class MapLoader extends Loader<Map> {
 
         return map;
     }
+
 }

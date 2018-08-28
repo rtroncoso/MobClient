@@ -30,11 +30,12 @@ import java.util.Vector;
 
 public class Tile {
 
+	public static final int EMPTY_INDEX = 0;
 	public static final float TILE_PIXEL_WIDTH = 32.0f;
 	public static final float TILE_PIXEL_HEIGHT = 32.0f;
 
 	private int[] graphic;
-	private Vector<BundledAnimation> textures = new Vector<BundledAnimation>();
+	private transient Vector<BundledAnimation> textures = new Vector<BundledAnimation>();
 	
 	private int charIndex;
 	private int objIndex = -1;
@@ -42,9 +43,10 @@ public class Tile {
 	
 	private WorldPosition tileExit;
 	private boolean blocked;
-	
+
 	private int trigger;
 
+	public Tile() {}
 	/**
 	 * @param graphic
 	 * @param charIndex
@@ -83,6 +85,9 @@ public class Tile {
 
 
 	public TextureRegion getRegion(int index) {
+		if (textures.isEmpty()) {
+			this.loadTextures();
+		}
 		return (this.getGraphic(index) > 0) ?
 				(this.textures.get(index).isAnimated() ?
 						this.textures.get(index).getAnimatedGraphic(true) :
@@ -91,6 +96,9 @@ public class Tile {
 	}
 
 	public BundledAnimation getAnimation(int index) {
+		if (textures.isEmpty()) {
+			this.loadTextures();
+		}
 		return (this.textures.get(index) != null) ? this.textures.get(index) : null;
 	}
 

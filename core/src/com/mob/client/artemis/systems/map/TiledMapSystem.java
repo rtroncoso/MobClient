@@ -16,10 +16,18 @@
  *******************************************************************************/
 package com.mob.client.artemis.systems.map;
 
+import com.artemis.Aspect;
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
+import com.artemis.systems.IteratingSystem;
 import com.mob.dao.objects.Map;
 import com.mob.client.handlers.MapHandler;
+import player.PlayerControllable;
+import position.WorldPos;
+
+import java.util.List;
+
+import static com.artemis.E.E;
 
 /**
  * TiledMapSystem Class
@@ -28,23 +36,13 @@ import com.mob.client.handlers.MapHandler;
  * @package com.mob.client.api.systems.map
  */
 @Wire
-public class TiledMapSystem extends BaseSystem {
+public class TiledMapSystem extends IteratingSystem {
 
     public Map map;
-    public long mapNumber;
+    public long mapNumber = -1;
 
-    public TiledMapSystem(long mapNumber) {
-        this.mapNumber = mapNumber;
-    }
-
-    @Override
-    protected void processSystem() {
-
-    }
-
-    @Override
-    protected void initialize() {
-        changeMap(this.mapNumber);
+    public TiledMapSystem() {
+        super(Aspect.all(PlayerControllable.class, WorldPos.class));
     }
 
     /**
@@ -56,6 +54,17 @@ public class TiledMapSystem extends BaseSystem {
         this.mapNumber = number;
         this.map = MapHandler.get(number);
         this.map.initialize();
+//        new Thread(() -> {
+//            List<Integer> lindants = map.getLindants();
+//            lindants.forEach(mapNumber -> MapHandler.get(mapNumber));
+//        });
     }
 
+    @Override
+    protected void process(int entityId) {
+        int playerMap = E(entityId).getWorldPos().map;
+        if (playerMap != mapNumber) {
+            changeMap(playerMap);
+        };
+    }
 }

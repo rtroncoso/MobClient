@@ -65,9 +65,6 @@ project(":core") {
     dependencies {
         compile project(":components")
 
-        compile 'com.google.code.gson:gson:2.8.5'
-        compile 'com.google.code.gson:gson-extras:1.0-SNAPSHOT'
-
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"

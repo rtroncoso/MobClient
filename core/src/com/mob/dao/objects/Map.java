@@ -37,6 +37,8 @@ import com.mob.client.interfaces.Constants;
 import com.mob.client.items.Items;
 import com.mob.client.textures.BundledAnimation;
 
+import java.util.List;
+
 public class Map<I extends Number, G> implements Constants {
 
     public static final float TILE_PIXEL_WIDTH = 32.0f;
@@ -219,5 +221,9 @@ public class Map<I extends Number, G> implements Constants {
                 }
             }
         }
+    }
+
+    public List<Integer> getLindants() {
+        return null;
     }
 }

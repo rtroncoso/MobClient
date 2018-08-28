@@ -22,9 +22,11 @@ import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.mob.client.artemis.systems.interactions.MeditateSystem;
+import com.mob.client.handlers.MapHandler;
+import com.mob.dao.objects.Map;
 import com.mob.dao.objects.Tile;
+import com.mob.dao.objects.WorldPosition;
 import movement.Destination;
 import physics.AOPhysics;
 import position.Pos2D;
@@ -51,23 +53,56 @@ public class MovementSystem extends IteratingSystem {
         Optional<AOPhysics.Movement> movementIntention = phys.getMovementIntention();
         if (!player.hasDestination()) {
             movementIntention.ifPresent(movement -> {
-                WorldPos expectedPos = getExpectedPos(movement, pos);
-                player.destinationX(expectedPos.x);
-                player.destinationY(expectedPos.y);
-                // stop meditating
-                stopMeditating(player);
+                WorldPos expectedPos = getExpectedPos(player, movement, pos);
+                if (isValid(expectedPos)) {
+                    player.destinationX(expectedPos.x);
+                    player.destinationY(expectedPos.y);
+                    // stop meditating
+                    stopMeditating(player);
+                }
             });
         }
         player.moving(player.hasDestination());
         if (player.hasDestination()) {
             if (movePlayer(player)) {
+                updateTile(Tile.EMPTY_INDEX, pos);
                 Destination destination = player.getDestination();
                 pos.x = destination.x;
                 pos.y = destination.y;
                 player.removeDestination();
+                if (changeMap(player, pos)) {
+                    return;
+                }
+                updateTile(entity, pos);
             }
         }
 
+    }
+
+    private boolean changeMap(E player, WorldPos pos) {
+        Map map = MapHandler.get(pos.map);
+        Tile tile = map.getTile(pos.x, pos.y);
+        WorldPosition newPos = tile.getTileExit();
+        WorldPos playerPos = player.getWorldPos();
+        if (newPos.getMap() != 0 && newPos.getMap() != playerPos.map) {
+            playerPos.map = newPos.getMap();
+            playerPos.x = newPos.getX();
+            playerPos.y = newPos.getY();
+            return true;
+        }
+        return false;
+    }
+
+    private void updateTile(int entity, WorldPos pos) {
+	    Map map = MapHandler.get(pos.map);
+        Tile tile = map.getTile(pos.x, pos.y);
+        tile.setCharIndex(entity);
+    }
+
+    private boolean isValid(WorldPos expectedPos) {
+        Map map = MapHandler.get(expectedPos.map);
+        Tile tile = map.getTile(expectedPos.x, expectedPos.y);
+        return tile != null && !tile.isBlocked() && tile.getCharIndex() == Tile.EMPTY_INDEX;
     }
 
     private void stopMeditating(E player) {
@@ -152,18 +187,22 @@ public class MovementSystem extends IteratingSystem {
     }
 
 
-    private WorldPos getExpectedPos(AOPhysics.Movement movement, WorldPos pos) {
+    private WorldPos getExpectedPos(E player, AOPhysics.Movement movement, WorldPos pos) {
 	    switch (movement) {
             case RIGHT:
-                return new WorldPos(pos.x + 1, pos.y);
+                player.headingCurrent(Heading.HEADING_EAST);
+                return new WorldPos(pos.x + 1, pos.y, pos.map);
             case LEFT:
-                return new WorldPos(pos.x - 1, pos.y);
+                player.headingCurrent(Heading.HEADING_WEST);
+                return new WorldPos(pos.x - 1, pos.y, pos.map);
             case UP:
-                return new WorldPos(pos.x, pos.y - 1);
+                player.headingCurrent(Heading.HEADING_NORTH);
+                return new WorldPos(pos.x, pos.y - 1, pos.map);
             case DOWN:
-                return new WorldPos(pos.x, pos.y + 1);
+                player.headingCurrent(Heading.HEADING_SOUTH);
+                return new WorldPos(pos.x, pos.y + 1, pos.map);
             default:
-                return new WorldPos(pos.x, pos.y);
+                return new WorldPos(pos.x, pos.y, pos.map);
         }
     }
 
