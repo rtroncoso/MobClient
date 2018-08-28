@@ -4,6 +4,8 @@ public abstract class DefenseItem extends Item {
     private int defenseMin;
     private int defenseMax;
 
+    public DefenseItem() {}
+
     public DefenseItem(int id, int value, int graphic) {
         super(id, value, graphic);
     }

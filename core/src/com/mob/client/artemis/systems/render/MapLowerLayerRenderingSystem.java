@@ -19,6 +19,7 @@ package com.mob.client.artemis.systems.render;
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mob.dao.objects.Map;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
@@ -66,6 +67,7 @@ public class MapLowerLayerRenderingSystem extends BaseSystem {
 
         // LAYER 2 - STATIC - FRAMEBUFFERED
         this.batch.draw(map.getBufferedLayer(), 0, 0);
+
     }
 
     @Override

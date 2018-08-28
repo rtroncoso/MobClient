@@ -8,17 +8,4 @@ public interface DescriptorsReader {
 
     Map loadMap(String map);
 
-    LongMap<Graphic> loadGraphics();
-
-    LongMap<FXDescriptor> loadFxs();
-
-    LongMap<BodyDescriptor> loadBodies();
-
-    LongMap<HeadDescriptor> loadHeads();
-
-    LongMap<HelmetDescriptor> loadHelmets();
-
-    LongMap<ShieldDescriptor> loadShields();
-
-    LongMap<WeaponDescriptor> loadWeapons();
 }

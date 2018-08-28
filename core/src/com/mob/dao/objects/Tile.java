@@ -37,7 +37,7 @@ public class Tile {
 	private Vector<BundledAnimation> textures = new Vector<BundledAnimation>();
 	
 	private int charIndex;
-	private int objIndex;
+	private int objIndex = -1;
 	private int npcIndex;
 	
 	private WorldPosition tileExit;

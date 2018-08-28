@@ -4,6 +4,8 @@ public abstract class AttackItem extends Item {
     private int attackMin;
     private int attackMax;
 
+    public AttackItem() {}
+
     public AttackItem(int id, int value, int graphic) {
         super(id, value, graphic);
     }

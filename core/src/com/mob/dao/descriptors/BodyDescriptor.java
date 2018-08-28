@@ -2,8 +2,8 @@ package com.mob.dao.descriptors;
 
 public class BodyDescriptor extends Descriptor {
 
-    private int headOffsetX;
-    private int headOffsetY;
+    public int headOffsetX;
+    public int headOffsetY;
 
     public BodyDescriptor() {}
     public BodyDescriptor(int[] grhIndex, int headOffsetX, int headOffsetY) {

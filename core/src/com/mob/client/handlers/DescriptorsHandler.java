@@ -24,6 +24,16 @@
  * @version 0.1
  * @author Rodrigo Troncoso
  * @version 0.1
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-06-26
+ * <p>
+ * Manages loader objects
+ * @since 2014-06-26
+ * <p>
+ * Manages loader objects
  * @since 2014-06-26
  * <p>
  * Manages loader objects
@@ -45,42 +55,55 @@ package com.mob.client.handlers;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.LongMap;
-import com.google.gson.reflect.TypeToken;
 import com.mob.dao.descriptors.*;
 import com.mob.dao.objects.*;
 import com.mob.dao.readers.*;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DescriptorsHandler {
 
-    private static LongMap<Graphic> graphics;
-    private static LongMap<BodyDescriptor> bodies;
-    private static LongMap<HeadDescriptor> heads;
-    private static LongMap<HelmetDescriptor> helmets;
-    private static LongMap<WeaponDescriptor> weapons;
-    private static LongMap<ShieldDescriptor> shields;
-    private static LongMap<FXDescriptor> fxs;
+    private static Map<String, Graphic> graphics;
+    private static List<BodyDescriptor> bodies;
+    private static List<HeadDescriptor> heads;
+    private static List<HelmetDescriptor> helmets;
+    private static List<WeaponDescriptor> weapons;
+    private static List<ShieldDescriptor> shields;
+    private static List<FXDescriptor> fxs;
     private static DescriptorsReader reader = new AODescriptorsReader();
 
     public static void load() {
-        graphics = load("graphics");
-        bodies = load("bodies");
-        weapons = load("weapons");
-        shields = load("shields");
-        heads = load("heads");
-        helmets = load("helmets");
-        fxs = load("fxs");
+        graphics = loadMap("graphicsMap");
+        bodies = load("bodies2");
+        weapons = load("weapons2");
+        shields = load("shields2");
+        heads = load("heads2");
+        helmets = load("helmets2");
+        fxs = load("fxs2");
     }
 
-    public static LongMap load(String fileName) {
-        Type type = new TypeToken<LongMap<Graphic>>() {}.getType();
-        return getJson().fromJson(LongMap.class, Gdx.files.internal("data/descriptors/" + fileName + ".json"));
+    public static List load(String fileName) {
+        Json json = getJson();
+        FileHandle file = Gdx.files.internal("data/descriptors/" + fileName + ".json");
+        return (List) json.fromJson(ArrayList.class, file);
     }
+
+    public static Map loadMap(String fileName) {
+        Json json = getJson();
+        FileHandle file = Gdx.files.internal("data/descriptors/" + fileName + ".json");
+        return (java.util.HashMap) json.fromJson(HashMap.class, file);
+    }
+//
+//    public static IntMap loadGraphics(String fileName) {
+//        Json json = getJson();
+//        FileHandle file = Gdx.files.internal("data/descriptors/" + fileName + ".json");
+//        return (IntMap) json.fromJson(IntMap.class, file);
+//    }
 
     private static Json getJson() {
         Json json = new Json();
@@ -94,42 +117,31 @@ public class DescriptorsHandler {
         return json;
     }
 
-//    public static void printJson(LongMap<?> map, String fileName) {
-//        System.out.println("---- " + fileName + " ----");
-//        try (PrintWriter out = new PrintWriter("data/descriptors/" + fileName + ".json")) {
-//            Json json = new Json();
-//            json.addClassTag(fileName, map.get(1).getClass());
-//            out.println(json.toJson(map));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    public static LongMap<Graphic> getGraphics() {
+    public static Map<String, Graphic> getGraphics() {
         return graphics;
     }
 
-    public static LongMap<BodyDescriptor> getBodies() {
+    public static List<BodyDescriptor> getBodies() {
         return bodies;
     }
 
-    public static LongMap<FXDescriptor> getFxs() {
+    public static List<FXDescriptor> getFxs() {
         return fxs;
     }
 
-    public static LongMap<HeadDescriptor> getHeads() {
+    public static List<HeadDescriptor> getHeads() {
         return heads;
     }
 
-    public static LongMap<HelmetDescriptor> getHelmets() {
+    public static List<HelmetDescriptor> getHelmets() {
         return helmets;
     }
 
-    public static LongMap<ShieldDescriptor> getShields() {
+    public static List<ShieldDescriptor> getShields() {
         return shields;
     }
 
-    public static LongMap<WeaponDescriptor> getWeapons() {
+    public static List<WeaponDescriptor> getWeapons() {
         return weapons;
     }
 
@@ -158,7 +170,7 @@ public class DescriptorsHandler {
     }
 
     public static Graphic getGraphic(int index) {
-        return DescriptorsHandler.getGraphics().get(index);
+        return DescriptorsHandler.getGraphics().get(String.valueOf(index));
     }
 
 

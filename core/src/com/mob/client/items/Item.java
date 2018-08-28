@@ -11,6 +11,7 @@ public abstract class Item {
     private static final Set<Kind> EQUIPABLE_KINDS;
     public abstract Kind getKind();
 
+    public Item() {}
     public Item(int id, int value, int graphic) {
         this.id = id;
         this.value = value;
