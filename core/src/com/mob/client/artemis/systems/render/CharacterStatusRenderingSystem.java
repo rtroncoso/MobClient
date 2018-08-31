@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.util.Colors;
+import com.mob.shared.util.Colors;
 
 import static com.artemis.E.E;
-import static com.mob.client.util.Fonts.WHITE_FONT;
-import static com.mob.client.util.Fonts.layout;
+import static com.mob.shared.util.Fonts.WHITE_FONT;
+import static com.mob.shared.util.Fonts.layout;
 
 /**
  * CharacterRenderingSystem Class

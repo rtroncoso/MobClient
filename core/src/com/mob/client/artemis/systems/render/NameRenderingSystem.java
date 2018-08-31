@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.artemis.systems.OrderedEntityProcessingSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.util.Util;
+import com.mob.shared.util.Util;
 import com.mob.dao.objects.Tile;
 import position.Pos2D;
 import position.WorldPos;
@@ -18,7 +18,7 @@ import position.WorldPos;
 import java.util.Comparator;
 
 import static com.artemis.E.E;
-import static com.mob.client.util.Fonts.*;
+import static com.mob.shared.util.Fonts.*;
 
 @Wire
 public class NameRenderingSystem extends OrderedEntityProcessingSystem {

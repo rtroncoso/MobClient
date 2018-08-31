@@ -22,7 +22,7 @@
  * @version 0.1
  * @since 2014-04-10
  */
-package com.mob.client.util;
+package com.mob.shared.util;
 
 
 import com.mob.dao.objects.Tile;

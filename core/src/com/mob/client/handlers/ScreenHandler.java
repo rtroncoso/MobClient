@@ -18,6 +18,7 @@
  */
 package com.mob.client.handlers;
 
+import com.artemis.Entity;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import com.mob.client.Game;
@@ -35,6 +36,7 @@ public class ScreenHandler {
     protected static HashMap<String, Screen> screens = new HashMap<String, Screen>();
     protected static Screen currentScreen;
     private static Game game;
+    private static Entity player;
 
     public static Screen load(String screenClassName) {
 

@@ -16,11 +16,10 @@
  *******************************************************************************/
 package com.mob.dao.loaders;
 
-import com.badlogic.gdx.utils.Json;
 import com.mob.dao.objects.Map;
 import com.mob.dao.objects.Tile;
 import com.mob.dao.objects.WorldPosition;
-import com.mob.client.util.Util;
+import com.mob.shared.util.Util;
 
 import java.io.DataInputStream;
 import java.io.IOException;

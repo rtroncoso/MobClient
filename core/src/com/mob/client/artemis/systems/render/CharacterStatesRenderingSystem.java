@@ -1,26 +1,21 @@
 package com.mob.client.artemis.systems.render;
 
-import camera.Focused;
 import character.Character;
 import character.States;
-import character.Status;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.util.Util;
+import com.mob.shared.util.Util;
 import com.mob.dao.objects.Tile;
 import position.Pos2D;
 
 import static com.artemis.E.E;
-import static com.mob.client.util.Fonts.*;
-import static com.mob.client.util.Fonts.DIALOG_FONT;
-import static com.mob.client.util.Fonts.dialogLayout;
+import static com.mob.shared.util.Fonts.*;
+import static com.mob.shared.util.Fonts.dialogLayout;
 
 /**
  * CharacterRenderingSystem Class

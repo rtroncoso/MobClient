@@ -8,14 +8,11 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.IntMap;
 import com.mob.client.artemis.systems.OrderedEntityProcessingSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.handlers.AnimationsHandler;
-import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.client.textures.BundledAnimation;
-import com.mob.client.util.Util;
-import com.mob.dao.descriptors.HeadDescriptor;
+import com.mob.shared.util.Util;
 import position.Pos2D;
 import position.WorldPos;
 

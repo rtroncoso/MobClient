@@ -33,8 +33,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.mob.client.interfaces.Constants;
-import com.mob.client.items.Items;
+import com.mob.shared.interfaces.Constants;
 import com.mob.client.textures.BundledAnimation;
 
 import java.util.List;

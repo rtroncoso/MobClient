@@ -1,4 +1,4 @@
-package com.mob.client.util;
+package com.mob.shared.util;
 
 import com.badlogic.gdx.graphics.Color;
 

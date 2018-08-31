@@ -16,15 +16,12 @@
  *******************************************************************************/
 package com.mob.client.handlers;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.mob.dao.objects.Map;
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.interfaces.Constants;
 import com.mob.dao.readers.AODescriptorsReader;
 import com.mob.dao.readers.DescriptorsReader;
 

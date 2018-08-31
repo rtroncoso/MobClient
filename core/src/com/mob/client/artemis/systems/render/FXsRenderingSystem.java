@@ -7,7 +7,7 @@ import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.client.util.Util;
+import com.mob.shared.util.Util;
 import com.mob.dao.objects.Tile;
 import graphics.FX;
 import position.Pos2D;

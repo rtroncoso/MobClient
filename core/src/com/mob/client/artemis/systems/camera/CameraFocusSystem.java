@@ -6,10 +6,8 @@ import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.managers.TagManager;
-import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.systems.IteratingSystem;
-import com.mob.client.util.Util;
-import net.mostlyoriginal.api.component.basic.Pos;
+import com.mob.shared.util.Util;
 import position.Pos2D;
 
 import static com.artemis.E.E;

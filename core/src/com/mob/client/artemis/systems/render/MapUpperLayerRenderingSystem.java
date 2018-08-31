@@ -23,12 +23,6 @@ import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 import com.mob.dao.objects.Map;
 
-/**
- * MapRenderSystem Class
- *
- * @author rt
- * @package com.mob.client.api.systems.render
- */
 @Wire
 public class MapUpperLayerRenderingSystem extends BaseSystem {
 
@@ -42,8 +36,9 @@ public class MapUpperLayerRenderingSystem extends BaseSystem {
 
     private void renderWorld() {
         // Variable Declarations
-        int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
         Map map = this.mapSystem.map;
+        if (map == null) return;
+        int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
 
         // Calculate visible part of the map
         int cameraPosX = (int) (this.cameraSystem.camera.position.x / Map.TILE_PIXEL_WIDTH);

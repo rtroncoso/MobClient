@@ -16,11 +16,7 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
-import character.Heading;
-import com.artemis.Archetype;
-import com.artemis.Entity;
-import com.artemis.SuperMapper;
-import com.artemis.WorldConfigurationBuilder;
+import com.artemis.*;
 import com.artemis.managers.TagManager;
 import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.Gdx;
@@ -29,7 +25,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mob.client.Game;
-import com.mob.client.artemis.archetypes.AOArchetypes;
 import com.mob.client.artemis.systems.anim.MovementAnimationSystem;
 import com.mob.client.artemis.systems.camera.CameraFocusSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
@@ -37,9 +32,11 @@ import com.mob.client.artemis.systems.camera.CameraMovementSystem;
 import com.mob.client.artemis.systems.interactions.DialogSystem;
 import com.mob.client.artemis.systems.interactions.MeditateSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
+import com.mob.client.artemis.systems.network.ClientSystem;
 import com.mob.client.artemis.systems.physics.*;
 import com.mob.client.artemis.systems.render.*;
-import com.mob.client.handlers.ParticlesHandler;
+import com.mob.network.login.LoginRequest;
+import net.mostlyoriginal.api.network.marshal.kryonet.KryonetClientMarshalStrategy;
 
 import static com.artemis.E.E;
 
@@ -53,6 +50,7 @@ public class GameScreen extends Screen {
     public static final int FONTS_PRIORITY = WorldConfigurationBuilder.Priority.NORMAL + 3;
     private Stage stage;
     private Table dialog;
+    private KryonetClientMarshalStrategy client;
 
     public GameScreen(Game game) {
 		super(game);
@@ -66,61 +64,16 @@ public class GameScreen extends Screen {
                 .aOCamera(true)
                 .pos2D();
         world.getSystem(TagManager.class).register("camera", cameraEntity);
-        Archetype playerArchetype = AOArchetypes.player(world);
-
-	    Entity player = world.createEntity(playerArchetype);
-        E(player)
-                .pos2DX(50)
-                .pos2DY(50)
-                .worldPosX(50)
-                .worldPosY(50)
-                .worldPosMap(1)
-                .focused(true)
-                .playerControllable(true)
-                .headingCurrent(Heading.HEADING_NORTH)
-                .headIndex(4)
-                .bodyIndex(100)
-                .weaponIndex(8)
-                .shieldIndex(3)
-                .helmetIndex(6)
-				.statusHealth(120)
-                .statusMaxHealth(120)
-                .statusHungry(100)
-                .statusMana(1000)
-                .statusMaxMana(1000)
-                .statusStamina(100)
-                .statusThirst(100)
-                .statusCriminal(true)
-                .infoName("guidota")
-                .infoClan("Clarinete")
-                .canWrite()
-                .aOPhysics();
-
-        Entity player2 = world.createEntity(playerArchetype);
-        E(player2)
-                .pos2DX(50)
-                .pos2DY(50)
-                .worldPosX(50)
-                .worldPosY(50)
-                .worldPosMap(1)
-                .headingCurrent(Heading.HEADING_NORTH)
-                .headIndex(2)
-                .bodyIndex(2)
-                .weaponIndex(3)
-                .shieldIndex(3)
-                .helmetIndex(3)
-                .statusNewbie(true)
-                .dialogText("aa")
-                .randomMovement(true)
-                .infoName("guidota2")
-                .aOPhysics();
+        client.sendToAll(new LoginRequest("guidota", ""));
     }
 
     @Override
     protected void initSystems(WorldConfigurationBuilder builder) {
         // WORLD SYSTEMS
+        client = new KryonetClientMarshalStrategy("localhost", 7666);
         builder
                 .with(new SuperMapper())
+                .with(new ClientSystem(client))
                 // Player movement
                 .with(new PlayerInputSystem())
                 .with(new MovementSystem())
@@ -154,6 +107,10 @@ public class GameScreen extends Screen {
 
         Container<Table> dialogContainer = createDialogContainer();
         stage.addActor(dialogContainer);
+    }
+
+    public static World getWorld() {
+        return world;
     }
 
     private Container<Table> createDialogContainer() {

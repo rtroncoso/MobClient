@@ -29,7 +29,7 @@ public abstract class Screen extends ScreenAdapter {
     public static final int GAME_PAUSED = 1;
 
     protected Game game;
-    protected World world;
+    public static World world;
     protected FPSLogger logger;
     protected final WorldConfigurationBuilder builder = new WorldConfigurationBuilder();
 

@@ -6,18 +6,15 @@ import character.Character;
 import character.Dialog;
 import com.artemis.Aspect;
 import com.artemis.E;
-import com.artemis.Entity;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.Align;
-import net.mostlyoriginal.api.component.interact.Focus;
 
 import static com.artemis.E.E;
-import static com.mob.client.util.Skins.COMODORE_SKIN;
+import static com.mob.shared.util.Skins.COMODORE_SKIN;
 
 public class DialogSystem extends IteratingSystem {
 

@@ -42,9 +42,10 @@ public class MapLowerLayerRenderingSystem extends BaseSystem {
     }
 
     private void renderWorld() {
+        Map map = this.mapSystem.map;
+        if (map == null) return;
         // Variable Declarations
         int screenMinX, screenMaxX, screenMinY, screenMaxY, minAreaX, minAreaY, maxAreaX, maxAreaY;
-        Map map = this.mapSystem.map;
 
         // Calculate visible part of the map
         int cameraPosX = (int) (this.cameraSystem.camera.position.x / Map.TILE_PIXEL_WIDTH);

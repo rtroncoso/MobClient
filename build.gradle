@@ -22,6 +22,7 @@ allprojects {
     ext {
         appName = 'MobClient'
         gdxVersion = '1.9.8'
+        kryonetVersion = '2.22.0-RC1'
         roboVMVersion = '2.3.1'
         box2DLightsVersion = '1.4'
         aiVersion = '1.8.1'
@@ -65,6 +66,8 @@ project(":core") {
     dependencies {
         compile project(":components")
 
+        compile 'org.mongodb:mongo-java-driver:2.12.3'
+
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
@@ -78,6 +81,7 @@ project(":core") {
         compile "net.mostlyoriginal.artemis-odb:contrib-core:$artemisContribVersion"
         compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion"
         compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion"
+        compile "net.mostlyoriginal.artemis-odb:contrib-network:$artemisContribVersion"
 
         compile 'junit:junit:4.+'
         testCompile 'junit:junit:4.+'
@@ -86,6 +90,8 @@ project(":core") {
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+
+        compile "com.esotericsoftware:kryonet:$kryonetVersion"
     }
 }
 
