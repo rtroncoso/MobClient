@@ -39,7 +39,7 @@ public class GameTexture {
 	
 	public GameTexture(Graphic graphic) {
 		this.textureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())),
-				graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
+				graphic.getX(), graphic.getY(), graphic.getWidth(), graphic.getHeight());
 		this.textureRegion.flip(false, true);
 	}
 

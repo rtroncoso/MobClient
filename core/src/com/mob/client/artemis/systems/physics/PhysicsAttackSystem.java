@@ -1,6 +1,6 @@
 package com.mob.client.artemis.systems.physics;
 
-import character.Heading;
+import entity.Heading;
 import com.artemis.Aspect;
 import com.artemis.systems.IteratingSystem;
 import physics.PhysicAttack;

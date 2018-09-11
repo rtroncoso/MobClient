@@ -16,135 +16,72 @@
  *******************************************************************************/
 package com.mob.client.artemis.systems.physics;
 
-import character.Heading;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.mob.client.artemis.systems.interactions.MeditateSystem;
-import com.mob.client.handlers.MapHandler;
-import com.mob.dao.objects.Map;
+import com.esotericsoftware.minlog.Log;
+import com.mob.client.screens.GameScreen;
 import com.mob.dao.objects.Tile;
-import com.mob.dao.objects.WorldPosition;
 import movement.Destination;
 import physics.AOPhysics;
 import position.Pos2D;
 import position.WorldPos;
-
-import java.util.Optional;
 
 import static com.artemis.E.E;
 
 @Wire
 public class MovementSystem extends IteratingSystem {
 
-	public MovementSystem() {
-		super(Aspect.all(AOPhysics.class,
+    public MovementSystem() {
+        super(Aspect.all(Destination.class,
                 WorldPos.class, Pos2D.class));
-	}
+    }
 
     @Override
     protected void process(int entity) {
         E player = E(entity);
-        final AOPhysics phys = player.getAOPhysics();
-        final WorldPos pos = player.getWorldPos();
-
-        Optional<AOPhysics.Movement> movementIntention = phys.getMovementIntention();
-        if (!player.hasDestination()) {
-            movementIntention.ifPresent(movement -> {
-                WorldPos expectedPos = getExpectedPos(player, movement, pos);
-                if (isValid(expectedPos)) {
-                    player.destinationX(expectedPos.x);
-                    player.destinationY(expectedPos.y);
-                    // stop meditating
-                    stopMeditating(player);
-                }
-            });
+        player.moving();
+        WorldPos pos = player.getWorldPos();
+        if (entity == GameScreen.getPlayer()) {
+            pos = MovementProcessorSystem.getPosition(pos);
         }
-        player.moving(player.hasDestination());
         if (player.hasDestination()) {
             if (movePlayer(player)) {
-                updateTile(Tile.EMPTY_INDEX, pos);
-                Destination destination = player.getDestination();
-                pos.x = destination.x;
-                pos.y = destination.y;
                 player.removeDestination();
-                if (changeMap(player, pos)) {
-                    return;
-                }
-                updateTile(entity, pos);
+                player.removeMoving();
             }
         }
 
     }
 
-    private boolean changeMap(E player, WorldPos pos) {
-        Map map = MapHandler.get(pos.map);
-        Tile tile = map.getTile(pos.x, pos.y);
-        WorldPosition newPos = tile.getTileExit();
-        WorldPos playerPos = player.getWorldPos();
-        if (newPos.getMap() != 0 && newPos.getMap() != playerPos.map) {
-            playerPos.map = newPos.getMap();
-            playerPos.x = newPos.getX();
-            playerPos.y = newPos.getY();
-            return true;
-        }
-        return false;
-    }
-
-    private void updateTile(int entity, WorldPos pos) {
-	    Map map = MapHandler.get(pos.map);
-        Tile tile = map.getTile(pos.x, pos.y);
-        tile.setCharIndex(entity);
-    }
-
-    private boolean isValid(WorldPos expectedPos) {
-        Map map = MapHandler.get(expectedPos.map);
-        Tile tile = map.getTile(expectedPos.x, expectedPos.y);
-        return tile != null && !tile.isBlocked() && tile.getCharIndex() == Tile.EMPTY_INDEX;
-    }
-
-    private void stopMeditating(E player) {
-        player.getStates().meditating = false;
-        MeditateSystem.stopMeditating(player);
-    }
-
     private boolean movePlayer(E player) {
         Destination destination = player.getDestination();
+        Log.debug("Moving player: " + player.id() + " to " + destination.worldPos.x + " - " + destination.worldPos.y);
         Pos2D pos2D = player.getPos2D();
-        AOPhysics.Movement dir = getDirection(player.getWorldPos(), destination);
-        Pos2D possiblePos = new Pos2D(pos2D.x, pos2D.y);
         float delta = world.getDelta() * AOPhysics.WALKING_VELOCITY / Tile.TILE_PIXEL_HEIGHT;
-        switch (dir) {
+        switch (destination.dir) {
             default:
             case DOWN:
-                possiblePos.y += delta;
-                player.headingCurrent(Heading.HEADING_SOUTH);
+                pos2D.y += delta;
                 break;
             case LEFT:
-                possiblePos.x -= delta;
-                player.headingCurrent(Heading.HEADING_WEST);
+                pos2D.x -= delta;
                 break;
             case RIGHT:
-                possiblePos.x += delta;
-                player.headingCurrent(Heading.HEADING_EAST);
+                pos2D.x += delta;
                 break;
             case UP:
-                possiblePos.y -= delta;
-                player.headingCurrent(Heading.HEADING_NORTH);
+                pos2D.y -= delta;
                 break;
         }
 
-        adjustPossiblePos(possiblePos, destination, dir);
-
-        pos2D.y = possiblePos.y;
-        pos2D.x = possiblePos.x;
+        adjustPossiblePos(pos2D, destination.worldPos, destination.dir);
         return pos2D.x % 1 == 0 && pos2D.y % 1 == 0;
-	}
+    }
 
-    private void adjustPossiblePos(Pos2D possiblePos, Destination destination, AOPhysics.Movement dir) {
-	    int newY = (int) possiblePos.y;
+    private void adjustPossiblePos(Pos2D possiblePos, WorldPos destination, AOPhysics.Movement dir) {
+        int newY = (int) possiblePos.y;
         int newX = (int) possiblePos.x;
         switch (dir) {
             case LEFT:
@@ -167,42 +104,6 @@ public class MovementSystem extends IteratingSystem {
                     possiblePos.y = destination.y;
                 }
                 break;
-        }
-    }
-
-    private AOPhysics.Movement getDirection(WorldPos worldPos, Destination destination) {
-	    if (worldPos.x != destination.x) {
-	        if (worldPos.x < destination.x) {
-	            return AOPhysics.Movement.RIGHT;
-            } else {
-	            return AOPhysics.Movement.LEFT;
-            }
-        } else {
-	        if (worldPos.y > destination.y) {
-                return AOPhysics.Movement.UP;
-            } else {
-	            return AOPhysics.Movement.DOWN;
-            }
-        }
-    }
-
-
-    private WorldPos getExpectedPos(E player, AOPhysics.Movement movement, WorldPos pos) {
-	    switch (movement) {
-            case RIGHT:
-                player.headingCurrent(Heading.HEADING_EAST);
-                return new WorldPos(pos.x + 1, pos.y, pos.map);
-            case LEFT:
-                player.headingCurrent(Heading.HEADING_WEST);
-                return new WorldPos(pos.x - 1, pos.y, pos.map);
-            case UP:
-                player.headingCurrent(Heading.HEADING_NORTH);
-                return new WorldPos(pos.x, pos.y - 1, pos.map);
-            case DOWN:
-                player.headingCurrent(Heading.HEADING_SOUTH);
-                return new WorldPos(pos.x, pos.y + 1, pos.map);
-            default:
-                return new WorldPos(pos.x, pos.y, pos.map);
         }
     }
 

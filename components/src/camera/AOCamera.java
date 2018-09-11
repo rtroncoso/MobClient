@@ -20,13 +20,4 @@ import com.artemis.Component;
 
 import java.io.Serializable;
 
-/**
- * AOCamera Class
- *
- * @author rt
- * @package com.mob.client.api.components.camera
- */
-public class AOCamera extends Component implements Serializable {
-
-
-}
+public class AOCamera extends Component implements Serializable { }

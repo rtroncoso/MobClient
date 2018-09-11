@@ -34,6 +34,14 @@ public class AnimationsHandler {
         return result;
     }
 
+    private static Map<Integer, List<BundledAnimation>> loadDescriptors(Map<Integer, ?> descriptors) {
+        Map<Integer, List<BundledAnimation>> result = new HashMap<>();
+        descriptors.forEach((id, descriptor) -> {
+            result.put(id, createAnimations((IDescriptor) descriptor));
+        });
+        return result;
+    }
+
     private static List<BundledAnimation> createAnimations(IDescriptor descriptor) {
         List<BundledAnimation> animations = new ArrayList<>();
         int[] indexs = descriptor.getIndexs();

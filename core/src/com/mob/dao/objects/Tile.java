@@ -30,16 +30,16 @@ import java.util.Vector;
 
 public class Tile {
 
-	public static final int EMPTY_INDEX = 0;
+	public static final int EMPTY_INDEX = -1;
 	public static final float TILE_PIXEL_WIDTH = 32.0f;
 	public static final float TILE_PIXEL_HEIGHT = 32.0f;
 
 	private int[] graphic;
 	private transient Vector<BundledAnimation> textures = new Vector<BundledAnimation>();
 	
-	private int charIndex;
-	private int objIndex = -1;
-	private int npcIndex;
+	private int charIndex = EMPTY_INDEX;
+	private int objIndex = EMPTY_INDEX;
+	private int npcIndex = EMPTY_INDEX;
 	
 	private WorldPosition tileExit;
 	private boolean blocked;

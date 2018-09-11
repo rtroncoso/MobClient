@@ -1,5 +1,7 @@
 package com.mob.server.core;
 
+import com.esotericsoftware.minlog.Log;
+
 public class ServerLauncher {
 
     private static WorldServer worldServer;
@@ -13,6 +15,7 @@ public class ServerLauncher {
         System.out.println("Initializing systems");
         worldServer.initSystems();
         System.out.println("Creating world");
+        Log.set(Log.LEVEL_DEBUG);
         worldServer.createWorld();
         worldServer.start();
     }

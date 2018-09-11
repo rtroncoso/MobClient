@@ -18,6 +18,7 @@ package com.mob.client.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.esotericsoftware.minlog.Log;
 import com.mob.client.Game;
 
 public class DesktopLauncher {
@@ -31,7 +32,7 @@ public class DesktopLauncher {
         cfg.vSyncEnabled = Game.GAME_VSYNC_ENABLED;
         cfg.foregroundFPS = 0;
         cfg.resizable = false;
-        
+        Log.set(Log.LEVEL_DEBUG);
         new LwjglApplication(new Game(), cfg);
 	}
 }

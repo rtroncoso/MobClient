@@ -16,7 +16,10 @@
  *******************************************************************************/
 package com.mob.client.screens;
 
-import com.artemis.*;
+import com.artemis.Entity;
+import com.artemis.SuperMapper;
+import com.artemis.World;
+import com.artemis.WorldConfigurationBuilder;
 import com.artemis.managers.TagManager;
 import com.artemis.managers.UuidEntityManager;
 import com.badlogic.gdx.Gdx;
@@ -24,47 +27,67 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.esotericsoftware.minlog.Log;
 import com.mob.client.Game;
+import com.mob.client.KryonetClientMarshalStrategy;
 import com.mob.client.artemis.systems.anim.MovementAnimationSystem;
 import com.mob.client.artemis.systems.camera.CameraFocusSystem;
-import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.camera.CameraMovementSystem;
+import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.artemis.systems.interactions.DialogSystem;
 import com.mob.client.artemis.systems.interactions.MeditateSystem;
 import com.mob.client.artemis.systems.map.TiledMapSystem;
 import com.mob.client.artemis.systems.network.ClientSystem;
-import com.mob.client.artemis.systems.physics.*;
+import com.mob.client.artemis.systems.physics.MovementProcessorSystem;
+import com.mob.client.artemis.systems.physics.MovementSystem;
+import com.mob.client.artemis.systems.physics.PlayerInputSystem;
+import com.mob.client.artemis.systems.render.StateRenderingSystem;
 import com.mob.client.artemis.systems.render.*;
-import com.mob.network.login.LoginRequest;
-import net.mostlyoriginal.api.network.marshal.kryonet.KryonetClientMarshalStrategy;
+import com.mob.server.systems.RandomMovementSystem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.artemis.E.E;
 
-
-/**
- * Class GameScreen
- * @author Rodrigo
- */
 public class GameScreen extends Screen {
 
     public static final int FONTS_PRIORITY = WorldConfigurationBuilder.Priority.NORMAL + 3;
     private Stage stage;
     private Table dialog;
-    private KryonetClientMarshalStrategy client;
+    public static KryonetClientMarshalStrategy client;
+    public static int player;
+    public static GameScreen instance;
+
+    public static Map<Integer, Integer> networkedEntities = new HashMap<>();
 
     public GameScreen(Game game) {
-		super(game);
+        super(game);
+        instance = this;
 	}
+
+	public static GameScreen getInstance() {
+        return instance;
+    }
+
+    public static int getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(int player) {
+        GameScreen.player = player;
+        E(player).character();
+    }
 
     @Override
     protected void postWorldInit() {
-        // register camera?
         Entity cameraEntity = world.createEntity();
         E(cameraEntity)
                 .aOCamera(true)
                 .pos2D();
         world.getSystem(TagManager.class).register("camera", cameraEntity);
-        client.sendToAll(new LoginRequest("guidota", ""));
+        Log.info("Send login request");
+
     }
 
     @Override
@@ -76,8 +99,9 @@ public class GameScreen extends Screen {
                 .with(new ClientSystem(client))
                 // Player movement
                 .with(new PlayerInputSystem())
-                .with(new MovementSystem())
+                .with(new MovementProcessorSystem())
                 .with(new MovementAnimationSystem())
+                .with(new MovementSystem())
                 // Camera
                 .with(new CameraSystem(Game.GAME_SCREEN_ZOOM))
                 .with(new CameraFocusSystem())
@@ -88,9 +112,11 @@ public class GameScreen extends Screen {
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 2, new CharacterRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new FXsRenderingSystem(this.game.getSpriteBatch()))
                 .with(WorldConfigurationBuilder.Priority.NORMAL + 1, new MapUpperLayerRenderingSystem(this.game.getSpriteBatch()))
+                .with(new StateRenderingSystem(game.getSpriteBatch()))
                 .with(new CharacterStatusRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new NameRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new DialogRenderingSystem(game.getSpriteBatch()))
+                .with(FONTS_PRIORITY, new CoordinatesRenderingSystem(game.getSpriteBatch()))
                 .with(FONTS_PRIORITY, new CharacterStatesRenderingSystem(game.getSpriteBatch()))
                 // Logic systems
                 .with(new MeditateSystem())
@@ -111,6 +137,10 @@ public class GameScreen extends Screen {
 
     public static World getWorld() {
         return world;
+    }
+
+    public static KryonetClientMarshalStrategy getClient() {
+        return client;
     }
 
     private Container<Table> createDialogContainer() {
@@ -150,6 +180,18 @@ public class GameScreen extends Screen {
     protected void drawUI() {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    public static boolean entityExsists(int networkId) {
+        return networkedEntities.containsKey(networkId);
+    }
+
+    public static int getNetworkedEntity(int networkId) {
+        return networkedEntities.get(networkId);
+    }
+
+    public static void registerEntity(int networkId, int entityId) {
+        networkedEntities.put(networkId, entityId);
     }
 
     @Override

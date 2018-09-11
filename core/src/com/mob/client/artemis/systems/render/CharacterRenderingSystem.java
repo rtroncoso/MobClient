@@ -1,7 +1,5 @@
 package com.mob.client.artemis.systems.render;
 
-import character.*;
-import character.Character;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
@@ -13,8 +11,9 @@ import com.mob.client.artemis.systems.camera.CameraSystem;
 import com.mob.client.handlers.AnimationsHandler;
 import com.mob.client.textures.BundledAnimation;
 import com.mob.shared.util.Util;
+import entity.*;
+import entity.character.Character;
 import position.Pos2D;
-import position.WorldPos;
 
 import java.util.Comparator;
 
@@ -29,7 +28,7 @@ public class CharacterRenderingSystem extends OrderedEntityProcessingSystem {
     private CameraSystem cameraSystem;
 
     public CharacterRenderingSystem(SpriteBatch batch) {
-        super(Aspect.all(Character.class, WorldPos.class, Heading.class));
+        super(Aspect.all(Character.class, Pos2D.class, Heading.class));
         this.batch = batch;
     }
 

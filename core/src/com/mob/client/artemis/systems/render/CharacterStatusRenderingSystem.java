@@ -1,8 +1,9 @@
 package com.mob.client.artemis.systems.render;
 
 import camera.Focused;
-import character.*;
-import character.Character;
+import com.mob.client.textures.TextureUtils;
+import entity.character.*;
+import entity.character.Character;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
@@ -31,7 +32,6 @@ public class CharacterStatusRenderingSystem extends IteratingSystem {
     public static final int BAR_HEIGHT = 8;
     public static final int BORDER = 2;
 
-    private static final Texture white = new Texture("data/ui/images/blank.png");
     public static final float ALPHA = 0.7f;
 
     public static float OFFSET_X = (Gdx.graphics.getWidth() + BAR_WIDTH) / 2;
@@ -43,7 +43,7 @@ public class CharacterStatusRenderingSystem extends IteratingSystem {
      * Creates a new EntityProcessingSystem.
      */
     public CharacterStatusRenderingSystem(SpriteBatch batch) {
-        super(Aspect.all(Character.class, Status.class, Focused.class));
+        super(Aspect.all(Character.class, Focused.class));
         this.batch = batch;
     }
 
@@ -53,33 +53,45 @@ public class CharacterStatusRenderingSystem extends IteratingSystem {
         batch.setProjectionMatrix(cameraSystem.guiCamera.combined);
         batch.begin();
         OFFSET_X = (cameraSystem.guiCamera.viewportWidth / 2) - BAR_WIDTH / 2;
+        drawExp(E(entity));
         drawHealth(E(entity));
         drawMana(E(entity));
         batch.end();
     }
 
+    private void drawExp(E player) {
+        int maxExp = player.getExp().exp;
+        int minExp = player.getElv().elv;
+        drawBar(maxExp, minExp, (int) OFFSET_X, 0, Colors.EXP.cpy(), OFFSET_Y);
+    }
+
     private void drawMana(E player) {
-        int maxHealth = player.getStatus().maxMana;
-        int health = player.getStatus().mana;
-        drawBar(maxHealth, health, (int) OFFSET_X, OFFSET_Y + BAR_HEIGHT + 1, Colors.MANA.cpy());
+        int maxMana = player.getMana().max;
+        int minMana = player.getMana().min;
+        drawBar(maxMana, minMana, (int) OFFSET_X, OFFSET_Y + BAR_HEIGHT + 1, Colors.MANA.cpy(), BAR_HEIGHT  );
+        drawText(maxMana, minMana, (int) OFFSET_X, OFFSET_Y + BAR_HEIGHT + 1);
     }
 
     private void drawHealth(E player) {
-        int maxHealth = player.getStatus().maxHealth;
-        int health = player.getStatus().health;
-        drawBar(maxHealth, health, (int) OFFSET_X, OFFSET_Y, Colors.HEALTH.cpy());
+        int maxHealth = player.getHealth().max;
+        int health = player.getHealth().min;
+        drawBar(maxHealth, health, (int) OFFSET_X, OFFSET_Y, Colors.HEALTH.cpy(), BAR_HEIGHT);
+        drawText(maxHealth, health, (int) OFFSET_X, OFFSET_Y);
     }
 
-    private void drawBar(int max, int value, int offsetX, int offsetY, Color barColor) {
+    private void drawBar(int max, int value, int offsetX, int offsetY, Color barColor, int barHeight) {
         //background
         Color black = Color.BLACK.cpy();
         batch.setColor(black.r, black.g, black.b, ALPHA);
-        batch.draw(white, offsetX, offsetY, BAR_WIDTH + BORDER, BAR_HEIGHT);
+        batch.draw(TextureUtils.white, offsetX, offsetY, BAR_WIDTH + BORDER, barHeight);
 
         //color
         batch.setColor(barColor.r, barColor.g, barColor.b, ALPHA);
-        batch.draw(white, offsetX + BORDER/2, offsetY + BORDER/2,( (float) value / max) * BAR_WIDTH, BAR_HEIGHT-BORDER);
+        batch.draw(TextureUtils.white, offsetX + BORDER/2, offsetY + BORDER/2,( (float) value / max) * BAR_WIDTH, barHeight-BORDER);
 
+    }
+
+    private void drawText(int max, int value, int offsetX, int offsetY) {
         //text
         batch.setColor(Color.WHITE.cpy());
         layout.setText(WHITE_FONT,value + "/" + max);

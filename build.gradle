@@ -82,6 +82,7 @@ project(":core") {
         compile "net.mostlyoriginal.artemis-odb:contrib-jam:$artemisContribVersion"
         compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:$artemisContribVersion"
         compile "net.mostlyoriginal.artemis-odb:contrib-network:$artemisContribVersion"
+//        compile "com.esotericsoftware:kryonet:$kryonetVersion"
 
         compile 'junit:junit:4.+'
         testCompile 'junit:junit:4.+'
@@ -91,7 +92,6 @@ project(":core") {
         testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
 
-        compile "com.esotericsoftware:kryonet:$kryonetVersion"
     }
 }
 

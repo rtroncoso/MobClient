@@ -35,7 +35,6 @@ public class Game implements ApplicationListener {
         AnimationsHandler.load();
         ParticlesHandler.load();
 
-
         // Set ScreenHandler Game instance to this and load GameScreen
         ScreenHandler.setGameInstance(this);
         ScreenHandler.load("GameScreen");

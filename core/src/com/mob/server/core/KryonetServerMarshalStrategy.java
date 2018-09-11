@@ -1,12 +1,10 @@
 package com.mob.server.core;
 
-import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
 import net.mostlyoriginal.api.network.marshal.common.MarshalState;
 import net.mostlyoriginal.api.network.marshal.kryonet.KryonetMarshalStrategy;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 
 public class KryonetServerMarshalStrategy extends KryonetMarshalStrategy {
 
@@ -17,8 +15,8 @@ public class KryonetServerMarshalStrategy extends KryonetMarshalStrategy {
         endpoint = new Server() {
             @Override
             public void sendToTCP(int connectionID, Object object) {
-                super.sendToTCP(connectionID, object);
                 System.out.println("Sent message to " + connectionID);
+                super.sendToTCP(connectionID, object);
             }
 
         };

@@ -7,7 +7,8 @@ public class LoginFailed implements IResponse {
 
     private String reason;
 
-    public LoginFailed() {}
+    public LoginFailed() {
+    }
 
     public LoginFailed(String reason) {
         this.reason = reason;
@@ -19,6 +20,6 @@ public class LoginFailed implements IResponse {
 
     @Override
     public void accept(IResponseProcessor processor) {
-
+        processor.processResponse(this);
     }
 }

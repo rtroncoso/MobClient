@@ -1,7 +1,6 @@
 package com.mob.client.artemis.systems.render;
 
-import character.Character;
-import character.States;
+import entity.character.Character;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
@@ -17,11 +16,6 @@ import static com.artemis.E.E;
 import static com.mob.shared.util.Fonts.*;
 import static com.mob.shared.util.Fonts.dialogLayout;
 
-/**
- * CharacterRenderingSystem Class
- *
- * @author rt
- */
 @Wire
 public class CharacterStatesRenderingSystem extends IteratingSystem {
 
@@ -33,20 +27,19 @@ public class CharacterStatesRenderingSystem extends IteratingSystem {
      * Creates a new EntityProcessingSystem.
      */
     public CharacterStatesRenderingSystem(SpriteBatch batch) {
-        super(Aspect.all(Character.class, States.class, Pos2D.class));
+        super(Aspect.all(Character.class, Pos2D.class));
         this.batch = batch;
     }
 
     @Override
     protected void process(int entity) {
-        States states = E(entity).getStates();
-        if (states.isInAnyState()) {
+        if (isInAnyState(entity)) {
             E player = E(entity);
             Pos2D playerPos = Util.toScreen(player.getPos2D());
             Pos2D cameraPos = new Pos2D(cameraSystem.camera.position.x, cameraSystem.camera.position.y);
             Pos2D screenPos = new Pos2D(cameraPos.x - playerPos.x, cameraPos.y - playerPos.y);
 
-            if (states.writing) {
+            if (player.hasWriting()) {
                 cameraSystem.guiCamera.update();
                 batch.setProjectionMatrix(cameraSystem.guiCamera.combined);
                 batch.begin();
@@ -58,6 +51,10 @@ public class CharacterStatesRenderingSystem extends IteratingSystem {
                 batch.end();
             }
         }
+    }
+
+    private boolean isInAnyState(int entity) {
+        return E(entity).hasMeditating() || E(entity).hasWriting() || E(entity).hasResting();
     }
 }
 

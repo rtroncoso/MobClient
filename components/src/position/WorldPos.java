@@ -16,10 +16,10 @@
  *******************************************************************************/
 package position;
 
-import character.Heading;
+import entity.Heading;
 import com.artemis.Component;
 
-import static character.Heading.*;
+import static entity.Heading.*;
 
 /**
  * WorldPos Class

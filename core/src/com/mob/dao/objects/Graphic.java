@@ -28,10 +28,8 @@ public class Graphic {
 	private int y;
 	private int fileNum;
 	private int grhIndex;
-	private int pixelWidth;
-	private int pixelHeight;
-	private float tileWidth;
-	private float tileHeight;
+	private int width;
+	private int height;
 	private int[] frames;
 	private float speed;
 
@@ -45,10 +43,8 @@ public class Graphic {
 		this.x = x;
 		this.y = y;
 		this.fileNum = fileNum;
-		this.pixelWidth = pixelWidth;
-		this.pixelHeight = pixelHeight;
-		this.tileWidth = tileWidth;
-		this.tileHeight = tileHeight;
+		this.width = pixelWidth;
+		this.height = pixelHeight;
 		this.frames = frames;
 		this.speed = speed;
 	}
@@ -96,59 +92,46 @@ public class Graphic {
 	}
 
 	/**
-	 * @return the pixelWidth
+	 * @return the width
 	 */
-	public int getPixelWidth() {
-		return pixelWidth;
+	public int getWidth() {
+		return width;
 	}
 
 	/**
-	 * @param pixelWidth the pixelWidth to set
+	 * @param width the width to set
 	 */
-	public void setPixelWidth(int pixelWidth) {
-		this.pixelWidth = pixelWidth;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 	/**
-	 * @return the pixelHeight
+	 * @return the height
 	 */
-	public int getPixelHeight() {
-		return pixelHeight;
+	public int getHeight() {
+		return height;
 	}
 
 	/**
-	 * @param pixelHeight the pixelHeight to set
+	 * @param height the height to set
 	 */
-	public void setPixelHeight(int pixelHeight) {
-		this.pixelHeight = pixelHeight;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 	/**
 	 * @return the tileWidth
 	 */
 	public float getTileWidth() {
-		return tileWidth;
+		return width / Tile.TILE_PIXEL_WIDTH;
 	}
 
-	/**
-	 * @param tileWidth the tileWidth to set
-	 */
-	public void setTileWidth(float tileWidth) {
-		this.tileWidth = tileWidth;
-	}
 
 	/**
 	 * @return the tileHeight
 	 */
 	public float getTileHeight() {
-		return tileHeight;
-	}
-
-	/**
-	 * @param tileHeight the tileHeight to set
-	 */
-	public void setTileHeight(float tileHeight) {
-		this.tileHeight = tileHeight;
+		return height / Tile.TILE_PIXEL_HEIGHT;
 	}
 
 	/**

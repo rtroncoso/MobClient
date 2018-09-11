@@ -1,7 +1,5 @@
 package com.mob.client.artemis.systems.render;
 
-import character.*;
-import character.Character;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;
@@ -10,10 +8,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mob.client.artemis.systems.OrderedEntityProcessingSystem;
 import com.mob.client.artemis.systems.camera.CameraSystem;
-import com.mob.shared.util.Util;
 import com.mob.dao.objects.Tile;
+import com.mob.shared.util.Util;
+import entity.character.Character;
+import entity.character.info.Name;
 import position.Pos2D;
-import position.WorldPos;
 
 import java.util.Comparator;
 
@@ -27,7 +26,7 @@ public class NameRenderingSystem extends OrderedEntityProcessingSystem {
     private CameraSystem cameraSystem;
 
     public NameRenderingSystem(SpriteBatch batch) {
-        super(Aspect.all(Character.class, WorldPos.class, Status.class, Info.class));
+        super(Aspect.all(Character.class, Pos2D.class, Name.class));
         this.batch = batch;
     }
 
@@ -49,10 +48,10 @@ public class NameRenderingSystem extends OrderedEntityProcessingSystem {
 
     private float drawName(E player, Pos2D screenPos) {
         BitmapFont font =
-                player.getStatus().gm ? GM_NAME_FONT :
-                player.getStatus().newbie ? NEWBIE_NAME_FONT :
-                player.getStatus().criminal ? CRIMINAL_NAME_FONT : CITIZEN_NAME_FONT;
-        layout.setText(font, player.getInfo().name);
+                player.hasGM() ? GM_NAME_FONT :
+                player.getLevel().level > 13 ? NEWBIE_NAME_FONT :
+                player.hasCriminal() ? CRIMINAL_NAME_FONT : CITIZEN_NAME_FONT;
+        layout.setText(font, player.getName().name);
         final float fontX = (cameraSystem.guiCamera.viewportWidth / 2) - screenPos.x - (Tile.TILE_PIXEL_WIDTH + layout.width) / 2 - 4;
         final float fontY = (cameraSystem.guiCamera.viewportHeight / 2) + screenPos.y - (layout.height) / 2;
         font.draw(batch, layout, fontX, fontY);
@@ -60,9 +59,9 @@ public class NameRenderingSystem extends OrderedEntityProcessingSystem {
     }
 
     private void drawClanName(E player, Pos2D screenPos, float nameY) {
-        if (player.getInfo().clan != null && !player.getInfo().clan.isEmpty()) {
-            layout.setText(CLAN_FONT, "<" + player.getInfo().clan + ">");
-            final float fontX = (cameraSystem.guiCamera.viewportWidth / 2) - screenPos.x - (Tile.TILE_PIXEL_WIDTH + layout.width) / 2 - 4;
+        if (player.hasClan() && !player.getClan().clan.isEmpty()) {
+            layout.setText(CLAN_FONT, "<" + player.getClan().clan + ">");
+            final float fontX = (cameraSystem.guiCamera.viewportWidth / 2) - screenPos.x - (Tile.TILE_PIXEL_WIDTH + layout.width) / 2;
             final float fontY = nameY - layout.height - 5;
             CLAN_FONT.draw(batch, layout, fontX, fontY);
         }

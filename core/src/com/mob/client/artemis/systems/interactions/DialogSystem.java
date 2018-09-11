@@ -1,9 +1,9 @@
 package com.mob.client.artemis.systems.interactions;
 
 import camera.Focused;
-import character.CanWrite;
-import character.Character;
-import character.Dialog;
+import entity.character.CanWrite;
+import entity.character.Character;
+import entity.Dialog;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.systems.IteratingSystem;
@@ -40,8 +40,8 @@ public class DialogSystem extends IteratingSystem {
                             if (keycode == Input.Keys.ENTER && !firstOpened[0]) {
                                 // remove textfield
                                 talk(E(player), textf.getText());
-                                E(player).canWrite(true);
-                                E(player).getStates().writing = false;
+                                E(player).hasCanWrite();
+                                E(player).removeWriting();
                                 table.removeActor(textf, true);
                             } else if (firstOpened[0]) {
                                 firstOpened[0] = false;
@@ -51,7 +51,7 @@ public class DialogSystem extends IteratingSystem {
                     };
                 }
             };
-            E(player).getStates().writing = true;
+            E(player).writing();
             table.row().colspan(1).expandX().fillX();
             table.add(textf).fillX();
             table.getStage().setKeyboardFocus(textf);

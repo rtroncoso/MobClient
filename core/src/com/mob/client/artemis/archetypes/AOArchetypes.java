@@ -1,10 +1,10 @@
 package com.mob.client.artemis.archetypes;
 
-import character.*;
-import character.Character;
+import entity.Body;
+import entity.Head;
+import entity.character.Character;
 import com.artemis.Archetype;
 import com.artemis.ArchetypeBuilder;
-import com.artemis.EntityTransmuter;
 import com.artemis.World;
 import physics.AOPhysics;
 import position.Pos2D;
@@ -20,9 +20,7 @@ public class AOArchetypes {
                  .add(Body.class)
                  .add(Head.class)
                  .add(AOPhysics.class)
-                 .add(Info.class)
-                 .add(States.class)
-                 .add(Status.class)
+                 // TODO Complete
                  .build(world);
     }
 }

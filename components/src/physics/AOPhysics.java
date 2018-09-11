@@ -23,11 +23,6 @@ import java.util.Deque;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-/**
- * AOPhysics Class
- *
- * @author rt
- */
 public class AOPhysics extends Component implements Serializable {
 
     public final static float MAX_VELOCITY = Float.MAX_VALUE;
@@ -37,23 +32,25 @@ public class AOPhysics extends Component implements Serializable {
 
     public AOPhysics() {}
 
-    public void move(Movement movement, boolean moving) {
-        if (moving && !intentions.contains(movement)) {
-            intentions.add(movement);
-        } else if (!moving) {
-            intentions.remove(movement);
-        }
-    }
-
     public Optional<Movement> getMovementIntention() {
         return Optional.ofNullable(intentions.isEmpty() ? null : intentions.getFirst());
+    }
+
+    public void addIntention(Movement movement) {
+        intentions.add(movement);
+    }
+
+    public void removeIntention(Movement movement) {
+        intentions.remove(movement);
     }
 
     public enum Movement {
         UP,
         DOWN,
         RIGHT,
-        LEFT
+        LEFT;
+
+        Movement() {}
     }
 
 }

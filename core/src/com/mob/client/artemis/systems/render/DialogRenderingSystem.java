@@ -1,6 +1,6 @@
 package com.mob.client.artemis.systems.render;
 
-import character.Dialog;
+import entity.Dialog;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.Entity;

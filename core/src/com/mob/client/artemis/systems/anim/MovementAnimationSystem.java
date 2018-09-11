@@ -1,13 +1,15 @@
 package com.mob.client.artemis.systems.anim;
 
-import character.*;
-import character.Character;
+import entity.Body;
+import entity.Heading;
+import entity.Shield;
+import entity.Weapon;
+import entity.character.Character;
 import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
 import com.mob.client.handlers.AnimationsHandler;
-import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.client.textures.BundledAnimation;
 import movement.Moving;
 

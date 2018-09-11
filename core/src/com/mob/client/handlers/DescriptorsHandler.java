@@ -57,6 +57,9 @@ package com.mob.client.handlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+import com.mob.client.serializers.BodyDescriptorSerializer;
+import com.mob.client.serializers.GraphicsSerializer;
 import com.mob.dao.descriptors.*;
 import com.mob.dao.objects.*;
 import com.mob.dao.readers.*;
@@ -65,11 +68,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class DescriptorsHandler {
 
-    private static Map<String, Graphic> graphics;
-    private static List<BodyDescriptor> bodies;
+    private static Map<Integer, Graphic> graphics;
+//    private static List<BodyDescriptor> bodies;
+    private static Map<Integer, BodyDescriptor> bodies;
     private static List<HeadDescriptor> heads;
     private static List<HelmetDescriptor> helmets;
     private static List<WeaponDescriptor> weapons;
@@ -78,8 +84,8 @@ public class DescriptorsHandler {
     private static DescriptorsReader reader = new AODescriptorsReader();
 
     public static void load() {
-        graphics = loadMap("graphicsMap");
-        bodies = load("bodies2");
+        graphics = new GenericReader<Graphic>().read("graficos", Graphic.class, new GraphicsSerializer(), Graphic::getGrhIndex);
+        bodies = new GenericReader<BodyDescriptor>().read("cuerpos", BodyDescriptor.class, new BodyDescriptorSerializer(), Descriptor::getId);
         weapons = load("weapons2");
         shields = load("shields2");
         heads = load("heads2");
@@ -98,12 +104,6 @@ public class DescriptorsHandler {
         FileHandle file = Gdx.files.internal("data/descriptors/" + fileName + ".json");
         return (java.util.HashMap) json.fromJson(HashMap.class, file);
     }
-//
-//    public static IntMap loadGraphics(String fileName) {
-//        Json json = getJson();
-//        FileHandle file = Gdx.files.internal("data/descriptors/" + fileName + ".json");
-//        return (IntMap) json.fromJson(IntMap.class, file);
-//    }
 
     private static Json getJson() {
         Json json = new Json();
@@ -117,11 +117,20 @@ public class DescriptorsHandler {
         return json;
     }
 
-    public static Map<String, Graphic> getGraphics() {
+    public static ArrayList read(String fileName, Class type, Json.Serializer serializer) {
+        FileHandle file = Gdx.files.internal("data/indices/" + fileName + ".json");
+        Json json = new Json();
+        json.setSerializer(type, serializer);
+
+        return json.fromJson(ArrayList.class, type, file);
+    }
+
+
+    public static Map<Integer, Graphic> getGraphics() {
         return graphics;
     }
 
-    public static List<BodyDescriptor> getBodies() {
+    public static Map<Integer, BodyDescriptor> getBodies() {
         return bodies;
     }
 
@@ -170,7 +179,7 @@ public class DescriptorsHandler {
     }
 
     public static Graphic getGraphic(int index) {
-        return DescriptorsHandler.getGraphics().get(String.valueOf(index));
+        return DescriptorsHandler.getGraphics().get(index);
     }
 
 
