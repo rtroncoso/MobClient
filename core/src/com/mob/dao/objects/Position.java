@@ -22,7 +22,7 @@
  */
 package com.mob.dao.objects;
 
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.interfaces.Constants;
 
 public class Position implements Constants {
 

@@ -18,6 +18,7 @@
  */
 package com.mob.client.handlers;
 
+import com.artemis.Entity;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import com.mob.client.Game;
@@ -35,6 +36,7 @@ public class ScreenHandler {
     protected static HashMap<String, Screen> screens = new HashMap<String, Screen>();
     protected static Screen currentScreen;
     private static Game game;
+    private static Entity player;
 
     public static Screen load(String screenClassName) {
 
@@ -48,10 +50,10 @@ public class ScreenHandler {
                 newScreen = (Screen) constructor.newInstance(game);
                 screens.put(screenClassName, newScreen);
             } catch ( InvocationTargetException ex ) {
-                System.err.println(ex.getMessage() + " Exception in Screen.");
+                System.err.println(ex.getMessage() + " Exception in Screen. " + screenClassName);
                 ex.printStackTrace();
             } catch ( ReflectionException ex ) {
-                System.err.println(ex.getMessage() + " Exception in Screen.");
+                System.err.println(ex.getMessage() + " Reflection Exception in Screen." + screenClassName);
                 ex.printStackTrace();
             } catch ( NoSuchMethodException ex ){
             } catch( InstantiationException ex ){

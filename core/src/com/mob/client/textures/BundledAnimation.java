@@ -20,7 +20,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.mob.dao.objects.Graphic;
-import com.mob.client.handlers.AssetsHandler;
+import com.mob.client.handlers.DescriptorsHandler;
 
 /**
  * @author Rodrigo
@@ -28,7 +28,7 @@ import com.mob.client.handlers.AssetsHandler;
 public class BundledAnimation {
 
 	private Array<GameTexture> frames = new Array<GameTexture>();
-	private Animation animation;
+	private Animation<TextureRegion> animation;
 	private float animationTime;
 	private boolean animated = false;
 
@@ -42,7 +42,7 @@ public class BundledAnimation {
 		if(numFrames > 0) {
 			
 			for(int frame : graphic.getFrames()) {
-				this.frames.add(new GameTexture(AssetsHandler.getGraphic(frame)));
+				this.frames.add(new GameTexture(DescriptorsHandler.getGraphic(frame)));
 				tmpRegions.add(this.frames.peek().getGraphic());
 			}
 			
@@ -54,7 +54,7 @@ public class BundledAnimation {
 				index++;
 			}
 			
-			this.setAnimation(new Animation(graphic.getSpeed() / 1000.0f, textures));
+			this.setAnimation(new Animation<TextureRegion>(graphic.getSpeed() / 3340.0f, textures));
 			this.animated = true;
 			
 		} else {

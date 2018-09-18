@@ -19,7 +19,7 @@ package com.mob.dao.loaders;
 import com.mob.dao.objects.Map;
 import com.mob.dao.objects.Tile;
 import com.mob.dao.objects.WorldPosition;
-import com.mob.client.util.Util;
+import com.mob.shared.util.Util;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -28,7 +28,6 @@ public class MapLoader extends Loader<Map> {
 
     @Override
     public Map load(DataInputStream file) throws IOException {
-
         file.skipBytes(GAME_FILE_HEADER_SIZE + (2 * 5)); // Skip complete map header
         Map map = new Map();
 
@@ -73,4 +72,5 @@ public class MapLoader extends Loader<Map> {
 
         return map;
     }
+
 }

@@ -17,38 +17,92 @@
 package com.mob.client.artemis.systems.physics;
 
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
-import com.artemis.Entity;
+import com.artemis.E;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.EntityProcessingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.mob.client.artemis.components.physics.Physics;
-import com.mob.client.artemis.components.position.Pos;
+import com.artemis.systems.IteratingSystem;
+import com.mob.client.screens.GameScreen;
+import com.mob.dao.objects.Tile;
+import movement.Destination;
+import physics.AOPhysics;
+import position.Pos2D;
+import position.WorldPos;
+
+import static com.artemis.E.E;
 
 @Wire
-public class MovementSystem extends EntityProcessingSystem {
+public class MovementSystem extends IteratingSystem {
 
-	private ComponentMapper<Physics> xm;
-	private ComponentMapper<Pos> pm;
-
-	public MovementSystem() {
-		super(Aspect.all(Physics.class,
-                Pos.class));
-	}
+    public MovementSystem() {
+        super(Aspect.all(Destination.class,
+                WorldPos.class, Pos2D.class));
+    }
 
     @Override
-    protected void process(Entity entity) {
+    protected void process(int entity) {
+        E player = E(entity);
+        player.moving();
+        WorldPos pos = player.getWorldPos();
+        if (entity == GameScreen.getPlayer()) {
+            pos = MovementProcessorSystem.getPosition(pos);
+        }
+        if (player.hasDestination()) {
+            if (movePlayer(player)) {
+                player.removeDestination();
+                player.removeMoving();
+            }
+        }
 
-        final Physics phys = xm.get(entity);
-        final Pos pos = pm.get(entity);
+    }
 
-        pos.x += phys.speedX * world.getDelta();
-        pos.y += phys.speedY * world.getDelta();
+    private boolean movePlayer(E player) {
+        Destination destination = player.getDestination();
+        Pos2D pos2D = player.getPos2D();
+        float delta = world.getDelta() * AOPhysics.WALKING_VELOCITY / Tile.TILE_PIXEL_HEIGHT;
+        switch (destination.dir) {
+            default:
+            case DOWN:
+                pos2D.y += delta;
+                break;
+            case LEFT:
+                pos2D.x -= delta;
+                break;
+            case RIGHT:
+                pos2D.x += delta;
+                break;
+            case UP:
+                pos2D.y -= delta;
+                break;
+        }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            Gdx.app.log(MovementSystem.class.toString(), "X: " + String.valueOf(pos.x) + " , Y: " + String.valueOf(pos.y));
+        adjustPossiblePos(pos2D, destination.worldPos, destination.dir);
+        return pos2D.x % 1 == 0 && pos2D.y % 1 == 0;
+    }
 
+    private void adjustPossiblePos(Pos2D possiblePos, WorldPos destination, AOPhysics.Movement dir) {
+        int newY = (int) possiblePos.y;
+        int newX = (int) possiblePos.x;
+        switch (dir) {
+            case LEFT:
+                if (newX < destination.x) {
+                    possiblePos.x = destination.x;
+                }
+                break;
+            case RIGHT:
+                if (newX == destination.x) {
+                    possiblePos.x = destination.x;
+                }
+                break;
+            case UP:
+                if (newY < destination.y) {
+                    possiblePos.y = destination.y;
+                }
+                break;
+            case DOWN:
+                if (newY == destination.y) {
+                    possiblePos.y = destination.y;
+                }
+                break;
+        }
     }
 
 }

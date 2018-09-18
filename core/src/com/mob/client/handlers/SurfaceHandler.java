@@ -30,7 +30,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.mob.client.Game;
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.interfaces.Constants;
 
 public class SurfaceHandler implements Constants {
 

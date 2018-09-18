@@ -25,13 +25,13 @@ package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.dao.objects.Graphic;
-import com.mob.client.handlers.AssetsHandler;
 
 public class BundledTexture {
 
 	private GameTexture[] frames;
-	private Animation animation;
+	private Animation<TextureRegion> animation;
 	private float animationTime;
 	private boolean animated;
 
@@ -48,16 +48,16 @@ public class BundledTexture {
             this.frames = new GameTexture[numFrames];
             TextureRegion tmpFrames[] = new TextureRegion[numFrames];
             for(int i = 0; i < numFrames; i++) {
-                this.frames[i] = new GameTexture(AssetsHandler.getGraphics().get(graphic.getFrame(i)));
+                this.frames[i] = new GameTexture(DescriptorsHandler.getGraphics().get(graphic.getFrame(i)));
                 tmpFrames[i] = this.frames[i].getGraphic();
             }
-            this.animation = new Animation(graphic.getSpeed() / 1000, tmpFrames);
+            this.animation = new Animation<TextureRegion>(graphic.getSpeed() / 1000, tmpFrames);
             this.animated = true;
         }
     }
 
 	public BundledTexture (int grhIndex, boolean animated) {
-		this(AssetsHandler.getGraphic(grhIndex), animated);
+		this(DescriptorsHandler.getGraphic(grhIndex), animated);
 	}
 
     public BundledTexture (int grhIndex) {

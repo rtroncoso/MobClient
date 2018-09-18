@@ -17,8 +17,8 @@
 package com.mob.client.textures;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mob.client.handlers.DescriptorsHandler;
 import com.mob.dao.objects.Graphic;
-import com.mob.client.handlers.AssetsHandler;
 import com.mob.client.handlers.SurfaceHandler;
 
 /**
@@ -34,12 +34,12 @@ public class GameTexture {
 	private TextureRegion textureRegion;
 
 	public GameTexture(int grhIndex) {
-		this(AssetsHandler.getGraphics().get(grhIndex));
+		this(DescriptorsHandler.getGraphics().get(grhIndex));
 	}
 	
 	public GameTexture(Graphic graphic) {
 		this.textureRegion = new TextureRegion(SurfaceHandler.get(String.valueOf(graphic.getFileNum())),
-				graphic.getX(), graphic.getY(), graphic.getPixelWidth(), graphic.getPixelHeight());
+				graphic.getX(), graphic.getY(), graphic.getWidth(), graphic.getHeight());
 		this.textureRegion.flip(false, true);
 	}
 

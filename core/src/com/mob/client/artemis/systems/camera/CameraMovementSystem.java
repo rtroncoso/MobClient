@@ -1,15 +1,14 @@
 package com.mob.client.artemis.systems.camera;
 
+import camera.AOCamera;
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
-import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
-import com.mob.client.artemis.components.camera.Camera;
-import com.mob.client.artemis.components.position.Pos;
-import com.mob.client.artemis.components.position.WorldPos;
-import com.mob.dao.objects.Tile;
+import com.artemis.systems.IteratingSystem;
+import position.Pos2D;
+
+import static com.artemis.E.E;
 
 /**
  * CameraMovementSystem Class
@@ -17,24 +16,21 @@ import com.mob.dao.objects.Tile;
  * @author rt
  */
 @Wire
-public class CameraMovementSystem extends EntityProcessingSystem
+public class CameraMovementSystem extends IteratingSystem
 {
 
-    private ComponentMapper<Pos> pm;
     private CameraSystem cameraSystem;
 
     /**
      * Creates a new CameraMovementSystem.
      */
     public CameraMovementSystem() {
-        super(Aspect.all(Pos.class, Camera.class));
+        super(Aspect.all(Pos2D.class, AOCamera.class));
     }
 
     @Override
-    protected void process(Entity e) {
-        world.getManager(TagManager.class);
-
-        final Pos pos = pm.get(e);
+    protected void process(int camera) {
+        final Pos2D pos = E(camera).getPos2D();
         cameraSystem.camera.position.x = (pos.x);
         cameraSystem.camera.position.y = (pos.y);
         cameraSystem.camera.update();

@@ -1,19 +1,25 @@
-/*******************************************************************************
+/**
  * Copyright (C) 2014  Rodrigo Troncoso
+ * <p>
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * <p>
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * <p>
+ * Temporal storage for maps info until I make a Map element (to get maps rendered easier)
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU Affero General Public License as
- *     published by the Free Software Foundation, either version 3 of the
- *     License, or (at your option) any later version.
- *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU Affero General Public License for more details.
- *
- *     You should have received a copy of the GNU Affero General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
+ * @author Rodrigo Troncoso
+ * @version 0.1
+ * @since 2014-04-10
+ */
 /**
  * Temporal storage for maps info until I make a Map element (to get maps rendered easier)
  * @author Rodrigo Troncoso
@@ -23,15 +29,14 @@
 package com.mob.dao.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.interfaces.Constants;
 import com.mob.client.textures.BundledAnimation;
+
+import java.util.List;
 
 public class Map implements Constants {
 
@@ -47,44 +52,44 @@ public class Map implements Constants {
     public static final int MAP_START_LAYER = 1;
     public static final int MAP_END_LAYER = 4;
 
-	protected Tile tiles[][];
-	protected boolean loaded;
+    protected Tile tiles[][];
+    protected boolean loaded;
     protected Texture bufferedLayer;
 
-	public Map() {
-		this.tiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
-		this.loaded = false;
-	}
+    public Map() {
+        this.tiles = new Tile[MAX_MAP_SIZE_WIDTH + 1][MAX_MAP_SIZE_HEIGHT + 1];
+        this.loaded = false;
+    }
 
-	/**
-	 * @return the tiles
-	 */
-	public Tile[][] getTileArray() {
-		return tiles;
-	}
+    /**
+     * @return the tiles
+     */
+    public Tile[][] getTileArray() {
+        return tiles;
+    }
 
-	/**
-	 * @param tiles the tiles to set
-	 */
-	public void setTileArray(Tile tiles[][]) {
-		this.tiles = tiles;
-	}
-	
-	public Tile getTile(int x, int y) {
-		return this.tiles[x][y];
-	}
-	
-	public void setTile(int x, int y, Tile tile) {
-		this.tiles[x][y] = tile;
-	}
+    /**
+     * @param tiles the tiles to set
+     */
+    public void setTileArray(Tile tiles[][]) {
+        this.tiles = tiles;
+    }
 
-	public boolean isLoaded() {
-		return loaded;
-	}
+    public Tile getTile(int x, int y) {
+        return this.tiles[x][y];
+    }
 
-	public void setLoaded(boolean pLoaded) {
-		this.loaded = pLoaded;
-	}
+    public void setTile(int x, int y, Tile tile) {
+        this.tiles[x][y] = tile;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean pLoaded) {
+        this.loaded = pLoaded;
+    }
 
     public Texture getBufferedLayer() {
         return bufferedLayer;
@@ -183,26 +188,41 @@ public class Map implements Constants {
      * @param maxY
      */
     public void renderLayer(SpriteBatch batch, float delta, int layer, int minX, int maxX, int minY, int maxY) {
-
-        for(int y = minY; y <= maxY; y++) {
-            for(int x = minX; x <= maxX; x++) {
+        Color color = batch.getColor();
+        if (layer >= 2) {
+            batch.setColor(color.r, color.g, color.b, 0.7f);
+        }
+        for (int y = minY; y <= maxY; y++) {
+            for (int x = minX; x <= maxX; x++) {
 
                 BundledAnimation animation = this.getTile(x, y).getAnimation(layer);
                 TextureRegion tileRegion = this.getTile(x, y).getRegion(layer);
 
-                if(animation != null && animation.isAnimated()) {
+                if (animation != null && animation.isAnimated()) {
                     animation.setAnimationTime(animation.getAnimationTime() + delta);
                 }
 
-                if(tileRegion != null) {
+                if (tileRegion != null) {
                     final float mapPosX = (x * TILE_PIXEL_WIDTH);
                     final float mapPosY = (y * TILE_PIXEL_HEIGHT);
                     final float tileOffsetX = mapPosX - (tileRegion.getRegionWidth() * 0.5f) - (16.0f);
                     final float tileOffsetY = mapPosY - tileRegion.getRegionHeight();
 
                     batch.draw(tileRegion, tileOffsetX, tileOffsetY);
+                    if (layer == 1) {
+                        // render object
+                        int objIndex = this.getTile(x, y).getObjIndex();
+                        if (objIndex > 0) {
+                            //   Items.getItem(objIndex).getGraphic();
+                            // TODO ITEMS!
+                        }
+                    }
                 }
             }
         }
+    }
+
+    public List<Integer> getLindants() {
+        return null;
     }
 }

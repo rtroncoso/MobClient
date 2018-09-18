@@ -16,7 +16,7 @@
  *******************************************************************************/
 package com.mob.dao.loaders;
 
-import com.mob.client.interfaces.Constants;
+import com.mob.shared.interfaces.Constants;
 
 import java.io.DataInputStream;
 import java.io.IOException;

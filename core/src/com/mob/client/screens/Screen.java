@@ -18,11 +18,10 @@ package com.mob.client.screens;
 
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
+import com.artemis.WorldConfigurationBuilder;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.mob.client.Game;
-
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 
 public abstract class Screen extends ScreenAdapter {
 
@@ -30,7 +29,7 @@ public abstract class Screen extends ScreenAdapter {
     public static final int GAME_PAUSED = 1;
 
     protected Game game;
-    protected World world;
+    public static World world;
     protected FPSLogger logger;
     protected final WorldConfigurationBuilder builder = new WorldConfigurationBuilder();
 
@@ -46,17 +45,20 @@ public abstract class Screen extends ScreenAdapter {
 		this.game = game;
         this.logger = new FPSLogger();
 
-        this.initSystems(builder);
         this.initScene();
+        this.initSystems(builder);
 
         this.world = new World(builder.build());
+        this.postWorldInit();
         this.state = GAME_RUNNING;
 	}
+
+    protected abstract void postWorldInit();
 
     @Override
     public void render (float delta) {
         this.update(delta);
-//		this.drawUI();
+		this.drawUI();
     }
 
     @Override
@@ -66,6 +68,7 @@ public abstract class Screen extends ScreenAdapter {
             this.pauseSystems();
         }
     }
+
     @Override
     public void resume() {
         if(this.state == GAME_PAUSED) {
@@ -73,7 +76,6 @@ public abstract class Screen extends ScreenAdapter {
             this.resumeSystems();
         }
     }
-
     @Override
     public void dispose() {
         super.dispose();
@@ -86,6 +88,7 @@ public abstract class Screen extends ScreenAdapter {
     abstract protected void updatePaused();
     abstract protected void updateRunning(float deltaTime);
     abstract protected void update(float deltaTime);
+    abstract protected void drawUI();
 
     public Game getGame() {
         return game;

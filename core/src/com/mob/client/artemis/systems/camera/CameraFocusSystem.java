@@ -1,37 +1,32 @@
 package com.mob.client.artemis.systems.camera;
 
+import camera.Focused;
+import entity.character.Character;
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.managers.TagManager;
-import com.artemis.systems.EntityProcessingSystem;
-import com.mob.client.artemis.components.camera.Focused;
-import com.mob.client.artemis.components.character.*;
-import com.mob.client.artemis.components.character.Character;
-import com.mob.client.artemis.components.position.Pos;
+import com.artemis.systems.IteratingSystem;
+import com.mob.shared.util.Util;
+import position.Pos2D;
+import position.WorldPos;
 
-/**
- * CameraFocusSystem Class
- *
- * Focus camera on a specified character
- */
+import static com.artemis.E.E;
+
 @Wire
-public class CameraFocusSystem extends EntityProcessingSystem {
-
-    private ComponentMapper<Pos> pm;
+public class CameraFocusSystem extends IteratingSystem {
 
     public CameraFocusSystem() {
-        super(Aspect.all(Focused.class, Character.class));
+        super(Aspect.all(Focused.class, Pos2D.class));
     }
 
     @Override
-    protected void process(Entity e) {
-        Entity camera = world.getManager(TagManager.class).getEntity("camera");
-        Pos cameraPos = camera.getComponent(Pos.class);
-
-        cameraPos.x = pm.get(e).x;
-        cameraPos.y = pm.get(e).y;
+    protected void process(int player) {
+        Entity camera = world.getSystem(TagManager.class).getEntity("camera");
+        Pos2D cameraPos = camera.getComponent(Pos2D.class);
+        Pos2D pos = Util.toScreen(E(player).getPos2D()); // TODO Cambiar por pos2d
+        cameraPos.x = pos.x;
+        cameraPos.y = pos.y;
     }
 
 }
