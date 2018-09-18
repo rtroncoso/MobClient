@@ -40,7 +40,7 @@ public class DialogSystem extends IteratingSystem {
                             if (keycode == Input.Keys.ENTER && !firstOpened[0]) {
                                 // remove textfield
                                 talk(E(player), textf.getText());
-                                E(player).hasCanWrite();
+                                E(player).canWrite();
                                 E(player).removeWriting();
                                 table.removeActor(textf, true);
                             } else if (firstOpened[0]) {

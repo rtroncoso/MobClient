@@ -194,6 +194,13 @@ public class GameScreen extends Screen {
         networkedEntities.put(networkId, entityId);
     }
 
+    public static void unregisterEntity(int networkId) {
+        int entityId = networkedEntities.get(networkId);
+        world.delete(entityId);
+        networkedEntities.remove(networkId);
+
+    }
+
     @Override
     public void dispose() {
         stage.dispose();

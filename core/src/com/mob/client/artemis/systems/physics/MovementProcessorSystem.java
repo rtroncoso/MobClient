@@ -84,7 +84,7 @@ public class MovementProcessorSystem extends IteratingSystem {
     public static WorldPos getPosition(WorldPos worldPos) {
         WorldPos correctPos = new WorldPos(worldPos.x, worldPos.y, worldPos.map);
         requests.values().stream().filter(it -> it.valid).forEach(request -> {
-                WorldPos nextPos = WorldUtils.getNextPos(correctPos, AOPhysics.Movement.valueOf(request.movement));
+                WorldPos nextPos = WorldUtils.getNextPos(correctPos, request.movement);
                 correctPos.x = nextPos.x;
                 correctPos.y = nextPos.y;
                 correctPos.map = nextPos.map;

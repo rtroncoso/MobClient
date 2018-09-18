@@ -38,7 +38,7 @@ import com.mob.client.textures.BundledAnimation;
 
 import java.util.List;
 
-public class Map<I extends Number, G> implements Constants {
+public class Map implements Constants {
 
     public static final float TILE_PIXEL_WIDTH = 32.0f;
     public static final float TILE_PIXEL_HEIGHT = 32.0f;

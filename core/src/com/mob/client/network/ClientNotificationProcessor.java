@@ -1,7 +1,6 @@
 package com.mob.client.network;
 
 import com.artemis.Component;
-import com.artemis.E;
 import com.artemis.Entity;
 import com.artemis.EntityEdit;
 import com.esotericsoftware.minlog.Log;
@@ -10,8 +9,7 @@ import com.mob.client.screens.GameScreen;
 import com.mob.network.interfaces.INotification;
 import com.mob.network.interfaces.INotificationProcessor;
 import com.mob.network.notifications.EntityUpdate;
-import com.mob.network.notifications.MovementNotification;
-import physics.AOPhysics;
+import com.mob.network.notifications.RemoveEntity;
 import position.WorldPos;
 
 import static com.artemis.E.E;
@@ -20,7 +18,6 @@ public class ClientNotificationProcessor implements INotificationProcessor {
 
     @Override
     public void defaultProcess(INotification notification) {
-
     }
 
     @Override
@@ -34,6 +31,12 @@ public class ClientNotificationProcessor implements INotificationProcessor {
             Log.info("Network entity exists: " + entityUpdate.entityId + ". Updating");
             updateEntity(entityUpdate);
         }
+    }
+
+    @Override
+    public void processNotification(RemoveEntity removeEntity) {
+        Log.debug("Unregistering entity: " + removeEntity.playerId);
+        GameScreen.unregisterEntity(removeEntity.playerId);
     }
 
     private void addComponentsToEntity(Entity newEntity, EntityUpdate entityUpdate) {
@@ -59,13 +62,8 @@ public class ClientNotificationProcessor implements INotificationProcessor {
         for (Component component : entityUpdate.components) {
             edit.add(component);
         }
-    }
-
-    @Override
-    public void processNotification(MovementNotification movementNotification) {
-        E entity = E(movementNotification.entityId);
-        if (entity.hasAOPhysics()) {
-            entity.getAOPhysics().addIntention(AOPhysics.Movement.valueOf(movementNotification.movement));
-        }
+        entityUpdate.components.stream().filter(WorldPos.class::isInstance).map(WorldPos.class::cast).forEach(worldPos -> {
+            MapHandler.get(worldPos.map).getTile(worldPos.x, worldPos.y).setCharIndex(entityId);
+        });
     }
 }

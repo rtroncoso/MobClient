@@ -3,16 +3,16 @@ package com.mob.network.notifications;
 import com.mob.network.interfaces.INotification;
 import com.mob.network.interfaces.INotificationProcessor;
 
-public class MovementNotification implements INotification {
+public class RemoveEntity implements INotification {
 
-    public int entityId;
-    public String movement;
+    public int playerId;
 
-    public MovementNotification() {}
+    public RemoveEntity() {
+    }
 
-    public MovementNotification(int entityId, String movement) {
-        this.entityId = entityId;
-        this.movement = movement;
+    public RemoveEntity(int entityId) {
+
+        this.playerId = entityId;
     }
 
     @Override

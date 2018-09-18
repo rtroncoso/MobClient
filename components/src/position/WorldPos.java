@@ -19,6 +19,8 @@ package position;
 import entity.Heading;
 import com.artemis.Component;
 
+import java.util.Objects;
+
 import static entity.Heading.*;
 
 /**
@@ -51,6 +53,12 @@ public class WorldPos extends Component {
         this.map = map;
     }
 
+    public WorldPos(WorldPos pos) {
+        this.x = pos.x;
+        this.y = pos.y;
+        this.map = pos.map;
+    }
+
     public WorldPos getNextPos(Heading facing) {
         switch (facing.current) {
             case HEADING_NORTH:
@@ -68,5 +76,21 @@ public class WorldPos extends Component {
     @Override
     public String toString() {
         return "(map: " + map + " x: " + x + " y: " + y + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorldPos worldPos = (WorldPos) o;
+        return map == worldPos.map &&
+                x == worldPos.x &&
+                y == worldPos.y;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(map, x, y);
     }
 }

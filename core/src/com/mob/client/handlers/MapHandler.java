@@ -16,14 +16,14 @@
  *******************************************************************************/
 package com.mob.client.handlers;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.mob.dao.objects.Map;
-import com.mob.shared.interfaces.Constants;
 import com.mob.dao.readers.AODescriptorsReader;
 import com.mob.dao.readers.DescriptorsReader;
+import com.mob.shared.interfaces.Constants;
+
+import java.util.HashMap;
 
 public class MapHandler implements Constants {
 

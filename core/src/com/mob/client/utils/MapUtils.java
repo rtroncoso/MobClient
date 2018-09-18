@@ -10,7 +10,6 @@ import position.WorldPos;
 
 public class MapUtils {
 
-
     public static boolean changeMap(E player, WorldPos pos) {
         Map map = MapHandler.get(pos.map);
         Tile tile = map.getTile(pos.x, pos.y);
@@ -32,9 +31,14 @@ public class MapUtils {
         tile.setCharIndex(entity);
     }
 
+    public static boolean isValidPos(Map map, WorldPos expectedPos) {
+        Tile tile = map.getTile(expectedPos.x, expectedPos.y);
+        return tile != null && !tile.isBlocked() && tile.getCharIndex() == Tile.EMPTY_INDEX;
+    }
+
     public static boolean isValid(WorldPos expectedPos) {
         Map map = MapHandler.get(expectedPos.map);
         Tile tile = map.getTile(expectedPos.x, expectedPos.y);
-        return tile != null && !tile.isBlocked() && tile.getCharIndex() == Tile.EMPTY_INDEX;
+        return tile!= null && !tile.isBlocked() && tile.getCharIndex() == Tile.EMPTY_INDEX;
     }
 }

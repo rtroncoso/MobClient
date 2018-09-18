@@ -20,7 +20,6 @@ import com.artemis.Aspect;
 import com.artemis.E;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.IteratingSystem;
-import com.esotericsoftware.minlog.Log;
 import com.mob.client.screens.GameScreen;
 import com.mob.dao.objects.Tile;
 import movement.Destination;
@@ -57,7 +56,6 @@ public class MovementSystem extends IteratingSystem {
 
     private boolean movePlayer(E player) {
         Destination destination = player.getDestination();
-        Log.debug("Moving player: " + player.id() + " to " + destination.worldPos.x + " - " + destination.worldPos.y);
         Pos2D pos2D = player.getPos2D();
         float delta = world.getDelta() * AOPhysics.WALKING_VELOCITY / Tile.TILE_PIXEL_HEIGHT;
         switch (destination.dir) {

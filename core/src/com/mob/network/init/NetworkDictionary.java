@@ -7,6 +7,7 @@ import com.mob.network.login.LoginRequest;
 import com.mob.network.movement.MovementRequest;
 import com.mob.network.movement.MovementResponse;
 import com.mob.network.notifications.EntityUpdate;
+import com.mob.network.notifications.RemoveEntity;
 import com.mob.shared.model.Player;
 import entity.*;
 import entity.character.CanWrite;
@@ -43,8 +44,10 @@ public class NetworkDictionary extends MarshalDictionary {
                 // Responses
                 LoginOK.class,
                 MovementResponse.class,
+
                 // Notifications
                 EntityUpdate.class,
+                RemoveEntity.class,
                 Player.class,
                 ArrayList.class,
                 ConcurrentLinkedDeque.class,

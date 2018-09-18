@@ -1,7 +1,7 @@
 package com.mob.network.interfaces;
 
 import com.mob.network.notifications.EntityUpdate;
-import com.mob.network.notifications.MovementNotification;
+import com.mob.network.notifications.RemoveEntity;
 
 public interface INotificationProcessor {
 
@@ -9,5 +9,5 @@ public interface INotificationProcessor {
 
     void processNotification(EntityUpdate notification);
 
-    void processNotification(MovementNotification movementNotification);
+    void processNotification(RemoveEntity removeEntity);
 }

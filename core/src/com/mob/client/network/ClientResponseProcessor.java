@@ -7,12 +7,16 @@ import com.mob.network.login.LoginFailed;
 import com.mob.network.login.LoginOK;
 import com.mob.network.movement.MovementResponse;
 
+import static com.artemis.E.E;
+
 public class ClientResponseProcessor implements IResponseProcessor {
 
     @Override
     public void processResponse(LoginOK response) {
 //        ClientSystem.notificationProcessor.processNotification(new EntityUpdate(response.entityId, response.player.getComponents()));
-        GameScreen.setPlayer(GameScreen.getNetworkedEntity(response.entityId));
+        int localEntity = GameScreen.getNetworkedEntity(response.entityId);
+        GameScreen.setPlayer(localEntity);
+        E(localEntity).focused();
     }
 
     @Override

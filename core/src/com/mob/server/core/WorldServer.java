@@ -5,10 +5,10 @@ import com.artemis.SuperMapper;
 import com.artemis.World;
 import com.artemis.WorldConfigurationBuilder;
 import com.mob.server.database.IDatabase;
+import com.mob.server.manager.MapManager;
 import com.mob.server.network.NetworkComunicator;
 import com.mob.server.systems.RandomMovementSystem;
 import entity.Heading;
-import net.mostlyoriginal.api.network.common.DeltaSubscriptionManager;
 
 import static com.artemis.E.E;
 
@@ -28,19 +28,15 @@ public class WorldServer {
     }
 
     public void initSystems() {
+        MapManager.initialize();
         KryonetServerMarshalStrategy server = new KryonetServerMarshalStrategy();
         networkComunicator = new NetworkComunicator(server);
         builder
                 .with(new SuperMapper())
                 .with(new ServerSystem(server))
-                .with(new DeltaSubscriptionManager())
                 .with(new RandomMovementSystem());
         // Logic systems
         // TODO AI-NPC
-    }
-
-    public static DeltaSubscriptionManager getSubscriptionManager() {
-        return world.getSystem(DeltaSubscriptionManager.class);
     }
 
 
@@ -79,7 +75,7 @@ public class WorldServer {
                 .canWrite()
                 .networkId(player2.getId())
                 .aOPhysics();
-        WorldManager.updatePlayerMap(player2.getId(), E(player2).getWorldPos().map, WorldManager.Action.ADD);
+        MapManager.addPlayer(player2.getId());
     }
 
     public void start() {
@@ -108,9 +104,6 @@ public class WorldServer {
         }).start();
     }
 
-    public static void removeEntity(int entityId) {
-        world.delete(entityId);
-    }
 
     public void pause() {
         this.pause = true;
